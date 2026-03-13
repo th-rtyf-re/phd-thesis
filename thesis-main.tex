@@ -1,0 +1,86 @@
+% !TEX root = ./thesis-main.tex
+
+\input{headers/my-kthpq}
+\input{headers/my-macros}
+
+\begin{document}
+
+\input{includes/front-matter}
+
+\mainmatter
+\newrefsection
+
+\part{Background and results}
+
+\input{includes/introduction}
+\input{includes/persistent-algebra}
+\input{includes/morse-theory}
+\input{includes/outlook}
+\input{includes/contributions}
+
+\printbibliography[title=References,heading=bibintoc]
+
+% ==== PAPERS ====
+
+\part{Papers}
+\label{Part:papers}
+\newrefsection% Reset the bibliography
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}% https://www.reddit.com/r/LaTeX/comments/1khta4d/comment/mr9hxeb/
+
+\papertitlepage[color=light blue]{CGRST2024}
+
+% \includepdf[pages=-]{papers/CGRST2024}
+
+\papertitlepage[color=light blue]{AGRS2025}
+
+% \includepdf[pages=-]{papers/AGRS2025}
+
+\papertitlepage[color=light blue,misctext=To be submitted]{GRRS2026}
+
+\paperchapter{GRRS2026}
+
+\papertitlepage[color=light blue,misctext=Submitted]{GLRS2025}
+
+\paperchapter{GLRS2025}
+
+\begin{paperabstract}%[.9\textwidth]% default value
+This abstract is in a \texttt{paperabstract} environment. Lorem ipsum dolor sit amet!
+\end{paperabstract}
+
+The usual approach to including papers is to include PDFs. \texttt{kthpq-thesis} does not provide any tools for that; use your favorite package or external method. If you wish to include your paper's \TeX{} code directly in the thesis, add the line
+\begin{verbatim}
+\paperchapter[Short title]{REF}
+\end{verbatim}
+where \texttt{REF} is the bibliography reference for the paper, and \texttt{Short title} is the title that will appear in the headers.
+
+\section{Introduction}
+
+text
+
+\papertitlepage[color=light blue,misctext=To be submitted]{Ren2026}
+
+\paperchapter{Ren2026}
+
+% ---- Back matter ----
+
+\backmatter
+
+\begin{colophon}[.5\textwidth]
+\footnotesize
+\setlength{\parindent}{1pc}
+\noindent This thesis is set in Figtree, Georgia, Fira Code, and XCharter-Math.
+
+Headings and some short body text are set in Figtree, designed by Eric Kennedy in 2022. Minimalist yet friendly, Figtree is a geometric sans serif face made for the digital age.
+
+The body text face is Georgia, designed by Matthew Carter and hinted by Thomas Rickner in 1993. Georgia is a serif face in the Scotch Roman style designed to be legible on low-resolution screens, but its elegant forms are equally appreciated at higher resolutions and in print.
+
+The monospace face is Fira Code, designed Nikita Prokopov in 2019. It is based on the Fira Mono typeface by Carrois Apostrophe and features an extensive set of ligatures for many programming languages.
+
+The mathematical text is set in XCharter-Math, designed and maintained by Daniel Flipo for \TeX. This OpenType math font borrows and derives its symbols from XCharter, designed and maintained by Michael Sharpe and itself derived from Matthew Carter's Bitstream Charter (a predecessor to Georgia), as well as MathDesign by Paul Pichaureau and Fourier-GUTenberg by Michel Bovani.
+
+\mydinkus
+
+\noindent This thesis was typeset on \today{} by \formattedluatexbanner{} with \LaTeX2e{} (\fmtversion) and \textsf{expl3} (\ExplLoaderFileDate) using the class \href{https://github.com/th-rtyf-re/kthpq-thesis}{\texttt{kthpq-thesis}} written by me!
+\end{colophon}
+
+\end{document}

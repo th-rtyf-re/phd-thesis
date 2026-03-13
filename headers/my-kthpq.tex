@@ -1,0 +1,282 @@
+\RequirePackage{mathtools}  % mathtools asks to be loaded before unicode-math...
+\documentclass{kthpq-thesis}
+
+% ==== PACKAGES ====
+
+% ---- kthpq-thesis ----
+
+% Custom biblatex package to have cool macros
+\usepackage[%
+  bibstyle=numeric,
+  maxnames=99,
+  isbn=false,
+  url=false,
+  urldate=ymd
+]{biblatex-kthpq}
+
+% ---- Formatting ----
+
+\usepackage{parskip}
+
+\usepackage[
+  % demo  % omit inclusion of PDFs
+]{pdfpages}
+
+\usepackage{setspace}  % `spacing` environment
+\usepackage{ifoddpage}  % \ifoddpage(oroneside)
+\usepackage{mparhack}  % try to fix marginpar on wrong side (typically on the first line of a page)
+\usepackage{silence}
+\usepackage{marginnote}
+
+\usepackage{titletoc}  % to suppress wayoflooking from toc, I guess
+
+% ---- Math ----
+
+% mathtools loaded at the top!
+\usepackage{amsthm,thmtools}
+\usepackage{tikz}
+\usetikzlibrary{babel,cd}
+
+% ---- Load last ----
+
+% Hyperref needs to come after parskip
+% (https://tex.stackexchange.com/questions/450551/theorems-and-parskip#comment1853746_450551),
+% and generally should be loaded last.
+\usepackage[
+%  draft, % Uncomment to remove all links (useful for printing in black and white)
+%  hidelinks,
+  bookmarksdepth,% w/o argument: uses tocdepth, supposedly
+  pdfusetitle,
+  colorlinks,
+  linktoc=all,
+  allcolors={digital blue}
+]{hyperref}
+
+% amsmath (from unicode-math) > hyperref > cleveref
+\usepackage[capitalize]{cleveref}
+
+% ==== COMMANDS ====
+
+\WarningFilter{latex}{Marginpar on page}
+
+% ---- Font ----
+
+\setmainfont{Georgia Pro}[
+  Uprightfont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic,
+  Numbers = OldStyle,
+  Scale = \fontscale
+]
+
+% ---- Proofing ----
+
+% \geometry{showframe}  % layout frames
+% \usepackage{lua-visual-debug}  % more boxes!
+% \overfullrule=10pt  % visual indicator of overfull boxes
+
+% ---- Bibliography ----
+
+\addbibresource{bib/mypapers.bib}
+\addbibresource{bib/others.bib}
+
+% ---- Layout ----
+
+\geometry{
+  outer=3mm,  % originally 18.7mm
+  marginparwidth=16mm,  % decent width
+  includemp  % include marginparwidth in computation of outer margin
+}
+\fancyheadoffset{0pt}  % force update \headwidth
+
+% Custom header and footer with fancyhdr
+\fancyhf{} % reset
+\fancyhead[LO]{\sffamily\small\rightmark}
+\fancyhead[RE]{\sffamily\small\leftmark}
+\fancyhead[LE]{\sffamily\small\thepage} % Left for even pages, right for odd pages
+\fancyhead[RO]{\sffamily\small\thepage}
+
+\fancypagestyle{plain}{% for special pages, e.g. first pages of chapters
+  \fancyhead[LO,RE]{} % reset
+}
+
+\setcounter{tocdepth}{1}
+
+% Try to make things more compact
+%\linespread{.9}
+
+% ---- Sections & titles ----
+
+\newcommand{\inleftmargin}[2][\marginparsep]{%
+  \makebox[0pt][r]{#2\hspace{#1}}%
+}
+
+\titleformat{\section}
+  {\sffamily\fontsize{13pt}{13pt}\selectfont\bfseries}
+  {\inleftmargin{\thesection}}{0em}{}
+
+\titleformat{\subsection}
+  {\sffamily\fontsize{12pt}{12pt}\selectfont\bfseries}
+  {\inleftmargin{\thesubsection}}{0em}{}
+
+% New subsection-like
+\titleclass{\wayoflooking}{straight}[\subsection]
+\newcounter{wayoflooking}[subsection]
+\renewcommand{\thewayoflooking}{\Roman{wayoflooking}}
+\titleformat
+  {\wayoflooking}
+  {\sffamily\fontsize{12pt}{12pt}\selectfont\bfseries}
+  {\inleftmargin{\thewayoflooking}}
+  {0em}
+  {}
+\titlespacing*{\wayoflooking}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}% copying subsection default in titlesec
+\crefname{wayoflooking}{Way of Looking}{Ways of Looking}% hard-coded capitalized
+\Crefname{wayoflooking}{Way of Looking}{Ways of Looking}
+\titlecontents{wayoflooking}[0pt]{}{}{}{}% Somehow suppresses the line from the toc
+\makeatletter
+\newcommand{\toclevel@wayoflooking}{2}% bookmark level for hyperref?
+\makeatother
+
+% New section-like for papers
+\newcounter{papersection}
+\renewcommand{\thepapersection}{Paper \Alph{papersection}}
+\newcommand{\papersection}[2][]{%
+  \stepcounter{papersection}%
+  \vskip 3.5ex plus 1ex minus .2ex%
+  \inleftmargin{\sffamily\bfseries\thepapersection}%
+  \inlinepaper[#1]{#2}%
+  \vskip 2.3ex plus .2ex%
+}
+
+% ---- Theorems ----
+
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries,
+  headformat={\inleftmargin[.5\marginparsep]{\NUMBER}\NAME \NOTE},
+  postheadhook={%
+    \checkoddpage%
+    \ifoddpageoroneside%
+    \else%
+      \leavevmode\marginpar{\vspace{-8pt}}%
+    \fi%
+  },
+  headpunct={.\,},
+  qed=$\mdlgblksquare$
+]{plain-margin}
+
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries,
+  headformat={\inleftmargin[.5\marginparsep]{\NUMBER}\NAME \NOTE},
+  postheadhook={%
+    \checkoddpage%
+    \ifoddpageoroneside%
+    \else%
+      \leavevmode\marginpar{\vspace{-8pt}}%
+    \fi%
+  },
+  headpunct={.\,},
+  bodyfont={\itshape}
+]{theorem-margin}
+
+\declaretheorem[style=theorem-margin, parent=chapter]{theorem}
+\declaretheorem[style=theorem-margin, sibling=theorem]{proposition}
+\declaretheorem[style=theorem-margin, sibling=theorem]{corollary}
+\declaretheorem[style=theorem-margin, sibling=theorem]{lemma}
+
+\newtheorem*{theorem*}{Theorem}
+%\newtheorem{definition}[theorem]{Definition}
+
+\declaretheorem[style=plain-margin, sibling=theorem]{definition}
+\declaretheorem[style=plain-margin, sibling=theorem]{remark}
+\declaretheorem[style=plain-margin, sibling=theorem]{example}
+\declaretheorem[style=plain-margin, sibling=theorem]{notation}
+
+% Add a footnote right before the period of the theorem head.
+% This version is designed to be used with cleveref. The commented out lines (1)
+% should work if cleveref is not loaded. With cleverf, there are two types of
+% theorems, those that are siblings and those that are not (I think?). In any
+% case, it calls one of the two following command: \cref@thmoptarg and
+% \cref@thmnoarg (run \meaning\@thm to see how this is done). We locally
+% redefine both of them just to be sure.
+\makeatletter
+\newenvironment{footnoted}[2]{%
+  \def\@currentthmname{#1}
+  % \let\old@thm\@thm% (1)
+  % \def\@thm##1##2##3{\old@thm{##1\thm@headpunct{\footnotemark.}}{##2}{##3}}% (1)
+  \let\old@cref@thmoptarg\cref@thmoptarg
+  \def\cref@thmoptarg[##1]##2##3##4{\old@cref@thmoptarg[##1]{##2\thm@headpunct{\footnotemark.}}{##3}{##4}}
+  \let\old@cref@thmnoarg\cref@thmnoarg
+  \def\cref@thmnoarg##1##2##3{\old@cref@thmnoarg{##1\thm@headpunct{\footnotemark.}}{##2}{##3}}
+  \csname#1\endcsname
+  \footnotetext{#2}
+}{%
+  \csname end\@currentthmname\endcsname
+}
+\makeatother
+
+% ---- non-math commands ----
+
+% epigraph
+\makeatletter
+\newenvironment{epigraph}[1][\@nil]{%
+  \def\epigraph@uthor{#1}
+  \begin{flushright}
+    \small \itshape
+    \begin{tabular}{l@{}}
+}{%
+    \end{tabular}%
+    \vspace{1ex}
+  \ifx\epigraph@uthor\@nnil
+  \else
+    \\
+    \normalfont
+    --- \epigraph@uthor
+  \fi
+  \end{flushright}
+}
+\makeatother
+
+\newcommand{\ir}[1]{{\color{brick} #1}}
+\def\mydinkus{\par\noindent\hfill\textasciitilde~$\cdot$~\textasciitilde\hfill\null\par}
+
+% in-margin highlights
+\makeatletter
+\def\notation{\@dblarg\kthpq@highlight}
+\def\term{\@dblarg\kthpq@term}
+\newcommand{\kthpq@term}[2][]{\kthpq@highlight[#1]{\textbf{#2}}}
+
+% Fix value (3) for same-note line spacing,
+% Fix value (2) for vertical alignment with the text.
+% After fixing (2) and (3), fix value (1) for multiple-note spacing.
+\marginparpush=1.2\baselineskip  % (1)
+\newcommand{\kthpq@highlight}[2][]{%
+  \leavevmode% I don't remember why
+  \checkoddpage
+  \marginpar{%
+    \ifoddpageoroneside
+      \raggedright
+    \else
+      \raggedleft
+    \fi
+    \vspace{-5pt}  % (2)
+    \begin{spacing}{.7}  % (3)
+      \scriptsize\sffamily #1
+    \end{spacing}
+  }%
+  \penalty\@M% no linebreak after hspace
+  \hspace{0pt}% allow hyphenation by inserting a zero-width thing
+  #2%
+}
+\makeatother
+
+\newcommand{\fallbackhighlight}[1]{%
+  \marginnote{%
+    \ifoddpageoroneside%
+      \raggedright%
+    \else%
+      \raggedleft%
+    \fi%
+    \scriptsize\sffamily #1%
+  }
+}
