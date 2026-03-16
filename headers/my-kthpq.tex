@@ -1,3 +1,5 @@
+% !TEX root = ../thesis-main.tex
+
 \RequirePackage{mathtools}  % mathtools asks to be loaded before unicode-math...
 \documentclass{kthpq-thesis}
 
@@ -25,15 +27,19 @@
 \usepackage{setspace}  % `spacing` environment
 \usepackage{ifoddpage}  % \ifoddpage(oroneside)
 \usepackage{mparhack}  % try to fix marginpar on wrong side (typically on the first line of a page)
-\usepackage{silence}
-\usepackage{marginnote}
+\usepackage{silence}  % suppress marginpar warnings
+\usepackage{marginnote}  % for fallback highlight command
 
 \usepackage{titletoc}  % to suppress wayoflooking from toc, I guess
+
+% longtable: ignoring this error https://github.com/latex3/latex2e/issues/1907
+% with VS Code LaTeX Workshop 
+\usepackage{longtable}
 
 % ---- Math ----
 
 % mathtools loaded at the top!
-\usepackage{amsthm,thmtools}
+\usepackage{amsthm,thmtools}  % thmtools for QED in any theorem
 \usepackage{tikz}
 \usetikzlibrary{babel,cd}
 
@@ -58,6 +64,7 @@
 % ==== COMMANDS ====
 
 \WarningFilter{latex}{Marginpar on page}
+\WarningsOff[latex]%{latex}{Infinite glue shrinkage}
 
 % ---- Font ----
 
@@ -91,15 +98,25 @@
 \fancyheadoffset{0pt}  % force update \headwidth
 
 % Custom header and footer with fancyhdr
-\fancyhf{} % reset
-\fancyhead[LO]{\sffamily\small\rightmark}
-\fancyhead[RE]{\sffamily\small\leftmark}
-\fancyhead[LE]{\sffamily\small\thepage} % Left for even pages, right for odd pages
-\fancyhead[RO]{\sffamily\small\thepage}
+\fancypagestyle{fancy}{%
+  \fancyhf{} % reset
+  \fancyhead[LO]{\sffamily\small\rightmark}
+  \fancyhead[RE]{\sffamily\small\leftmark}
+  \fancyhead[LE]{\sffamily\small\thepage} % Left for even pages, right for odd pages
+  \fancyhead[RO]{\sffamily\small\thepage}
+}
 
 \fancypagestyle{plain}{% for special pages, e.g. first pages of chapters
-  \fancyhead[LO,RE]{} % reset
+  \fancyhf{} % reset
+  \fancyhead[LE]{\sffamily\small\thepage} % Left for even pages, right for odd pages
+  \fancyhead[RO]{\sffamily\small\thepage}
 }
+
+% Remove fancy headers from front matter
+\let\oldfrontmatter\frontmatter
+\let\oldmainmatter\mainmatter
+\def\frontmatter{\oldfrontmatter\pagestyle{plain}}
+\def\mainmatter{\oldmainmatter\pagestyle{fancy}}
 
 \setcounter{tocdepth}{1}
 
@@ -120,23 +137,23 @@
   {\sffamily\fontsize{12pt}{12pt}\selectfont\bfseries}
   {\inleftmargin{\thesubsection}}{0em}{}
 
-% New subsection-like
-\titleclass{\wayoflooking}{straight}[\subsection]
-\newcounter{wayoflooking}[subsection]
-\renewcommand{\thewayoflooking}{\Roman{wayoflooking}}
-\titleformat
-  {\wayoflooking}
-  {\sffamily\fontsize{12pt}{12pt}\selectfont\bfseries}
-  {\inleftmargin{\thewayoflooking}}
-  {0em}
-  {}
-\titlespacing*{\wayoflooking}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}% copying subsection default in titlesec
-\crefname{wayoflooking}{Way of Looking}{Ways of Looking}% hard-coded capitalized
-\Crefname{wayoflooking}{Way of Looking}{Ways of Looking}
-\titlecontents{wayoflooking}[0pt]{}{}{}{}% Somehow suppresses the line from the toc
-\makeatletter
-\newcommand{\toclevel@wayoflooking}{2}% bookmark level for hyperref?
-\makeatother
+% % New subsection-like
+% \titleclass{\wayoflooking}{straight}[\subsection]
+% \newcounter{wayoflooking}[subsection]
+% \renewcommand{\thewayoflooking}{\Roman{wayoflooking}}
+% \titleformat
+%   {\wayoflooking}
+%   {\sffamily\fontsize{12pt}{12pt}\selectfont\bfseries}
+%   {\inleftmargin{\thewayoflooking}}
+%   {0em}
+%   {}
+% \titlespacing*{\wayoflooking}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}% copying subsection default in titlesec
+% \crefname{wayoflooking}{Way of Looking}{Ways of Looking}% hard-coded capitalized
+% \Crefname{wayoflooking}{Way of Looking}{Ways of Looking}
+% \titlecontents{wayoflooking}[0pt]{}{}{}{}% Somehow suppresses the line from the toc
+% \makeatletter
+% \newcommand{\toclevel@wayoflooking}{2}% bookmark level for hyperref?
+% \makeatother
 
 % New section-like for papers
 \newcounter{papersection}
@@ -153,21 +170,7 @@
 
 \declaretheoremstyle[
   headfont=\sffamily\bfseries,
-  headformat={\inleftmargin[.5\marginparsep]{\NUMBER}\NAME \NOTE},
-  postheadhook={%
-    \checkoddpage%
-    \ifoddpageoroneside%
-    \else%
-      \leavevmode\marginpar{\vspace{-8pt}}%
-    \fi%
-  },
-  headpunct={.\,},
-  qed=$\mdlgblksquare$
-]{plain-margin}
-
-\declaretheoremstyle[
-  headfont=\sffamily\bfseries,
-  headformat={\inleftmargin[.5\marginparsep]{\NUMBER}\NAME \NOTE},
+  headformat={\inleftmargin[.5\marginparsep]{\mdseries\NUMBER}\NAME \NOTE},
   postheadhook={%
     \checkoddpage%
     \ifoddpageoroneside%
@@ -184,17 +187,88 @@
 \declaretheorem[style=theorem-margin, sibling=theorem]{corollary}
 \declaretheorem[style=theorem-margin, sibling=theorem]{lemma}
 
-\newtheorem*{theorem*}{Theorem}
-%\newtheorem{definition}[theorem]{Definition}
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries,
+  headformat={\inleftmargin[.5\marginparsep]{\mdseries\NUMBER}\NAME \NOTE},
+  postheadhook={%
+    \checkoddpage%
+    \ifoddpageoroneside%
+    \else%
+      \leavevmode\marginpar{\vspace{-8pt}}%
+    \fi%
+  },
+  headpunct={.\,},
+  qed=$\mdlgblksquare$
+]{plain-margin}
 
 \declaretheorem[style=plain-margin, sibling=theorem]{definition}
 \declaretheorem[style=plain-margin, sibling=theorem]{remark}
 \declaretheorem[style=plain-margin, sibling=theorem]{example}
 \declaretheorem[style=plain-margin, sibling=theorem]{notation}
 
+\newcommand*{\blackbird}{%
+  \begin{tikzpicture}[%
+      scale=.3,  % 1 = 2 x 2cm icon
+      line width=.8pt,
+      line cap=round,
+      baseline={([yshift=-.6ex]current bounding box.center)}
+    ]
+    \useasboundingbox (-1,1) rectangle (1,-1);
+    \draw (-1,0) .. controls (-.83,.12) and (-.57,.09) .. (-.45,.12)
+      .. controls (-.62,.23) and (-.7,.46) .. (-.79,.62)
+      .. controls (-.43,.54) and (-.23,.31) .. (-.06,.09)
+      .. controls (-.75,-.04) and (-.72,-.31) .. (-.83,-.43)
+      .. controls (-.52,-.49) and (-.27,-.44) .. (-.11,-.39)
+      .. controls (.05,-.53) and (.38,-.65) .. (.52,-.66)
+      .. controls (.44,-.42) and (.29,-.31) .. (.12,-.16)
+      .. controls (.3,0) and (.61,.1) .. (.83,.13);
+    \draw (-.24,.51) .. controls (.03,.61) .. (.27,.79);
+    \draw (-.16,.21) .. controls (.25,.37) .. (.51,.63);
+    \draw (.17,.1) .. controls (.4,.22) .. (.66,.31);
+    \draw (-.4,-.76) .. controls (-.22,-.59) .. (-.03,-.45);
+    \draw (.26,-.28) .. controls (.62,-.14) .. (1.01,-.03);
+    \draw (.08,-.85) .. controls (.2,-.73) .. (.33,-.62);
+    \draw (.47,-.53) .. controls (.71,-.41) .. (.95,-.33);
+    \fill (-.52,-.34) circle[radius=.05];
+  \end{tikzpicture}%
+}
+
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries,
+  headformat={\inleftmargin[.5\marginparsep]{\blackbird}\NAME \NOTE},
+  postheadhook={%
+    \checkoddpage%
+    \ifoddpageoroneside%
+    \else%
+      \leavevmode\marginpar{\vspace{-8pt}}%
+    \fi%
+  },
+  headpunct={.\,},
+  bodyfont={\itshape}
+]{theorem-bird}
+
+\declaretheorem[style=theorem-bird, numbered=no, name=Theorem]{theorem**}
+\declaretheorem[style=theorem-bird, numbered=no, name=Proposition]{proposition**}
+
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries,
+  headformat={\inleftmargin[.5\marginparsep]{\blackbird}\NAME \NOTE},
+  postheadhook={%
+    \checkoddpage%
+    \ifoddpageoroneside%
+    \else%
+      \leavevmode\marginpar{\vspace{-8pt}}%
+    \fi%
+  },
+  headpunct={.\,},
+  qed=$\mdlgblksquare$
+]{plain-bird}
+
+\declaretheorem[style=plain-bird, numbered=no, name=Definition]{definition**}
+
 % Add a footnote right before the period of the theorem head.
 % This version is designed to be used with cleveref. The commented out lines (1)
-% should work if cleveref is not loaded. With cleverf, there are two types of
+% should work if cleveref is not loaded. With cleveref, there are two types of
 % theorems, those that are siblings and those that are not (I think?). In any
 % case, it calls one of the two following command: \cref@thmoptarg and
 % \cref@thmnoarg (run \meaning\@thm to see how this is done). We locally

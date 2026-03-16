@@ -12,11 +12,11 @@
 
 \section{Thirteen Ways of Looking at a Persistence Module}
 
-If you are familiar with TDA, then you may be aware of the perhaps excessive number of resources introducing the field and its central tool, persistent homology \ir{cite some}. This section is yet another presentation of TDA, through thirteen ``Ways of Looking'' marked with Roman numerals. The aim is to showcase the multifaceted nature of persistence modules. Not everything introduced here will be used in the thesis (see the following chapters for thesis-specific results), but all preliminary definitions will be provided here. You may skip to the next chapter and return as needed for exact definitions and notational conventions.
+If you are familiar with TDA, then you may be aware of the perhaps excessive number of resources introducing the field and its central tool, persistent homology \ir{cite some}. This section is yet another presentation of TDA, through thirteen perspectives. The aim is to showcase the multifaceted and nature of persistence modules. Not everything introduced here will be used in the thesis (see the following chapters for thesis-specific results), but all preliminary definitions will be provided here. Mathematical detours that are not directly used in the thesis are marked by a \blackbird{} symbol. You may skip to the next chapter and return as needed for exact definitions and notational conventions.
 
 If you are not familiar with TDA, then read on. In this section, we will explore some of its definitions, characterizations, generalizations, and invariants. Along the way, we will cover key concepts in the so-called persistent homology pipeline, including the barcode decomposition, bottleneck stability, and the rank invariant. \ir{(add references to ways of looking as I figure out where to put them)}
 
-\wayoflooking{As persistent homology}
+\subsection{As persistent homology}
 
 In TDA, persistence modules first appeared in the form of \textbf{persistent homology}. The general definition of persistent homology is for filtered topological spaces:
 
@@ -52,7 +52,9 @@ Instead, the main example of filtered spaces is filtered simplicial complexes, w
 
 \begin{example}
   \ir{Example of a simplicial complex}
+\end{example}
 
+\begin{example}
   Now let $(M, d)$ be a metric space, $X$ a subset of $M$, and $t \geq 0$ a positive number.
   The \term[Čech complex]{Čech complex at radius $t$} is the simplicial complex consisting of all subsets $\sigma$ of $X$ such that there exists a closed ball $B(x, t)$ of radius $t$ in $M$ containing $\sigma$. We denote this complex by $\Cech_t(X)$:
   \[
@@ -91,7 +93,7 @@ We now define simplicial homology over the field of two elements $\bf{F}_2$ (for
   We have thus defined simplicial homology for a single simplicial complex; we now turn to the persistent version. Let $(K, f)$ be a filtered simplicial complex. For each value $t \in \R$, we consider the simplicial chain complex $C_*(K_{\leq t})$ on the corresponding sublevel set. For all $s \leq t$ in $\R$, the natural inclusions of spaces of simplicial $k$-chains $C_k(K_{s \leq t}) \colon C_k(K_{\leq s}) \hookrightarrow C_k(K_{\leq t})$ commute with the boundary maps, and therefore they extend to a natural inclusion of simplicial chain complexes $C_*(K_{\leq s}) \hookrightarrow C_*(K_{\leq t})$ \ir{(I'm skipping over details here)}. This inclusion then induces the linear maps (not necessarily inclusions) $H_k(K_{s \leq t}) \colon H_k(K_{\leq s}) \to H_k(K_{\leq t})$ between homology spaces, and this is the \textbf{$k^{\th}$ persistent homology of the filtered simplicial complex $(K, f)$}.
 \end{definition}
 
-\wayoflooking{As the image of a homology functor}
+\subsection{As the image of a functor}
 
 It turns out that persistent homology does not need to come from a filtered topological space. It suffices to have a sequence of maps between spaces
 \[
@@ -103,8 +105,8 @@ and then apply a homology functor. In this section, we will define what a homolo
 \label{D:category}
   A \term{category} $\cat{C}$ is the given of
   \begin{itemize}
-    \item a collection of \term{objects} $\obj(\cat{C})$,
-    \item for every two objects $x, y$ in $\obj(\cat{C})$, a collection of \term{morphisms} $\mor_{\cat{C}}(x, y)$,
+    \item a collection $\obj(\cat{C})$ of \term{objects},
+    \item for every two objects $x, y$ in $\obj(\cat{C})$, a collection $\mor_{\cat{C}}(x, y)$ of \term{morphisms},
     \item for every three objects $x, y, z$ in $\obj(\cat{C})$, a \term[composition]{composition operation} $\circ \colon \mor_{\cat{C}}(x, y) \times \mor_{\cat{C}}(y, z) \to \mor_{\cat{C}}(x, z)$ that maps the pair $(f, g)$ to a morphisms $g \circ f$, and
     \item for every object $x$ in $\obj(\cat{C})$, an \term[identity]{identity morphism} $\id_x$ in $\mor_{\cat{C}}(x, x)$,
   \end{itemize}
@@ -133,12 +135,16 @@ and then apply a homology functor. In this section, we will define what a homolo
     \item composition is respected: for every three objects $x, y, z$ in $\cat{C}$ and morphisms $f \colon x \to y$ and $g \colon y \to z$, $F(g \circ f) = F(g) \circ F(f)$, and
     \item units are respected: for every object $x$ in $\cat{C}$, $F(\id_x) = F(\id_x)$.
   \end{itemize}
-  For example, we can construct a functor from $\Set$ to $\Vect_{\bf{k}}$ by mapping a set $X$ to the vector space $\bf{k} X$ generated by formal sums of elements of $X$, and mapping a set-valued function $f \colon X \to Y$ to the linear map that sends each basis element $x$ in $\bf{k} X$ to the corresponding basis element $f(x)$ in $\bf{k} Y$.
+  \ir{Define natural transformations. A morphism of functors is a natural transformation. We write $f_t$ for $t \in I$. Define equivalence of categories.}
 \end{definition}
+
+\begin{example}
+  For example, we can construct a functor from $\Set$ to $\Vect_{\bf{k}}$ by mapping a set $X$ to the vector space $\bf{k} X$ generated by formal sums of elements of $X$, and mapping a set-valued function $f \colon X \to Y$ to the linear map that sends each basis element $x$ in $\bf{k} X$ to the corresponding basis element $f(x)$ in $\bf{k} Y$.
+\end{example}
 
 It can be shown that homology is a functor from $\Top$ to $\Vect_{\bf{k}}$ \ir{cite?}. For example, the construction of the homology spaces in \cref{D:simplicial-homology} is functorial. We can thus view persistent homology more generally as the application of the homology functor to a subcategory of topological spaces (or simplicial complexes). Specifically, let $I$ be a totally ordered set, $(X_i)_{i \in I}$ a collection of spaces (or simplicial complexes), and $X_{i \leq j} \colon X_i \to X_j$ a morphism for each $i \leq j$ in $I$, satisfying the composition and identity axioms for categories (see \cref{D:category}). This defines a category, which we denote by $X$, whose objects are the $X_i$ and morphisms are the $X_{i \leq j}$. For all integers $k \geq 0$, we then call the image of $X$ by the functor $H_k(-)$ the \textbf{$k^{\th}$ persistent homology of $X$}. 
 
-\wayoflooking{As a collection of vector spaces and transition maps}
+\subsection{As a collection of vector spaces and transition maps}
 \label{W:vector-spaces}
 
 The image of the aforementioned homology functors is interesting in its own right. Abstracting the previous way of looking, we can view persistent homology as a collection of vector spaces and linear maps between them. This is how we define persistence modules:
@@ -155,7 +161,7 @@ The image of the aforementioned homology functors is interesting in its own righ
 
 The similarities between these conditions and those of functors is not a coincidence, and will be detailed further in \cref{W:functor}.
 
-\wayoflooking{As a graded module}
+\subsection{As a graded module}
 
 Persistence modules have been extensively studied as graded modules over polynomial rings \cite{ZomorodianCarlsson2005} \ir{cite more}. Specifically, when the indexing poset is $\N$, we have the following equivalent characterization of persistence modules:
 
@@ -171,28 +177,30 @@ Persistence modules have been extensively studied as graded modules over polynom
 
 We remark that nothing prevents us from considering multigraded modules over multivariate polynomial rings. This is the approach of \cite{CarlssonZomorodian2009}, where the authors call such modules multidimensional persistence. They are more commonly called \term[multiparameter persistence module]{multiparameter persistence modules}, and we immediately generalize this further to arbitrary posets.
 
-\wayoflooking{As a functor itself}
+\subsection{As a functor itself}
 \label{W:functor}
 
 As remarked in \cref{W:vector-spaces}, the definition of a persistence module closely resembles that of a functor. We formalize this here:
 
-\ir{First, define natural transformations. A morphism of functors is a natural transformation. We write $f_t$ for $t \in I$.}
-
 \begin{definition}
   Let $\bf{k}$ be a field and $(I, \leq)$ a poset. Note that $(I, \leq)$ is a category (see \cref{D:category}) where $\obj(I, \leq) = I$ and, for all $i, j$ in $I$, $\mor_{(I, \leq)}(i, j) = \{*\}$ if $i \leq j$ and $\varnothing$ otherwise. We define a \term[generalized persistence module]{generalized persistence module indexed by} (or \textbf{over}) \textbf{$I$} to be a functor $V \colon (I, \leq) \to \Vect_{\bf{k}}$.
+  
+  \ir{A morphism of persistence modules is then a natural transformation between two functors...}
 \end{definition}
 
 We check that this definition coincides with \cref{D:persistence-module} when $I$ is totally ordered.
 
-\wayoflooking{As a sheaf}
+\subsection{As a sheaf}
 
 Pushing the generalization of persistence modules even further, we can view them through the lens of sheaf theory \cite{KashiwaraShapira2018,Berkouk2020}. Here we present a brief overview of what this theory entails.
 
 \begin{definition}
   We start with some preliminary definitions in category theory. Let $\cat{C}$ be a category. The \term{opposite category} of $\cat{C}$ is the category $\cat{C}^{\op}$ where $\obj(\cat{C}^{\op}) \coloneq \obj(\cat{C})$ and, for all $x, y$ in $\obj(\cat{C}^{\op})$, $\mor_{\cat{C}^{\op}}(x, y) \coloneq \mor_{\cat{C}}(y, x)$. Composition is that of $\cat{C}$, but inverted: writing $f^{\op} \colon y \to x$ and $g^{\op} \colon z \to y$ as the elements in $\cat{C}^{\op}$ that correspond to $f \colon x \to y$ and $g \colon y \to z$ in $\cat{C}$, we define $f \circ^{\op} g \coloneq g \circ f$.
-  
-  For example, the opposite category of a poset $(I, \leq)$, viewed as a category, is the opposite poset $(I, \geq)$.
-  
+\end{definition}
+
+For example, the opposite category of a poset $(I, \leq)$, viewed as a category, is the opposite poset $(I, \geq)$.
+
+\begin{definition**}
   Let $X$ be a topological space and denote by $\cc{O}(X)$ the poset of open sets of $X$. A \term[(topological) presheaf]{$\Vect$-valued presheaf on $X$} is a functor $F \colon \cc{O}(X)^{\op} \to \Vect$. For $U$ an open set in $\cc{O}(X)$, the elements of $F(U)$ are called \term[section]{sections of $F$ over $U$}. For each containment of open sets $V \supseteq U$ in $\cc{O}(X)$, we get a \term{restriction morphism} $(-)\big|_U \colon F(V) \to F(U)$. The presheaf $F$ is then a \term{sheaf} if it satisfies the following two axioms:
   \begin{enumerate}
   \item \term[locality]{Locality:}
@@ -201,13 +209,13 @@ Pushing the generalization of persistence modules even further, we can view them
     for $U$ an open set, $\{U_\alpha\}_{\alpha \in A}$ an open cover of $U$ with $U_\alpha \subseteq U$ for all $\alpha \in A$, and $v_\alpha \in F(U_\alpha)$ for all $\alpha \in A$, if $v_\alpha\big|_{U_\alpha \cap U_\beta} = v_\beta\big|_{U_\alpha \cap U_\beta}$ for all $\alpha, \beta$ in $A$, then there exists $v$ in $F(U)$ such that $v\big|_{U_\alpha} = v_\alpha$ for all $\alpha \in A$. In other words, if local sections coincide on their overlapping parts, then they can be glued together into a global section.
   \end{enumerate}
   Now let us equip our poset $(I, \leq)$ with a topology. The \term{Alexandrov topology} on $I$ is the topology where open sets are \term[downset]{downsets}, that is, subsets $S$ of $I$ such that $S = \{y \in I \mid \exists x \in S, \; y \leq x\}$. We check that this is indeed a topology.
-\end{definition}
+\end{definition**}
 
-\begin{proposition}[{\cite[Proposition 2.2.3]{Berkouk2020}}, from {\cite[Proposition 2.15(b)]{KashiwaraShapira2018}}]
+\begin{proposition**}[{\cite[Proposition 2.2.3]{Berkouk2020}}, from {\cite[Proposition 2.15(b)]{KashiwaraShapira2018}}]
   Let $(I, \leq)$ be a poset, equipped with the Alexandrov topology. Then persistence modules indexed by $I$ are equivalent (in a categorical sense) to $\Vect$-valued sheaves over $I$.
-\end{proposition}
+\end{proposition**}
 
-\wayoflooking{As a barcode}
+\subsection{As a barcode}
 
 We have strayed far enough our persistent homology pipeline. Let us return to the \term[one-parameter persistence module]{one-parameter} case, that is, the case of generalized persistence modules where the indexing poset $I$ is a total order. The remarkable result that gives persistent homology its expressive power is the fact that one-parameter persistence modules admit a decomposition theorem.
 
@@ -264,7 +272,7 @@ Note that the collection of intervals may be infinite and even uncountable: this
 \ir{Key result from Carlsson-Zomorodian 2009 is that there is no similar combinatorial/discrete representation of persistence modules in a more general setting.}
 
 
-\wayoflooking{As clustering}
+\subsection{As clustering}
 
 The case of $0^{\th}$ degree persistent homology initially appeared under the name \term{size theory} in the 1990s \cite{Frosini1990}. $0^{\th}$ degree persistent homology is also closely related to data clustering in the following sense.
 
@@ -276,7 +284,7 @@ Let $(K, f)$ be a filtered simplicial complex and consider its $0^{\th}$ degree 
 
 The persistence set of filtered simplicial complexes can be graphically represented as a planar tree: each vertex $v$ corresponds to a branch that ``starts'' at filtration value $f(v)$, and two branches merge when their connected components merge. \ir{figure please}. For a Čech or Vietoris-Rips filtration, where all vertices appear at level $0$, this tree representation can be seen as a \term{dendrogram}, a data representation that is commonly used in hierarchical clustering \ir{figure}. For more general filtrations, this representation is called a \term{merge tree} \ir{cite}. Merge trees contain strictly more information than persistence modules, but enjoy many of the same properties, including stability \ir{ref below}.
 
-\wayoflooking{As a diagram}
+\subsection{As a diagram}
 
 Let $V$ be a (pointwise finite dimensional) persistence module indexed by $\R$. We can represent its barcode as a multiset of points in $\R^2$.
 
@@ -291,7 +299,7 @@ Let $V$ be a (pointwise finite dimensional) persistence module indexed by $\R$. 
 \end{definition}
 
 
-\wayoflooking{As a point in a metric space}
+\subsection{As a point in a metric space}
 
 In TDA, not only are we interested in the topological features of a data set, but we would also like to compare the topologies of different data sets. To do this, we define (pseudo)metrics on the space of persistence diagrams.
 
@@ -326,8 +334,8 @@ In TDA, not only are we interested in the topological features of a data set, bu
 \end{remark}
 
 \begin{footnoted}{remark}
-{Thanks to Théo Lacombe for bringing my attention to this.}
-  The name ``Wasserstein distance'' is due to \cite{EdelsbrunnerHarer2010}, where the infimum in the definition iterates over all \emph{total} matchings (i.e., every point is matched) of persistence diagrams unioned with the points on the diagonal with infinite multiplicity. This is equivalent to our definition, but is more accurate to the Wasserstein, or earth-mover's, distance in optimal transport theory for measures, where matchings are also total, in a measure-theoretic sense. The ``totality'' of the matchings in \cite{EdelsbrunnerHarer2010} is rather artificial, as we need to include the diagonal infinitely many times. We will prefer our definition with partial matchings, but then perhaps the more appropriate name would be Figalli-Gigli distance, named after \cite{FigalliGigli2010}. See \cite{DivolLacombe2021} and \cite[Remark 2]{JanthialLacombe2026} for further discussion about this point.
+{Thank you to Théo Lacombe for bringing my attention to this.}
+  The name ``Wasserstein distance'' is due to \cite{EdelsbrunnerHarer2010}, where the infimum in the definition iterates over all \emph{total} matchings (i.e., every point is matched) of persistence diagrams unioned with the points on the diagonal with infinite multiplicity. This is equivalent to our definition, but is more accurate to the Wasserstein, or earth-mover's, distance in optimal transport theory for measures, where matchings are total in a measure-theoretic sense. The ``totality'' of the matchings in \cite{EdelsbrunnerHarer2010} is rather artificial, as we include the diagonal infinitely many times. We will prefer our definition with partial matchings, but then the more appropriate name might be Figalli-Gigli distance, named after \cite{FigalliGigli2010}. See \cite{DivolLacombe2021} and \cite[Remark 2]{JanthialLacombe2026} for further discussion about this point.
 \end{footnoted}
 
 A fundamental property of persistent homology is its \term{stability}: small perturbations of the input result in small changes in the output. This is usually formalized as a Lipschitz-type inequality. \ir{cite a result for filtrations, maybe}
@@ -379,11 +387,11 @@ We can also define distances on persistence modules.
 \end{definition}
 
 \begin{remark}
-  As with the distances defined between persistence diagrams and barcodes, the interleaving distance is not formally a metric. In particular, it does not separate isomorphic persistence modules, which can be shown to admit $0$-interleavings. We will consider distances $d$ between persistence modules as pseudometrics satisfying the following axioms: for all persistence modules $U$, $V$, $W$,
+  As with the distances defined between persistence diagrams and barcodes, the interleaving distance is not formally a metric. In particular, it does not separate isomorphic persistence modules, which can be shown to admit $0$-interleavings. We will consider distances $d$ between persistence modules as \term{pseudometrics} satisfying the following axioms: for all persistence modules $U$, $V$, $W$,
   \begin{enumerate}
     \item $d(U, V) = d(V, U)$;
     \item $d(U, V) = 0$ if $U$ is isomorphic to $V$;
-    \item $d(U, W) \leq d(U, V) + d(V, W)$.
+    \item $d(U, W) \leq d(U, V) + d(V, W)$. \qedhere
   \end{enumerate}
 \end{remark}
 
@@ -426,7 +434,7 @@ For more general persistence modules, where we do not have barcode decomposition
 
 \ir{For more general persistence modules, where we do not have barcode decompositions, we can also product metrics based on a decision on what is considered ``small''. A systematic way to produce metrics is noise systems and hierarchical stabilization.}
 
-\wayoflooking{As a vector}
+\subsection{As a vector}
 
 Every modern data analysis pipeline crosses paths with machine learning at some point. Persistent homology is no exception, and there are several ways to include topological insights in machine learning pipelines. One major issue with persistent homology is that the simple output, the barcode, is of variable length. This is incompatible with most traditional machine learning frameworks, where the input data is a vector of fixed dimension or length.
 
@@ -436,7 +444,7 @@ Every modern data analysis pipeline crosses paths with machine learning at some 
 
 \ir{hierarchical stabilization: stabilize a numeric invariant as a function using a distance. For total rank and Wasserstein-type distances, this is computable.}
 
-\wayoflooking{As its rank function}
+\subsection{As its rank function}
 
 As previously noted, generalized persistence modules do not have barcodes. However, if we allow ourselves to loose some information, we can instead study the rank function of a persistence module instead.
 
@@ -453,75 +461,87 @@ As previously noted, generalized persistence modules do not have barcodes. Howev
 
 Note that, in the one-dimensional case, the rank function is equivalent to the barcode in the sense that either one can be recovered from the other \ir{cite}. In the general case, rank functions admit decompositions into simple functions \ir{cite BOO?}.
 
-\wayoflooking{As bars and arrows}
+\subsection{As bars and arrows}
 
 As the last way of looking at persistence modules, we fix some graphical conventions for representing persistence modules and their morphisms in the one-dimensional case.
 
 \ir{We represent the bars of a tame persistence module by segements whose endpoints' $x$ coordinates correspond to the birth and deaths of the interval. A morphism has a matrix representation... maybe this is not the place to describe this.}
 
-\section{Persistent matrix algebra}
+% ====
 
-\ir{Just as there are many ways of looking at persistence modules, there are also many ways of looking at morphisms of persistence modules. In this section, we consider the matrix perspective.}
+\section{Persistent linear algebra}
+
+\subsection{Persistence generators}
+
+Free module.
+
+Generators can be: elements of specific vector spaces $V_t$, morphisms from free module to $V$.
+
+A set of generators generates $V$ if every element is a sum of generators up to transition maps.
+
+A basis is an isomorphism to $\Bar$.
+
+Remark: this theory can be expanded to linear independence, but we do not need that.
 
 \subsection{Matrix representations}
 
-There are several. The idea comes from the isomorphism
+Just as there are many ways of looking at persistence modules, there are also many ways of looking at morphisms of persistence modules. In this section, we consider the matrix perspective. We mainly work in the one-dimensional case.
+
+We first define a category, equivalent to $\Pfd$, where we can work explicitly with bars.
+
+\begin{definition}
+  the category $\Bar$. Objects are explicit direct sums!
+\end{definition}
+
+The idea behind representing morphisms of persistence modules as matrices comes from the isomorphism
 \[
-\hom(\bigoplus_i \ldots, \bigoplus_j \ldots) \cong \bigoplus_{i, j} \hom(\ldots, \ldots).
+\hom(\bigoplus_i \bf{k}_{S_i}, \bigoplus_j \bf{k}_{T_j}) \cong \prod_{i, j} \hom(\bf{k}_{S_i}, \bf{k}_{T_j}).
 \]
-Rows and columns should be labeled. The big question is how to label them, and how to order the rows and columns.
+The isomorphism holds for all abelian categories by the universal properties of direct sums as products and coproducts.
 
-Matrix multiplication is nontrivial.
+\begin{remark}
+  In $\Tame$, the product is a direct sum.
+  
+  Example where product is not direct sum: $\K_{(0, 1)} \to \bigoplus_{n \geq 1} \K_{(0, \frac{1}{n})}$.
+\end{remark}
 
-There is an alternate interpretation of matrices using persistence vectors. Matrix multiplication is slightly different. \ir{Not sure if we need this, in the end.}
+\begin{definition}
+  (\term[(ordered) matrix representation]{ordered}) \textbf{matrix representations}. Rows and columns should be labeled. The big question is how to label them, and how to order the rows and columns.
+  
+  Matrix multiplication: it is nontrivial.
+\end{definition}
+
+\begin{remark}
+  There is an alternate interpretation of matrices using persistence vectors. Matrix multiplication is slightly different. \ir{Maybe just briefly mention this.}
+\end{remark}
+
+\begin{remark}
+  This matrix theory also works for general persistence modules, if we label by indecomposables... example: free modules.
+\end{remark}
 
 \subsection{The pairing uniqueness lemma}
 
-The isomorphism of the barcode decomposition theorem can be explicitly computed by reducing a matrix appropriately (morphism of free resolution). Pivots do not depend on order of operations.
+We can view boundary map as morphism of persistence modules: since persistent homology is computed pointwise, we can define persistent homology as the homology of persistent chain complexes, which are just sequences of persistence modules with differential maps. We describe an algorithm for computing persistent homology:
 
-\section{Persistent homological algebra}
+...
 
-\ir{In this section, we consider persistence modules as functors over posets.}
+We can view this as a morphism between free modules.
 
-\subsection{Projective and free poset modules}
+The isomorphism of the barcode decomposition theorem can be explicitly computed by reducing a matrix appropriately (morphism of free resolution). Key result: Pivots do not depend on order of operations.
 
-% Considering the functorial view of persistence modules, we can generalize from $\R$ to an arbitrary indexing poset $I$.
-
-% We lose barcode decomposition theorem, but we can look at decompositions of simpler invariants: rank function.
-
-Persistence modules over arbitrary posets. We use the language of functors: free functor...
-
-If $I$ is finite then we have good properties: projective is free, enough projectives, ...
-
-Decomposition of rank functors? (if not detailed earlier)
-
-\subsection{Local Koszul complexes}
-
-Going back to free presentations, there is a tool to compute the multiplicities of free modules in the minimal free resolution.
-
-\subsection{Relative homological algebra for poset modules}
-
-Try to emulate the barcode decomposition theorem with ``simple'' modules.
-
-Related: decompositions of rank functions
+% ====
 
 \section{Normed persistent algebra}
 
-Back to one-parameter
+Back to one-parameter: we have already introduced some notions of metrics (and by extension, norms) of persistence modules.
 
-\subsection{Norms and metrics}
+\subsection{Bar-to-bar morphisms and algebraic Wasserstein distances}
 
-We can equip persistence modules with norms, essentially via the lengths of bars.
+Define $p$-norms, algebraic Wasserstein distances. Key point is size of cokernels of monomorphisms (kernels of epimorphisms).
 
-This is of interest for stability results, essential for applications. Interleaving distance, bottleneck distance.
+Definition: bar-to-bar.
 
-\subsection{Noise systems and algebraic Wasserstein distances}
-
-General way of producing distances: noise systems (amplitudes).
-
-We worked with $p$-norms, defining (algebraic) Wasserstein distances. Key point is size of cokernels of monomorphisms (kernels of epimorphisms).
-
-Bar-to-bar. Proof of noise system axioms involves representing $p$-norms as integrals of the rank function.
+We prove that this is a distance via bar-to-bar. Two proofs in two papers: one involves an ugly algorithm with permutations and stuff, the other involves representing $p$-norms as integrals of the rank function.
 
 \subsection{Induced matchings}
 
@@ -534,3 +554,27 @@ Applications: interpretability?
 Other interesting question, related to noise systems: biggest extension?
 
 Partial results if $X$ or $Y$ is a single bar.
+
+% ====
+
+\section{Persistent homological algebra}
+
+In this section, we consider persistence modules as functors over posets.
+
+\subsection{Projective and free poset modules}
+
+Persistence modules over arbitrary posets. We use the language of functors: free functor...
+
+If $I$ is finite then we have good properties: projective is free, enough projectives, ...
+
+Decomposition of rank functions? (if not detailed earlier)
+
+\subsection{Local Koszul complexes}
+
+Going back to free presentations, there is a tool to compute the multiplicities of free modules in the minimal free resolution.
+
+\subsection{Relative homological algebra for poset modules}
+
+Try to emulate the barcode decomposition theorem with ``simple'' modules. Theory works out, we want to compute relative Betti diagrams.
+
+Related: decompositions of rank functions

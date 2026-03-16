@@ -1,12 +1,14 @@
 % !TEX root = ./thesis-main.tex
 
-\input{headers/my-kthpq}
-\input{headers/my-macros}
+\input{headers/my-kthpq}  % load class and packages, define more complicated commands
+\input{headers/my-macros}  % math macros and metadata
 
 \begin{document}
 
+% ==== FRONT MATTER ====
 \input{includes/front-matter}
 
+% ==== MAIN MATTER ====
 \mainmatter
 \newrefsection
 
@@ -15,8 +17,8 @@
 \input{includes/introduction}
 \input{includes/persistent-algebra}
 \input{includes/morse-theory}
-\input{includes/outlook}
 \input{includes/contributions}
+\input{includes/outlook}
 
 \printbibliography[title=References,heading=bibintoc]
 
@@ -61,26 +63,7 @@ text
 
 \paperchapter{Ren2026}
 
-% ---- Back matter ----
-
-\backmatter
-
-\begin{colophon}[.5\textwidth]
-\footnotesize
-\setlength{\parindent}{1pc}
-\noindent This thesis is set in Figtree, Georgia, Fira Code, and XCharter-Math.
-
-Headings and some short body text are set in Figtree, designed by Eric Kennedy in 2022. Minimalist yet friendly, Figtree is a geometric sans serif face made for the digital age.
-
-The body text face is Georgia, designed by Matthew Carter and hinted by Thomas Rickner in 1993. Georgia is a serif face in the Scotch Roman style designed to be legible on low-resolution screens, but its elegant forms are equally appreciated at higher resolutions and in print.
-
-The monospace face is Fira Code, designed Nikita Prokopov in 2019. It is based on the Fira Mono typeface by Carrois Apostrophe and features an extensive set of ligatures for many programming languages.
-
-The mathematical text is set in XCharter-Math, designed and maintained by Daniel Flipo for \TeX. This OpenType math font borrows and derives its symbols from XCharter, designed and maintained by Michael Sharpe and itself derived from Matthew Carter's Bitstream Charter (a predecessor to Georgia), as well as MathDesign by Paul Pichaureau and Fourier-GUTenberg by Michel Bovani.
-
-\mydinkus
-
-\noindent This thesis was typeset on \today{} by \formattedluatexbanner{} with \LaTeX2e{} (\fmtversion) and \textsf{expl3} (\ExplLoaderFileDate) using the class \href{https://github.com/th-rtyf-re/kthpq-thesis}{\texttt{kthpq-thesis}} written by me!
-\end{colophon}
+% ==== BACK MATTER ====
+\input{includes/back-matter}
 
 \end{document}
