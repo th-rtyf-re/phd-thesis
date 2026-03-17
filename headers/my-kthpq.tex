@@ -40,8 +40,12 @@
 
 % mathtools loaded at the top!
 \usepackage{amsthm,thmtools}  % thmtools for QED in any theorem
+
+% ---- Other ----
+
 \usepackage{tikz}
 \usetikzlibrary{babel,cd}
+\usepackage[ruled]{algorithm2e}
 
 % ---- Load last ----
 
@@ -257,7 +261,7 @@
     \checkoddpage%
     \ifoddpageoroneside%
     \else%
-      \leavevmode\marginpar{\vspace{-8pt}}%
+      \leavevmode\marginpar{\vspace{-6pt}}%
     \fi%
   },
   headpunct={.\,},

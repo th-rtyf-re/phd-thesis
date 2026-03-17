@@ -1,6 +1,6 @@
 % !TEX root = ../thesis-main.tex
 
-\chapter{Metric algebraic Morse theory}
+\chapter{Morse theory and metric algebraic geometry}
 \label{C:metric-morse}
 
 \begin{epigraph}
@@ -9,14 +9,10 @@
   Of one of many circles.
 \end{epigraph}
 
-A specific example of filtered space: distance functions between subsets of $\R^n$.
+In the previous chapter, we presented a general theory for algebraically studying filtered spaces using the tools of persistent homology. In this section, we present tools from a slightly older theory, namely Morse theory, for studying filtered manifolds. We cover preliminaries on Morse theory and related studies of critical points of distance functions in metric algebraic geometry.
 
-\section{Classical Morse theory}
+\section{A combinatorial encoding of topology}
 \label{S:Morse-theory}
-
-\ir{No need for preliminaries: homological results using homology, define reduced homology on the spot.}
-
-\subsection{A combinatorial encoding of topology}
 
 \begin{definition}
   Let $X$ be a smooth manifold and $f \colon X \to \R$ a smooth function. A \term[critical point]{critical point of $f$} is a point $x$ of $X$ where the differential $\partial_x f$ of $f$ is $0$. A \term{critical value} is the image $f(x)$ of a critical point.
@@ -46,13 +42,7 @@ This algebraic encoding of the geometry of a filtered manifold can be developed 
   Let $X$ be a smooth manifold, $f \colon X \to \R$ a smooth function, and $s \leq t$ in $\R$. Recall the notation $X_{\leq t} = f^{-1}((-\infty, t])$. Then:
   \begin{enumerate}
     \item If the interval $[s, t]$ contains no critical values, then $X_{\leq s}$ is diffeomorphic to $X_{\leq t}$ and $X_{\leq t}$ deformation retracts onto $X_{\leq s}$.
-    \item Suppose that there is a unique nondegenerate critical point $x \in X$ whose value $f(v)$ is in the interval $[s, t]$, and let $\iota$ be the index of $x$. Then $X_{\leq t}$ is homotopy equivalent to $X_{\leq s}$ with an $\iota$-cell attached.
-    
-    In terms of homology, we can write
-    \[
-      H_*(X_{\leq t}, X_{\leq s}) \cong \tilde{H}_*(\bf{S}^\iota).
-    \]
-    In words, the homology of $X_{\leq t}$ relative to $X_{\leq s}$ is isomorphic to the reduced homology of an $\iota$-sphere.
+    \item Suppose that there is a unique nondegenerate critical point $x \in X$ whose value $f(x)$ is in the interval $[s, t]$, and let $\iota$ be the index of $x$. Then $X_{\leq t}$ is homotopy equivalent to $X_{\leq s}$ with an $\iota$-cell attached.
   \end{enumerate}
 \end{theorem}
 
@@ -60,12 +50,67 @@ This algebraic encoding of the geometry of a filtered manifold can be developed 
   \ir{classic donut}
 \end{example}
 
-\ir{Morse inequalities}
+In terms of homology, we have the following results \ir{cite}
 
-\section{Morse theory for distance functions}
+\begin{definition}
+  Let $X$ be a smooth manifold. For all integers $d \geq 0$, we call $b_d(X) \coloneq \dim H_d(X)$ the \term[Betti number]{$d^{\th}$ Betti number of $X$}.
+\end{definition}
 
-Locally Lipschitz, subdifferential, continuous selections.
+\begin{theorem}
+  Let $X$ be a smooth manifold and $f \colon X \to \R$ a smooth function whose critical points are isolated and nondegenerate. For all integers $d \geq 0$, denote by $C^d$ the number of critical points of $f$ of index $d$. Then, for all $d \geq 0$, we have the inequality
+  \[
+    C^d - C^{d - 1} + \cdots + (-1)^d C^0 \geq b_d(X) - b_{d - 1}(X) + \cdots + (-1)^d b_0(X).
+  \]
+  In particular, for all $d \geq 0$, we get
+  \[
+    C^d \geq b_d(X).
+  \]
+\end{theorem}
 
-\section{The case of distances between algebraic varieties}
+When the set of critical points is easy to compute, this gives powerful upper bounds on the homology of the manifold $X$.
 
-\ir{algebraic variety, complete intersection, \textbf{metric algebraic geometry in general}, generically nondegenerate}
+\begin{remark}
+  Morse theory was originally developed for smooth function on smooth manifolds. However, it has been generalized in many directions, including Morse-Bott theory, stratified Morse theory, and discrete Morse theory. In \ir{Paper D} we develop Morse theory for continuous selections, as presented in \cite{APS1997}.
+\end{remark}
+
+\ir{I'm starting to think that anything that is in the papers should not be written out here...}
+
+\section{Distance functions between algebraic varieties}
+
+For algebraic spaces, the notion of critical points of distance functions has been studied extensively in the past few decades, as part of the growing field of \term{metric algebraic geometry}.
+
+\begin{definition}
+  An \term{real algebraic variety} is the set of solutions of a system of multivariate polynomial equations over the real numbers. \ir{copied from Wikipedia, I guess...}
+  
+  Consider the space $\R^n$ for some $n \geq 1$ and an integer $d \geq 0$. Denote by $\cc{P}_{n, d}$ the space of real polynomials in $n$ variables, of degree $d$. Given polynomials $\vec{p} = p_1, \ldots, p_k$ in $\cc{P}_{n, d}$, we denote by $V(\vec{p})$ the algebraic variety that is the set of solutions of the equations $p_i(x) = 0$, for all $i \in \{1, \ldots, k\}$.
+  
+  The \term[(co)dimension]{dimension} of a variety $X$ is its dimension around any nonsingular point, seen as a manifold. We denote it by $\dim X$. Its codimension is $\codim V \coloneq n - \dim X$ where $n$ is the dimension of the ambient real or complex space.
+  
+  An algebraic variety $X$ is a \term{complete intersection} if there exist $\codim V$ many polynomials $p_1, \ldots, p_{\codim X}$ such that $X = V(p_1, \ldots, p_{\codim X})$.
+\end{definition}
+
+Algebraic geometers are often interested in integer invariants for algebraic varieties, and metric algebraic geometers are no exception. We present two of these \textit{degrees}:
+
+\begin{definition}
+  Let $X$ be a real algebraic variety and $u$ an arbitrary point in $\R^n$. Consider the function
+  \[
+    \dist_u \colon \left\{ \begin{array}{ccc}
+      X & \to & [0, \infty) \\
+      x & \mapsto & \| u - x \|_2^2
+    \end{array} \right.
+  \]
+  defined as the squared Euclidean distance. It turns out that the number of critical points of $\dist_u$ is constant for a dense open subset of choices of $\R^n$: the \term[Euclidean distance degree (EDD)]{Euclidean distance degree} (\textbf{EDD}) \textbf{of $X$} is then this constant number \cite{DHOST2016}. An interpretation of the EDD is as a measure of the complexity of finding the closest point on $X$ to a given point $u$ in $\R^n$.
+  
+  Now let $X$ be a real algebraic variety. The \term[bottleneck]{bottlenecks of $X$} are pairs $(x, y)$ of distinct points of $X$ such that the line passing through $x$ and $y$ is normal (orthogonal) to $X$ at both points. Equivalently, bottlenecks are the nontrivial critical points of the squared distance function on $X$, that is, the critical points of the function
+  \[
+    \dist\big|_X \colon \left\{ \begin{array}{ccc}
+      X \times X & \to & [0, \infty) \\
+      (x, y) & \mapsto & \| x - y \|_2^2,
+    \end{array} \right.
+  \]
+  with the extra condition that $x \neq y$. The \term[bottleneck degree (BND)]{bottleneck degree} (\textbf{BND}) \textbf{of $X$} is the number of bottlenecks, under some regularity conditions on $X$ \cite{DREW2020}.
+\end{definition}
+
+\begin{remark}
+  Both of these notions fit within the framework of critical points of the distance function from an algebraic variety, restricted to another algebraic variety. In \ir{Papers D and E}, we generalize this notion to generic varieties.
+\end{remark}
