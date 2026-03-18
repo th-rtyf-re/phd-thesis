@@ -16,6 +16,20 @@
   urldate=ymd
 ]{biblatex-kthpq}
 
+% \makeatletter
+% \defbibenvironment{bibliography}
+% {\list{\printtext[labelnumberwidth]{%
+%     \printfield{prefixnumber}%
+%     \printfield{labelnumber}}}
+% {\setlength{\bibhang}{0pt}%
+% \setlength{\leftmargin}{\bibhang}%
+% \setlength{\itemindent}{-\leftmargin}%
+% \setlength{\itemsep}{\bibitemsep}%
+% \setlength{\parsep}{\bibparsep}}}
+% {\endlist}
+% {\item}
+% \makeatother
+
 % ---- Formatting ----
 
 \usepackage{parskip}
@@ -92,6 +106,10 @@
 \addbibresource{bib/mypapers.bib}
 \addbibresource{bib/others.bib}
 
+\DeclareFieldFormat{eprint:github}{%
+GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint}}}
+}
+
 % ---- Layout ----
 
 \geometry{
@@ -103,17 +121,15 @@
 
 % Custom header and footer with fancyhdr
 \fancypagestyle{fancy}{%
-  \fancyhf{} % reset
+  \fancyhf{}  % reset
   \fancyhead[LO]{\sffamily\small\rightmark}
   \fancyhead[RE]{\sffamily\small\leftmark}
-  \fancyhead[LE]{\sffamily\small\thepage} % Left for even pages, right for odd pages
-  \fancyhead[RO]{\sffamily\small\thepage}
+  \fancyhead[LE,RO]{\sffamily\small\thepage}  % Left for even pages, right for odd pages
 }
 
 \fancypagestyle{plain}{% for special pages, e.g. first pages of chapters
-  \fancyhf{} % reset
-  \fancyhead[LE]{\sffamily\small\thepage} % Left for even pages, right for odd pages
-  \fancyhead[RO]{\sffamily\small\thepage}
+  \fancyhf{}  % reset
+  \fancyhead[LE,RO]{\sffamily\small\thepage}  % Left for even pages, right for odd pages
 }
 
 % Remove fancy headers from front matter
@@ -141,34 +157,60 @@
   {\sffamily\fontsize{12pt}{12pt}\selectfont\bfseries}
   {\inleftmargin{\thesubsection}}{0em}{}
 
-% % New subsection-like
-% \titleclass{\wayoflooking}{straight}[\subsection]
-% \newcounter{wayoflooking}[subsection]
-% \renewcommand{\thewayoflooking}{\Roman{wayoflooking}}
-% \titleformat
-%   {\wayoflooking}
-%   {\sffamily\fontsize{12pt}{12pt}\selectfont\bfseries}
-%   {\inleftmargin{\thewayoflooking}}
-%   {0em}
-%   {}
-% \titlespacing*{\wayoflooking}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}% copying subsection default in titlesec
-% \crefname{wayoflooking}{Way of Looking}{Ways of Looking}% hard-coded capitalized
-% \Crefname{wayoflooking}{Way of Looking}{Ways of Looking}
-% \titlecontents{wayoflooking}[0pt]{}{}{}{}% Somehow suppresses the line from the toc
-% \makeatletter
-% \newcommand{\toclevel@wayoflooking}{2}% bookmark level for hyperref?
-% \makeatother
-
 % New section-like for papers
-\newcounter{papersection}
-\renewcommand{\thepapersection}{Paper \Alph{papersection}}
-\newcommand{\papersection}[2][]{%
-  \stepcounter{papersection}%
-  \vskip 3.5ex plus 1ex minus .2ex%
-  \inleftmargin{\sffamily\bfseries\thepapersection}%
-  \inlinepaper[#1]{#2}%
-  \vskip 2.3ex plus .2ex%
+\makeatletter
+\newcommand\papersection[2][]{% OPTIONAL: shorttitle, misctext
+  \setkeys{kthpq@papersection}{#1}%
+  \@papersection{#2}%
+  \let\@misctext\defaultmisctext%
+  \let\@shorttitle\@nil
 }
+
+\let\@shorttitle\@nil
+\define@key{kthpq@papersection}{misctext}{\def\@misctext{#1}}
+\define@key{kthpq@papersection}{shorttitle}{\def\@shorttitle{#1}}
+
+\DeclareCiteCommand{\@papersection}
+{%
+  \pagetrackerfalse%
+  \citetrackerfalse%
+  \usebibmacro{prenote}%
+  \defcounter{maxnames}{99}%
+  \sffamily%
+  \let\theoldsection\thesection
+  \renewcommand{\thesection}{\papername\ \Alph{section}}
+}
+{%
+  \ifx\@shorttitle\@nil
+    \section{\thefield{labeltitle}}
+  \else
+    \section[\@shorttitle]{\thefield{labeltitle}}
+  \fi
+  \printnames{author}.
+  \ifentrytype{article}{%
+    In \usebibmacro{tryfjournal},
+  }{}%
+  \ifentrytype{inbook}{%
+    In \printfield{booktitle},
+  }{}%
+  \ifentrytype{incollection}{%
+    In \printfield{booktitle},
+  }{}%
+  \ifentrytype{inproceedings}{%
+    In \printfield{booktitle},
+  }{}%
+  \ifentrytype{misc}{%
+    \@misctext\ifx\@misctext\empty\else, \fi%
+  }{}%
+  \printfield{year}.
+  \printfield{doi}\printfield[eprint:arxiv]{eprint}%
+}
+{}
+{%
+  \usebibmacro{postnote}%
+  \let\thesection\theoldsection
+}
+\makeatother
 
 % ---- Theorems ----
 

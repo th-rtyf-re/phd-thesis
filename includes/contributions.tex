@@ -2,29 +2,99 @@
 
 \chapter{Papers and contributions}
 
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+
 \papersection{CGRST2024}
 
-In this paper we extend the results of section blah.
+In this paper, we study persistence modules over a finite poset $(I, \mathord{\leq})$ using the functorial perspective (\cref{SS:functor}). We extend the results of \cref{S:persistent-homological-algebra} to the \term[relative homological algebra]{relative homological case}. Instead of approximating functors over $I$ by projective resolutions, where each term is a sum of free functors, we approximate them by other ``simple'' functors. Given a collection $\cc{P}$ of such simple functors, we define $\cc{P}$-exactness, $\cc{P}$-projectives, $\cc{P}$-covers, and $\cc{P}$-resolutions, which are the relative versions of the ``absolute'' notions defined in \cref{S:persistent-homological-algebra}. A \term[$\cc{P}$-free]{$\cc{P}$-free functor} is a functor that is isomorphic to a direct sum of elements of $\cc{P}$. The collection $\cc{P}$ is then \term{acyclic} if every $\cc{P}$-projective is $\cc{P}$-free. Under this condition, we can then define Betti diagrams relative to $\cc{P}$.
 
-Try to emulate the barcode decomposition theorem with ``simple'' modules. Theory works out, we want to compute relative Betti diagrams.
+The principal result of this paper is that, under reasonable conditions on $\cc{P}$, we can compute the relative Betti diagrams using local Koszul complexes. First, assume that the collection $\cc{P}$ is parameterized by a functor $\cc{T} \colon (J, \mathord{\preceq})^{\op} \to \Fun(I, \Vect)$ where $(J, \mathord{\preceq})$ is a finite upper semilattice (\ir{ref}) and $\cc{P} = \{\cc{T}(a) \mid \cc{T}(a) \neq 0, \; a \in J\}$. The parameterization functor $\cc{T}$ is \term{thin} if, for all $a \preceq b$ in $J$, the space of natural transformation $\Nat(\cc{T}(b), \cc{T}(a))$ is of dimension at most $1$. In this case, the collection $\cc{P}$ is acyclic, and so we can talk about Betti diagrams relative to $\cc{P}$: given a functor $M \colon I \to \Vect$ and an element $a \in J$ such that $\cc{T}(a) \neq 0$, we denote by $\beta_{\cc{P}}^d M(a)$ the multiplicity of $\cc{T}(a)$ in the $d^{\th}$ term of the minimal $\cc{P}$-projective resolution of $M$.
 
-Related: decompositions of rank functions
+Given a functor $M \colon I \to \Vect$, we define the functor indexed by $J$
+\[
+  \cc{R} M \colon \left\{ \begin{array}{ccc}
+    J & \to & \Vect \\
+    a & \mapsto & \Nat(\cc{T}(a), M).
+  \end{array} \right.
+\]
+The main result is the following.
 
-Note: mistake in an example. Thanks to Tada Shunsuke!
+\begin{theorem}[\ir{Corollary 5.20, Paper A}]
+  Let $(J, \mathord{\preceq})$ be an upper semilattice and $\cc{T}$ a thin parameterization functor. Assume that
+  \begin{enumerate}
+    \item the set $\{a \in J \mid \cc{T}(a) = 0\}$ is closed under joins, and
+    \item for all $a, b$ in $J$, if $b$ is minimal $\succeq a$ such that $\Nat(\cc{T}(b), \cc{T}(a)) = 0$, then $\cc{T}(a) = 0$.
+  \end{enumerate}
+  Then, for all functors $M \colon I \to \Vect$, all $a$ in $J$ such that $\cc{T}(a) \neq 0$, and all $d \geq 0$,
+  \[
+    \beta_{\cc{P}}^d M(a) = \dim H_d(\cc{K}_a \cc{R} M).
+  \]
+\end{theorem}
 
-Another mistake: in def of Koszul complex, differential second case is $d \geq 0$
+In other words, under the listed conditions, we can compute the Betti diagrams relative to $\cc{P}$ using the standard Koszul complexes defined on $\cc{R} M \colon J \to \Vect$.
 
-Contributions: hi
+The paper ends with an extensive list of examples of collection $\cc{P}$ and parameterization functors $\cc{T}$ where the conditions of the theorem hold. This includes examples that have been studied in previous works, including \textbf{rectangles}, \textbf{lower hooks} \cite{BOO2025}, and \textbf{single-source spread modules} \cite{BBH2024}. In fact, this work was in part motivated by the study of exact structures for persistence modules, in particular relative to lower hooks, in \cite[Section 4]{BOO2025}. We have also implemented the computation of Betti diagrams relative to lower hooks in Python \cite{lowerhooks}.
 
-\papersection{AGRS2025}
+\ir{figure}
 
-generalization of combinatorial Wasserstein with two parameters
+Related: decompositions of rank functions \ir{put this elsewhere}
 
-Definition: bar-to-bar.
+\subsection*{Erratum}
 
-We prove that this is a distance via bar-to-bar. Two proofs in two papers: one involves an ugly algorithm with permutations and stuff, the other involves representing $p$-norms as integrals of the rank function.
+Thank you to Tada Shunsuke for pointing out the following mistake. In \textsection 4.4, we write that a functor $F \colon J \to \Vect$ is isomorphic to a subfunctor of $\K_J$ if, and only if, $F$ is a filtration and $\dim F(a) \leq 1$ for every $a$ in $J$. This does not hold in all generality: consider the functor $F$ defined by
+\[
+  \begin{tikzcd}
+    \K
+      \arrow[r, "1"]
+      \arrow[d, "1" swap]
+    & \K
+    \\
+    \K
+    & \K
+      \arrow[l, "1"]
+      \arrow[u, "\lambda" swap]
+  \end{tikzcd}
+\]
+where $\lambda \in \K \setminus \{0, 1\}$. Then $F$ is a filtration with pointwise dimension at most $1$, but is not isomorphic to a subfunctor of $\K_J$. As a correction, we restrict the claim to the case where $J$ is an upper semilattice. There is no impact on the rest of the paper. \ir{right?}
 
-isometry result? maybe next paper
+\subsection*{Contributions}
+
+In this paper I co-wrote the main results, was the main contributor to the analysis of examples in the last section, and wrote the software \texttt{lowerhooks} \cite{lowerhooks} that applies our theoretical results to the specific case of lower hooks.
+
+CRediT classification: \textbf{Isaac Ren:} conceptualization (equal), formal analysis (equal), software (lead), visualization (lead), writing - original draft preparation (equal), writing - review \& editing (equal).
+
+\papersection[shorttitle={Algebraic Wasserstein distances...}]{AGRS2025}
+
+In this paper, we define algebraic $p$-Wasserstein distances for tame persistence modules, proving that the sequence of collections $\cc{S} = \{\cc{S}_\varepsilon\}_{\varepsilon \geq 0}$ of \cref{SS:algebraic-wasserstein} is indeed a noise system. This is an alternate proof to that of \cite{SkrabaTurner2023}, \ir{a preprint that is being rewritten at the time of publication (like honestly what do I say here)}.
+
+The difficult noise system axiom to prove is the exact sequence, and specifically the following lemma:
+
+\begin{lemma}[\ir{Lemma 4.15, Paper B, simplified}]
+\label{L:triangular-ineq}
+  Let $0 \to U \xrightarrow{f} V \xrightarrow{g} W \to 0$ be an exact sequence of tame persistence modules, and $p \in [1, \infty]$ a number. Then
+  \[
+    \| V \|_p \leq \| U \|_p + \| W \|_p.
+  \]
+\end{lemma}
+
+Our proof strategy is to observe that the morphism $f$ is a monomorphism and that $W \cong \coker f$, and then study cases where the $p$-norm of $\coker f$ is easy to compute. We identify the following notion.
+
+\begin{definition}
+  A morphism $f \colon V \to W$ of tame persistence modules is \term{bar-to-bar} when there exists a matrix representation of $f$ such that each row and column has at most one nonzero coefficient.
+\end{definition}
+
+In other words, for a bar-to-bar morphism, there exist barcode decompositions of the domain and codomain such that each bar of the domain maps to at most one bar of the codomain. The key result is the following.
+
+\begin{theorem}{\ir{Theorem 3.14}}
+  Let $f \colon V \hookrightarrow W$ be a monomorphism of tame persistence modules. Then there exists a bar-to-bar monomorphism $f_b \colon V \hookrightarrow W$ such that $\| \coker f_b \|_p \leq \| \coker f \|_p$ for all $p \in [1, \infty]$.
+\end{theorem}
+
+Moreover, we observe that \cref{L:triangular-ineq} \ir{is easy to show for bar-to-bar monomorphisms as the triangular inequality on the vectors of bar lengths, and this gives the triangular inequality...}
+
+\ir{isometry result}
+
+In this paper, we also introduce \ir{extra parameterization on $p$-Wasserstein distances: an extra number $q$ for combining costs (combinatorial def?) and a lifetime function to weight bars by their position. Hierarchical stabilization,which we can compute explicitly. We then study case of brain arteries, where we can learn optimal parameterizations for a classification task}
+
 
 \papersection[misctext=To be submitted]{GRRS2026}
 
@@ -32,12 +102,14 @@ Induced matchings.
 
 Applications: interpretability?
 
-\papersection[misctext=Submitted]{GLRS2025}
+\papersection[shorttitle={Morse theory of Euclidean distance functions...}, misctext=Submitted]{GLRS2025}
 
 Distance function as continuous selection: not obvious, needs to be shown, cite result.
 
 Generic nondegeneracy between hyperplanes
 
-\papersection[misctext=To be submitted]{Ren2026}
+\papersection[shorttitle={Nondegeneracy of distance functions...}, misctext=To be submitted]{Ren2026}
 
 case of complete intersections
+
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}

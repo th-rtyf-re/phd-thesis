@@ -145,13 +145,13 @@ and then apply a homology functor. In this section, we will define what a homolo
 It can be shown that homology is a functor from $\Top$ to $\Vect_{\bf{k}}$ \ir{cite?}. For example, the construction of the homology spaces in \cref{D:simplicial-homology} is functorial. We can thus view persistent homology more generally as the application of the homology functor to a subcategory of topological spaces (or simplicial complexes). Specifically, let $I$ be a totally ordered set, $(X_i)_{i \in I}$ a collection of spaces (or simplicial complexes), and $X_{i \leq j} \colon X_i \to X_j$ a morphism for each $i \leq j$ in $I$, satisfying the composition and identity axioms for categories (see \cref{D:category}). This defines a category, which we denote by $X$, whose objects are the $X_i$ and morphisms are the $X_{i \leq j}$. For all integers $k \geq 0$, we then call the image of $X$ by the functor $H_k(-)$ the \textbf{$k^{\th}$ persistent homology of $X$}. 
 
 \subsection{As a collection of vector spaces and transition maps}
-\label{W:vector-spaces}
+\label{SS:vector-spaces}
 
 The image of the aforementioned homology functors is interesting in its own right. Abstracting the previous way of looking, we can view persistent homology as a collection of vector spaces and linear maps between them. This is how we define persistence modules:
 
 \begin{definition}
 \label{D:persistence-module}
-  Fix a field $\bf{k}$ and $(I, \leq)$ a totally ordered set. A \term[persistence module]{persistence module over $I$} is a collection of $\bf{k}$-vector spaces $(V_i)_{i \in I}$ indexed by $I$, along with linear maps $(V_{i \leq j} \colon V_i \to V_j)_{i \leq j \in I}$, called \term{transition maps}, such that
+  Fix a field $\bf{k}$ and $(I, \mathord{\leq})$ a totally ordered set. A \term[persistence module]{persistence module over $I$} is a collection of $\bf{k}$-vector spaces $(V_i)_{i \in I}$ indexed by $I$, along with linear maps $(V_{i \leq j} \colon V_i \to V_j)_{i \leq j \in I}$, called \term{transition maps}, such that
   \begin{itemize}
     \item for all $i \leq j \leq k$ in $\R$, we have the equality $V_{j \leq k} \circ V_{i \leq j} = V_{i \leq k}$, and
     \item for all $i$ in $I$, $V_{i \leq i} = \id_{V_i}$.
@@ -159,7 +159,7 @@ The image of the aforementioned homology functors is interesting in its own righ
   \ir{Morphisms of persistence modules}
 \end{definition}
 
-The similarities between these conditions and those of functors is not a coincidence, and will be detailed further in \cref{W:functor}.
+The similarities between these conditions and those of functors is not a coincidence, and will be detailed further in \cref{SS:functor}.
 
 \subsection{As a graded module}
 
@@ -178,12 +178,12 @@ Persistence modules have been extensively studied as graded modules over polynom
 We remark that nothing prevents us from considering multigraded modules over multivariate polynomial rings. This is the approach of \cite{CarlssonZomorodian2009}, where the authors call such modules multidimensional persistence. They are more commonly called \term[multiparameter persistence module]{multiparameter persistence modules}, and we immediately generalize this further to arbitrary posets.
 
 \subsection{As a functor itself}
-\label{W:functor}
+\label{SS:functor}
 
-As remarked in \cref{W:vector-spaces}, the definition of a persistence module closely resembles that of a functor. We formalize this here:
+As remarked in \cref{SS:vector-spaces}, the definition of a persistence module closely resembles that of a functor. We formalize this here:
 
 \begin{definition}
-  Let $\bf{k}$ be a field and $(I, \leq)$ a poset. Note that $(I, \leq)$ is a category (see \cref{D:category}) where $\obj(I, \leq) = I$ and, for all $i, j$ in $I$, $\mor_{(I, \leq)}(i, j) = \{*\}$ if $i \leq j$ and $\varnothing$ otherwise. We define a \term[generalized persistence module]{generalized persistence module indexed by} (or \textbf{over}) \textbf{$I$} to be a functor $V \colon (I, \leq) \to \Vect_{\bf{k}}$.
+  Let $\bf{k}$ be a field and $(I, \mathord{\leq})$ a poset. Note that $(I, \mathord{\leq})$ is a category (see \cref{D:category}) where $\obj(I, \mathord{\leq}) = I$ and, for all $i, j$ in $I$, $\mor_{(I, \mathord{\leq})}(i, j) = \{*\}$ if $i \leq j$ and $\varnothing$ otherwise. We define a \term[generalized persistence module]{generalized persistence module indexed by} (or \textbf{over}) \textbf{$I$} to be a functor $V \colon (I, \mathord{\leq}) \to \Vect_{\bf{k}}$.
   
   \ir{A morphism of persistence modules is then a natural transformation between two functors...}
 \end{definition}
@@ -198,7 +198,7 @@ Pushing the generalization of persistence modules even further, we can view them
   We start with some preliminary definitions in category theory. Let $\cat{C}$ be a category. The \term{opposite category} of $\cat{C}$ is the category $\cat{C}^{\op}$ where $\obj(\cat{C}^{\op}) \coloneq \obj(\cat{C})$ and, for all $x, y$ in $\obj(\cat{C}^{\op})$, $\mor_{\cat{C}^{\op}}(x, y) \coloneq \mor_{\cat{C}}(y, x)$. Composition is that of $\cat{C}$, but inverted: writing $f^{\op} \colon y \to x$ and $g^{\op} \colon z \to y$ as the elements in $\cat{C}^{\op}$ that correspond to $f \colon x \to y$ and $g \colon y \to z$ in $\cat{C}$, we define $f \circ^{\op} g \coloneq g \circ f$.
 \end{definition}
 
-For example, the opposite category of a poset $(I, \leq)$, viewed as a category, is the opposite poset $(I, \geq)$.
+For example, the opposite category of a poset $(I, \mathord{\leq})$, viewed as a category, is the opposite poset $(I, \geq)$.
 
 \begin{definition**}
   Let $X$ be a topological space and denote by $\cc{O}(X)$ the poset of open sets of $X$. A \term[(topological) presheaf]{$\Vect$-valued presheaf on $X$} is a functor $F \colon \cc{O}(X)^{\op} \to \Vect$. For $U$ an open set in $\cc{O}(X)$, the elements of $F(U)$ are called \term[section]{sections of $F$ over $U$}. For each containment of open sets $V \supseteq U$ in $\cc{O}(X)$, we get a \term{restriction morphism} $(-)\big|_U \colon F(V) \to F(U)$. The presheaf $F$ is then a \term{sheaf} if it satisfies the following two axioms:
@@ -208,11 +208,11 @@ For example, the opposite category of a poset $(I, \leq)$, viewed as a category,
   \item \term[gluing]{Gluing:}
     for $U$ an open set, $\{U_\alpha\}_{\alpha \in A}$ an open cover of $U$ with $U_\alpha \subseteq U$ for all $\alpha \in A$, and $v_\alpha \in F(U_\alpha)$ for all $\alpha \in A$, if $v_\alpha\big|_{U_\alpha \cap U_\beta} = v_\beta\big|_{U_\alpha \cap U_\beta}$ for all $\alpha, \beta$ in $A$, then there exists $v$ in $F(U)$ such that $v\big|_{U_\alpha} = v_\alpha$ for all $\alpha \in A$. In other words, if local sections coincide on their overlapping parts, then they can be glued together into a global section.
   \end{enumerate}
-  Now let us equip our poset $(I, \leq)$ with a topology. The \term{Alexandrov topology} on $I$ is the topology where open sets are \term[downset]{downsets}, that is, subsets $S$ of $I$ such that $S = \{y \in I \mid \exists x \in S, \; y \leq x\}$. We check that this is indeed a topology.
+  Now let us equip our poset $(I, \mathord{\leq})$ with a topology. The \term{Alexandrov topology} on $I$ is the topology where open sets are \term[downset]{downsets}, that is, subsets $S$ of $I$ such that $S = \{y \in I \mid \exists x \in S, \; y \leq x\}$. We check that this is indeed a topology.
 \end{definition**}
 
 \begin{proposition**}[{\cite[Proposition 2.2.3]{Berkouk2020}}, from {\cite[Proposition 2.15(b)]{KashiwaraShapira2018}}]
-  Let $(I, \leq)$ be a poset, equipped with the Alexandrov topology. Then persistence modules indexed by $I$ are equivalent (in a categorical sense) to $\Vect$-valued sheaves over $I$.
+  Let $(I, \mathord{\leq})$ be a poset, equipped with the Alexandrov topology. Then persistence modules indexed by $I$ are equivalent (in a categorical sense) to $\Vect$-valued sheaves over $I$.
 \end{proposition**}
 
 \subsection{As a barcode}
@@ -221,9 +221,9 @@ We have strayed far enough our persistent homology pipeline. Let us return to th
 
 \begin{definition}
 \label{D:interval}
-  Let $(I, \leq)$ be a poset. An \term{interval} of $I$ is a subset $S$ such that, for all, $i, j$ in $S$ and $k$ in $I$ such that $i \leq k \leq j$, $k$ is also an element of $S$.
+  Let $(I, \mathord{\leq})$ be a poset. An \term{interval} of $I$ is a subset $S$ such that, for all, $i, j$ in $S$ and $k$ in $I$ such that $i \leq k \leq j$, $k$ is also an element of $S$.
   
-  Suppose that $(I, \leq)$ is a total order and $S \subseteq I$ an interval. The \term{interval module} or \term[bar]{bar with support $S$} is the persistence module \notation{$\bf{k}_S$} defined functorially by, for all $i \leq j$ in $I$,
+  Suppose that $(I, \mathord{\leq})$ is a total order and $S \subseteq I$ an interval. The \term{interval module} or \term[bar]{bar with support $S$} is the persistence module \notation{$\bf{k}_S$} defined functorially by, for all $i \leq j$ in $I$,
   \[
     \bf{k}_S(i) \coloneq \begin{cases}
       \bf{k} & \text{if } i \in S, \\
@@ -236,7 +236,7 @@ We have strayed far enough our persistent homology pipeline. Let us return to th
     \end{cases}
   \]
 
-  A \term{pointwise finite-dimensional persistence module} is a persistence module $V$ indexed by $(I, \leq)$ such that, for all $i \in I$, $V(i)$ is a finite-dimensional vector space.
+  A \term{pointwise finite-dimensional persistence module} is a persistence module $V$ indexed by $(I, \mathord{\leq})$ such that, for all $i \in I$, $V(i)$ is a finite-dimensional vector space.
 \end{definition}
 
 \begin{definition}
@@ -245,7 +245,7 @@ We have strayed far enough our persistent homology pipeline. Let us return to th
 
 \begin{theorem}[{\cite[Theorem 1.2]{BotnanCrawleyBoevey2020}}]
 \label{T:barcode-decomposition}
-  Let $V$ be a pointwise finite-dimensional persistence module indexed by a total order $(I, \leq)$. Then there exists a unique multiset of intervals $\{S_\alpha\}_{\alpha \in A}$ of $I$ such that
+  Let $V$ be a pointwise finite-dimensional persistence module indexed by a total order $(I, \mathord{\leq})$. Then there exists a unique multiset of intervals $\{S_\alpha\}_{\alpha \in A}$ of $I$ such that
   \[
     V \cong \bigoplus_{\alpha \in A} \bf{k}_{S_\alpha}.
   \]
@@ -262,7 +262,7 @@ Note that the collection of intervals may be infinite and even uncountable: this
 
 \begin{definition}
 \label{D:tame}
-  A persistence module is \term[tame persistence module]{tame} is a pointwise finite-dimensional persistence module $V$ over a total order $(I, \leq)$ such that there exists a finite sequence $i_1 < \cdots < i_n$ such that, for $i \leq j$ in $I$, $V(i \leq j)$ is a non-isomorphism only if $i < i_k \leq j$ for some $k \in \{1, \ldots, n\}$. In this case, it turns out that each interval is of the form $[i, j)$, that is, closed from below and open from above \ir{cite}.
+  A persistence module is \term[tame persistence module]{tame} is a pointwise finite-dimensional persistence module $V$ over a total order $(I, \mathord{\leq})$ such that there exists a finite sequence $i_1 < \cdots < i_n$ such that, for $i \leq j$ in $I$, $V(i \leq j)$ is a non-isomorphism only if $i < i_k \leq j$ for some $k \in \{1, \ldots, n\}$. In this case, it turns out that each interval is of the form $[i, j)$, that is, closed from below and open from above \ir{cite}.
 \end{definition}
 
 \begin{example}
@@ -281,7 +281,7 @@ The case of $0^{\th}$ degree persistent homology initially appeared under the na
 Let $(K, f)$ be a filtered simplicial complex and consider its $0^{\th}$ degree persistent homology $V$. At each filtration value, $V(i)$ has a canonical basis consisting of the equivalence classes of each connected component of $K_{\leq i}$. Moreover, for $i \leq j$ in $\R$, the linear map $V(i \leq j)$ maps basis elements to basis elements: specifically, the class of a vertex $v \in K_0$ in $K_{\leq i}$ maps to its class in $K_{\leq j}$. This gives us the notion of \textbf{persistence sets}:
 
 \begin{definition**}
-  A \term{persistence set} is a functor from a poset $(I, \leq)$, seen as a category, to the category of sets $\Set$. More explicitly, it is the given of a set $S(i)$ for all $i$ in $I$ and transition maps $S(i \leq j) \colon S(i) \to S(j)$ for all $i \leq j$ in $I$ such that, for all $i \leq j \leq k$ in $I$, $S(j \leq k) \circ S(i \leq j) = S(i \leq k)$.
+  A \term{persistence set} is a functor from a poset $(I, \mathord{\leq})$, seen as a category, to the category of sets $\Set$. More explicitly, it is the given of a set $S(i)$ for all $i$ in $I$ and transition maps $S(i \leq j) \colon S(i) \to S(j)$ for all $i \leq j$ in $I$ such that, for all $i \leq j \leq k$ in $I$, $S(j \leq k) \circ S(i \leq j) = S(i \leq k)$.
 \end{definition**}
 
 The persistence set of filtered simplicial complexes can be graphically represented as a planar tree: each vertex $v$ corresponds to a branch that ``starts'' at filtration value $f(v)$, and two branches merge when their connected components merge. \ir{figure please}. For a Čech or Vietoris-Rips filtration, where all vertices appear at level $0$, this tree representation can be seen as a \term{dendrogram}, a data representation that is commonly used in hierarchical clustering \ir{figure}. For more general filtrations, this representation is called a \term{merge tree} \ir{cite}. Merge trees contain strictly more information than persistence modules, but enjoy many of the same properties, including stability \ir{ref below}.
@@ -413,35 +413,6 @@ Remarkably, the interleaving distance on persistence modules and the bottleneck 
 
 One of the results of this thesis is to prove similar results for other $p$-Wasserstein distances. To do this, we need to define an algebraic $p$-Wasserstein distance for persistence modules: \ir{this is the content of paper... (A proof already exists, see Skraba-Turner, but hmm...)}
 
-For more general persistence modules, where we do not have barcode decompositions, we can produce (pseudo)metrics by deciding which persistence modules are ``small''. This is the approach of noise systems: \ir{need tameness?}
-
-\begin{definition}[{\cite{SCLRÖ2017}}]
-\label{D:noise-system}
-  Let $(I, \leq)$ be a poset. A \term{noise system} is a sequence $\cc{S} = \{\cc{S}_\varepsilon\}_{\varepsilon \in [0, \infty)}$ of collections of persistence modules such that
-  \begin{enumerate}
-    \item $0 \in \cc{S}_\varepsilon$ for all $\varepsilon \in [0, \infty)$,
-    \item $\cc{S}_\delta \subseteq \cc{S}_\varepsilon$ for all $\delta \leq \varepsilon$, and
-    \item for all short exact sequences $0 \to V_0 \to V_1 \to V_2 \to 0$,
-    \begin{itemize}
-      \item if $V_1$ is in $\cc{S}_\varepsilon$, then $V_0$ and $V_2$ are in $\cc{S}_\varepsilon$;
-      \item if $V_0$ is in $\cc{S}_\delta$ and $V_2$ is in $\cc{S}_\varepsilon$, then $V_1$ is in $\cc{S}_{\delta + \varepsilon}$.
-    \end{itemize}
-  \end{enumerate}
-  Let $\varepsilon \geq 0$ be a number. Two persistence modules $V$ and $W$ are \term{$\varepsilon$-close} if there exist a persistence module $U$, a pair of morphism $V \xleftarrow{f} U \xrightarrow{g} W$ (called a \term{span}), and numbers $\varepsilon_1, \varepsilon_2, \varepsilon_3, \varepsilon_4 \geq 0$ such that
-  \[
-    \ker f \in \cc{S}_{\varepsilon_1}, \quad
-    \coker f \in \cc{S}_{\varepsilon_2}, \quad
-    \ker g \in \cc{S}_{\varepsilon_3}, \quad \text{and} \quad
-    \coker g \in \cc{S}_{\varepsilon_4},
-  \]
-  and $\varepsilon_1 + \varepsilon_2 + \varepsilon_3 + \varepsilon_4 \leq \varepsilon$. We then define the pseudometric induced by $\cc{S}$ to be
-  \[
-    d_{\cc{S}}(V, W) \coloneq \inf\{\varepsilon \geq 0 \mid \text{$V$ and $W$ are $\varepsilon$-close}\}.
-  \]
-\end{definition}
-
-\ir{For more general persistence modules, where we do not have barcode decompositions, we can also product metrics based on a decision on what is considered ``small''. A systematic way to produce metrics is noise systems and hierarchical stabilization.}
-
 \subsection{As a vector}
 
 Every modern data analysis pipeline crosses paths with machine learning at some point. Persistent homology is no exception, and there are several ways to include topological insights in machine learning pipelines. One major issue with persistent homology is that the simple output, the barcode, is of variable length. This is incompatible with most traditional machine learning frameworks, where the input data is a vector of fixed dimension or length.
@@ -457,7 +428,7 @@ Every modern data analysis pipeline crosses paths with machine learning at some 
 As previously noted, generalized persistence modules do not have barcodes. However, if we allow ourselves to loose some information, we can instead study the rank function of a persistence module instead.
 
 \begin{definition}
-  Let $V$ be a persistence module indexed by $(I, \leq)$. The \term[rank function]{rank function of $V$} is the function
+  Let $V$ be a persistence module indexed by $(I, \mathord{\leq})$. The \term[rank function]{rank function of $V$} is the function
   \[
     \rank(V) \colon \left\{ \begin{array}{ccc}
       \Omega(I) & \to & \N \\
@@ -479,7 +450,7 @@ As the last way of looking at persistence modules, we fix some graphical convent
 
 \section{Persistent linear algebra}
 
-Recall that a persistence module is a functor from a poset $(I, \leq)$ to $\Vect$, and that many notions that are defined for vector spaces also apply to persistence modules: for instance, direct sums, kernels, and cokernels all exist and are computed \emph{pointwise}, that is, computed at each time $t \in I$ and then combined into a persistence module. \ir{Move this elsewhere?}
+Recall that a persistence module is a functor from a poset $(I, \mathord{\leq})$ to $\Vect$, and that many notions that are defined for vector spaces also apply to persistence modules: for instance, direct sums, kernels, and cokernels all exist and are computed \emph{pointwise}, that is, computed at each time $t \in I$ and then combined into a persistence module. \ir{Move this elsewhere?}
 
 The objective of this section is to extend notions of linear algebra to persistence modules. \ir{Some of this is inspired by \cite{TorrasCasas2023}}
 
@@ -515,7 +486,7 @@ Persistence vectors can be generalized to persistence modules over arbitrary pos
 
 \begin{definition}
 \label{D:free}
-  Fix $(I, \leq)$ a poset and $s$ an element of $I$. The \term[free module]{free module at $s$} is the persistence module $\bf{k}_{\{I \geq t\}}$, where $\{I \geq s\} \coloneq \{t \in I \mid t \geq s\}$ is an interval of $I$ (see \cref{D:interval}).
+  Fix $(I, \mathord{\leq})$ a poset and $s$ an element of $I$. The \term[free module]{free module at $s$} is the persistence module $\bf{k}_{\{I \geq t\}}$, where $\{I \geq s\} \coloneq \{t \in I \mid t \geq s\}$ is an interval of $I$ (see \cref{D:interval}).
   
   Let $V$ be a persistence module over $I$. A \term[generalized persistence vector]{persistence vector of $V$} is an element $v$ in $V(s)$. As before, we call $s$ the grade of $v$, and write $\grade(v) \coloneq s$. Unlike before, there is no generalized notion of death-time (or not a unique one, at least). The notion of \term[generalized generating set]{generating sets} is the same as that of \eqref{Eq:generating-set}.
   
@@ -633,12 +604,13 @@ Moreover, applying \cref{A:std-red} to a matrix representation of $\partial_k$ w
 % ====
 
 \section{Persistent homological algebra}
+\label{S:persistent-homological-algebra}
 
 In this section, we recall homological algebraic theory for persistence modules, considered as functors over posets.
 
 \subsection{Projective modules}
 
-Let $(I, \leq)$ be a finite poset. Recall from \cref{D:free} and \cref{R:free} that a free module is a direct sum \ir{make sure that this is defined somewhere} of persistence modules of the form $\K_{\{I \geq s\}}$ for some $s$ in $I$. The term \textit{free} is justified by considering $\K_{\{I \geq s\}}$ to be the composition of the following functors \ir{$\hom$ vs $\mor$}
+Let $(I, \mathord{\leq})$ be a finite poset. Recall from \cref{D:free} and \cref{R:free} that a free module is a direct sum \ir{make sure that this is defined somewhere} of persistence modules of the form $\K_{\{I \geq s\}}$ for some $s$ in $I$. The term \textit{free} is justified by considering $\K_{\{I \geq s\}}$ to be the composition of the following functors \ir{$\hom$ vs $\mor$}
 \[
   \left\{ \begin{array}{ccccc}
     I & \to & \Set & \to & \Vect \\
@@ -678,7 +650,7 @@ Minimal projective resolutions provide an alternative to the barcode decompositi
 One way of extracting numeric invariants from more general minimal resolutions is to consider the multiplicities of free modules in the resolution.
 
 \begin{definition}
-  Let $V$ be a persistence module over $(I, \leq)$, $(F_*, \partial)$ its minimal projective resolution, and $d \geq 0$ an integer. Recall that all projectives are free: thus the minimal resolution of $V$ looks like
+  Let $V$ be a persistence module over $(I, \mathord{\leq})$, $(F_*, \partial)$ its minimal projective resolution, and $d \geq 0$ an integer. Recall that all projectives are free: thus the minimal resolution of $V$ looks like
   \[
     \cdots \to \bigoplus_{t \in I} \K_{\{I \geq t\}}^{\oplus \beta^1(t)} \to \bigoplus_{s \in I} \K_{\{I \geq s\}}^{\oplus \beta^0(s)} \to V \to 0.
   \]
@@ -688,9 +660,9 @@ One way of extracting numeric invariants from more general minimal resolutions i
 The naive way of computing Betti diagrams is the computation of the entire minimal resolution of $V$ and then extracting the multiplicities. There is a more efficient way: \ir{Field $\bf{F}_2$ for simplicity}
 
 \begin{definition}
-  Let $(I, \leq)$ be a finite poset and $t$ and element of $I$. A \term{parent} of $I$ is an element $s < t$ such that there is no element $u$ satisfying $s < u < t$. We denote the set of parents of $t$ by $\cc{U}(t)$.
+  Let $(I, \mathord{\leq})$ be a finite poset and $t$ and element of $I$. A \term{parent} of $I$ is an element $s < t$ such that there is no element $u$ satisfying $s < u < t$. We denote the set of parents of $t$ by $\cc{U}(t)$.
   
-  Now suppose that $I$ is an \term{upper semilattice}, that is, every pair of elements $s, t$ admits a minimal upper bound $s \wedge t$ called the \term{meet}. Let $V$ be a persistence module over $I$ and $t$ an element of $I$. The \term[Koszul complex]{Koszul complex of $V$ at $t$} is a chain complex of vector spaces $(\cc{K}_t V)$ defined as follows. For all $d \geq 0$, we define
+  Now suppose that $I$ is an \term{upper semilattice}, that is, every pair of elements $s, t$ admits a minimal upper bound $s \wedge t$ called the \term{meet}. Let $V$ be a persistence module over $I$ and $t$ an element of $I$. The (\term[(local) Koszul complex]{local}) \textbf{Koszul complex of $V$ at $t$} is a chain complex of vector spaces $(\cc{K}_t V)$ defined as follows. For all $d \geq 0$, we define
   \[
     (\cc{K}_t V)_d \coloneq \begin{cases}
       V(t) & \text{if } d = 0, \\
@@ -723,9 +695,43 @@ We now return to the one-dimensional case.
 
 \ir{Not sure how to structure this. Noise systems aren't a focus of this thesis, so they can go in the 13Ways part. But algebraic Wasserstein is pretty relevant, so it should be highlighted here? Along with induced matchings? But this could also go in the contributions section...}
 
+\ir{idea: the paper contributions should not have to refer too much to the 13Ways.}
+
 \subsection{Algebraic Wasserstein distances}
+\label{SS:algebraic-wasserstein}
+
+\ir{Rework this section.}
 
 Here we present a generalization of the isometry between interleaving and bottleneck distances (\cref{T:isometry-infty}) to $p$-Wasserstein distances (\cref{D:Wasserstein}). The $p$-Wasserstein distance, like the bottleneck distance, is defined combinatorially on the space of persistence diagrams. We are interested in characterizing this distance algebraically.
+
+For more general persistence modules, where we do not have barcode decompositions, we can produce (pseudo)metrics by deciding which persistence modules are ``small''. This is the approach of noise systems: \ir{need tameness?}
+
+\begin{definition}[{\cite{SCLRÖ2017}}]
+\label{D:noise-system}
+  Let $(I, \mathord{\leq})$ be a poset. A \term{noise system} is a sequence $\cc{S} = \{\cc{S}_\varepsilon\}_{\varepsilon \in [0, \infty)}$ of collections of persistence modules such that
+  \begin{enumerate}
+    \item $0 \in \cc{S}_\varepsilon$ for all $\varepsilon \in [0, \infty)$,
+    \item $\cc{S}_\delta \subseteq \cc{S}_\varepsilon$ for all $\delta \leq \varepsilon$, and
+    \item for all short exact sequences $0 \to V_0 \to V_1 \to V_2 \to 0$,
+    \begin{itemize}
+      \item if $V_1$ is in $\cc{S}_\varepsilon$, then $V_0$ and $V_2$ are in $\cc{S}_\varepsilon$;
+      \item if $V_0$ is in $\cc{S}_\delta$ and $V_2$ is in $\cc{S}_\varepsilon$, then $V_1$ is in $\cc{S}_{\delta + \varepsilon}$.
+    \end{itemize}
+  \end{enumerate}
+  Let $\varepsilon \geq 0$ be a number. Two persistence modules $V$ and $W$ are \term{$\varepsilon$-close} if there exist a persistence module $U$, a pair of morphism $V \xleftarrow{f} U \xrightarrow{g} W$ (called a \term{span}), and numbers $\varepsilon_1, \varepsilon_2, \varepsilon_3, \varepsilon_4 \geq 0$ such that
+  \[
+    \ker f \in \cc{S}_{\varepsilon_1}, \quad
+    \coker f \in \cc{S}_{\varepsilon_2}, \quad
+    \ker g \in \cc{S}_{\varepsilon_3}, \quad \text{and} \quad
+    \coker g \in \cc{S}_{\varepsilon_4},
+  \]
+  and $\varepsilon_1 + \varepsilon_2 + \varepsilon_3 + \varepsilon_4 \leq \varepsilon$. We then define the pseudometric induced by $\cc{S}$ to be
+  \[
+    d_{\cc{S}}(V, W) \coloneq \inf\{\varepsilon \geq 0 \mid \text{$V$ and $W$ are $\varepsilon$-close}\}.
+  \]
+\end{definition}
+
+\ir{hierarchical stabilization?}
 
 \begin{definition}
   Let $p \in [1, \infty]$ be a number. Given a p.f.d.\ persistence module $V = \bigoplus_{\alpha \in A} \K_{S_\alpha}$, we define the \term[$p$-norm]{$p$-norm of $V$} to be the nonnegative number
@@ -764,6 +770,8 @@ We need to check that this defines a distance.
   A similar statement of this result appears in \cite{SkrabaTurner2023} (version 5 specifically of this arXiv submission) as Theorems 7.27 and 7.28. \ir{The arguments therein are at times unclear, and we prefer to present our own proof, which is partly inspired by that of this preprint.}
 \end{remark}
 
-\subsection{Induced matchings}
+\subsection{Induced matchings and bar-to-bar morphisms}
 
 As we have seen in \cref{D:distance}, matchings play an important role in the construction of distances on persistence modules and diagrams in the one-dimensional case. \ir{Here we present two induced matchings: Bauer-Lesnick and Spanish}
+
+\ir{I should define bar-to-bar morphisms here: it's like an algebraic version of a matching; there exist morphisms that are not bar-to-bar (not necessarily obvious).}
