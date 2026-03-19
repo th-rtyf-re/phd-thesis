@@ -17,6 +17,8 @@
 \input{includes/introduction}
 \input{includes/persistent-algebra}
 \input{includes/morse-theory}
+
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}  % hide papers from table of contents
 \input{includes/contributions}
 \input{includes/outlook}
 
@@ -27,7 +29,7 @@
 \part{Papers}
 \label{Part:papers}
 \newrefsection% Reset the bibliography
-\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}% https://www.reddit.com/r/LaTeX/comments/1khta4d/comment/mr9hxeb/
+% \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}% https://www.reddit.com/r/LaTeX/comments/1khta4d/comment/mr9hxeb/
 
 \papertitlepage[color=light blue]{CGRST2024}
 
@@ -43,7 +45,7 @@
 
 \papertitlepage[color=light blue,misctext=Submitted]{GLRS2025}
 
-\paperchapter{GLRS2025}
+\paperchapter[Morse theory of Euclidean distance functions]{GLRS2025}
 
 \begin{paperabstract}%[.9\textwidth]% default value
 This abstract is in a \texttt{paperabstract} environment. Lorem ipsum dolor sit amet!
@@ -56,6 +58,14 @@ The usual approach to including papers is to include PDFs. \texttt{kthpq-thesis}
 where \texttt{REF} is the bibliography reference for the paper, and \texttt{Short title} is the title that will appear in the headers.
 
 \section{Introduction}
+
+text
+
+text
+
+text
+
+text
 
 text
 

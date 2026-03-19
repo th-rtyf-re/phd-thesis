@@ -11,15 +11,19 @@ For you!
 \end{dedication}
 
 \begin{abstract}
-Abstract
+  This thesis explores the construction and computation of algebraic invariants for filtered topological spaces. These invariants are derived from the classical algebraic invariant, homology, which is invariant under continuous invertible transformations of topological spaces. Filtered spaces, however are richer structures that often encode geometric information, and thus our algebraic constructions are invariant with respect to isometries and scaling operations.
+  
+  Papers A, B, and C study a modern algebraic invariant called a persistence module, a central object in the field of topological data analysis (TDA). \ir{some words about the results... relative Betti diagrams and induced matchings... what are the computations involved}
+  
+  Papers D and E generalize a more classical invariant, the critical points of a Morse function, to the setting of metric algebraic geometry, an emerging field that combines (or reunites) algebraic and differential geometry. Specifically, we develop a Morse theory for distance functions from an algebraic variety, restricted to an algebraic variety, and show that, generically, such a distance function is Morse. We define both geometric and algebraic notions of critical points and provide upper bounds on their number. In this sense, we are constructing and computing invariants for filtered algebraic spaces.
 
-\keywords{word1, word2}
+  \keywords{word1, word2}
 \end{abstract}
 
 \begin{abstract}[swedish]
-Samma sak fast på svenska.
+  Samma sak fast på svenska.
 
-\keywords{ord1, ord2}
+  \keywords{ord1, ord2}
 \end{abstract}
 
 \chapter{Popular science summary}
@@ -30,19 +34,31 @@ Add a part about the template: the class \texttt{kthpq-thesis} is inspired by fe
 
 \tableofcontents
 
+% \renewcommand*{\listfigurename}{List of figures}
 \listoffigures
 
 %\listoftables
 
-\chapter{Notations}
+\chapter{Abbreviations and notations}
+
+\section*{Abbreviations}
+
+\begin{tabular}{c|l}
+  p.f.d. & pointwise finite-dimensional \\
+  TDA & Topological data analysis
+\end{tabular}
+
+\section*{Notations}
 
 \begin{longtable}[l]{c|l}
   Symbol & Description \\
   \hline\endhead
+  $a$, $b$ & element of poset \\
   $\cat{Cat}$ & category \\
   $d$ & degree of homology \\
   $\partial$ & boundary map of chain complex \\
   $f$, $g$, $h$ & real-valued functions \\
+  $F$, $G$ & functor \\
   $i$, $j$ & index \\
   $I$, $J$ & poset \\
   $k$ & simplex dimension \\
@@ -51,16 +67,15 @@ Add a part about the template: the class \texttt{kthpq-thesis} is inspired by fe
   $M$ & matching of sets or multisets \\
   $\N$ & set or poset of natural numbers \\
   $\R$ & poset of real numbers \\
-  $s$, $t$ & elements of $\R$; start and endpoint of an interval \\
+  $s$, $t$ & element of poset; start and endpoint of an interval \\
   $S$, $T$ & subset of poset \\
   $v$ & vertex \\
   $U$, $V$, $W$ & persistence module \\
-  $x$ & element of space \\
-  $X$ & topological space \\
+  $x$, $y$ & element of space \\
+  $X$, $Y$ & topological space \\
   $\lambda$ & element of $\K$ \\
+  $\alpha$ & index \\
   $\sigma$, $\tau$ & simplices \\
-  ? & interval of a poset \\
-  ? & element of a poset \\
   \hline
-  \blackbird & Mathematical detour (for notions or results that are not used in the thesis, but are interesting nonetheless)
+  \blackbird & Mathematical detour
 \end{longtable}

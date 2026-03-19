@@ -8,48 +8,142 @@
   It was a small part of the pantomime.
 \end{epigraph}
 
-\section{Local Koszul complexes}
+In this thesis we explored many ways in which algebraic invariants for filtered spaces can be defined, and computed. There is still much more to investigate, and we present some ongoing work.
 
-\subsection{Computations, stabilizations}
+\section{Replacing kernels with cokernels}
 
-Computations: for lower hooks. Could be better.
+\ir{If this hasn't been said anywhere else, we observe that for the lower hook parameterization, $\Nat(\cc{T}(a, b), F) = \ker F(a \leq b)$.} Denote by $\pi_1$ and $\pi_2$ the two projections $\Omega(I) \to I$. We get two functors $F \pi_1$ and $F \pi_2$ and a natural morphism $\alpha \colon F \pi_1 \to F \pi_2$ between them. The following long exact sequence in $\Fun(\Omega(I), \Vect)$
+\[
+  0 \to \ker F(- \leq -) \hookrightarrow F \pi_1 \xrightarrow{\alpha} F \pi_2 \twoheadrightarrow \coker F(- \leq -) \to 0
+\]
+induces the following short exact sequences:
+\begin{gather*}
+  0 \to \ker F(- \leq -) \hookrightarrow F \pi_1 \twoheadrightarrow \im \alpha \to 0, \\
+  0 \to \im \alpha \hookrightarrow F \pi_2 \twoheadrightarrow \coker F(- \leq -) \to 0.
+\end{gather*}
 
-Stabilized Betti numbers? It's known to be NP hard though.
+Now suppose that $I$ is a two-dimensional grid (this should generalize to higher dimensions). Let $(a \leq b)$ be an element of $\Omega(I)$ with at least $3$ parents: in other words, $a$ and $b$ share at most one coordinate (of the two). Then we can show that the Koszul complex of $F \pi_i$, for $i = 1, 2$, is a product of chain complexes, one of which is contractible, and thus the homology of the Koszul complex is $0$ in all degrees.
 
-Preliminary result: inequality between stabilized standard and relative Betti numbers.
+Short exact sequences induce long exact sequences in homology: using the $0$'s of the homology of $F \pi_i$, we get the following isomorphisms for all $d \geq 0$:
+\[
+  H_d(\ker F(- \leq -)) \cong H_{d + 1}(\im \alpha) \cong H_{d + 2}(\coker F(- \leq -))
+\]
+Therefore, in order to compute Betti diagrams relative to lower hooks, we can study the Koszul complex of $\coker F(- \leq -)$ instead of $\ker F(- \leq -)$. This has some theoretical computational advantages: in order to compute a kernel basis, we need $O(n^2)$ space, where $n$ is the ambient dimension. In order to compute a cokernel basis, we only need $O(n)$ space, because we can choose representatives in the quotient space that correspond to canonical basis elements.
 
-\subsection{Duality}
+\ir{figure...}
 
-dual elements (Marve's thesis)
+With Andrea Guidolin and Bjørnar Gullikstad Hem.
 
-Preliminary result about relative injective resolutions: it's actually the same
+\section{Stabilized relative Betti numbers}
 
-\section{Rank functions}
+at IML, with Claudia Landi, Bjørnar Gullikstad Hem, Daniel Tolosa, Berat Geven \ir{surely I don't cite these names, or maybe this result...}
 
-Simpler invariant than modules over posets; contains most of the relevant information.
+In \cite{CGRST2024} the authors develop the theory of relative homological algebra for (multiparameter) persistence modules. In particular, given a collection $\mathcal{P}$ of ``simple'' persistence modules, we can define a minimal relative projective resolution of a module $M$ as
+\[
+\cdots \to F_1 \to F_0 \to M \to 0
+\]
+where each $F_i$ is of the form $\bigoplus_{A \in \mathcal{P}} A^{\oplus \beta_i^{\mathcal{P}}M(A)}$, with $\beta_i^{\mathcal{P}} M \colon \mathcal{P} \to \mathbb{N}$ giving the multiplicity of each module $A$ of $\mathcal{P}$ in $F_i$. These multiplicities are the \emph{relative Betti numbers}, and the paper gives a strategy to efficiently compute them for certain collections $\mathcal{P}$, using (local) Koszul complexes. When $\mathcal{P}$ is the collection of free modules, then the relative Betti numbers are exactly the standard Betti numbers; in the notation the $\mathcal{P}$ is omitted.
 
-\subsection{The space of rank functions}
+Separately, in \cite{GafvertChacholski2021}, the authors show that the hierarchical stabilization of the standard $0^{\text{th}}$ Betti number $\beta_0 M$ is NP-hard to compute, while also giving a strategy for computing them (not so efficiently). We then had two broad research directions:
+\begin{enumerate}
+\item understand the algorithm for computing stabilized $\beta_0$;
+\item understand the stabilized relative $\beta_0$.
+\end{enumerate}
+We focused on the second direction, where we managed to prove the following.
 
-What does it look like? Supermodular and modular functions.
+\paragraph{Result.} If $\{\text{free}\} \subseteq \mathcal{P} \subseteq \{\text{single-source}\}$, where single-source modules are those with a single generator, then $\widehat{\beta_0^{\mathcal{P}} M} \geq \widehat{\beta_0 M}$ for all persistence modules $M$.
 
-\subsection{Invariants for multiparameter persistence}
+That is, given a fixed noise system, if the collection $\mathcal{P}$ contains all free modules and only contains single-source modules, then the stabilized relative $\beta_0$ is always greater than the stabilized standard $\beta_0$.
 
-Integral of rank function with other densities?
+\ir{proof?}
 
-\section{About \texorpdfstring{$p$}{p}-norms}
+\section{Dual poset elements for Koszul complexes}
 
-\subsection{Matchings}
+with Wojciech Chachólski and Marve Grönblad Vesterinen.
 
-$p$-norms of compositions of matchings
+This was a Master's thesis. We define a notion of \term[dual element]{dual elements} for lattices $I$ such that the Betti diagrams of the minimal projective and injective resolutions of a functor over $I$ are dual in some sense.
 
-\subsection{Extensions}
+\section{Space of rank functions}
 
-Questions about $p$-norms of extensions. Preliminary result if one of the two outer terms is a single bar.
+with Wojiech Chachólski, Andrea Guidolin, Christina Kapatsori, Woojin Kim, Francesca Tombari.
 
-\section{Metric algebraic geometry}
+The rank function of a persistence module over a poset $I$ satisfies some inequalities \ir{list them}. These inequalities have been studied in other contexts under the name \term{supermodularity}. We aim to study the space of \term{chain-supermodular} functions.
 
-Aside from numerical implementations...
+As a first step, we replace the inequalities with equalities. This gives us chain-modular functions. An interesting question is which functors give chain-modular functions. We give some characterizations of the space of chain-modular functions and functors depending on the structure of the underlying poset $I$.
 
-\subsection{Pair degree}
+\section{Rank-based noise systems for multiparameter persistence}
+
+with Håvard Bakke Bjerkevik, Andrea Guidolin, and Martina Scolamiero.
+
+Using the characterization of the $p$-norm as the integral of the rank function with respect to a measure...
+
+Define the amplitude of an $n$-dimensional persistence module $M$ as
+\[
+  \| M \|_{n + 1} \coloneq \left( \int_{\Omega} \rank M \right)^{\frac{1}{n + 1}}
+\]
+We want to define a noise system. The easy SES axiom comes from the following result
+
+\begin{proposition}
+\label{P:rank-ineq}
+  For every short exact sequence $0 \to X \to Y \to Z \to 0$ of (1-parameter) persistence modules it holds that $\rank(Y) \geq \rank(X) + \rank(Z)$.
+\end{proposition}
+
+\begin{proof}
+  Let $s \leq t$ in $\R$ and consider the appropriate diagram with two exact rows as in the snake lemma. We have
+  \[
+    \rank X_{s \leq t} - \rank Y_{s \leq t} + \rank X_{s \leq t} = - \dim \ker X_{s \leq t} + \dim \ker Y_{s \leq t} - \dim \ker Z_{s \leq t} \leq 0,
+  \]
+  where the equality follows from $\rank X_{s \leq t} = \dim X_t - \dim \ker X_{s \leq t}$ and similar identities for $Y$ and $Z$, together with the identity $\dim X_t - \dim Y_t + \dim Z_t = 0$ by exactness of $0 \to X_t \to Y_t \to Z_t \to 0$; the inequality above follows from the exact sequence $0 \to \ker X_{s\le t} \to \ker Y_{s\le t} \xrightarrow{g} \ker Z_{s\le t} \to \coker g \to 0$ (snake lemma) again by Euler characteristic.
+\end{proof}
+
+To prove the hard SES axiom, our strategy is as follows. We restrict the rank function of $M$ to lines in $\R^n$ parameterized as $\ell \colon x \mapsto x \vec{a} + \vec{b}$, where $\vec{a} = (1, a_2, \ldots, a_n)$ and $\vec{b} = (0, b_2, \ldots, b_n)$. Then we parameterize our pairs of points by scalars $s$ and $t$:
+\[
+\vec{p} = s \vec{a} + \vec{b}, \qquad \vec{q} = t \vec{a} + \vec{b}.
+\]
+Then we have
+\begin{equation}
+\label{Eq:reparam}
+  \int_{(p \leq q) \in \Omega} (p_1 - q_1)^k \rank M(p, q) = \int_{\vec{a} \geq 0} \int_{\vec{b} \in \R^n} \int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} (t - s)^{k + n - 1} \rank M(\vec{p}, \vec{q}) \text{d}t \text{d}s \text{d}\vec{b} \text{d}\vec{a},
+\end{equation}
+where the proof \ir{write this as a result + proof} relies on the computation of the Jacobian:
+\[
+  J_\varphi = \bordermatrix{%
+  & s & t & a_2 & b_2 & a_3 & b_3 & \cdots \cr
+  p_1 & 1 & 0 \cr
+  q_1 & 0 & 1 \cr
+  p_2 & a_2 & 0 & s & 1 \cr
+  q_2 & 0 & a_2 & t & 1 \cr
+  p_3 & a_3 & 0 &&& s & 1 \cr
+  q_3 & 0 & a_3 &&& t & 1 \cr
+  \vdots & \vdots & \vdots &&&&& \ddots
+  }
+\]
+In particular, we have $|\det J_\varphi| = (t - s)^{n - 1}$.
+
+For a given line $\ell \colon x \mapsto x \vec{a} + \vec{b}$, we apply the result that the $(n + 1)$-norm gives a noise system. In particular, the triangular inequality holds:
+\begin{align*}
+  \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} (t - s)^{k + n - 1} \rank Y(\vec{p}, \vec{q}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \leq {} & \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} (t - s)^{k + n - 1} \rank X(\vec{p}, \vec{q}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \\
+  & {} + \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} (t - s)^{k + n - 1} \rank Z(\vec{p}, \vec{q}) \text{d}t \text{d}s\right)^{\frac{1}{p}}.
+\end{align*}
+where $p = k + n + 1$. Minkowski's inequality states that $(\int (f+g)^p)^{\frac 1p} \leq (\int f^p)^{\frac 1p} + (\int g^p)^{\frac 1p}$ holds for $1\leq p<\infty$. Let $f(\vec{a},\vec{b}) = (\int_{-\infty}^\infty \int_s^\infty (t-s)^{k + n - 1} \rank Y(\vec{p}, \vec{q}) dt ds)^{\frac 1p}$, and define $g$ and $h$ similarly.
+Then $f \leq g + h$ by the above equation, so by Minkowski's inequality, $(\int_{\vec{a}} \int_{\vec{b}} f(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} \leq (\int_{\vec{a}} \int_{\vec{b}} g(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} + (\int_{\vec{a}} \int_{\vec{b}} h(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}}$. And by \eqref{Eq:reparam}, we get
+\[
+  (\int_{\Omega}f(x)dx)^{\frac 1p} \leq (\int_{\Omega}g(x)dx)^{\frac 1p} + (\int_{\Omega}h(x)dx)^{\frac 1p}
+\]
+\ir{$p = n + 1$}. This is the hard axiom!
+
+\section{Matching costs}
+
+$\| \mu_1 \bullet \mu_2 \|_p \leq \| \mu_1 \|_p \| \mu_2 \|_p$ ?
+
+\section{\texorpdfstring{$p$}{p}-norms of extensions}
+
+with Hugo Åkesson and Wojciech Chachólski
+
+What are the maximal and minimal $p$-norms of the middle term of an extension? We have partial results if $X$ or $Y$ is a single bar, and studying this problems also gives us insight into the space of extensions. The extension barcodes are parameterized by antichains or something.
+
+\section{Pair degree}
+
+Following discussions with Emil Horobeț
 
 We bound the number of algebraic critical points. This number, in the complex setting, could be a new invariant that generalizes EDD and BND.

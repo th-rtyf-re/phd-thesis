@@ -2,8 +2,6 @@
 
 \chapter{Papers and contributions}
 
-\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-
 \papersection{CGRST2024}
 
 In this paper, we study persistence modules over a finite poset $(I, \mathord{\leq})$ using the functorial perspective (\cref{SS:functor}). We extend the results of \cref{S:persistent-homological-algebra} to the \term[relative homological algebra]{relative homological case}. Instead of approximating functors over $I$ by projective resolutions, where each term is a sum of free functors, we approximate them by other ``simple'' functors. Given a collection $\cc{P}$ of such simple functors, we define $\cc{P}$-exactness, $\cc{P}$-projectives, $\cc{P}$-covers, and $\cc{P}$-resolutions, which are the relative versions of the ``absolute'' notions defined in \cref{S:persistent-homological-algebra}. A \term[$\cc{P}$-free]{$\cc{P}$-free functor} is a functor that is isomorphic to a direct sum of elements of $\cc{P}$. The collection $\cc{P}$ is then \term{acyclic} if every $\cc{P}$-projective is $\cc{P}$-free. Under this condition, we can then define Betti diagrams relative to $\cc{P}$.
@@ -61,9 +59,10 @@ where $\lambda \in \K \setminus \{0, 1\}$. Then $F$ is a filtration with pointwi
 
 In this paper I co-wrote the main results, was the main contributor to the analysis of examples in the last section, and wrote the software \texttt{lowerhooks} \cite{lowerhooks} that applies our theoretical results to the specific case of lower hooks.
 
-CRediT classification: \textbf{Isaac Ren:} conceptualization (equal), formal analysis (equal), software (lead), visualization (lead), writing - original draft preparation (equal), writing - review \& editing (equal).
+\textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (equal); formal analysis (equal); software (lead); visualization (lead); writing -- original draft preparation (equal); writing -- review \& editing (equal).
 
 \papersection[shorttitle={Algebraic Wasserstein distances...}]{AGRS2025}
+\label{PS:wasserstein}
 
 In this paper, we define algebraic $p$-Wasserstein distances for tame persistence modules, proving that the sequence of collections $\cc{S} = \{\cc{S}_\varepsilon\}_{\varepsilon \geq 0}$ of \cref{SS:algebraic-wasserstein} is indeed a noise system. This is an alternate proof to that of \cite{SkrabaTurner2023}, \ir{a preprint that is being rewritten at the time of publication (like honestly what do I say here)}.
 
@@ -91,25 +90,100 @@ In other words, for a bar-to-bar morphism, there exist barcode decompositions of
 
 Moreover, we observe that \cref{L:triangular-ineq} \ir{is easy to show for bar-to-bar monomorphisms as the triangular inequality on the vectors of bar lengths, and this gives the triangular inequality...}
 
-\ir{isometry result}
-
 In this paper, we also introduce \ir{extra parameterization on $p$-Wasserstein distances: an extra number $q$ for combining costs (combinatorial def?) and a lifetime function to weight bars by their position. Hierarchical stabilization,which we can compute explicitly. We then study case of brain arteries, where we can learn optimal parameterizations for a classification task}
 
+\subsection*{Contributions}
+
+In this paper I was the main contributor to Section 3, which contains the fundamental theoretical results that allow for the results and computations in the rest of the paper.
+
+\textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (equal); formal analysis (lead); visualization (equal); writing -- original draft preparation (equal); writing -- review \& editing (equal).
 
 \papersection[misctext=To be submitted]{GRRS2026}
 
-Induced matchings.
+In this paper, we refine the tools introduced in \ref{PS:AGRS2025}. We extend the notion of bar-to-bar morphisms to pointwise finite-dimensional persistence modules and prove analogous results to those of \ref{PS:AGRS2025}. In particular, we develop a simpler method of constructing bar-to-bar morphisms from mono- and epimorphisms.
 
-Applications: interpretability?
+\begin{definition}
+  \ir{same-end operator}.
+\end{definition}
+
+\ir{Our approach to proving the inequality of $p$-norms of cokernels goes through the integral of the rank function. Pretty cool!}
+
+In this more general setting, we also prove the isometry theorem between the algebraic and combinatorial Wasserstein distances.
+
+\begin{theorem}[\ir{ref}]
+  For all $p \in [1, \infty]$ and all $V$ and $W$ in $\Pfd$, we have \ir{diagram vs barcode? I haven't introduced a notation $\cc{D}(V)$ but I guess I should}
+  \[
+    d_{\cc{S}^p}(V, W) = d_p(\barcode(V), \barcode(W)).
+  \]
+\end{theorem}
+
+In addition to this new proof of the isometry result, we also study the properties of matchings induced by morphisms. Note that a bar-to-bar morphism can be seen as an algebraic representation of a barcode matching \ir{if not explained earlier} and we define induced matchings from mono- and epimorphisms. Building on the results of \cite{BauerLesnick2015} and \cite{GST2025}, we show that our matchings are \term{additive} but not \term{functorial}. Moreover, we show the following result.
+
+\begin{theorem}[\ir{ref}]
+  An operator that maps monomorphisms (resp.\ epimorphisms) to matchings cannot be both additive and functorial.
+\end{theorem}
+
+Using the strategy of \cite{BauerLesnick2015}, we define the induced matching of a morphism $f \colon V \to W$ by taking an epi-mono factorization $f = m \circ e$, inducing matchings on $m$ and $e$, and then composing them together. In particular, there exists an algorithm that computes the epi-mono factorization such that the resulting matching $\mu(f)$ is that of \cite{GST2025}.
+
+\subsection*{Contributions}
+
+\ir{It depends on how the paper turns out...}
+
+\textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (equal); formal analysis (lead); visualization (equal); writing -- original draft preparation (equal); writing -- review \& editing (equal).
 
 \papersection[shorttitle={Morse theory of Euclidean distance functions...}, misctext=Submitted]{GLRS2025}
 
-Distance function as continuous selection: not obvious, needs to be shown, cite result.
+In this paper we generalize Morse theory to distance functions $f \coloneq \dist_Y\big|_X$ from a subset $Y \subseteq \R^n$ restricted to a subset $X \subseteq \R^n$. We show that, under certain conditions, the distance function $f$ is a continuous selection:
 
-Generic nondegeneracy between hyperplanes
+\begin{proposition}{\ir{Proposition 2.5.8}}
+  Suppose that $Y$ is smooth and let $x \in \R^n$ be a regular value of the exponential map $\varphi \colon NY \to \R^n$, where $NY$ denotes the normal bundle of $Y$ \ir{elaborate more?}. Then
+  \begin{enumerate}
+    \item
+      $B(x, \dist_Y(x)) \cap Y$ is a finite set $\{y_0, \ldots, y_k\}$,
+    \end{enumerate}
+    and for all $\varepsilon > 0$ small enough, there exists $\delta >0$ such that
+    \begin{enumerate}[resume]
+    \item
+      for every $i \in \{0, \ldots, k\}$, the function $f_i \coloneq \dist_{B(y_i, \varepsilon) \cap Y}$ is $\mathcal{C}^2$ on $B(x, \delta)$;
+    \item
+      the function $\dist_Y\big|_{B(x, \delta)}$ is a continuous selection of the $f_i$: specifically, $\dist_Y\big|_{B(x, \delta)} = \min_i f_i$.
+    \end{enumerate}
+\end{proposition}
+
+We can therefore apply the results of \cite{APS1997} to distance functions $\dist_Y\big|_X$ where all critical points are regular points of the exponential map on $Y$. \ir{Recall that} a nondegenerate critical point $x$ of a continuous selection has two indices, a piecewise linear index $k(x)$ and a quadratic index $\iota(x)$. Given a pair $(X, Y)$ of subsets of $\R^n$ such that $\dist_Y\big|_X$ only has nondegenerate critical points, we denote by $C_{k, \iota}(X, Y)$ the critical points with indices $(k, \iota)$. We recover the Morse lemmas and inequalities \ir{ref, I guess...}. Moreover, we can exchange the roles of $X$ and $Y$: if $\dist_X\big|_Y$ also only has nondegenerate critical points, then combining the resulting Morse inequalities gives the following equality relating the Euler characteristics of $X$ and $Y$ and the number of critical points \ir{Corllary 2.6.7}:
+\[
+  \chi(Y) + \sum_{k, \iota \geq 0} (-1)^{k + \iota} \#C_{k, \iota}(X, Y) = \chi(X) + \sum_{k, \iota \geq 0} (-1)^{k + \iota} \#C_{k, \iota}(Y, X).
+\]
+
+In the second half of the paper, we study the case where $X$ and $Y$ are generic algebraic hypersurfaces, i.e., zero sets of polynomial functions. By \term{generic} we mean that the results hold for a dense open subset of polynomials. We summarize our results as follows:
+
+\begin{theorem}
+  Let $p \in \cc{P}_{d_1}$ and $q \in \cc{P}_{d_2}$ be generic polynomials, and let $X = Z(p)$ and $Y = Z(q)$ be their zero sets. Then, depending on the values of $d_1 = \deg(X)$ and $d_2 = \deg(Y)$ the following is true:
+  \begin{enumerate}
+    \item if $d_1 \geq 3$ and $d_2 \geq 4$, then the function $\dist$ is a continuous selection near each of its critical points (\ir{ref});
+    \item if $d_1, d_2 \geq 4$, then every critical point of $\dist$ not in $Y$ is nondegenerate (\ir{ref});
+    \item if $d_1, d_2 \geq 3$, then for every $k \in \{1, \ldots, n\}$, the number of $k$-critical points of $\dist_Y\big|_X$ can be bounded by
+    \[
+      \#C_{k, *}(X, Y) \leq c(k, n) \deg(X)^n \deg(Y)^{n (k + 1)},
+    \]
+    for some number $c(k, n) > 0$ depending on $n$ and $k$ only (\ir{ref}).
+  \end{enumerate}
+\end{theorem}
+
+We get analogous results when $X = \R^n$ \ir{ref}.
+
+\subsection*{Contributions}
+
+In this paper I was the main contributor to Section 4, which applies the theory of the previous sections to algebraic hypersurfaces, and I contributed to Section 2 with the proofs and example figures.
+
+\textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (equal); formal analysis (lead); visualization (lead); writing -- original draft preparation (equal); writing -- review \& editing (equal).
 
 \papersection[shorttitle={Nondegeneracy of distance functions...}, misctext=To be submitted]{Ren2026}
 
-case of complete intersections
+This paper is a direct generalization of \ref{PS:GLRS2025}'s results on algebraic hypersurfaces to complete intersections. \ir{The computations are just more complicated.}
 
-\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+\subsection*{Contributions}
+
+I was the sole contributor to this paper.
+
+\textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (lead); formal analysis (lead); writing -- original draft preparation (lead); writing -- review \& editing (lead).

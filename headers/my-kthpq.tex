@@ -82,7 +82,6 @@
 % ==== COMMANDS ====
 
 \WarningFilter{latex}{Marginpar on page}
-\WarningsOff[latex]%{latex}{Infinite glue shrinkage}
 
 % ---- Font ----
 
@@ -103,8 +102,8 @@
 
 % ---- Bibliography ----
 
-\addbibresource{bib/mypapers.bib}
-\addbibresource{bib/others.bib}
+\addbibresource{bib/mine.bib}
+\addbibresource{bib/kappa.bib}
 
 \DeclareFieldFormat{eprint:github}{%
 GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint}}}
@@ -186,6 +185,7 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
   \else
     \section[\@shorttitle]{\thefield{labeltitle}}
   \fi
+  \label{PS:\strfield{entrykey}}  % automatically add label (outside labels don't detect this section)
   \printnames{author}.
   \ifentrytype{article}{%
     In \usebibmacro{tryfjournal},

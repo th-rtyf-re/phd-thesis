@@ -71,7 +71,7 @@ Instead, the main example of filtered spaces is filtered simplicial complexes, w
   We denote the sublevel sets of $\Cech(X)$ and $\VR(X)$ by $\Cech_t(X)$ and $\VR_t(X)$, respectively, and observe that they coincide with the Čech and Vietoris-Rips complexes defined above. Note that the sublevel sets are empty for $t < 0$.
 \end{example}
 
-We now define simplicial homology over the field of two elements $\bf{F}_2$ (for topological spaces, we may use singular homology \ir{cite}), which will give us persistent homology for simplicial complexes. The choice of field was made to simplify the following constructions.
+We now define simplicial homology over the field of two elements $\bf{F}_2$ (for topological spaces, we may use singular homology \ir{Hatcher}), which will give us persistent homology for simplicial complexes. The choice of field was made to simplify the following constructions.
 
 \begin{definition}
 \label{D:simplicial-homology}
@@ -122,9 +122,13 @@ and then apply a homology functor. In this section, we will define what a homolo
     \]
   \end{itemize}
   In practice, we write $x \in \cat{C}$ for an object of $\cat{C}$, and $f \colon x \to y$ for a morphism in $\mor_{\cat{C}}(x, y)$.
-  
-  Categories encapsulate most common mathematical frameworks: for example, we have the category \notation{$\Set$}, whose objects are sets and morphisms are set-theoretic functions. Another example is the category \notation{$\Vect_{\bf{k}}$}, whose objects are vector spaces over the field $\bf{k}$ and whose morphisms are linear maps. For persistent homology, the relevant categories are \notation{$\Top$ and $\SCpx$}, consisting of topological spaces and continuous maps on the one hand, and simplicial complexes and morphisms of simplicial complexes on the other.
-  
+\end{definition}
+
+\begin{example}
+  Categories encapsulate most common mathematical frameworks: for example, we have the category \notation{$\Set$}, whose objects are sets and morphisms are set-theoretic functions. Another example is the category \notation{$\Vect_{\bf{k}}$}, whose objects are vector spaces over the field $\bf{k}$ and whose morphisms are $\K$-linear maps. For persistent homology, the relevant categories are \notation{$\Top$ and $\SCpx$}, consisting of topological spaces and continuous maps on the one hand, and simplicial complexes and morphisms of simplicial complexes on the other.
+\end{example}
+
+\begin{definition}
   A functor is a way to pass from one category to another. Formally, let $\cat{C}$ and $\cat{D}$ be two categories. A \term{functor} $F \colon \cat{C} \to \cat{D}$ consists of
   \begin{itemize}
     \item for each object $x$ in $\cat{C}$, an object $F(x)$ in $\cat{D}$, and
@@ -135,14 +139,37 @@ and then apply a homology functor. In this section, we will define what a homolo
     \item composition is respected: for every three objects $x, y, z$ in $\cat{C}$ and morphisms $f \colon x \to y$ and $g \colon y \to z$, $F(g \circ f) = F(g) \circ F(f)$, and
     \item units are respected: for every object $x$ in $\cat{C}$, $F(\id_x) = F(\id_x)$.
   \end{itemize}
-  \ir{Define natural transformations. A morphism of functors is a natural transformation. We write $f_t$ for $t \in I$. Define equivalence of categories.}
+  Let $F$ and $G$ be functors from $\cat{C}$ to $\cat{D}$. A \term[natural transformation]{natural transformation from $F$ to $G$} consists of a collection $\{\eta_x\}_{c \in \cat{C}}$ of morphisms $\eta_x \colon F(x) \to G(x)$ in $\cat{D}$ such, for every morphism $f \colon x \to y$ in $\cat{C}$, the following square commutes:
+  \[
+    \begin{tikzcd}
+      F(x)
+        \arrow[r, "F(f)"]
+        \arrow[d, "\eta_x" swap]
+      & F(y)
+        \arrow[d, "\eta_y"]
+    \\
+      G(x)
+        \arrow[r, "G(f)" swap]
+      & G(y)
+    \end{tikzcd}
+  \]
+  We denote such a natural transformation by $\eta \colon F \Rightarrow G$.
+  
+  Natural transformations serve as morphisms between functors, and thus we naturally obtain a \term[category of functors]{category of functors from $\cat{C}$ to $\cat{D}$} denoted by \notation{$\Fun(\cat{C}, \cat{D})$}.
+  
+  Sometimes two categories behave very similarly. For example, we will see several definitions of persistence modules, and some of these will be equivalent. We formalize this notion as follows. An \term{equivalence of categories} between two categories $\cat{C}$ and $\cat{D}$ consists of
+  \begin{itemize}
+    \item a pair of functors $F \colon \cat{C} \to \cat{D}$ and $G \colon \cat{D} \to \cat{C}$, and
+    \item \term[natural isomorphism]{natural isomorphisms} (i.e., invertible natural transformations) $F \circ G \cong \id_{\cat{D}}$ and $G \circ F \cong \id_{\cat{C}}$.
+  \end{itemize}
+  Two categories are \textbf{equivalent} if there is an equivalence of categories between them.
 \end{definition}
 
 \begin{example}
-  For example, we can construct a functor from $\Set$ to $\Vect_{\bf{k}}$ by mapping a set $X$ to the vector space $\bf{k} X$ generated by formal sums of elements of $X$, and mapping a set-valued function $f \colon X \to Y$ to the linear map that sends each basis element $x$ in $\bf{k} X$ to the corresponding basis element $f(x)$ in $\bf{k} Y$.
+  For example, we can construct a functor from $\Set$ to $\Vect_{\bf{k}}$ by mapping a set $X$ to the vector space \notation{$\bf{k} X$} generated by formal sums of elements of $X$, and mapping a set-valued function $f \colon X \to Y$ to the linear map that sends each basis element $x$ in $\bf{k} X$ to the corresponding basis element $f(x)$ in $\bf{k} Y$.
 \end{example}
 
-It can be shown that homology is a functor from $\Top$ to $\Vect_{\bf{k}}$ \ir{cite?}. For example, the construction of the homology spaces in \cref{D:simplicial-homology} is functorial. We can thus view persistent homology more generally as the application of the homology functor to a subcategory of topological spaces (or simplicial complexes). Specifically, let $I$ be a totally ordered set, $(X_i)_{i \in I}$ a collection of spaces (or simplicial complexes), and $X_{i \leq j} \colon X_i \to X_j$ a morphism for each $i \leq j$ in $I$, satisfying the composition and identity axioms for categories (see \cref{D:category}). This defines a category, which we denote by $X$, whose objects are the $X_i$ and morphisms are the $X_{i \leq j}$. For all integers $k \geq 0$, we then call the image of $X$ by the functor $H_k(-)$ the \textbf{$k^{\th}$ persistent homology of $X$}. 
+It can be shown that homology is a functor from $\Top$ to $\Vect_{\bf{k}}$ \ir{cite?}. For example, the construction of the homology spaces in \cref{D:simplicial-homology} is functorial. We can thus view persistent homology more generally as the application of the homology functor to a subcategory of topological spaces (or simplicial complexes). Specifically, let $I$ be a totally ordered set, $(X_t)_{t \in I}$ a collection of spaces (or simplicial complexes), and $X_{s \leq t} \colon X_s \to X_t$ a morphism for each $s \leq t$ in $I$, satisfying the composition and identity axioms for categories (see \cref{D:category}). This defines a category, which we denote by $X$, whose objects are the $X_t$ and morphisms are the $X_{s \leq t}$. For all integers $k \geq 0$, we then call the image of $X$ by the functor $H_k(-)$ the \textbf{$k^{\th}$ persistent homology of $X$}. 
 
 \subsection{As a collection of vector spaces and transition maps}
 \label{SS:vector-spaces}
@@ -151,12 +178,26 @@ The image of the aforementioned homology functors is interesting in its own righ
 
 \begin{definition}
 \label{D:persistence-module}
-  Fix a field $\bf{k}$ and $(I, \mathord{\leq})$ a totally ordered set. A \term[persistence module]{persistence module over $I$} is a collection of $\bf{k}$-vector spaces $(V_i)_{i \in I}$ indexed by $I$, along with linear maps $(V_{i \leq j} \colon V_i \to V_j)_{i \leq j \in I}$, called \term{transition maps}, such that
+  Fix a field $\bf{k}$ and $(I, \mathord{\leq})$ a totally ordered set. A \term[persistence module]{persistence module over $I$} is a collection of $\bf{k}$-vector spaces $(V_t)_{t \in I}$ indexed by $I$, along with linear maps $(V_{s \leq t} \colon V_s \to V_t)_{s \leq t \in I}$, called \term{transition maps}, such that
   \begin{itemize}
-    \item for all $i \leq j \leq k$ in $\R$, we have the equality $V_{j \leq k} \circ V_{i \leq j} = V_{i \leq k}$, and
-    \item for all $i$ in $I$, $V_{i \leq i} = \id_{V_i}$.
+    \item for all $r \leq s \leq t$ in $\R$, we have the equality $V_{s \leq t} \circ V_{r \leq s} = V_{r \leq t}$, and
+    \item for all $t$ in $I$, $V_{t \leq t} = \id_{V_t}$.
   \end{itemize}
-  \ir{Morphisms of persistence modules}
+  Let $V$ and $W$ be persistence modules. A \term[morphism of persistence modules]{morphism from $V$ to $W$} is a collection of linear maps $(f_t \colon V_t \to W_t)_{t \in I}$ such that, for all $s \leq t$ in $I$, the following diagram commutes:
+  \[
+    \begin{tikzcd}
+      V_s
+        \arrow[r, "V_{s \leq t}"]
+        \arrow[d, "f_s" swap]
+      & V_t
+        \arrow[d, "f_t"]
+    \\
+      W_s
+        \arrow[r, "W_{s \leq t}" swap]
+      & W_t
+    \end{tikzcd}
+    \qedhere
+  \]
 \end{definition}
 
 The similarities between these conditions and those of functors is not a coincidence, and will be detailed further in \cref{SS:functor}.
@@ -166,13 +207,13 @@ The similarities between these conditions and those of functors is not a coincid
 Persistence modules have been extensively studied as graded modules over polynomial rings \cite{ZomorodianCarlsson2005} \ir{cite more}. Specifically, when the indexing poset is $\N$, we have the following equivalent characterization of persistence modules:
 
 \begin{proposition}
-  Let $\bf{k}$ be a field. A persistence module over $\N$ is equivalently a graded module over the polynomial ring $\bf{k}[t]$.
+  Let $\bf{k}$ be a field. A persistence module over $\N$ is equivalently a graded module over the polynomial ring $\bf{k}[x]$.
 \end{proposition}
 
 \begin{proof}
-  Let $V$ be a persistence module. We construct the graded module $\bigoplus_{i = 0}^\infty V_i$ where each $V_i$ has grade $i$, and the action of $\bf{k}[t]$ is determined by $t$ acting on $V_i$ as $V_{i \leq i + 1}$.
+  Let $V$ be a persistence module. We construct the graded module $\bigoplus_{t = 0}^\infty V_t$ where each $V_t$ has grade $t$, and the action of $\bf{k}[x]$ is determined by $x$ acting on $V_t$ as $V_{t \leq t + 1}$.
   
-  Conversely, let $V$ be a graded module over $\bf{k}[t]$. We define $V_i$ to be the summand of $V$ of grade $i$, and, for all $i \leq j$, we define $V_{i \leq j}$ to be the action of $t^{j - i}$ on $V_i$. We check that this satisfies the associativity and unit conditions of \cref{D:persistence-module}.
+  Conversely, let $V$ be a graded module over $\bf{k}[x]$. We define $V_t$ to be the summand of $V$ of grade $t$, and, for all $s \leq t$, we define $V_{s \leq t}$ to be the action of $x^{t - s}$ on $V_s$. We check that this satisfies the associativity and unit conditions of \cref{D:persistence-module}.
 \end{proof}
 
 We remark that nothing prevents us from considering multigraded modules over multivariate polynomial rings. This is the approach of \cite{CarlssonZomorodian2009}, where the authors call such modules multidimensional persistence. They are more commonly called \term[multiparameter persistence module]{multiparameter persistence modules}, and we immediately generalize this further to arbitrary posets.
@@ -183,9 +224,9 @@ We remark that nothing prevents us from considering multigraded modules over mul
 As remarked in \cref{SS:vector-spaces}, the definition of a persistence module closely resembles that of a functor. We formalize this here:
 
 \begin{definition}
-  Let $\bf{k}$ be a field and $(I, \mathord{\leq})$ a poset. Note that $(I, \mathord{\leq})$ is a category (see \cref{D:category}) where $\obj(I, \mathord{\leq}) = I$ and, for all $i, j$ in $I$, $\mor_{(I, \mathord{\leq})}(i, j) = \{*\}$ if $i \leq j$ and $\varnothing$ otherwise. We define a \term[generalized persistence module]{generalized persistence module indexed by} (or \textbf{over}) \textbf{$I$} to be a functor $V \colon (I, \mathord{\leq}) \to \Vect_{\bf{k}}$.
+  Let $\bf{k}$ be a field and $(I, \mathord{\leq})$ a poset. Note that $(I, \mathord{\leq})$ is a category (see \cref{D:category}) where $\obj(I, \mathord{\leq}) = I$ and, for all $s, t$ in $I$, $\mor_{(I, \mathord{\leq})}(s, t) = \{*\}$ if $s \leq t$ and $\varnothing$ otherwise. We define a \term[generalized persistence module]{generalized persistence module indexed by} (or \textbf{over}) \textbf{$I$} to be a functor $V \colon (I, \mathord{\leq}) \to \Vect_{\bf{k}}$.
   
-  \ir{A morphism of persistence modules is then a natural transformation between two functors...}
+  A \term{morphism of persistence modules} is then a natural transformation between persistence modules.
 \end{definition}
 
 We check that this definition coincides with \cref{D:persistence-module} when $I$ is totally ordered. \textbf{From now on, we use the term ``persistence module'' to refer to this functorial definition.}
@@ -208,7 +249,7 @@ For example, the opposite category of a poset $(I, \mathord{\leq})$, viewed as a
   \item \term[gluing]{Gluing:}
     for $U$ an open set, $\{U_\alpha\}_{\alpha \in A}$ an open cover of $U$ with $U_\alpha \subseteq U$ for all $\alpha \in A$, and $v_\alpha \in F(U_\alpha)$ for all $\alpha \in A$, if $v_\alpha\big|_{U_\alpha \cap U_\beta} = v_\beta\big|_{U_\alpha \cap U_\beta}$ for all $\alpha, \beta$ in $A$, then there exists $v$ in $F(U)$ such that $v\big|_{U_\alpha} = v_\alpha$ for all $\alpha \in A$. In other words, if local sections coincide on their overlapping parts, then they can be glued together into a global section.
   \end{enumerate}
-  Now let us equip our poset $(I, \mathord{\leq})$ with a topology. The \term{Alexandrov topology} on $I$ is the topology where open sets are \term[downset]{downsets}, that is, subsets $S$ of $I$ such that $S = \{y \in I \mid \exists x \in S, \; y \leq x\}$. We check that this is indeed a topology.
+  Now let us equip our poset $(I, \mathord{\leq})$ with a topology. The \term{Alexandrov topology} on $I$ is the topology where open sets are \term[downset]{downsets}, that is, subsets $S$ of $I$ such that $S = \{s \in I \mid \exists t \in S, \; s \leq t\}$. We check that this is indeed a topology.
 \end{definition**}
 
 \begin{proposition**}[{\cite[Proposition 2.2.3]{Berkouk2020}}, from {\cite[Proposition 2.15(b)]{KashiwaraShapira2018}}]
@@ -221,22 +262,22 @@ We have strayed far enough our persistent homology pipeline. Let us return to th
 
 \begin{definition}
 \label{D:interval}
-  Let $(I, \mathord{\leq})$ be a poset. An \term{interval} of $I$ is a subset $S$ such that, for all, $i, j$ in $S$ and $k$ in $I$ such that $i \leq k \leq j$, $k$ is also an element of $S$.
+  Let $(I, \mathord{\leq})$ be a poset. An \term{interval} of $I$ is a subset $S$ such that, for all, $s, t$ in $S$ and $r$ in $I$ such that $s \leq r \leq t$, $r$ is also an element of $S$.
   
-  Suppose that $(I, \mathord{\leq})$ is a total order and $S \subseteq I$ an interval. The \term{interval module} or \term[bar]{bar with support $S$} is the persistence module \notation{$\bf{k}_S$} defined functorially by, for all $i \leq j$ in $I$,
+  Suppose that $(I, \mathord{\leq})$ is a total order and $S \subseteq I$ an interval. The \term{interval module} or \term[bar]{bar with support $S$} is the persistence module \notation{$\bf{k}_S$} defined functorially by, for all $s \leq t$ in $I$,
   \[
-    \bf{k}_S(i) \coloneq \begin{cases}
-      \bf{k} & \text{if } i \in S, \\
+    \bf{k}_S(t) \coloneq \begin{cases}
+      \bf{k} & \text{if } t \in S, \\
       0 & \text{otherwise}
     \end{cases}
     \quad \text{and} \quad
-    \bf{k}_S(i \leq j) \coloneq \begin{cases}
-      \id_{\bf{k}} & \text{if } i, j \in S, \\
+    \bf{k}_S(s \leq t) \coloneq \begin{cases}
+      \id_{\bf{k}} & \text{if } s, t \in S, \\
       0 & \text{otherwise}.
     \end{cases}
   \]
 
-  A \term{pointwise finite-dimensional persistence module} is a persistence module $V$ indexed by $(I, \mathord{\leq})$ such that, for all $i \in I$, $V(i)$ is a finite-dimensional vector space.
+  A \term{pointwise finite-dimensional persistence module} is a persistence module $V$ indexed by $(I, \mathord{\leq})$ such that, for all $t \in I$, $V(t)$ is a finite-dimensional vector space.
 \end{definition}
 
 \begin{definition}
@@ -262,11 +303,11 @@ Note that the collection of intervals may be infinite and even uncountable: this
 
 \begin{definition}
 \label{D:tame}
-  A persistence module is \term[tame persistence module]{tame} is a pointwise finite-dimensional persistence module $V$ over a total order $(I, \mathord{\leq})$ such that there exists a finite sequence $i_1 < \cdots < i_n$ such that, for $i \leq j$ in $I$, $V(i \leq j)$ is a non-isomorphism only if $i < i_k \leq j$ for some $k \in \{1, \ldots, n\}$. In this case, it turns out that each interval is of the form $[i, j)$, that is, closed from below and open from above \ir{cite}.
+  A persistence module is \term[tame persistence module]{tame} is a pointwise finite-dimensional persistence module $V$ over a total order $(I, \mathord{\leq})$ such that there exists a finite sequence $t_1 < \cdots < t_n$ such that, for $s \leq t$ in $I$, $V(s \leq t)$ is a non-isomorphism only if $s < t_k \leq t$ for some $k \in \{1, \ldots, n\}$. In this case, it turns out that each interval is of the form $[s, t)$, that is, closed from below and open from above \ir{cite}.
 \end{definition}
 
 \begin{example}
-  For example, in the case where $I$ is the real line and $V$ is the persistent homology of a finite filtered simplicial complex, $V$ is tame. The bars of its decomposition would then correspond to a topological feature (depending on the degree of homology: a connected component, a loop, a cavity, etc.) that appears at filtration level $i$ and disappears at filtration level $j$. The further these values are from each other, the longer the topological feature \textit{persists}: hence the name of persistent homology.
+  For example, in the case where $I$ is the real line and $V$ is the persistent homology of a finite filtered simplicial complex, $V$ is tame. The bars of its decomposition would then correspond to a topological feature (depending on the degree of homology: a connected component, a loop, a cavity, etc.) that appears at filtration level $s$ and disappears at filtration level $t$. The further these values are from each other, the longer the topological feature \textit{persists}: hence the name of persistent homology.
 
   \ir{Definitely need a good example here}
 \end{example}
@@ -281,7 +322,7 @@ The case of $0^{\th}$ degree persistent homology initially appeared under the na
 Let $(K, f)$ be a filtered simplicial complex and consider its $0^{\th}$ degree persistent homology $V$. At each filtration value, $V(i)$ has a canonical basis consisting of the equivalence classes of each connected component of $K_{\leq i}$. Moreover, for $i \leq j$ in $\R$, the linear map $V(i \leq j)$ maps basis elements to basis elements: specifically, the class of a vertex $v \in K_0$ in $K_{\leq i}$ maps to its class in $K_{\leq j}$. This gives us the notion of \textbf{persistence sets}:
 
 \begin{definition**}
-  A \term{persistence set} is a functor from a poset $(I, \mathord{\leq})$, seen as a category, to the category of sets $\Set$. More explicitly, it is the given of a set $S(i)$ for all $i$ in $I$ and transition maps $S(i \leq j) \colon S(i) \to S(j)$ for all $i \leq j$ in $I$ such that, for all $i \leq j \leq k$ in $I$, $S(j \leq k) \circ S(i \leq j) = S(i \leq k)$.
+  A \term{persistence set} is a functor from a poset $(I, \mathord{\leq})$, seen as a category, to the category of sets $\Set$. More explicitly, it is the given of a set $S(t)$ for all $t$ in $I$ and transition maps $S(s \leq t) \colon S(s) \to S(t)$ for all $s \leq t$ in $I$ such that, for all $r \leq s \leq t$ in $I$, $S(s \leq t) \circ S(r \leq s) = S(r \leq t)$.
 \end{definition**}
 
 The persistence set of filtered simplicial complexes can be graphically represented as a planar tree: each vertex $v$ corresponds to a branch that ``starts'' at filtration value $f(v)$, and two branches merge when their connected components merge. \ir{figure please}. For a Čech or Vietoris-Rips filtration, where all vertices appear at level $0$, this tree representation can be seen as a \term{dendrogram}, a data representation that is commonly used in hierarchical clustering \ir{figure}. For more general filtrations, this representation is called a \term{merge tree} \ir{cite}. Merge trees contain strictly more information than persistence modules, but enjoy many of the same properties, including stability \ir{ref below}.
@@ -314,18 +355,18 @@ In TDA, not only are we interested in the topological features of a data set, bu
   
   \ir{$p$-cost of a matching}
 
-  Let $D$ and $D'$ be persistence diagrams. Denote by $\Delta \coloneq \{(x, x) \mid x \in \R\}$ the diagonal of $\R^2$. Fix $p \in [1, +\infty]$, denote by $d_p$ the $p$-norm distance, and denote by $\Delta$ the diagonal $\{(x, x) \mid x \in \R\}$ in $\R^2$. We define the \term[$p$-Wasserstein distance]{$p$-Wasserstein distance between $D$ and $D'$} as
+  Let $D$ and $D'$ be persistence diagrams. Denote by $\Delta \coloneq \{(t, t) \mid t \in \R\}$ the diagonal of $\R^2$. Fix $p \in [1, +\infty]$, denote by $d_p$ the $p$-norm distance, and denote by $\Delta$ the diagonal $\{(t, t) \mid t \in \R\}$ in $\R^2$. We define the \term[$p$-Wasserstein distance]{$p$-Wasserstein distance between $D$ and $D'$} as
   \[
     d_p(D, D') \coloneq \inf_{M \in \Match(D, D')} \left(
-      \sum_{(u, v) \in M} d_p(u, v)^p + \sum_{\substack{u \in D \\ \mathclap{\text{unmatched}}}} d_p(u, \Delta)^p + \sum_{\substack{v \in D' \\ \mathclap{\text{unmatched}}}} d_p(v, \Delta)^p
+      \sum_{(a, b) \in M} d_p(u, v)^p + \sum_{\substack{a \in D \\ \mathclap{\text{unmatched}}}} d_p(a, \Delta)^p + \sum_{\substack{b \in D' \\ \mathclap{\text{unmatched}}}} d_p(b, \Delta)^p
     \right)^{\frac{1}{p}}.
   \]
   When $p$ tends to $+\infty$, we get the $\infty$-Wasserstein distance, which is more commonly referred to as the \term{bottleneck distance}:
   \[
     d_\infty(D, D') \coloneq \inf_{M \in \Match(D, D')} \max\left(
-      \sup_{(u, v) \in M} d_\infty(u, v),
-      \sup_{\substack{u \in D \\ \mathclap{\text{unmatched}}}} d_\infty(u, \Delta),
-      \sup_{\substack{v \in D' \\ \mathclap{\text{unmatched}}}} d_\infty(v, \Delta)
+      \sup_{(a, b) \in M} d_\infty(a, b),
+      \sup_{\substack{a \in D \\ \mathclap{\text{unmatched}}}} d_\infty(a, \Delta),
+      \sup_{\substack{b \in D' \\ \mathclap{\text{unmatched}}}} d_\infty(b, \Delta)
     \right).
   \]
   These distances between persistence diagrams lift to distances between barcodes: given persistence modules $V$ and $W$ with persistence diagrams $D_V$ and $D_W$, respectively and $p \in [1, +\infty]$, we define
@@ -432,10 +473,10 @@ As previously noted, generalized persistence modules do not have barcodes. Howev
   \[
     \rank(V) \colon \left\{ \begin{array}{ccc}
       \Omega(I) & \to & \N \\
-      (i \leq j) & \mapsto & \rank(V(i \leq j)),
+      (s \leq t) & \mapsto & \rank(V(s \leq t)),
     \end{array} \right.
   \]
-  where $\Omega(I) \coloneq \{(i, j) \in I \mid i \leq j\}$.
+  where \notation{$\Omega(I)$} is the set $\{(s, t) \in I \times I \mid s \leq t\}$.
 \end{definition}
 
 Note that, in the one-dimensional case, the rank function is equivalent to the barcode in the sense that either one can be recovered from the other \ir{cite}. In the general case, rank functions admit decompositions into simple functions \ir{cite BOO?}.
@@ -691,9 +732,9 @@ The Betti diagrams of a persistence module $V$ can then be computed as the dimen
 
 \section{Metric persistent algebra}
 
-We now return to the one-dimensional case.
+We now return to the one-dimensional case. \ir{or not really? noise systems are defined more generally, and we do want to show that there are metrics for multiparameter modules as well}
 
-\ir{Not sure how to structure this. Noise systems aren't a focus of this thesis, so they can go in the 13Ways part. But algebraic Wasserstein is pretty relevant, so it should be highlighted here? Along with induced matchings? But this could also go in the contributions section...}
+\ir{Moved the noise system stuff here}
 
 \ir{idea: the paper contributions should not have to refer too much to the 13Ways.}
 
