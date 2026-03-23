@@ -185,7 +185,8 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
   \else
     \section[\@shorttitle]{\thefield{labeltitle}}
   \fi
-  \label{PS:\strfield{entrykey}}  % automatically add label (outside labels don't detect this section)
+  % automatically add label (outside labels don't detect this section)
+  \label{PS:\strfield{entrykey}}
   \printnames{author}.
   \ifentrytype{article}{%
     In \usebibmacro{tryfjournal},

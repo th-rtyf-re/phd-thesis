@@ -3,6 +3,22 @@
 \input{headers/my-kthpq}  % load class and packages, define more complicated commands
 \input{headers/my-macros}  % math macros and metadata
 
+% % Debug code for infinite recompiles due to changing labels. Comment out
+% % `\begin{document}` line and uncomment this block.
+% % (https://tex.stackexchange.com/a/169245/216213)
+% \makeatletter
+% \def\@testdef #1#2#3{%
+%   \def\reserved@a{#3}\expandafter \ifx \csname #1@#2\endcsname
+%  \reserved@a  \else
+% \typeout{^^Jlabel #2 changed:^^J%
+% \meaning\reserved@a^^J%
+% \expandafter\meaning\csname #1@#2\endcsname^^J}%
+% \@tempswatrue \fi}
+% \begin{document}
+% \providecommand\r@foo{{1}{1}}
+% \edef\@currentlabel{.\expandafter\@firstoftwo\r@foo}
+% \makeatother
+
 \begin{document}
 
 % ==== FRONT MATTER ====
@@ -18,7 +34,8 @@
 \input{includes/persistent-algebra}
 \input{includes/morse-theory}
 
-\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}  % hide papers from table of contents
+% hide papers from table of contents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
 \input{includes/contributions}
 \input{includes/outlook}
 
@@ -29,21 +46,25 @@
 \part{Papers}
 \label{Part:papers}
 \newrefsection% Reset the bibliography
-% \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}% https://www.reddit.com/r/LaTeX/comments/1khta4d/comment/mr9hxeb/
+% \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
 
 \papertitlepage[color=light blue]{CGRST2024}
+\label{PC:CGRST2024}
 
 % \includepdf[pages=-]{papers/CGRST2024}
 
 \papertitlepage[color=light blue]{AGRS2025}
+\label{PC:AGRS2025}
 
 % \includepdf[pages=-]{papers/AGRS2025}
 
 \papertitlepage[color=light blue,misctext=To be submitted]{GRRS2026}
+\label{PC:GRRS2026}
 
 \paperchapter{GRRS2026}
 
 \papertitlepage[color=light blue,misctext=Submitted]{GLRS2025}
+\label{PC:GLRS2025}
 
 \paperchapter[Morse theory of Euclidean distance functions]{GLRS2025}
 
@@ -70,6 +91,7 @@ text
 text
 
 \papertitlepage[color=light blue,misctext=To be submitted]{Ren2026}
+\label{PC:Ren2026}
 
 \paperchapter{Ren2026}
 

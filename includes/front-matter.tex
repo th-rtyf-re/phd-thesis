@@ -11,22 +11,30 @@ For you!
 \end{dedication}
 
 \begin{abstract}
-  This thesis explores the construction and computation of algebraic invariants for filtered topological spaces. These invariants are derived from the classical algebraic invariant, homology, which is invariant under continuous invertible transformations of topological spaces. Filtered spaces, however are richer structures that often encode geometric information, and thus our algebraic constructions are invariant with respect to isometries and scaling operations.
+  This thesis explores the construction and computation of algebraic invariants for filtered topological spaces. These invariants are derived from the classical algebraic invariant, homology, which is invariant under continuous invertible transformations of topological spaces. Filtered spaces, however, are richer structures that often encode geometric information, and thus our algebraic constructions are invariant with respect to isometries and scaling operations. We are also interested in the stability of invariants with respect to small perturbations of the input data, including the addition of noise.
   
-  Papers A, B, and C study a modern algebraic invariant called a persistence module, a central object in the field of topological data analysis (TDA). \ir{some words about the results... relative Betti diagrams and induced matchings... what are the computations involved}
+  Given a space with a poset-valued filtration function, the homology (with field coefficients) of sublevel sets forms a functor from the poset to vector spaces: this functor is called a \emph{persistence module}, and is a central object in the field of topological data analysis (TDA). In Paper \ref{PC:CGRST2024}, we develop the theory of relative homological algebra for persistence modules, including the use of \emph{local Koszul complexes} as a tool for computing \emph{relative Betti diagrams}, which are a numerical invariant of minimal relative projective resolutions. In Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}, we study the case where the indexing poset is a total order. In this case, persistence modules decompose as sums of simple \emph{bar modules}, and we introduce the notion of \emph{bar-to-bar morphisms} between persistence modules as an algebraic version of bar matchings. Moreover, we develop algorithms for computing matchings induced by morphisms, passing through bar-to-bar morphisms.
   
-  Papers D and E generalize a more classical invariant, the critical points of a Morse function, to the setting of metric algebraic geometry, an emerging field that combines (or reunites) algebraic and differential geometry. Specifically, we develop a Morse theory for distance functions from an algebraic variety, restricted to an algebraic variety, and show that, generically, such a distance function is Morse. We define both geometric and algebraic notions of critical points and provide upper bounds on their number. In this sense, we are constructing and computing invariants for filtered algebraic spaces.
-
-  \keywords{word1, word2}
+  Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026} generalize a more classical invariant, the critical points of a Morse function, to the setting of \emph{metric algebraic geometry}, an emerging field that combines (or reunites) algebraic and differential geometry. Specifically, we develop a Morse theory for distance functions from an algebraic variety, restricted to an algebraic variety, and show that, generically, such a distance function is Morse. We define both geometric and algebraic notions of (nondegenerate) critical points and provide upper bounds on their number. In this sense, we construct and compute invariants for filtered algebraic spaces.
 \end{abstract}
 
 \begin{abstract}[swedish]
-  Samma sak fast på svenska.
-
-  \keywords{ord1, ord2}
+  Denna avhandling utforskar konstruktionen och beräkningen av algebraiska invarianter för filtrerade topologiska rum. Dessa invarianter härleds från den klassiska algebraiska invarianten, homologi, som är invariant under kontinuerliga inverterbara transformationer av topologiska rum. Filtrerade rum är emellertid rikare strukturer som ofta kodar geometrisk information, och därför är våra algebraiska konstruktioner invarianta med avseende på isometrier och skalningsoperationer. Vi är också intresserade av stabiliteten hos invarianter med avseende på små störningar i indata, inklusive tillägg av brus.
+  
+  Givet ett rum med en posetvärderad filtreringsfunktion, bildar homologin (med fältkoefficienter) hos \ir{delnivåmängder} en funktor från poseten till vektorrummen: denna funktor kallas en \emph{persistensmodul} och är ett centralt objekt inom området topologisk dataanalys (TDA). I Artikel \ref{PC:CGRST2024} utvecklar vi teorin om relativ homologisk algebra för persistensmoduler, inklusive användningen av \emph{lokala Koszul-komplex} som ett verktyg för att beräkna \emph{relativa Betti-diagram}, vilka är en numerisk invariant av minimala relativa projektiva upplösningar. I Artiklarna \ref{PC:AGRS2025} och \ref{PC:GRRS2026} studerar vi fallet där indexeringsposeten är en total ordning. I detta fall sönderfaller persistensmoduler som summor av enkla \emph{streckmoduler}, och vi introducerar begreppet \emph{strick-till-streck-morfismer} mellan persistensmoduler som en algebraisk version av streckmatchningar. Dessutom utvecklar vi algoritmer för att beräkna matchningar inducerade av morfismer, som passerar genom streck-till-streck-morfismer.
+  
+  Artiklarna \ref{PC:GLRS2025} och \ref{PC:Ren2026} generaliserar en mer klassisk invariant, de kritiska punkterna för en Morse-funktion, till \emph{metrisk algebraisk geometri}, ett framväxande område som kombinerar (eller återförenar) algebraisk och differentialgeometri. Mer specifikt utvecklar vi en Morse-teori för avståndsfunktioner från en algebraisk variant, begränsad till en algebraisk variant, och visar att en sådan avståndsfunktion generellt är Morse. Vi definierar både geometriska och algebraiska begrepp för (icke-degenererade) kritiska punkter och anger övre gränser för deras antal. I denna mening konstruerar och beräknar vi invarianter för filtrerade algebraiska rum.
 \end{abstract}
 
 \chapter{Popular science summary}
+
+Consider a set of reference points on a plane (such as the points in the bottom right corner of this page \ir{flipbook}) and define the function that to every point on the plane associates the distance to its closest reference point. This defines a \emph{filtered space}, where the space is the plane and the filtration is the distance function. The set of points with distance at most some threshold value is called a \emph{sublevel set}. starting from $0$, we can increase the threshold value progressively, thus obtaining a sequence of sublevel sets of the plane.
+
+We are interested in studying how the \emph{topology}, or shape, of these sublevel sets evolves over time: clusters can merge, loops can appear and disappear, and so on. This study is central to the two fields covered by this thesis, \emph{Morse theory} and \emph{topological data analysis} (TDA). Both fields use tools called \emph{algebraic invariants} to summarize the changes in topology. While there are an infinite number of sublevel sets --- one for each threshold value ---, there are typically only finitely many changes in topology. This finiteness of topological changes translates to finite-sized invariants, for example, a finite number of \emph{critical points} (for Morse theory) or a finite \emph{barcode} (for TDA). This leads to the question of computing algebraic invariants, which this thesis also addresses. While Morse theory focuses more on formal computations, such as bounding the number of topological features by the number of critical points, TDA's success is in part due to the computability of its invariants.
+
+The results of this thesis can be sorted into three topics, with the first two pertaining to TDA and the last to Morse theory. In Paper \ref{PC:CGRST2024}, we define and compute an algebraic invariant called a \emph{relative Betti diagram} for a generalized form of filtered space, where the filtrations values belong to an arbitrary partially ordered set instead of real numbers. In Papers {PC:AGRS2025} and \ref{PC:GRRS2026}, we stick to standard filtrations and study how functions between filtered spaces induce matchings between barcodes. In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we define Morse theory for spaces filtered by distance functions (the original theory is for smoother filtration functions). In particular, we study distance functions between spaces called \emph{algebraic varieties}, where we show that, in general, the Morse theory behaves well: critical points capture changes in topology and there are finitely many of them.
+
+The study of algebraic invariants for filtered spaces is a rich topic in mathematics at the intersection of theory and computation. This thesis provides a glimpse into the various questions that interest researchers, and opens some new directions to explore.
 
 \chapter{Acknowledgements}
 
@@ -55,13 +63,13 @@ Add a part about the template: the class \texttt{kthpq-thesis} is inspired by fe
   \hline\endhead
   $a$, $b$ & element of poset \\
   $\cat{Cat}$ & category \\
-  $d$ & degree of homology \\
+  $d$ & polynomial degree \\
   $\partial$ & boundary map of chain complex \\
   $f$, $g$, $h$ & real-valued functions \\
   $F$, $G$ & functor \\
   $i$, $j$ & index \\
   $I$, $J$ & poset \\
-  $k$ & simplex dimension \\
+  $k$ & simplex dimension, homological degree \\
   $K$ & simplicial complex \\
   $\K$ & underlying field for vector spaces \\
   $M$ & matching of sets or multisets \\
@@ -73,8 +81,8 @@ Add a part about the template: the class \texttt{kthpq-thesis} is inspired by fe
   $U$, $V$, $W$ & persistence module \\
   $x$, $y$ & element of space \\
   $X$, $Y$ & topological space \\
-  $\lambda$ & element of $\K$ \\
   $\alpha$ & index \\
+  $\lambda$ & element of $\K$ \\
   $\sigma$, $\tau$ & simplices \\
   \hline
   \blackbird & Mathematical detour
