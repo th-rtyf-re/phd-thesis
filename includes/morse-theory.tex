@@ -24,9 +24,9 @@ In the previous chapter, we presented a general theory for algebraically studyin
   A \term{Morse function} is a smooth function on a smooth manifold that has no degenerate critical points.
 \end{definition}
 
-The index of a nondegenerate critical point has the following interpretation in terms of normal forms: \ir{cite}
+The index of a nondegenerate critical point has the following interpretation in terms of normal forms.
 
-\begin{proposition}
+\begin{proposition}[{\cite[Lemma 2.2]{Milnor1963}}]
   Let $X$ be a smooth manifold of dimension $n$, $f \colon X \to \R$ a smooth function, and $x \in X$ a nondegenerate critical point with index $\iota \in \{0, \ldots, n\}$. Then there exists a neighborhood $U$ of $x$ and a homeomorphism $\psi \colon \R^n \to U$ such that
   \begin{equation}
   \label{E:normal-form}
@@ -34,11 +34,11 @@ The index of a nondegenerate critical point has the following interpretation in 
   \end{equation}
 \end{proposition}
 
-Viewing the filtration $f \colon X \to \R$ as a height function and considering the normal form \eqref{E:normal-form}, we can then consider the nondegenerate critical point $x$ to be a saddle point of $X$ where the manifold slopes downwards in $\iota$ directions and upwards in $n - \iota$ directions.
+Viewing the filtration $f \colon X \to \R$ as a height function and considering the \term{normal form} \eqref{E:normal-form}, we can then consider the nondegenerate critical point $x$ to be a saddle point of $X$ where the manifold slopes downwards in $\iota$ directions and upwards in $n - \iota$ directions.
 
 This algebraic encoding of the geometry of a filtered manifold can be developed further by the \term{Morse lemmas}, which we present as a theorem:
 
-\begin{theorem}
+\begin{theorem}[{\cite[Theorems 3.1 \& 3.2]{Milnor1963}}]
   Let $X$ be a smooth manifold, $f \colon X \to \R$ a smooth function, and $s \leq t$ in $\R$. Recall the notation $X_{\leq t} = f^{-1}((-\infty, t])$. Then:
   \begin{enumerate}
     \item If the interval $[s, t]$ contains no critical values, then $X_{\leq s}$ is diffeomorphic to $X_{\leq t}$ and $X_{\leq t}$ deformation retracts onto $X_{\leq s}$.
@@ -50,13 +50,13 @@ This algebraic encoding of the geometry of a filtered manifold can be developed 
   \ir{classic donut}
 \end{example}
 
-In terms of homology, we have the following results \ir{cite}
+In terms of homology, we have the following results.
 
 \begin{definition}
   Let $X$ be a smooth manifold. For all integers $d \geq 0$, we call $b_d(X) \coloneq \dim H_d(X)$ the \term[Betti number]{$d^{\th}$ Betti number of $X$}.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}[{\cite[\textsection 5]{Milnor1963}}]
   Let $X$ be a smooth manifold and $f \colon X \to \R$ a smooth function whose critical points are isolated and nondegenerate. For all integers $d \geq 0$, denote by $C^d$ the number of critical points of $f$ of index $d$. Then, for all $d \geq 0$, we have the inequality
   \[
     C^d - C^{d - 1} + \cdots + (-1)^d C^0 \geq b_d(X) - b_{d - 1}(X) + \cdots + (-1)^d b_0(X).
@@ -71,18 +71,22 @@ When the set of critical points is easy to compute, this gives powerful upper bo
 
 \section{Morse theory for continuous selections}
 
-\begin{remark}
-  Morse theory was originally developed for smooth function on smooth manifolds. However, it has been generalized in many directions, including Morse-Bott theory \ir{cite}, stratified Morse theory \ir{cite}, and discrete Morse theory \ir{cite}. In \ir{Paper D} we develop Morse theory for continuous selections, as presented in \cite{APS1997}.
-\end{remark}
+Morse theory was originally developed for smooth function on smooth manifolds. However, it has been generalized in many directions, including Morse-Bott theory \ir{cite}, stratified Morse theory \ir{cite}, and discrete Morse theory \ir{cite}. In \ir{Paper D} we develop Morse theory for continuous selections, as presented in \cite{APS1997}.
 
 \ir{I'm starting to think that anything that is in the papers should not be written out here... UPDATE: only the new contributions, so continuous selections should stay here.}
+
+\begin{definition}
+  \ir{A continuous selection is... The subdifferential is (general formula for locally Lipschitz), and for continuous selections it is... A critical point is... it is nondegenerate if...}
+\end{definition}
+
+\ir{in this case we have Morse lemma (normal form). The rest follows, see paper. See Chapter 4 for details about our contributions.}
 
 \section{Distance functions between algebraic varieties}
 
 For algebraic spaces, the notion of critical points of distance functions has been studied extensively in the past few decades, as part of the growing field of \term{metric algebraic geometry}.
 
 \begin{definition}
-  An \term{real algebraic variety} is the set of solutions of a system of multivariate polynomial equations over the real numbers. \ir{copied from Wikipedia, I guess...}
+  A \term{real algebraic variety} is the set of solutions of a system of multivariate polynomial equations over the real numbers. \ir{copied from Wikipedia, I guess...}
   
   Consider the space $\R^n$ for some $n \geq 1$ and an integer $d \geq 0$. Denote by $\cc{P}_{n, d}$ the space of real polynomials in $n$ variables, of degree $d$. Given polynomials $\vec{p} = p_1, \ldots, p_k$ in $\cc{P}_{n, d}$, we denote by $V(\vec{p})$ the algebraic variety that is the set of solutions of the equations $p_i(x) = 0$, for all $i \in \{1, \ldots, k\}$.
   

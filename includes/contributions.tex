@@ -1,6 +1,7 @@
 % !TEX root = ../thesis-main.tex
 
 \chapter{Papers and contributions}
+\label{C:contributions}
 
 \papersection{CGRST2024}
 
@@ -39,7 +40,9 @@ Related: decompositions of rank functions \ir{put this elsewhere}
 
 \subsection*{Erratum}
 
-Thank you to Tada Shunsuke for pointing out the following mistake. In \textsection 4.4, we write that a functor $F \colon J \to \Vect$ is isomorphic to a subfunctor of $\K_J$ if, and only if, $F$ is a filtration and $\dim F(a) \leq 1$ for every $a$ in $J$. This does not hold in all generality: consider the functor $F$ defined by
+Thank you to Tada Shunsuke for pointing out the following mistake.
+
+In \textsection 4.4, we write that a functor $F \colon J \to \Vect$ is isomorphic to a subfunctor of $\K_J$ if, and only if, $F$ is a filtration and $\dim F(a) \leq 1$ for every $a$ in $J$. This does not hold in all generality: consider the functor $F$ defined by
 \[
   \begin{tikzcd}
     \K
@@ -84,7 +87,7 @@ Our proof strategy is to observe that the morphism $f$ is a monomorphism and tha
 
 In other words, for a bar-to-bar morphism, there exist barcode decompositions of the domain and codomain such that each bar of the domain maps to at most one bar of the codomain. The key result is the following.
 
-\begin{theorem}{\ir{Theorem 3.14}}
+\begin{theorem}[\ir{Theorem 3.14}]
   Let $f \colon V \hookrightarrow W$ be a monomorphism of tame persistence modules. Then there exists a bar-to-bar monomorphism $f_b \colon V \hookrightarrow W$ such that $\| \coker f_b \|_p \leq \| \coker f \|_p$ for all $p \in [1, \infty]$.
 \end{theorem}
 
@@ -135,7 +138,7 @@ Using the strategy of \cite{BauerLesnick2015}, we define the induced matching of
 
 In this paper we generalize Morse theory to distance functions $f \coloneq \dist_Y\big|_X$ from a subset $Y \subseteq \R^n$ restricted to a subset $X \subseteq \R^n$. We show that, under certain conditions, the distance function $f$ is a continuous selection:
 
-\begin{proposition}{\ir{Proposition 2.5.8}}
+\begin{proposition}[\ir{Proposition 2.5.8}]
   Suppose that $Y$ is smooth and let $x \in \R^n$ be a regular value of the exponential map $\varphi \colon NY \to \R^n$, where $NY$ denotes the normal bundle of $Y$ \ir{elaborate more?}. Then
   \begin{enumerate}
     \item
@@ -150,7 +153,7 @@ In this paper we generalize Morse theory to distance functions $f \coloneq \dist
     \end{enumerate}
 \end{proposition}
 
-We can therefore apply the results of \cite{APS1997} to distance functions $\dist_Y\big|_X$ where all critical points are regular points of the exponential map on $Y$. \ir{Recall that} a nondegenerate critical point $x$ of a continuous selection has two indices, a piecewise linear index $k(x)$ and a quadratic index $\iota(x)$. Given a pair $(X, Y)$ of subsets of $\R^n$ such that $\dist_Y\big|_X$ only has nondegenerate critical points, we denote by $C_{k, \iota}(X, Y)$ the critical points with indices $(k, \iota)$. We recover the Morse lemmas and inequalities \ir{ref, I guess...}. Moreover, we can exchange the roles of $X$ and $Y$: if $\dist_X\big|_Y$ also only has nondegenerate critical points, then combining the resulting Morse inequalities gives the following equality relating the Euler characteristics of $X$ and $Y$ and the number of critical points \ir{Corllary 2.6.7}:
+We can therefore apply the results of \cite{APS1997} to distance functions $\dist_Y\big|_X$ where all critical points are regular points of the exponential map on $Y$. \ir{Recall that} a nondegenerate critical point $x$ of a continuous selection has two indices, a piecewise linear index $k(x)$ and a quadratic index $\iota(x)$. Given a pair $(X, Y)$ of subsets of $\R^n$ such that $\dist_Y\big|_X$ only has nondegenerate critical points, we denote by $C_{k, \iota}(X, Y)$ the critical points with indices $(k, \iota)$. We recover the Morse lemmas and inequalities \ir{ref, I guess...}. Moreover, we can exchange the roles of $X$ and $Y$: if $\dist_X\big|_Y$ also only has nondegenerate critical points, then combining the resulting Morse inequalities gives the following equality relating the Euler characteristics of $X$ and $Y$ and the number of critical points \ir{Corollary 2.6.7}:
 \[
   \chi(Y) + \sum_{k, \iota \geq 0} (-1)^{k + \iota} \#C_{k, \iota}(X, Y) = \chi(X) + \sum_{k, \iota \geq 0} (-1)^{k + \iota} \#C_{k, \iota}(Y, X).
 \]
