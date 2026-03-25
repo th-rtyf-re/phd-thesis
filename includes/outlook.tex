@@ -4,11 +4,14 @@
 \label{C:outlook}
 
 \begin{epigraph}
-  The blackbird whirled in the autumn winds. \\
-  It was a small part of the pantomime.
+  It was evening all afternoon. \\
+  It was snowing \\
+  And it was going to snow. \\
+  The blackbird sat \\
+  In the cedar-limbs.
 \end{epigraph}
 
-In this thesis we explored many ways in which algebraic invariants for filtered spaces can be defined, and computed. There is still much more to investigate, and we present some ongoing work.
+In this thesis we explored many ways in which algebraic invariants for filtered spaces can be defined and computed. There is still much more to investigate, and we present some ongoing work.
 
 \section{Replacing kernels with cokernels}
 
@@ -34,28 +37,28 @@ Therefore, in order to compute Betti diagrams relative to lower hooks, we can st
 
 With Andrea Guidolin and Bjørnar Gullikstad Hem.
 
-\section{Stabilized relative Betti numbers}
+% \section{Stabilized relative Betti numbers}  % I've kind of avoided defining stabilized ranks
 
-at IML, with Claudia Landi, Bjørnar Gullikstad Hem, Daniel Tolosa, Berat Geven \ir{surely I don't cite these names, or maybe this result...}
+% at IML, with Claudia Landi, Bjørnar Gullikstad Hem, Daniel Tolosa, Berat Geven \ir{surely I don't cite these names, or maybe this result...}
 
-In \cite{CGRST2024} the authors develop the theory of relative homological algebra for (multiparameter) persistence modules. In particular, given a collection $\mathcal{P}$ of ``simple'' persistence modules, we can define a minimal relative projective resolution of a module $M$ as
-\[
-\cdots \to F_1 \to F_0 \to M \to 0
-\]
-where each $F_i$ is of the form $\bigoplus_{A \in \mathcal{P}} A^{\oplus \beta_i^{\mathcal{P}}M(A)}$, with $\beta_i^{\mathcal{P}} M \colon \mathcal{P} \to \mathbb{N}$ giving the multiplicity of each module $A$ of $\mathcal{P}$ in $F_i$. These multiplicities are the \emph{relative Betti numbers}, and the paper gives a strategy to efficiently compute them for certain collections $\mathcal{P}$, using (local) Koszul complexes. When $\mathcal{P}$ is the collection of free modules, then the relative Betti numbers are exactly the standard Betti numbers; in the notation the $\mathcal{P}$ is omitted.
+% In \cite{CGRST2024} the authors develop the theory of relative homological algebra for (multiparameter) persistence modules. In particular, given a collection $\mathcal{P}$ of ``simple'' persistence modules, we can define a minimal relative projective resolution of a module $M$ as
+% \[
+% \cdots \to F_1 \to F_0 \to M \to 0
+% \]
+% where each $F_i$ is of the form $\bigoplus_{A \in \mathcal{P}} A^{\oplus \beta_i^{\mathcal{P}}M(A)}$, with $\beta_i^{\mathcal{P}} M \colon \mathcal{P} \to \mathbb{N}$ giving the multiplicity of each module $A$ of $\mathcal{P}$ in $F_i$. These multiplicities are the \emph{relative Betti numbers}, and the paper gives a strategy to efficiently compute them for certain collections $\mathcal{P}$, using (local) Koszul complexes. When $\mathcal{P}$ is the collection of free modules, then the relative Betti numbers are exactly the standard Betti numbers; in the notation the $\mathcal{P}$ is omitted.
 
-Separately, in \cite{GafvertChacholski2021}, the authors show that the hierarchical stabilization of the standard $0^{\text{th}}$ Betti number $\beta_0 M$ is NP-hard to compute, while also giving a strategy for computing them (not so efficiently). We then had two broad research directions:
-\begin{enumerate}
-\item understand the algorithm for computing stabilized $\beta_0$;
-\item understand the stabilized relative $\beta_0$.
-\end{enumerate}
-We focused on the second direction, where we managed to prove the following.
+% Separately, in \cite{GafvertChacholski2021}, the authors show that the hierarchical stabilization of the standard $0^{\text{th}}$ Betti number $\beta_0 M$ is NP-hard to compute, while also giving a strategy for computing them (not so efficiently). We then had two broad research directions:
+% \begin{enumerate}
+% \item understand the algorithm for computing stabilized $\beta_0$;
+% \item understand the stabilized relative $\beta_0$.
+% \end{enumerate}
+% We focused on the second direction, where we managed to prove the following.
 
-\paragraph{Result.} If $\{\text{free}\} \subseteq \mathcal{P} \subseteq \{\text{single-source}\}$, where single-source modules are those with a single generator, then $\widehat{\beta_0^{\mathcal{P}} M} \geq \widehat{\beta_0 M}$ for all persistence modules $M$.
+% \paragraph{Result.} If $\{\text{free}\} \subseteq \mathcal{P} \subseteq \{\text{single-source}\}$, where single-source modules are those with a single generator, then $\widehat{\beta_0^{\mathcal{P}} M} \geq \widehat{\beta_0 M}$ for all persistence modules $M$.
 
-That is, given a fixed noise system, if the collection $\mathcal{P}$ contains all free modules and only contains single-source modules, then the stabilized relative $\beta_0$ is always greater than the stabilized standard $\beta_0$.
+% That is, given a fixed noise system, if the collection $\mathcal{P}$ contains all free modules and only contains single-source modules, then the stabilized relative $\beta_0$ is always greater than the stabilized standard $\beta_0$.
 
-\ir{proof?}
+% \ir{proof?}
 
 \section{Dual poset elements for Koszul complexes}
 
@@ -132,9 +135,9 @@ Then $f \leq g + h$ by the above equation, so by Minkowski's inequality, $(\int_
 \]
 \ir{$p = n + 1$}. This is the hard axiom!
 
-\section{Matching costs}
+% \section{Matching costs}
 
-$\| \mu_1 \bullet \mu_2 \|_p \leq \| \mu_1 \|_p \| \mu_2 \|_p$ ?
+% $\| \mu_1 \bullet \mu_2 \|_p \leq \| \mu_1 \|_p \| \mu_2 \|_p$ ?
 
 \section{\texorpdfstring{$p$}{p}-norms of extensions}
 

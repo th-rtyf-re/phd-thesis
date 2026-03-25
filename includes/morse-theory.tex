@@ -71,22 +71,46 @@ When the set of critical points is easy to compute, this gives powerful upper bo
 
 \section{Morse theory for continuous selections}
 
-Morse theory was originally developed for smooth function on smooth manifolds. However, it has been generalized in many directions, including Morse-Bott theory \ir{cite}, stratified Morse theory \ir{cite}, and discrete Morse theory \ir{cite}. In \ir{Paper D} we develop Morse theory for continuous selections, as presented in \cite{APS1997}.
-
-\ir{I'm starting to think that anything that is in the papers should not be written out here... UPDATE: only the new contributions, so continuous selections should stay here.}
+Morse theory was originally developed for smooth function on smooth manifolds. However, it has been generalized in many directions, including Morse-Bott theory \cite{AustinBraam1995}, stratified Morse theory \cite{GoreskyMacPherson1988}, and discrete Morse theory \cite{Forman2002}. In Paper \ref{PC:GLRS2025} we develop Morse theory for continuous selections, as presented in \cite{APS1997}. We recall the original theory here.
 
 \begin{definition}
-  \ir{A continuous selection is... The subdifferential is (general formula for locally Lipschitz), and for continuous selections it is... A critical point is... it is nondegenerate if...}
+  Let $X$ be a smooth manifold and $\{f_0, \ldots, f_m\} \subseteq \cc{C}^2(X, \R)$ a set of $\cc{C}^2$ functions. A \term[continuous selection]{continuous selection from $\{f_0, \ldots, f_m\}$} is a continuous function $f \colon X \to \R$ such that, for every $x$ in $X$, there exists $i$ in $\{0, \ldots, m\}$ such that $f(x) = f_i(x)$. We denote by $\CS(f_0, \ldots, f_m)$ the collection of all continuous selections from $\{f_0, \ldots, f_m\}$.
+  
+  Let $f \in \CS(f_0, \ldots, f_m)$ be a continuous selection. The \term{subdifferential} of $f$ at a point $x \in X$ is (see \cite{APS1997} or Paper \ref{PC:GLRS2025} for a more general definition)
+  \[
+    \partial f(x) \coloneq \conv\{\nabla f_i(x) \mid i \in I(x)\},
+  \]
+  where $I(x)$ is the set of indices $i \in \{0, \ldots, m\}$ such that $x$ belongs to $\operatorname{clos} \operatorname{int} \{f(y) = f_i(y)\}$, i.e., the closure of the interior of the set where $f$ is equal to $f_i$.
+  
+  A point $x$ in $X$ is a \term[critical point]{critical point of $f$} if $0$ belongs to its subdifferential $\partial f(x)$. A critical point $x \in X$ is \term[nondegenerate critical point]{nondegenerate} if the following two conditions hold:
+  \begin{enumerate}
+    \item For every $i \in I(x)$, the set of differentials $\{D_x f_j \mid j \in I(x) \setminus \{i\}\}$ is linearly independent.
+    \item Denote by $(\lambda_i)_{i \in I(x)}$ the unique list of nonnegative real numbers such that
+    \[
+      \sum_{i \in I(x)} \lambda_i = 1
+      \quad \text{and} \quad
+      \sum_{i \in I(x)} \lambda_i D_x f_i = 0
+    \]
+    and by $\lambda f \colon X \to \R$ the function $\lambda f(y) \coloneq \sum_{i \in I(x)} \lambda_i f_i(y)$. Then the second differential of $\lambda f_i$ is nondegenerate on
+    \[
+      V(x) \coloneq \bigcap_{i \in I(x)} \ker(D_x f_i).
+    \]
+  \end{enumerate}
+  We write $k(x) \coloneq \#I(x) - 1$ and call this number the \term[piecewise linear index]{piecewise linear index of $x$}. We denote by $\iota(x)$ the number of negative eigenvalues of the restriction of the second differential of $\lambda f$ to $V(x)$, and call it the \term[quadratic index]{quadratic index of $x$}. \ir{See figs...}
 \end{definition}
 
-\ir{in this case we have Morse lemma (normal form). The rest follows, see paper. See Chapter 4 for details about our contributions.}
+For a nondegenerate critical point, we recover the Morse lemma: writing $k = k(x)$ and $\iota = \iota(x)$, there exists a neighborhood $U$ of $x$ and a locally Lipschitz homeomorphism $\psi \colon \R^k \times \R^{n - k} \to U$ (where $n$ is the dimension of the manifold $X$) such that
+\[
+  f(\psi(t_1, \ldots, t_n)) = f(x) + \ell(t_1, \ldots, t_k) - \sum_{j = k + 1}^{k + \iota} t_j^2 + \sum_{j = k + \iota + 1}^n t_j^2,
+\]
+where $\ell(t) \in CS(t_1, \ldots, t_k, -(t_1 + \cdots + t_k))$ is a continuous selection of linear functions, making it piecewise linear. From this result, the rest of Morse theory follows: see \cite{APS1997} for the general theory and Paper \ref{PC:GLRS2025} for results specific to distance functions.
 
 \section{Distance functions between algebraic varieties}
 
 For algebraic spaces, the notion of critical points of distance functions has been studied extensively in the past few decades, as part of the growing field of \term{metric algebraic geometry}.
 
 \begin{definition}
-  A \term{real algebraic variety} is the set of solutions of a system of multivariate polynomial equations over the real numbers. \ir{copied from Wikipedia, I guess...}
+  A \term{real algebraic variety} is the set of solutions of a system of multivariate polynomial equations over the real numbers.
   
   Consider the space $\R^n$ for some $n \geq 1$ and an integer $d \geq 0$. Denote by $\cc{P}_{n, d}$ the space of real polynomials in $n$ variables, of degree $d$. Given polynomials $\vec{p} = p_1, \ldots, p_k$ in $\cc{P}_{n, d}$, we denote by $V(\vec{p})$ the algebraic variety that is the set of solutions of the equations $p_i(x) = 0$, for all $i \in \{1, \ldots, k\}$.
   
@@ -118,5 +142,5 @@ Algebraic geometers are often interested in integer invariants for algebraic var
 \end{definition}
 
 \begin{remark}
-  Both of these notions fit within the framework of critical points of the distance function from an algebraic variety, restricted to another algebraic variety. In \ir{Papers D and E}, we generalize this notion to generic varieties.
+  Both of these notions fit within the framework of critical points of the distance function from an algebraic variety, restricted to another algebraic variety. In Papers \ref{PC:GRRS2026} and \ref{PC:Ren2026}, we generalize this notion to generic varieties.
 \end{remark}

@@ -16,7 +16,7 @@
   urldate=ymd
 ]{biblatex-kthpq}
 
-% \makeatletter
+% \makeatletter  % bibliography numbers in margin...
 % \defbibenvironment{bibliography}
 % {\list{\printtext[labelnumberwidth]{%
 %     \printfield{prefixnumber}%
@@ -44,8 +44,6 @@
 \usepackage{silence}  % suppress marginpar warnings
 \usepackage{marginnote}  % for fallback highlight command
 
-\usepackage{titletoc}  % to suppress wayoflooking from toc, I guess
-
 % longtable: ignoring this error https://github.com/latex3/latex2e/issues/1907
 % with VS Code LaTeX Workshop 
 \usepackage{longtable}
@@ -69,7 +67,7 @@
 \usepackage[
 %  draft, % Uncomment to remove all links (useful for printing in black and white)
 %  hidelinks,
-  bookmarksdepth,% w/o argument: uses tocdepth, supposedly
+  % bookmarksdepth,% w/o argument: uses tocdepth, supposedly
   pdfusetitle,
   colorlinks,
   linktoc=all,
@@ -211,13 +209,75 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
   \usebibmacro{postnote}%
   \let\thesection\theoldsection
 }
+
+% Adding bibliographic data to ToC
+% can't patch this command for some reason so here's the full thing
+\renewcommand{\papertitlepage}[2][]{%
+  \cleardoublepage%
+  \newgeometry{top=30mm,bottom=30mm,left=43mm,right=\@tabmargin}%
+  \thispagestyle{empty}%
+  \setkeys{kthpq@papertitlepage}{#1}
+  \phantomsection
+  \paper@tab% before stepping counter for better positioning
+  \refstepcounter{paper}
+  \@papertitlepage{#2}
+  \renewcommand{\thechapter}{\thepaper}
+  \markboth{}{}% Reset header
+  \addtocontents{toc}{%  <-- inserted block here
+    \protect\def\protect\@misctext{\@misctext}%
+    \protect\@paperdetailsintoc{#2}%
+  }% end inserted block
+  \let\@misctext\defaultmisctext
+  \restoregeometry
+  \vfil\newpage\null
+  \thispagestyle{empty}
+  \afterpage{\nopagecolor}% Reset the color after the current page
+  \newpage
+}
+
+\def\@paperdetailsintoc#1{%
+  \hspace{\cftchapnumwidth}%
+  \parbox[t]{\dimexpr\textwidth - \cftchapnumwidth - \@tocrmarg\relax}{%
+    \sffamily\@paperdetailsintoc@i{#1}
+  }%
+  \vspace{5pt}% manually adjusted
+}
+
+\DeclareCiteCommand{\@paperdetailsintoc@i}
+  {%
+    \pagetrackerfalse%
+    \citetrackerfalse%
+    \defcounter{maxnames}{99}%
+  }
+  {%
+    \printnames{author}.
+    \ifentrytype{article}{%
+      In \usebibmacro{tryfjournal},
+    }{}%
+    \ifentrytype{inbook}{%
+      In \printfield{booktitle},
+    }{}%
+    \ifentrytype{incollection}{%
+      In \printfield{booktitle},
+    }{}%
+    \ifentrytype{inproceedings}{%
+      In \printfield{booktitle},
+    }{}%
+    \ifentrytype{misc}{%
+      \@misctext\ifx\@misctext\empty\else, \fi%
+    }{}%
+    \printfield{year}.
+    \printfield{doi}\printfield[eprint:arxiv]{eprint}%
+  }
+  {}
+  {}
 \makeatother
 
 % ---- Theorems ----
 
 \declaretheoremstyle[
   headfont=\sffamily\bfseries,
-  headformat={\inleftmargin[.5\marginparsep]{\mdseries\NUMBER}\NAME \NOTE},
+  headformat={\inleftmargin[.5\marginparsep]{\mdseries\textparagraph\,\NUMBER}\NAME \NOTE},
   postheadhook={%
     \checkoddpage%
     \ifoddpageoroneside%
@@ -229,14 +289,14 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
   bodyfont={\itshape}
 ]{theorem-margin}
 
-\declaretheorem[style=theorem-margin, parent=chapter]{theorem}
+\declaretheorem[style=theorem-margin]{theorem}
 \declaretheorem[style=theorem-margin, sibling=theorem]{proposition}
 \declaretheorem[style=theorem-margin, sibling=theorem]{corollary}
 \declaretheorem[style=theorem-margin, sibling=theorem]{lemma}
 
 \declaretheoremstyle[
   headfont=\sffamily\bfseries,
-  headformat={\inleftmargin[.5\marginparsep]{\mdseries\NUMBER}\NAME \NOTE},
+  headformat={\inleftmargin[.5\marginparsep]{\mdseries{\rmfamily\textparagraph}\,\NUMBER}\NAME \NOTE},
   postheadhook={%
     \checkoddpage%
     \ifoddpageoroneside%
@@ -354,7 +414,8 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
     \normalfont
     --- \epigraph@uthor
   \fi
-  \end{flushright}
+  \end{flushright}%
+  \vspace{1em}%
 }
 \makeatother
 
@@ -363,7 +424,7 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 
 % in-margin highlights
 \makeatletter
-\def\notation{\@dblarg\kthpq@highlight}
+\def\notate{\@dblarg\kthpq@highlight}
 \def\term{\@dblarg\kthpq@term}
 \newcommand{\kthpq@term}[2][]{\kthpq@highlight[#1]{\textbf{#2}}}
 
