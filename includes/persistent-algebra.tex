@@ -8,11 +8,12 @@
   The blackbird must be flying.
 \end{epigraph}
 
-``Persistent algebra'' is just what I am calling all of linear and homological algebra applied to persistence modules. This is a setting where things are mostly well-behaved, but there are subtleties that expose interesting features of the standard theories.
+\textbf{Persistent algebra} is my name for the study of persistence modules using linear and homological algebra. This is a setting where the theory is mostly without surprises: persistence modules often behave like vector spaces (\cref{S:persistent-linear-algebra}), and their homological theory is also quite simple (\cref{S:persistent-homological-algebra}). But there are subtleties nonetheless that require attention and care, including the proper definition of persistence modules (\cref{S:ways-of-looking}). The aim of this chapter is to showcase the theory of persistent algebra as it will be used in the included papers.
 
 \section{Ten Ways of Looking at a Persistence Module}
+\label{S:ways-of-looking}
 
-If you are familiar with TDA, then you may be aware of the perhaps excessive number of resources introducing the field and its central tool, persistent homology \cite[][and the ``Preliminaries'' section of many papers]{CdSGO2016,DeyWang2022,EdelsbrunnerMorozov2013,OPTGH2017,Oudot2015}. This section is yet another presentation of TDA, through thirteen perspectives. The aim here is not to be exhaustive, but instead to showcase the multifaceted and nature of persistence modules. Not everything introduced here will be used in the thesis (see the following sections for thesis-specific results), but all preliminary definitions will be provided here.
+If you are familiar with TDA, then you may be aware of the perhaps excessive number of resources introducing the field and its central tool, persistent homology \cite[][and the ``Preliminaries'' section of many papers]{CdSGO2016,DeyWang2022,EdelsbrunnerMorozov2013,OPTGH2017,Oudot2015}. This section is yet another presentation of TDA, through ten perspectives. The aim here is not to be exhaustive, but instead to showcase the multifaceted and nature of persistence modules. Not everything introduced here will be used in the thesis (see the following sections for thesis-specific results), but all preliminary definitions will be provided here.
 % Mathematical detours that are not directly used in the thesis are marked by a \blackbird{} symbol.
 You may skip to \cref{S:persistent-linear-algebra} and return as needed for exact definitions and notational conventions.
 
@@ -907,9 +908,7 @@ To check that this is indeed a distance, we need to check the noise system axiom
   $\cc{S}^p$ is indeed a noise system, for all $p \in [1, \infty]$. As a consequence, $d_{\cc{S}^p}$ is a pseudometric on p.f.d.\ persistence modules.
 \end{theorem}
 
-\begin{remark}
-  A similar statement of this result appears in \cite{SkrabaTurner2023} (version 5 specifically of this arXiv submission) as Theorems 7.27 and 7.28. \ir{The arguments therein are at times unclear, and we prefer to present our own proof, which is partly inspired by that of this preprint.}
-\end{remark}
+A similar statement of this result appears in \cite{SkrabaTurner2023} (version 5 specifically of this arXiv submission) as Theorems 7.27 and 7.28.
 
 \subsection{Induced matchings}
 

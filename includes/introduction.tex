@@ -14,7 +14,7 @@ This thesis consists of three parts: the front matter, which you have just passe
 
 There is no one-to-one correspondence between the research questions and the mathematical concepts; each project involves each concept to some extent. However, the results of this thesis can be split into those studying persistence modules and those studying Morse theory. We now introduce these two mathematical tools.
 
-In the words of Gunnar Carlsson, a foundational researcher in \term[topological data analysis (TDA)]{topological data analysis} (\textbf{TDA}), ``data has shape and the shape matters'' \cite{Carlsson2015}. TDA is a relatively new field, established around the turn of the $\text{21}^{\text{st}}$ century, that applies invariants from topology and algebraic topology to understand the topological and geometric structure of data. One of the central objects in TDA, which quantifies the shape of, and encodes information about, data is the \textbf{persistence module}, which essentially is the application of a homology functor to a filtered topological space.
+In the words of Gunnar Carlsson, a foundational researcher in \term[topological data analysis (TDA)]{topological data analysis} (\textbf{TDA}), ``data has shape and the shape matters'' \cite{Carlsson2015}. TDA is a relatively new field, established around the turn of the $\text{21}^{\text{st}}$ century, that applies invariants from topology and algebraic topology to understand the topological and geometric structure of data. One of the central objects in TDA, which quantifies the shape of, and encodes information about, data is the \textbf{persistence module}, which essentially is the application of a homology functor to a filtered topological space. In \cref{C:persistent-algebra}, we present \term{persistent algebra}, the study of persistence modules, which will be relevant for Papers \ref{PC:CGRST2024}, \ref{PC:AGRS2025}, and \ref{PC:GRRS2026}.
 
 % \ir{The case of $0^{\th}$ degree persistent homology initially appeared in the 1990s under the name \term{size theory} \cite{Frosini1990}.
 
@@ -22,13 +22,14 @@ In the words of Gunnar Carlsson, a foundational researcher in \term[topological 
 
 % \ir{some figures or something...}
 
-While the first two-thirds of this thesis deal with persistence modules, the last third studies filtered spaces form a different angle, namely that of \term{Morse theory}. Here we present the original theory for smooth manifolds, as well as some variations and extensions.
+While the first two-thirds of this thesis revolve around persistence modules, the last third studies filtered spaces form a different angle, namely that of \term{Morse theory}. Morse theory was first developed by the eponymous mathematician under the name \textit{calculus of variations in the large} \cite{Morse1934}. In \cref{C:metric-morse} we give a modern presentation of the original theory for smooth manifolds, as well as its extensions to continuous selections, which are the basis for Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}.
 
-Morse theory was first developed by the eponymous mathematician under the name \textit{calculus of variations in the large} \cite{Morse1934}. We provide a modern presentation to the theory.
+% \ir{some figures or something!}
 
-\ir{some figures or something!}
+In \cref{C:contributions} we summarize the results of each included paper, and in \cref{C:outlook} we present some ongoing work and future directions of research.
 
-\textbf{\sffamily A note on reading this thesis.}
+\section*{A note on reading this thesis.}
+
 Defined terms are printed in \textbf{boldface} and repeated in the outer margin, as on this page. Relevant notations are also repeated in the outer margin. The ends of numbered ``paragraphs,'' such as definitions, examples, and remarks, are marked by a black square, as opposed to the ends of proofs, which are marked by a white square.
 
 The notations used in this \textit{kappa} differ from those of the included papers, as it was impossible to harmonize all notations while avoiding ambiguities. Notably, persistence modules here are denoted by $V$, $W$, and so on, while they are denoted by $F$, $M$, etc.\ in Paper \ref{PC:CGRST2024} and by $X$, $Y$, etc. in Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}.

@@ -71,7 +71,7 @@ In this paper I co-wrote the main results, was the main contributor to the analy
 \papersection[shorttitle={Algebraic Wasserstein distances...}]{AGRS2025}
 \label{PS:wasserstein}
 
-In this paper, we define algebraic $p$-Wasserstein distances for tame persistence modules, proving that the sequence of collections $\cc{S} = \{\cc{S}_\varepsilon\}_{\varepsilon \geq 0}$ of \cref{SS:algebraic-wasserstein} is indeed a noise system. This is an alternate proof to that of \cite{SkrabaTurner2023}, \ir{a preprint that is being rewritten at the time of publication (like honestly what do I say here)}.
+In this paper, we define algebraic $p$-Wasserstein distances for tame persistence modules, proving that the sequence of collections $\cc{S} = \{\cc{S}_\varepsilon\}_{\varepsilon \geq 0}$ of \cref{SS:algebraic-wasserstein} is indeed a noise system. This is an alternate proof to that of \cite{SkrabaTurner2023}.
 
 The difficult noise system axiom to prove is the exact sequence, and specifically the following result (a simplified version of [Paper \ref{PC:AGRS2025}, Lemma 4.15]):
 
@@ -174,8 +174,8 @@ I was an equal contributor throughout the conceptualization and writing of the p
 
 In this paper we generalize Morse theory to distance functions $f \coloneq \dist_Y\big|_X$ from a subset $Y \subseteq \R^n$ restricted to a subset $X \subseteq \R^n$. We show that, under certain conditions, the distance function $f$ is a continuous selection:
 
-\begin{proposition}[\ir{Proposition 2.5.8}]
-  Suppose that $Y$ is smooth and let $x \in \R^n$ be a regular value of the exponential map $\varphi \colon NY \to \R^n$, where $NY$ denotes the normal bundle of $Y$ \ir{elaborate more?}. Then
+\begin{proposition}[{Paper \ref{PC:GLRS2025}, Proposition 2.5.8}]
+  Suppose that $Y$ is smooth and let $x \in \R^n$ be a regular value of the exponential map $\varphi \colon NY \to \R^n$, where $NY$ denotes the normal bundle of $Y$. Then  % REVIEW: elaborate what a normal bundle is?
   \begin{enumerate}
     \item
       $B(x, \dist_Y(x)) \cap Y$ is a finite set $\{y_0, \ldots, y_k\}$,
@@ -189,27 +189,27 @@ In this paper we generalize Morse theory to distance functions $f \coloneq \dist
     \end{enumerate}
 \end{proposition}
 
-We can therefore apply the results of \cite{APS1997} to distance functions $\dist_Y\big|_X$ where all critical points are regular points of the exponential map on $Y$. \ir{Recall that} a nondegenerate critical point $x$ of a continuous selection has two indices, a piecewise linear index $k(x)$ and a quadratic index $\iota(x)$. Given a pair $(X, Y)$ of subsets of $\R^n$ such that $\dist_Y\big|_X$ only has nondegenerate critical points, we denote by $C_{k, \iota}(X, Y)$ the critical points with indices $(k, \iota)$. We recover the Morse lemmas and inequalities \ir{ref, I guess...}. Moreover, we can exchange the roles of $X$ and $Y$: if $\dist_X\big|_Y$ also only has nondegenerate critical points, then combining the resulting Morse inequalities gives the following equality relating the Euler characteristics of $X$ and $Y$ and the number of critical points \ir{Corollary 2.6.7}:
+We can therefore apply the results of \cite{APS1997} to distance functions $\dist_Y\big|_X$ where all critical points are regular points of the exponential map on $Y$. Recall from \cref{D:continuous-selection} that a nondegenerate critical point $x$ of a continuous selection has two indices, a piecewise linear index $k(x)$ and a quadratic index $\iota(x)$. Given a pair $(X, Y)$ of subsets of $\R^n$ such that $\dist_Y\big|_X$ only has nondegenerate critical points, we denote by $C_{k, \iota}(X, Y)$ the critical points with indices $(k, \iota)$. We recover the Morse lemmas and inequalities presented in \cref{S:Morse-theory}. Moreover, we can exchange the roles of $X$ and $Y$: if $\dist_X\big|_Y$ also only has nondegenerate critical points, then combining the resulting Morse inequalities gives the following equality relating the Euler characteristics of $X$ and $Y$ and the number of critical points [Paper \ref{PC:GLRS2025}, Corollary 2.6.7]:
 \[
   \chi(Y) + \sum_{k, \iota \geq 0} (-1)^{k + \iota} \#C_{k, \iota}(X, Y) = \chi(X) + \sum_{k, \iota \geq 0} (-1)^{k + \iota} \#C_{k, \iota}(Y, X).
 \]
 
 In the second half of the paper, we study the case where $X$ and $Y$ are generic algebraic hypersurfaces, i.e., zero sets of polynomial functions. By \term{generic} we mean that the results hold for a dense open subset of polynomials. We summarize our results as follows:
 
-\begin{theorem}
+\begin{theorem}[Paper \ref{PC:GLRS2025}]
   Let $p \in \cc{P}_{d_1}$ and $q \in \cc{P}_{d_2}$ be generic polynomials, and let $X = Z(p)$ and $Y = Z(q)$ be their zero sets. Then, depending on the values of $d_1 = \deg(X)$ and $d_2 = \deg(Y)$ the following is true:
   \begin{enumerate}
-    \item if $d_1 \geq 3$ and $d_2 \geq 4$, then the function $\dist$ is a continuous selection near each of its critical points (\ir{ref});
-    \item if $d_1, d_2 \geq 4$, then every critical point of $\dist$ not in $Y$ is nondegenerate (\ir{ref});
+    \item if $d_1 \geq 3$ and $d_2 \geq 4$, then the function $\dist$ is a continuous selection near each of its critical points (Corollary 4.5.2);
+    \item if $d_1, d_2 \geq 4$, then every critical point of $\dist$ not in $Y$ is nondegenerate (Theorem 4.6.6);
     \item if $d_1, d_2 \geq 3$, then for every $k \in \{1, \ldots, n\}$, the number of $k$-critical points of $\dist_Y\big|_X$ can be bounded by
     \[
       \#C_{k, *}(X, Y) \leq c(k, n) \deg(X)^n \deg(Y)^{n (k + 1)},
     \]
-    for some number $c(k, n) > 0$ depending on $n$ and $k$ only (\ir{ref}).
+    for some number $c(k, n) > 0$ depending on $n$ and $k$ only (Theorem 4.4.4).
   \end{enumerate}
 \end{theorem}
 
-We get analogous results when $X = \R^n$ \ir{ref}.
+We get analogous results when $X = \R^n$ [Paper \ref{PC:GLRS2025}, Remark 4.6.7].
 
 \subsection*{Contributions}
 

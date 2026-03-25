@@ -11,11 +11,13 @@
   In the cedar-limbs.
 \end{epigraph}
 
-In this thesis we explored many ways in which algebraic invariants for filtered spaces can be defined and computed. There is still much more to investigate, and we present some ongoing work.
+In this thesis we explored many ways in which algebraic invariants for filtered spaces can be defined and computed. There is still much more to investigate, and we present some ongoing work. We freely use the notations and results of the included papers. \ir{This section is in draft form}
 
 \section{Replacing kernels with cokernels}
 
-\ir{If this hasn't been said anywhere else, we observe that for the lower hook parameterization, $\Nat(\cc{T}(a, b), F) = \ker F(a \leq b)$.} Denote by $\pi_1$ and $\pi_2$ the two projections $\Omega(I) \to I$. We get two functors $F \pi_1$ and $F \pi_2$ and a natural morphism $\alpha \colon F \pi_1 \to F \pi_2$ between them. The following long exact sequence in $\Fun(\Omega(I), \Vect)$
+With Andrea Guidolin and Bjørnar Gullikstad Hem.
+
+Recall from Paper \ref{PC:CGRST2024} that for the lower hook parameterization, we have $\Nat(\cc{T}(a, b), F) = \ker F(a \leq b)$. Denote by $\pi_1$ and $\pi_2$ the two projections $\Omega(I) \to I$. We get two functors $F \pi_1$ and $F \pi_2$ and a natural morphism $\alpha \colon F \pi_1 \to F \pi_2$ between them. The following long exact sequence in $\Fun(\Omega(I), \Vect)$
 \[
   0 \to \ker F(- \leq -) \hookrightarrow F \pi_1 \xrightarrow{\alpha} F \pi_2 \twoheadrightarrow \coker F(- \leq -) \to 0
 \]
@@ -34,8 +36,6 @@ Short exact sequences induce long exact sequences in homology: using the $0$'s o
 Therefore, in order to compute Betti diagrams relative to lower hooks, we can study the Koszul complex of $\coker F(- \leq -)$ instead of $\ker F(- \leq -)$. This has some theoretical computational advantages: in order to compute a kernel basis, we need $O(n^2)$ space, where $n$ is the ambient dimension. In order to compute a cokernel basis, we only need $O(n)$ space, because we can choose representatives in the quotient space that correspond to canonical basis elements.
 
 \ir{figure...}
-
-With Andrea Guidolin and Bjørnar Gullikstad Hem.
 
 % \section{Stabilized relative Betti numbers}  % I've kind of avoided defining stabilized ranks
 
@@ -60,17 +60,17 @@ With Andrea Guidolin and Bjørnar Gullikstad Hem.
 
 % \ir{proof?}
 
-\section{Dual poset elements for Koszul complexes}
+% \section{Dual poset elements for Koszul complexes}
 
-with Wojciech Chachólski and Marve Grönblad Vesterinen.
+% with Wojciech Chachólski and Marve Grönblad Vesterinen.
 
-This was a Master's thesis. We define a notion of \term[dual element]{dual elements} for lattices $I$ such that the Betti diagrams of the minimal projective and injective resolutions of a functor over $I$ are dual in some sense.
+% This was a Master's thesis. We define a notion of \term[dual element]{dual elements} for lattices $I$ such that the Betti diagrams of the minimal projective and injective resolutions of a functor over $I$ are dual in some sense.
 
 \section{Space of rank functions}
 
 with Wojiech Chachólski, Andrea Guidolin, Christina Kapatsori, Woojin Kim, Francesca Tombari.
 
-The rank function of a persistence module over a poset $I$ satisfies some inequalities \ir{list them}. These inequalities have been studied in other contexts under the name \term{supermodularity}. We aim to study the space of \term{chain-supermodular} functions.
+The rank function of a persistence module over a poset $I$ satisfies some inequalities \ir{list them}. These inequalities have been studied in other contexts under the name \term{supermodularity} \ir{cite}. We aim to study the space of \term{chain-supermodular} functions.
 
 As a first step, we replace the inequalities with equalities. This gives us chain-modular functions. An interesting question is which functors give chain-modular functions. We give some characterizations of the space of chain-modular functions and functors depending on the structure of the underlying poset $I$.
 
@@ -78,37 +78,27 @@ As a first step, we replace the inequalities with equalities. This gives us chai
 
 with Håvard Bakke Bjerkevik, Andrea Guidolin, and Martina Scolamiero.
 
-Using the characterization of the $p$-norm as the integral of the rank function with respect to a measure...
-
-Define the amplitude of an $n$-dimensional persistence module $M$ as
+For $p \geq n + 1$ and $V \colon \R^n \to \Vect$ an $n$-dimensional persistence module, consider the following integral:
 \[
-  \| M \|_{n + 1} \coloneq \left( \int_{\Omega} \rank M \right)^{\frac{1}{n + 1}}
+  \| V \|_{p} \coloneq \left( \int_{\vec{x} \leq \vec{y} \in \Omega} p (p - 1)(y_1 - x_1)^{p - n - 1} \rank V(\vec{x} \leq \vec{y}) \right)^{\frac{1}{p}},
 \]
-We want to define a noise system. The easy SES axiom comes from the following result
+where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{y}\}$ for the product order on $\R^n$.
 
-\begin{proposition}
-\label{P:rank-ineq}
-  For every short exact sequence $0 \to X \to Y \to Z \to 0$ of (1-parameter) persistence modules it holds that $\rank(Y) \geq \rank(X) + \rank(Z)$.
-\end{proposition}
+Following Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}, we want to define a noise system using this $p$-norm. In other words, we want to check that the $p$-norm defines an amplitude. The first, easier short exact sequence axiom (see \cref{D:noise-system}) comes from [Paper \ref{PC:GRRS2026}, Proposition 4.9], as in the one-dimensional case.
 
-\begin{proof}
-  Let $s \leq t$ in $\R$ and consider the appropriate diagram with two exact rows as in the snake lemma. We have
-  \[
-    \rank X_{s \leq t} - \rank Y_{s \leq t} + \rank X_{s \leq t} = - \dim \ker X_{s \leq t} + \dim \ker Y_{s \leq t} - \dim \ker Z_{s \leq t} \leq 0,
-  \]
-  where the equality follows from $\rank X_{s \leq t} = \dim X_t - \dim \ker X_{s \leq t}$ and similar identities for $Y$ and $Z$, together with the identity $\dim X_t - \dim Y_t + \dim Z_t = 0$ by exactness of $0 \to X_t \to Y_t \to Z_t \to 0$; the inequality above follows from the exact sequence $0 \to \ker X_{s\le t} \to \ker Y_{s\le t} \xrightarrow{g} \ker Z_{s\le t} \to \coker g \to 0$ (snake lemma) again by Euler characteristic.
-\end{proof}
-
-To prove the hard SES axiom, our strategy is as follows. We restrict the rank function of $M$ to lines in $\R^n$ parameterized as $\ell \colon x \mapsto x \vec{a} + \vec{b}$, where $\vec{a} = (1, a_2, \ldots, a_n)$ and $\vec{b} = (0, b_2, \ldots, b_n)$. Then we parameterize our pairs of points by scalars $s$ and $t$:
+To prove the second, harder short exact sequence axiom, we proceed as follows. We restrict the rank function of $V$ to lines in $\R^n$ parameterized as $\ell \colon t \mapsto t \vec{a} + \vec{b}$, where $\vec{a} = (1, a_2, \ldots, a_n)$ and $\vec{b} = (0, b_2, \ldots, b_n)$. Then we parameterize our pairs of points $(\vec{x}, \vec{y})$ in $\Omega$ by scalars $s$ and $t$ in $\R$:
 \[
-\vec{p} = s \vec{a} + \vec{b}, \qquad \vec{q} = t \vec{a} + \vec{b}.
+  \vec{x} = s \vec{a} + \vec{b}, \qquad \vec{y} = t \vec{a} + \vec{b}.
 \]
-Then we have
+Then we have the change of parameters
 \begin{equation}
 \label{Eq:reparam}
-  \int_{(p \leq q) \in \Omega} (p_1 - q_1)^k \rank M(p, q) = \int_{\vec{a} \geq 0} \int_{\vec{b} \in \R^n} \int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} (t - s)^{k + n - 1} \rank M(\vec{p}, \vec{q}) \text{d}t \text{d}s \text{d}\vec{b} \text{d}\vec{a},
+  \begin{aligned}
+    \| V \|_p^p & = \int_{(\vec{x} \leq \vec{y}) \in \Omega} p (p - 1) (y_1 - x_1)^{p - n - 1} \rank V(\vec{x} \leq \vec{y}) \\
+    & = \int_{\vec{a} \geq 0} \int_{\vec{b} \in \R^n} \int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank V(\vec{p}, \vec{q}) \text{d}t \text{d}s \text{d}\vec{b} \text{d}\vec{a},
+  \end{aligned}
 \end{equation}
-where the proof \ir{write this as a result + proof} relies on the computation of the Jacobian:
+where the proof relies on the computation of the Jacobian of the change of parameters:
 \[
   J_\varphi = \bordermatrix{%
   & s & t & a_2 & b_2 & a_3 & b_3 & \cdots \cr
@@ -123,17 +113,27 @@ where the proof \ir{write this as a result + proof} relies on the computation of
 \]
 In particular, we have $|\det J_\varphi| = (t - s)^{n - 1}$.
 
-For a given line $\ell \colon x \mapsto x \vec{a} + \vec{b}$, we apply the result that the $(n + 1)$-norm gives a noise system. In particular, the triangular inequality holds:
+For a given line $\ell \colon t \mapsto t \vec{a} + \vec{b}$, we apply the result that the $p$-norm gives a noise system in the one-dimensional case. In particular, given a short exact sequence $0 \to U \to V \to W \to 0$ of $n$-dimensional persistence modules, we use the characterization of $p$-norms as integrals of the rank function [Paper \ref{PC:GRRS2026}, Proposition 4.7] to obtain the following triangular inequality:
 \begin{align*}
-  \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} (t - s)^{k + n - 1} \rank Y(\vec{p}, \vec{q}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \leq {} & \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} (t - s)^{k + n - 1} \rank X(\vec{p}, \vec{q}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \\
-  & {} + \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} (t - s)^{k + n - 1} \rank Z(\vec{p}, \vec{q}) \text{d}t \text{d}s\right)^{\frac{1}{p}}.
+  & \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank V(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \\
+  & \leq \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank U(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \\
+  & \hspace{2em} + \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank W(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}}.
 \end{align*}
-where $p = k + n + 1$. Minkowski's inequality states that $(\int (f+g)^p)^{\frac 1p} \leq (\int f^p)^{\frac 1p} + (\int g^p)^{\frac 1p}$ holds for $1\leq p<\infty$. Let $f(\vec{a},\vec{b}) = (\int_{-\infty}^\infty \int_s^\infty (t-s)^{k + n - 1} \rank Y(\vec{p}, \vec{q}) dt ds)^{\frac 1p}$, and define $g$ and $h$ similarly.
-Then $f \leq g + h$ by the above equation, so by Minkowski's inequality, $(\int_{\vec{a}} \int_{\vec{b}} f(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} \leq (\int_{\vec{a}} \int_{\vec{b}} g(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} + (\int_{\vec{a}} \int_{\vec{b}} h(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}}$. And by \eqref{Eq:reparam}, we get
+Let
 \[
-  (\int_{\Omega}f(x)dx)^{\frac 1p} \leq (\int_{\Omega}g(x)dx)^{\frac 1p} + (\int_{\Omega}h(x)dx)^{\frac 1p}
+  f(\vec{a},\vec{b}) \coloneq (\int_{-\infty}^\infty \int_s^\infty p (p - 1) (t-s)^{p - 2} \rank U(\vec{x} \leq \vec{y}) dt ds)^{\frac 1p},
 \]
-\ir{$p = n + 1$}. This is the hard axiom!
+and define $g$ and $h$ similarly. Then the previous equations rewrites as $f \leq g + h$.
+
+We can apply Minkowski's inequality, which states that $(\int (f + g)^p)^{\frac 1p} \leq (\int f^p)^{\frac 1p} + (\int g^p)^{\frac 1p}$ holds for $1 \leq p < \infty$. We get
+\[
+  (\int_{\vec{a}} \int_{\vec{b}} f(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} \leq (\int_{\vec{a}} \int_{\vec{b}} g(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} + (\int_{\vec{a}} \int_{\vec{b}} h(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}}.
+\]
+By \eqref{Eq:reparam}, this exactly says that
+\[
+  \| V \|_p \leq \| U \|_p + \| W \|_p,
+\]
+and this is the hard axiom of noise systems.
 
 % \section{Matching costs}
 
@@ -143,10 +143,24 @@ Then $f \leq g + h$ by the above equation, so by Minkowski's inequality, $(\int_
 
 with Hugo Åkesson and Wojciech Chachólski
 
-What are the maximal and minimal $p$-norms of the middle term of an extension? We have partial results if $X$ or $Y$ is a single bar, and studying this problems also gives us insight into the space of extensions. The extension barcodes are parameterized by antichains or something.
+Let $V$ and $W$ be persistence modules. An \term[extension]{extension of $V$ and $W$} is a persistence module $E$ that fits into a short exact sequence
+\[
+  0 \to V \to E \to W \to 0.
+\]
+The question that Hugo Åkesson studied in his Master's thesis is: what are the maximal and minimal $p$-norms of an extension? We have partial results if $V$ or $W$ is a single bar:
+
+\begin{proposition}
+  \ir{to do}
+\end{proposition}
+
+Studying this problems also gives us insight into the space of extensions. The extension barcodes can be parameterized by antichains.
 
 \section{Pair degree}
 
 Following discussions with Emil Horobeț
 
-We bound the number of algebraic critical points. This number, in the complex setting, could be a new invariant that generalizes EDD and BND.
+In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we defined notions of algebraic critical points, and bounded their number. The number of algebraic critical points, in the complex setting, could define a new numerical invariant that generalizes the Euclidean distance degree and the bottleneck degree. Here we sketch its definition:
+
+\begin{definition}
+  \ir{to do...}
+\end{definition}
