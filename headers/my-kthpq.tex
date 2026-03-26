@@ -118,22 +118,43 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 
 % Custom header and footer with fancyhdr
 \fancypagestyle{fancy}{%
-  \fancyhf{}  % reset
+  \fancyhead{}  % reset
   \fancyhead[LO]{\sffamily\small\rightmark}
   \fancyhead[RE]{\sffamily\small\leftmark}
   \fancyhead[LE,RO]{\sffamily\small\thepage}  % Left for even pages, right for odd pages
 }
 
 \fancypagestyle{plain}{% for special pages, e.g. first pages of chapters
-  \fancyhf{}  % reset
+  \fancyhead{}  % reset
   \fancyhead[LE,RO]{\sffamily\small\thepage}  % Left for even pages, right for odd pages
 }
 
-% Remove fancy headers from front matter
+\makeatletter
+% Flipbook stuff: inspired by nilsvu/latex-flipbook on GitHub
+% Current hunch is that pgfpicture sets the bounding box based on the vertices (the last path?)
+\newif\if@frontmatter
+\fancyfoot{}  % reset footer
+\fancyfoot[RO]{%
+  \if@mainmatter%
+    \ifnum\thepage<60\relax%
+      \AddToHookNext{shipout/background}{\put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-\fpeval{trunc((\thepage - 1) / 2, 0)}.pgf}}}%
+    \fi%
+  \else%
+    \if@frontmatter%
+      \AddToHookNext{shipout/background}{\put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-0.pgf}}}%
+    \fi%
+  \fi%
+}
+% \fancyfoot{}  % comment to get flipbook
+
+% Remove fancy headers from front matter and add check for front matter
 \let\oldfrontmatter\frontmatter
 \let\oldmainmatter\mainmatter
-\def\frontmatter{\oldfrontmatter\pagestyle{plain}}
-\def\mainmatter{\oldmainmatter\pagestyle{fancy}}
+\let\oldbackmatter\backmatter
+\def\frontmatter{\oldfrontmatter\@frontmattertrue\pagestyle{plain}}
+\def\mainmatter{\oldmainmatter\@frontmatterfalse\pagestyle{fancy}}
+\def\backmatter{\oldbackmatter\@frontmatterfalse}
+\makeatother
 
 \setcounter{tocdepth}{1}
 
@@ -462,3 +483,9 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
     \scriptsize\sffamily #1%
   }
 }
+
+% % Uncomment to remove margin notes
+% \makeatletter
+% \renewcommand{\kthpq@highlight}[2][]{#2}
+% \makeatother
+% \renewcommand{\fallbackhighlight}[1]{}

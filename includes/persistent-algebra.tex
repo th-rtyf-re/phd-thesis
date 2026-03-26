@@ -376,7 +376,7 @@ Note that the collection of intervals may be infinite and even uncountable: this
 Let $V$ be a (pointwise finite dimensional) persistence module indexed by $\R$. We can represent its barcode as a multiset of points in $\R^2$.
 
 \begin{definition}
-  Let $V$ be a persistence module indexed by $\R$. Recall from \cref{T:barcode-decomposition} that its barcode is a multiset of intervals $\{S_\alpha\}_{\alpha \in A}$. Recall that to each interval $S_\alpha$ we associate a startpoint $s(S_\alpha)$ and endpoint $t(S_\alpha)$. The \term{persistence diagram} of $V$ is the multiset of points $\{(s(S_\alpha), t(S_\alpha))\}_{\alpha \in A}$ in $\R^2$. These points are all above the line $y = x$, and are represented as in \ir{figure}.
+  Let $V$ be a persistence module indexed by $\R$. Recall from \cref{T:barcode-decomposition} that its barcode is a multiset of intervals $\{S_\alpha\}_{\alpha \in A}$. Recall that to each interval $S_\alpha$ we associate a startpoint $s(S_\alpha)$ and endpoint $t(S_\alpha)$. The \term{persistence diagram} of $V$ is the multiset of points $\cc{D}(V) \coloneq \{(s(S_\alpha), t(S_\alpha))\}_{\alpha \in A}$ in $\R^2$. These points are all above the line $y = x$, and are represented as in \ir{figure}.
 
   Persistence diagrams can also be viewed as discrete measures on $\R^2$ \cite{CdSGO2016}. Specifically, the \term{persistence measure} of $V$ is the sum of Dirac measures
   \[
@@ -430,15 +430,15 @@ In TDA, not only are we interested in the topological features of a data set, bu
   %   \right).
   % \]
   
-  These distances between persistence diagrams lift to distances between barcodes: given persistence modules $V$ and $W$ with persistence diagrams $D_V$ and $D_W$, respectively and $p \in [1, +\infty]$, we define
+  These distances between persistence diagrams lift to distances between barcodes: given persistence modules $V$ and $W$ and $p \in [1, +\infty]$, we define
   \[
-    d_p(\barcode(V), \barcode(W)) \coloneq d_p(D_V, D_W).
+    d_p(\barcode(V), \barcode(W)) \coloneq d_p(\cc{D}(V), \cc{D}(W)).
     \qedhere
   \]
 \end{definition}
 
 \begin{remark}
-  The word ``distance'' here is not a formal notion. They satisfy the axioms of symmetry and triangular inequality for metrics \cite{EdelsbrunnerHarer2010}, but they do not necessarily separate points: for instance, a persistence diagram whose points are all on the diagonal would be distance $0$ from the empty diagram. Aside from extreme cases as this one, which are sometimes excluded in the literature \cite{CCBdS2016}, we can consider these distances to be metrics in the formal sense.
+  The word ``distance'' here is not a formal notion. These distance functions satisfy the axioms of symmetry and triangular inequality for metrics \cite{EdelsbrunnerHarer2010}, but they do not necessarily separate points: for instance, a persistence diagram whose points are all on the diagonal would be distance $0$ from the empty diagram. Aside from extreme cases as this one, which are sometimes excluded in the literature \cite{CCBdS2016}, we can consider these distances to be metrics in the formal sense.
 \end{remark}
 
 \begin{footnoted}{remark}
@@ -449,9 +449,9 @@ In TDA, not only are we interested in the topological features of a data set, bu
 A fundamental property of persistent homology is its \term{stability}: small perturbations of the input filtered space result in small changes in the output persistence diagrams. This is usually formalized as a Lipschitz-type inequality:
 
 \begin{theorem}[{\cite{EdelsbrunnerHarer2010}, \cite[Theorem 4.8]{SkrabaTurner2023}}]
-  Let $X$ be a topological space or a simplicial complex, $f, g \colon X \to \R$ filtrations on $X$, and $D_f$ and $D_g$ the associated persistence diagrams. Then, for all $p \in [1, \infty]$, we have the inequality
+  Let $X$ be a topological space or a simplicial complex, $f, g \colon X \to \R$ filtrations on $X$, and $V$ and $W$ the associated persistence diagrams. Then, for all $p \in [1, \infty]$, we have the inequality
   \[
-    d_p(D_V, D_W) \leq \| f - g \|_p.
+    d_p(\cc{D}(V), \cc{D}(W)) \leq \| f - g \|_p.
   \]
 \end{theorem}
 

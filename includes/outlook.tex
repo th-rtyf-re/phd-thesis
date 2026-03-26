@@ -15,7 +15,7 @@ In this thesis we explored many ways in which algebraic invariants for filtered 
 
 \section{Replacing kernels with cokernels}
 
-With Andrea Guidolin and Bjørnar Gullikstad Hem.
+Following discussions with Andrea Guidolin and Bjørnar Gullikstad Hem.
 
 Recall from Paper \ref{PC:CGRST2024} that for the lower hook parameterization, we have $\Nat(\cc{T}(a, b), F) = \ker F(a \leq b)$. Denote by $\pi_1$ and $\pi_2$ the two projections $\Omega(I) \to I$. We get two functors $F \pi_1$ and $F \pi_2$ and a natural morphism $\alpha \colon F \pi_1 \to F \pi_2$ between them. The following long exact sequence in $\Fun(\Omega(I), \Vect)$
 \[
@@ -68,15 +68,20 @@ Therefore, in order to compute Betti diagrams relative to lower hooks, we can st
 
 \section{Space of rank functions}
 
-with Wojiech Chachólski, Andrea Guidolin, Christina Kapatsori, Woojin Kim, Francesca Tombari.
+With Wojiech Chachólski, Andrea Guidolin, Christina Kapatsori, Woojin Kim, Francesca Tombari.
 
-The rank function of a persistence module over a poset $I$ satisfies some inequalities \ir{list them}. These inequalities have been studied in other contexts under the name \term{supermodularity} \ir{cite}. We aim to study the space of \term{chain-supermodular} functions.
+The rank function $\rank V$ of a persistence module $V$ over a poset $I$ (\cref{D:rank-function}) satisfies the following inequalities. For all chains $a \leq b \leq c \leq d$ in $I$,
+\begin{itemize}
+  \item[monotonicity] $\rank V(a \leq d) \leq \rank V(b \leq c)$, and
+  \item[chain-supermodularity] $\rank V(a \leq d) + \rank V(b \leq c) \leq \rank V(a \leq c) + \rank V(b \leq d)$.
+\end{itemize}
+The name \term{chain-supermodularity} comes from \textbf{supermodularity}, a notion studied in probability and order theory \cite{PromislowYoung2005}. Monotone, chain-supermodular functions form a positive convex cone. The broad aim of this project is to study this cone and investigate if we can express rank functions as convex combinations of extremal rays.
 
-As a first step, we replace the inequalities with equalities. This gives us chain-modular functions. An interesting question is which functors give chain-modular functions. We give some characterizations of the space of chain-modular functions and functors depending on the structure of the underlying poset $I$.
+As a first step, we study \term{chain-modular} functions, which satisfy the chain-supermodularity condition but with an equality instead of inequality. An interesting question is: which functors have rank functions that are chain-modular? We give some characterizations of the space of chain-modular functions and functors depending on the structure of the underlying poset $I$. \ir{When $I$ has trivial $H^1$...}
 
 \section{Rank-based noise systems for multiparameter persistence}
 
-with Håvard Bakke Bjerkevik, Andrea Guidolin, and Martina Scolamiero.
+With Håvard Bakke Bjerkevik, Andrea Guidolin, and Martina Scolamiero.
 
 For $p \geq n + 1$ and $V \colon \R^n \to \Vect$ an $n$-dimensional persistence module, consider the following integral:
 \[
@@ -84,56 +89,64 @@ For $p \geq n + 1$ and $V \colon \R^n \to \Vect$ an $n$-dimensional persistence 
 \]
 where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{y}\}$ for the product order on $\R^n$.
 
-Following Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}, we want to define a noise system using this $p$-norm. In other words, we want to check that the $p$-norm defines an amplitude. The first, easier short exact sequence axiom (see \cref{D:noise-system}) comes from [Paper \ref{PC:GRRS2026}, Proposition 4.9], as in the one-dimensional case.
+Following Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}, we show the following:
 
-To prove the second, harder short exact sequence axiom, we proceed as follows. We restrict the rank function of $V$ to lines in $\R^n$ parameterized as $\ell \colon t \mapsto t \vec{a} + \vec{b}$, where $\vec{a} = (1, a_2, \ldots, a_n)$ and $\vec{b} = (0, b_2, \ldots, b_n)$. Then we parameterize our pairs of points $(\vec{x}, \vec{y})$ in $\Omega$ by scalars $s$ and $t$ in $\R$:
-\[
-  \vec{x} = s \vec{a} + \vec{b}, \qquad \vec{y} = t \vec{a} + \vec{b}.
-\]
-Then we have the change of parameters
-\begin{equation}
-\label{Eq:reparam}
-  \begin{aligned}
-    \| V \|_p^p & = \int_{(\vec{x} \leq \vec{y}) \in \Omega} p (p - 1) (y_1 - x_1)^{p - n - 1} \rank V(\vec{x} \leq \vec{y}) \\
-    & = \int_{\vec{a} \geq 0} \int_{\vec{b} \in \R^n} \int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank V(\vec{p}, \vec{q}) \text{d}t \text{d}s \text{d}\vec{b} \text{d}\vec{a},
-  \end{aligned}
-\end{equation}
-where the proof relies on the computation of the Jacobian of the change of parameters:
-\[
-  J_\varphi = \bordermatrix{%
-  & s & t & a_2 & b_2 & a_3 & b_3 & \cdots \cr
-  p_1 & 1 & 0 \cr
-  q_1 & 0 & 1 \cr
-  p_2 & a_2 & 0 & s & 1 \cr
-  q_2 & 0 & a_2 & t & 1 \cr
-  p_3 & a_3 & 0 &&& s & 1 \cr
-  q_3 & 0 & a_3 &&& t & 1 \cr
-  \vdots & \vdots & \vdots &&&&& \ddots
-  }
-\]
-In particular, we have $|\det J_\varphi| = (t - s)^{n - 1}$.
+\begin{proposition}
+  Let $p \in [n + 1, \infty)$. The $p$-norm on $n$-dimensional persistence modules defines in amplitude. In other words, the $p$-norm defines a noise system.
+\end{proposition}
 
-For a given line $\ell \colon t \mapsto t \vec{a} + \vec{b}$, we apply the result that the $p$-norm gives a noise system in the one-dimensional case. In particular, given a short exact sequence $0 \to U \to V \to W \to 0$ of $n$-dimensional persistence modules, we use the characterization of $p$-norms as integrals of the rank function [Paper \ref{PC:GRRS2026}, Proposition 4.7] to obtain the following triangular inequality:
-\begin{align*}
-  & \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank V(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \\
-  & \leq \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank U(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \\
-  & \hspace{2em} + \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank W(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}}.
-\end{align*}
-Let
-\[
-  f(\vec{a},\vec{b}) \coloneq (\int_{-\infty}^\infty \int_s^\infty p (p - 1) (t-s)^{p - 2} \rank U(\vec{x} \leq \vec{y}) dt ds)^{\frac 1p},
-\]
-and define $g$ and $h$ similarly. Then the previous equations rewrites as $f \leq g + h$.
+\begin{proof}[Sketch of proof]
+  The first, easier short exact sequence axiom (see \cref{D:noise-system}) comes from [Paper \ref{PC:GRRS2026}, Proposition 4.9], as in the one-dimensional case.
 
-We can apply Minkowski's inequality, which states that $(\int (f + g)^p)^{\frac 1p} \leq (\int f^p)^{\frac 1p} + (\int g^p)^{\frac 1p}$ holds for $1 \leq p < \infty$. We get
-\[
-  (\int_{\vec{a}} \int_{\vec{b}} f(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} \leq (\int_{\vec{a}} \int_{\vec{b}} g(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} + (\int_{\vec{a}} \int_{\vec{b}} h(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}}.
-\]
-By \eqref{Eq:reparam}, this exactly says that
-\[
-  \| V \|_p \leq \| U \|_p + \| W \|_p,
-\]
-and this is the hard axiom of noise systems.
+  To prove the second, harder short exact sequence axiom, we proceed as follows. We restrict the rank function of $V$ to lines in $\R^n$ parameterized as $\ell \colon t \mapsto t \vec{a} + \vec{b}$, where $\vec{a} = (1, a_2, \ldots, a_n)$ and $\vec{b} = (0, b_2, \ldots, b_n)$. Then we parameterize our pairs of points $(\vec{x}, \vec{y})$ in $\Omega$ by scalars $s$ and $t$ in $\R$:
+  \[
+    \vec{x} = s \vec{a} + \vec{b}, \qquad \vec{y} = t \vec{a} + \vec{b}.
+  \]
+  Then we have the change of parameters
+  \begin{equation}
+  \label{Eq:reparam}
+    \begin{aligned}
+      \| V \|_p^p & = \int_{(\vec{x} \leq \vec{y}) \in \Omega} p (p - 1) (y_1 - x_1)^{p - n - 1} \rank V(\vec{x} \leq \vec{y}) \\
+      & = \int_{\vec{a} \geq 0} \int_{\vec{b} \in \R^n} \int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank V(\vec{p}, \vec{q}) \text{d}t \text{d}s \text{d}\vec{b} \text{d}\vec{a},
+    \end{aligned}
+  \end{equation}
+  where the proof relies on the computation of the Jacobian of the change of parameters:
+  \[
+    J_\varphi = \bordermatrix{%
+    & s & t & a_2 & b_2 & a_3 & b_3 & \cdots \cr
+    p_1 & 1 & 0 \cr
+    q_1 & 0 & 1 \cr
+    p_2 & a_2 & 0 & s & 1 \cr
+    q_2 & 0 & a_2 & t & 1 \cr
+    p_3 & a_3 & 0 &&& s & 1 \cr
+    q_3 & 0 & a_3 &&& t & 1 \cr
+    \vdots & \vdots & \vdots &&&&& \ddots
+    }
+  \]
+  In particular, we have $|\det J_\varphi| = (t - s)^{n - 1}$.
+
+  For a given line $\ell \colon t \mapsto t \vec{a} + \vec{b}$, we apply the result that the $p$-norm gives a noise system in the one-dimensional case. In particular, given a short exact sequence $0 \to U \to V \to W \to 0$ of $n$-dimensional persistence modules, we use the characterization of $p$-norms as integrals of the rank function [Paper \ref{PC:GRRS2026}, Proposition 4.7] to obtain the following triangular inequality:
+  \begin{align*}
+    & \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank V(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \\
+    & \leq \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank U(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \\
+    & \hspace{2em} + \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank W(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}}.
+  \end{align*}
+  Let
+  \[
+    f(\vec{a},\vec{b}) \coloneq (\int_{-\infty}^\infty \int_s^\infty p (p - 1) (t-s)^{p - 2} \rank U(\vec{x} \leq \vec{y}) dt ds)^{\frac 1p},
+  \]
+  and define $g$ and $h$ similarly. Then the previous equations rewrites as $f \leq g + h$.
+
+  We can apply Minkowski's inequality, which states that $(\int (f + g)^p)^{\frac 1p} \leq (\int f^p)^{\frac 1p} + (\int g^p)^{\frac 1p}$ holds for $1 \leq p < \infty$. We get
+  \[
+    (\int_{\vec{a}} \int_{\vec{b}} f(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} \leq (\int_{\vec{a}} \int_{\vec{b}} g(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} + (\int_{\vec{a}} \int_{\vec{b}} h(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}}.
+  \]
+  By \eqref{Eq:reparam}, this exactly says that
+  \[
+    \| V \|_p \leq \| U \|_p + \| W \|_p,
+  \]
+  and this is the hard axiom of noise systems.
+\end{proof}
 
 % \section{Matching costs}
 
@@ -141,19 +154,48 @@ and this is the hard axiom of noise systems.
 
 \section{\texorpdfstring{$p$}{p}-norms of extensions}
 
-with Hugo Åkesson and Wojciech Chachólski
+This is the content of Hugo Åkesson's Masters thesis \cite{Åkesson2023}, which I co-supervised with Wojciech Chachólski.
 
-Let $V$ and $W$ be persistence modules. An \term[extension]{extension of $V$ and $W$} is a persistence module $E$ that fits into a short exact sequence
+Let $V$ and $W$ be persistence modules. An \term[extension]{extension of $V$ by $W$} is a persistence module $E$ that fits into a short exact sequence
 \[
-  0 \to V \to E \to W \to 0.
+  0 \to W \to E \to V \to 0.
 \]
-The question that Hugo Åkesson studied in his Master's thesis is: what are the maximal and minimal $p$-norms of an extension? We have partial results if $V$ or $W$ is a single bar:
+We denote by $\Ext(V, W)$ the collection of extensions up to isomorphism (a morphism of extensions is one that commutes with the maps from $W$ and to $V$), and it turns out that this collection forms a vector space.
+The question that Åkesson studied is: what is the maximal $p$-norm of an extension? We have results if $W$ is a single bar:
 
-\begin{proposition}
-  \ir{to do}
-\end{proposition}
+\begin{theorem}[{\cite[Theorem 3.1]{Åkesson2023}}]
+\label{T:antichain-extensions-1}
+  Let $V$ be a tame persistence module and $[a, b)$ an interval of $\R$. Write
+  \[
+    F^{ab}(V) \coloneq \{(c, d) \in \cc{D}(V) \mid a < c \leq b < d\}.
+  \]
+  Then there exists explicitly constructed bijection
+  \[
+    \psi \colon \{ \text{antichains in } F^ab(V) \} \cong \barcode(\Ext(\K_{[a, b)}, V)),
+  \]
+  where antichains are defined in [Paper \ref{PC:CGRST2024}, \textsection 4.6] and $\barcode(-)$ is the set of barcodes of elements of the argument.
+\end{theorem}
 
-Studying this problems also gives us insight into the space of extensions. The extension barcodes can be parameterized by antichains.
+Moreover, we can equip antichains with a partial order $\preceq$ (see again [Paper \ref{PC:CGRST2024}, \textsection 4.6]) such that the following result holds.
+
+\begin{theorem}[{\cite[Theorem 3.2]{Åkesson2023}}]
+\label{T:antichain-extension-2}
+  We use the notations of \cref{T:antichain-extensions-1} and fix $p \in [1, \infty]$. The function $A \mapsto \| \psi(A) \|_p$ from antichains in $F^{ab}(V)$ to $p$-norms is monotone. In other words, for antichains $A$ and $B$ in $F^{ab}$,
+  \[
+    A \preceq B \quad \Rightarrow \quad \| \psi(A) \|_p \leq \| \psi(B) \|_p.
+  \]
+\end{theorem}
+
+Notably, the poset of antichains of $F^{ab}$ has a greatest element, the antichain of maximal elements of $F^{ab}$. By \cref{T:antichain-extension-2}, the bijection $\psi$ sends this antichain to the extension barcode with the greatest $p$-norm.
+
+When $W$ is arbitrary, Åkesson provides a recursive formula \cite[Theorem 4.1]{Åkesson2023}: if $W = W_1 \oplus W_2$ with $\Ext(W_1, W_2) = 0$ (this is always possible), then
+\begin{equation}
+\label{Eq:recursive-extension}
+  \barcode(\Ext(W, V)) = \bigcup_{B \in \barcode(\Ext(W_2, V))} \barcode(\Ext(W_1, \cc{V}(B))),
+\end{equation}
+where $\cc{V}(B)$ is a persistence module with barcode $B$. This gives an iterative strategy for computing $\barcode(\Ext(W, V))$: sort the bars of $W$ compatibly with the product order on the start- and endpoints, set $W_2$ equal to the first bar and $W_1$ to the sum of the rest: by construction, we get $\Ext(W_1, W_2) = 0$.
+
+It is still an open problem to determine the extension with largest $p$-norm.
 
 \section{Pair degree}
 
