@@ -1,4 +1,7 @@
 # -*-coding:utf8-*-
+
+import gudhi as gd
+
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
 
@@ -10,6 +13,24 @@ from matplotlib.widgets import Slider
 import shapely
 
 import bisect
+
+from matplotlib import font_manager
+
+font_path = "/Users/rtyf/Library/Fonts/Figtree-Regular.ttf" # Your font path goes here
+font_manager.fontManager.addfont(font_path)
+prop = font_manager.FontProperties(fname=font_path)
+
+font_path = "/Users/rtyf/Library/Fonts/XCharter-Math.otf" # Your font path goes here
+# font_path = "/usr/local/texlive/2025/texmf-dist/fonts/opentype/public/xcharter-math/XCharter-Math.otf"
+font_manager.fontManager.addfont(font_path)
+prop = font_manager.FontProperties(fname=font_path)
+
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = "Figtree"
+plt.rcParams['font.serif'] = "XCharter Math"
+plt.rcParams['mathtext.fontset'] = "custom"
+plt.rcParams['mathtext.it'] = "serif"
+plt.rcParams['mathtext.rm'] = "serif"
 
 """
 list of tuples (name, right ascension, declination, visible magnitude).
@@ -301,87 +322,72 @@ def render_to_pgf(
 """
     )
     return
+
+def plot_barcode(diag):
+    """
+    diag is the output of VR.fit_transform()
+    """
+    birth = diag[:, 0]
+    death = diag[:, 1]
+    finite_bars = death[death != np.inf]
     
+    if len(finite_bars) > 0:
+        inf_end = 1.1 * max(finite_bars)
+    else:
+        inf_end = 2
+    death[death == np.inf] = inf_end
     
+    fig, ax = plt.subplots(1, 2, figsize=(9, 5))
     
-    # linecoll = mc.LineCollection(list(lines), colors="k", linewidths=2, capstyle="round")
-    # tricoll = mc.PolyCollection(list(tris), facecolors="0.7")
-    # ax.add_collection(linecoll)
-    # ax.add_collection(tricoll)
-    # ax.axis('equal')
+    legend_artists = [None, None]
+    for i, (b, d) in enumerate(zip(birth, death)):
+        if d == inf_end:
+            ax[0].plot([b, d], [i, i], color="#000061", lw=3)
+            ax[1].plot(b, d, color="#000061", marker='o', markersize=5)
+        else:
+            dim = int(diag[i, 2])
+            c = ("#000061", "#e86a58")[dim]
+            ax[0].plot([b, d], [i, i], color=c, lw=3)
+            legend_artists[dim], = ax[1].plot(b, d, color=c, marker='o', markersize=5)
+    # random infinite bar?
+    # ax[0].plot([0, inf_end], [-1, -1], color="#000061", lw=3)
+    # ax[1].plot(0, inf_end, color="#000061", marker='o', markersize=5)
+    # diagonal
+    ax[1].plot([0, inf_end], [0, inf_end], 'k--', linewidth=2)
     
-    # # New guy
-    # sublevelset = shapely.MultiPoint(coords)
-    # sls_buffer = sublevelset.buffer(threshold)
-    # verts = []
-    # if hasattr(sls_buffer, "geoms"):
-    #     for geom in sls_buffer.geoms:
-    #         verts.append(np.array(geom.exterior.xy).T)
-    #         verts += [np.array(int_geom.xy).T for int_geom in geom.interiors]
-    # else:
-    #     verts.append(np.array(sls_buffer.exterior.xy).T)
-    #     verts += [np.array(int_geom.xy).T for int_geom in sls_buffer.interiors]
-    # levelset_coll = mc.PolyCollection(verts, linestyles="dotted", facecolors="none", zorder=0)
-    # ax.add_collection(levelset_coll)
+    ax[0].set_title('Barcode')
+    ax[0].set_xlabel('filtration value')
+    ax[0].set_yticks([])
     
-    # # fig.subplots_adjust(left=.3, right=.7, bottom = .13, top=.6)
-    # plt.savefig(f"leo-{threshold}.pgf")
+    ax[1].axis("equal")
+    ax[1].set_title("Persistence diagram")
+    ax[1].set_xlabel("birth")
+    ax[1].set_ylabel("death")
+    ax[1].legend(legend_artists, [r"$𝐻_0$", r"$𝐻_1$"], facecolor="none", edgecolor="none", handlelength=0.)
+    
+    fig.tight_layout()
     # plt.show()
-
-# def plot_barcode(diag):
-#     """
-#     diag is the output of VR.fit_transform()
-#     """
-#     birth = diag[:, 0]
-#     death = diag[:, 1]
-#     finite_bars = death[death != np.inf]
+    plt.savefig("../figs/barcode-diagram.png", dpi=300, transparent=True)
     
-#     if len(finite_bars) > 0:
-#         inf_end = 1.1 * max(finite_bars)
-#     else:
-#         inf_end = 2
-#     death[death == np.inf] = inf_end
-    
-#     fig, ax = plt.subplots(1, 2, figsize=(9, 5))
-    
-#     legend_artists = [None, None]
-#     for i, (b, d) in enumerate(zip(birth, death)):
-#         if d == inf_end:
-#             ax[0].plot([b, d], [i, i], color="#000061", lw=3)
-#             ax[1].plot(b, d, color="#000061", marker='o', markersize=5)
-#         else:
-#             dim = int(diag[i, 2])
-#             c = ("#000061", "#e86a58")[dim]
-#             ax[0].plot([b, d], [i, i], color=c, lw=3)
-#             legend_artists[dim], = ax[1].plot(b, d, color=c, marker='o', markersize=5)
-#     ax[0].plot([0, inf_end], [-1, -1], color="#000061", lw=3)
-#     ax[1].plot(0, inf_end, color="#000061", marker='o', markersize=5)
-#     ax[1].plot([0, inf_end], [0, inf_end], 'k--', linewidth=2)
-    
-#     ax[0].set_title('Barcode')
-#     ax[0].set_xlabel('filtration value')
-#     ax[0].set_yticks([])
-    
-#     ax[1].axis("equal")
-#     ax[1].set_title("Persistence diagram")
-#     ax[1].set_xlabel("birth")
-#     ax[1].set_ylabel("death")
-#     ax[1].legend(legend_artists, ["H0", "H1"], facecolor="none", edgecolor="none", handlelength=0.)
-    
-#     fig.tight_layout()
-#     # plt.show()
-    
-#     plt.savefig("figs/combi.png", dpi=300, transparent=True)
-    
+    return
 
 
-# def barcode_stuff():
-#     VR = VietorisRipsPersistence(homology_dimensions=[0, 1])
-#     diagrams = VR.fit_transform([coords])
-#     plot_barcode(diagrams[0])
+def barcode_stuff():
+    cpx = gd.AlphaComplex(points=coords).create_simplex_tree()
+    cpx.compute_persistence()
+    diag = cpx.persistence(persistence_dim_max=2)
+    diag_array = np.zeros((len(diag), 3), dtype=float)
+    for i, element in enumerate(diag):
+        diag_array[i] = (element[1][0], element[1][1], element[0])
+    diag_array[:, :2] = np.sqrt(diag_array[:, :2])
+    print(diag_array)
+    plot_barcode(diag_array)
 
+def flipbook_stuff():
+    for i, t in enumerate(np.linspace(0, 17, endpoint=True, num=30)):
+        render_frame(t, file_prefix="../figs/flip/leo", frame_id=i)
 
 if __name__ == "__main__":
     # visualize()
-    for i, t in enumerate(np.linspace(0, 17, endpoint=True, num=30)):
-        render_frame(t, file_prefix="../figs/flip/leo", frame_id=i)
+    # flipbook_stuff()
+    barcode_stuff()

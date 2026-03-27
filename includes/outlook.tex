@@ -11,7 +11,7 @@
   In the cedar-limbs.
 \end{epigraph}
 
-In this thesis we explored many ways in which algebraic invariants for filtered spaces can be defined and computed. There is still much more to investigate, and we present some ongoing work. We freely use the notations and results of the included papers. \ir{This section is in draft form}
+In this thesis we explored many ways in which algebraic invariants for filtered spaces can be defined and computed. There is still much more to investigate, and we present some ongoing work. We freely use the notations and results of the included papers.
 
 \section{Replacing kernels with cokernels}
 
@@ -35,7 +35,7 @@ Short exact sequences induce long exact sequences in homology: using the $0$'s o
 \]
 Therefore, in order to compute Betti diagrams relative to lower hooks, we can study the Koszul complex of $\coker F(- \leq -)$ instead of $\ker F(- \leq -)$. This has some theoretical computational advantages: in order to compute a kernel basis, we need $O(n^2)$ space, where $n$ is the ambient dimension. In order to compute a cokernel basis, we only need $O(n)$ space, because we can choose representatives in the quotient space that correspond to canonical basis elements.
 
-\ir{figure...}
+% REVIEW: add figure
 
 % \section{Stabilized relative Betti numbers}  % I've kind of avoided defining stabilized ranks
 
@@ -77,7 +77,8 @@ The rank function $\rank V$ of a persistence module $V$ over a poset $I$ (\cref{
 \end{enumerate}
 The name \term{chain-supermodularity} comes from \textbf{supermodularity}, a notion studied in probability and order theory \cite{PromislowYoung2005}. Monotone, chain-supermodular functions form a positive convex cone. The broad aim of this project is to study this cone and investigate if we can express rank functions as convex combinations of extremal rays.
 
-As a first step, we study \term{chain-modular} functions, which satisfy the chain-supermodularity condition but with an equality instead of inequality. An interesting question is: which functors have rank functions that are chain-modular? We give some characterizations of the space of chain-modular functions and functors depending on the structure of the underlying poset $I$. \ir{When $I$ has trivial $H^1$...}
+As a first step, we study \term{chain-modular} functions, which satisfy the chain-supermodularity condition but with an equality instead of inequality. An interesting question is: which functors have rank functions that are chain-modular? We give some characterizations of the space of chain-modular functions and functors depending on the structure of the underlying poset $I$.
+% REVIEW: \ir{When $I$ has trivial $H^1$...}
 
 \section{Rank-based noise systems for multiparameter persistence}
 
@@ -204,5 +205,5 @@ Following discussions with Emil Horobeț
 In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we defined notions of algebraic critical points, and bounded their number. The number of algebraic critical points, in the complex setting, could define a new numerical invariant that generalizes the Euclidean distance degree and the bottleneck degree. Here we sketch its definition:
 
 \begin{definition}
-  \ir{to do...}
+  Let $X$ and $Y$ be complete intersections defined by polynomials $\vec{p}$ and $\vec{q}$, respectively. We define the \term[pair degree]{pair degree of $X$ and $Y$} to be the cardinality of the set $C_k(\vec{p}, \vec{q})$ of algebraic critical points of the distance function $\dist_Y\big|_X$ (see Paper \ref{PC:Ren2026}, Definition 3.3.2).
 \end{definition}

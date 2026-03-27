@@ -46,9 +46,10 @@ This algebraic encoding of the geometry of a filtered manifold can be developed 
   \end{enumerate}
 \end{theorem}
 
-\begin{example}
-  \ir{classic donut}
-\end{example}
+% REVIEW
+% \begin{example}
+%   classic donut
+% \end{example}
 
 In terms of homology, we have the following results.
 
@@ -97,8 +98,131 @@ Morse theory was originally developed for smooth function on smooth manifolds. H
       V(x) \coloneq \bigcap_{i \in I(x)} \ker(D_x f_i).
     \]
   \end{enumerate}
-  We write $k(x) \coloneq \#I(x) - 1$ and call this number the \term[piecewise linear index]{piecewise linear index of $x$}. We denote by $\iota(x)$ the number of negative eigenvalues of the restriction of the second differential of $\lambda f$ to $V(x)$, and call it the \term[quadratic index]{quadratic index of $x$}. \ir{See figs...}
+  We write $k(x) \coloneq \#I(x) - 1$ and call this number the \term[piecewise linear index]{piecewise linear index of $x$}. We denote by $\iota(x)$ the number of negative eigenvalues of the restriction of the second differential of $\lambda f$ to $V(x)$, and call it the \term[quadratic index]{quadratic index of $x$}. See \cref{F:nondegenerate} for an illustration of nondegenerate and degenerate critical points of $\dist_Y\big|_X$ and \cref{F:indices} for an illustration of different indices for $\dist_Y\big|_X$.
 \end{definition}
+
+\begin{figure}
+  \captionsetup[subfigure]{justification=centering}
+  \begin{subfigure}[t]{.3\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=.8]
+      \coordinate (x) at (0, 0);
+      \coordinate (y1) at (0:1.5cm);
+      \coordinate (y2) at (120:1.5cm);
+      \coordinate (y3) at (-120:1.5cm);
+
+      \draw[dashed] (x) circle (1.5cm);
+
+      \filldraw[thick, fill=white!80!black] ($(x)!1cm!60:(y1)$) -- ($(x)!1cm!60:(y2)$) -- ($(x)!1cm!60:(y3)$) -- cycle;
+      \node[yshift=3ex] at ($(x)!1cm!60:(y2)$) {$\partial_x f$};
+
+      \filldraw (x) circle (2pt) node[above]{$x$};
+      \filldraw (y1) circle (2pt) node[right]{$y_0$};
+      \filldraw (y2) circle (2pt) node[above]{$y_1$};
+      \filldraw (y3) circle (2pt) node[below]{$y_2$};
+    \end{tikzpicture}
+    \caption{nondegenerate critical point}
+    \label{F:sub-nondegen}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{.3\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=.8]
+      \coordinate (x) at (0, 0);
+      \coordinate (y1) at (1.5, 0);
+      \coordinate (y2) at (0, 1.5);
+      \coordinate (y3) at (-1.5, 0);
+      \coordinate (y4) at (0, -1.5);
+
+      \draw[dashed] (x) circle (1.5cm);
+
+      \filldraw[thick, fill=white!80!black] (1, 0) -- (0, 1) -- (-1, 0) -- (0, -1) -- cycle;
+      \node[yshift=3ex] at (-1, 0) {$\partial_x f$};
+
+      \filldraw (x) circle (2pt) node[above]{$x$};
+      \filldraw (y1) circle (2pt) node[right]{$y_0$};
+      \filldraw (y2) circle (2pt) node[above]{$y_1$};
+      \filldraw (y3) circle (2pt) node[left]{$y_2$};
+      \filldraw (y4) circle (2pt) node[below]{$y_3$};
+    \end{tikzpicture}
+    \caption{degenerate critical point for the first condition}
+    \label{F:sub-degen1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{.3\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=.8]
+      \coordinate (x) at (-.2, -.4);
+      \coordinate (y1) at (-1.4, .2);
+
+      \draw[thick] (-2.25, -1.5) -- (-.5, 2) node[right]{$Y$};
+      \draw[thick] (-1, -2) -- (.75, 1.5) node[right]{$X$};
+
+      \filldraw (x) circle (2pt) node[left]{$x$};
+      \filldraw (y1) circle (2pt) node[left]{$y_0$};
+    \end{tikzpicture}
+    \caption{degenerate critical point for the second condition}
+    \label{F:sub-degen2}
+  \end{subfigure}
+  \caption[Examples of critical points and their degeneracy.]{Examples of critical points of $f = \dist$ and their degeneracy. (\subref{F:sub-nondegen}) and (\subref{F:sub-degen1}): $X$ is the plane $\R^2$ and $Y$ is a finite set of points in the plane. (\subref{F:sub-degen2}): $X$ and $Y$ are lines.}
+  \label{F:nondegenerate}
+\end{figure}
+
+\begin{figure}
+  \captionsetup[subfigure]{justification=centering}
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=.8]
+      \coordinate (x) at (0, 0);
+      \coordinate (y1) at (-1, 0);
+      \coordinate (y2) at (1, 0);
+
+      \draw[thick] (-1, -2) -- (1, 2) node[right]{$X$};
+
+      \filldraw (x) circle (2pt) node[left]{$x$};
+      \filldraw (y1) circle (2pt) node[left]{$y_1$};
+      \filldraw (y2) circle (2pt) node[right]{$y_2$};
+    \end{tikzpicture}
+    \caption{indices $(1, 0)$}
+    \label{F:sub-10}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=.8]
+      \coordinate (x) at (0, 0);
+      \coordinate (y1) at ($(x)!1cm!90:(1, 2)$);
+
+      \draw[thick] (-1, -2) -- (1, 2) node[right]{$X$};
+
+      \filldraw (x) circle (2pt) node[left]{$x$};
+      \filldraw (y1) circle (2pt) node[left]{$y_1$};
+    \end{tikzpicture}
+    \caption{indices $(0, 0)$}
+    \label{F:sub-00}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=.8]
+      \coordinate (x) at (0, 0);
+      \coordinate (y1) at ($(x)!1cm!90:(1, 2)$);
+      \coordinate (c) at ($(x)!-.5cm!90:(1, 2)$);
+
+      % \draw (x) circle (1);
+      \draw[thick] (-1, -2) -- (1, 2) node[right]{$X$};
+      \draw[thick] (c) circle (1.5);
+      \node[above left] at ($(x)!-2cm!90:(1, 2)$) {$Y$};
+
+      \filldraw (x) circle (2pt) node[left]{$x$};
+      \filldraw (y1) circle (2pt) node[left]{$y_1$};
+    \end{tikzpicture}
+    \caption{indices $(0, 1)$}
+    \label{F:sub-01}
+  \end{subfigure}
+  \caption[Examples of critical points with different piecewise linear and quadratic indices.]{Examples of $\dist$ and $x \in X$ with different piecewise linear and quadratic indices, written as $(k(x), \iota(x))$. (\subref{F:sub-10}) and (\subref{F:sub-00}): $X$ is a line and $Y$ is a set of points. (\subref{F:sub-01}): $X$ is a line, $Y$ is a circle, and $y_1$ is the closest point of $Y$ to $x$.}
+  \label{F:indices}
+\end{figure}
 
 For a nondegenerate critical point, we recover the Morse lemma: writing $k = k(x)$ and $\iota = \iota(x)$, there exists a neighborhood $U$ of $x$ and a locally Lipschitz homeomorphism $\psi \colon \R^k \times \R^{n - k} \to U$ (where $n$ is the dimension of the manifold $X$) such that
 \[

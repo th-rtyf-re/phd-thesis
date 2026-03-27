@@ -38,11 +38,11 @@
   % demo  % omit inclusion of PDFs
 ]{pdfpages}
 
-\usepackage{setspace}  % `spacing` environment
-\usepackage{ifoddpage}  % \ifoddpage(oroneside)
-\usepackage{mparhack}  % try to fix marginpar on wrong side (typically on the first line of a page)
-\usepackage{silence}  % suppress marginpar warnings
-\usepackage{marginnote}  % for fallback highlight command
+% \usepackage{setspace}  % `spacing` environment
+% \usepackage{ifoddpage}  % \ifoddpage(oroneside)
+% \usepackage{mparhack}  % try to fix marginpar on wrong side (typically on the first line of a page)
+% \usepackage{silence}  % suppress marginpar warnings
+% \usepackage{marginnote}  % for fallback highlight command
 
 % longtable: ignoring this error https://github.com/latex3/latex2e/issues/1907
 % with VS Code LaTeX Workshop 
@@ -53,10 +53,16 @@
 % mathtools loaded at the top!
 \usepackage{amsthm,thmtools}  % thmtools for QED in any theorem
 
+% ---- Floats ----
+
+% \usepackage{flafter}
+\usepackage{caption}
+\usepackage{subcaption}
+
 % ---- Other ----
 
 \usepackage{tikz}
-\usetikzlibrary{babel,cd}
+\usetikzlibrary{babel,calc,cd}
 \usepackage[ruled]{algorithm2e}
 
 \usepackage{imakeidx}
@@ -77,11 +83,11 @@
 ]{hyperref}
 
 % amsmath (from unicode-math) > hyperref > cleveref
-\usepackage[capitalize]{cleveref}
+\usepackage[noabbrev,capitalize]{cleveref}
 
 % ==== COMMANDS ====
 
-\WarningFilter{latex}{Marginpar on page}
+% \WarningFilter{latex}{Marginpar on page}
 
 % ---- Font ----
 
@@ -111,11 +117,11 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 
 % ---- Layout ----
 
-\geometry{
-  outer=3mm,  % originally 18.7mm
-  marginparwidth=16mm,  % decent width
-  includemp  % include marginparwidth in computation of outer margin
-}
+% \geometry{
+%   outer=3mm,  % originally 18.7mm
+%   marginparwidth=16mm,  % decent width
+%   includemp  % include marginparwidth in computation of outer margin
+% }
 \fancyheadoffset{0pt}  % force update \headwidth
 
 % Custom header and footer with fancyhdr
@@ -301,13 +307,13 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \declaretheoremstyle[
   headfont=\sffamily\bfseries,
   headformat={\inleftmargin[.5\marginparsep]{\mdseries{\rmfamily\textparagraph}\,\NUMBER}\NAME \NOTE},
-  postheadhook={%
-    \checkoddpage%
-    \ifoddpageoroneside%
-    \else%
-      \leavevmode\marginpar{\vspace{-8pt}}%
-    \fi%
-  },
+  % postheadhook={%
+  %   \checkoddpage%
+  %   \ifoddpageoroneside%
+  %   \else%
+  %     \leavevmode\marginpar{\vspace{-8pt}}%
+  %   \fi%
+  % },
   headpunct={.\,},
   bodyfont={\itshape}
 ]{theorem-margin}
@@ -320,13 +326,13 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \declaretheoremstyle[
   headfont=\sffamily\bfseries,
   headformat={\inleftmargin[.5\marginparsep]{\mdseries{\rmfamily\textparagraph}\,\NUMBER}\NAME \NOTE},
-  postheadhook={%
-    \checkoddpage%
-    \ifoddpageoroneside%
-    \else%
-      \leavevmode\marginpar{\vspace{-8pt}}%
-    \fi%
-  },
+  % postheadhook={%
+  %   \checkoddpage%
+  %   \ifoddpageoroneside%
+  %   \else%
+  %     \leavevmode\marginpar{\vspace{-8pt}}%
+  %   \fi%
+  % },
   headpunct={.\,},
   qed=$\mdlgblksquare$
 ]{plain-margin}
@@ -336,65 +342,65 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \declaretheorem[style=plain-margin, sibling=theorem]{example}
 \declaretheorem[style=plain-margin, sibling=theorem]{notation}
 
-\newcommand*{\blackbird}{%
-  \begin{tikzpicture}[%
-      scale=.3,  % 1 = 2 x 2cm icon
-      line width=.8pt,
-      line cap=round,
-      baseline={([yshift=-.6ex]current bounding box.center)}
-    ]
-    \useasboundingbox (-1,1) rectangle (1,-1);
-    \draw (-1,0) .. controls (-.83,.12) and (-.57,.09) .. (-.45,.12)
-      .. controls (-.62,.23) and (-.7,.46) .. (-.79,.62)
-      .. controls (-.43,.54) and (-.23,.31) .. (-.06,.09)
-      .. controls (-.75,-.04) and (-.72,-.31) .. (-.83,-.43)
-      .. controls (-.52,-.49) and (-.27,-.44) .. (-.11,-.39)
-      .. controls (.05,-.53) and (.38,-.65) .. (.52,-.66)
-      .. controls (.44,-.42) and (.29,-.31) .. (.12,-.16)
-      .. controls (.3,0) and (.61,.1) .. (.83,.13);
-    \draw (-.24,.51) .. controls (.03,.61) .. (.27,.79);
-    \draw (-.16,.21) .. controls (.25,.37) .. (.51,.63);
-    \draw (.17,.1) .. controls (.4,.22) .. (.66,.31);
-    \draw (-.4,-.76) .. controls (-.22,-.59) .. (-.03,-.45);
-    \draw (.26,-.28) .. controls (.62,-.14) .. (1.01,-.03);
-    \draw (.08,-.85) .. controls (.2,-.73) .. (.33,-.62);
-    \draw (.47,-.53) .. controls (.71,-.41) .. (.95,-.33);
-    \fill (-.52,-.34) circle[radius=.05];
-  \end{tikzpicture}%
-}
+% \newcommand*{\blackbird}{%
+%   \begin{tikzpicture}[%
+%       scale=.3,  % 1 = 2 x 2cm icon
+%       line width=.8pt,
+%       line cap=round,
+%       baseline={([yshift=-.6ex]current bounding box.center)}
+%     ]
+%     \useasboundingbox (-1,1) rectangle (1,-1);
+%     \draw (-1,0) .. controls (-.83,.12) and (-.57,.09) .. (-.45,.12)
+%       .. controls (-.62,.23) and (-.7,.46) .. (-.79,.62)
+%       .. controls (-.43,.54) and (-.23,.31) .. (-.06,.09)
+%       .. controls (-.75,-.04) and (-.72,-.31) .. (-.83,-.43)
+%       .. controls (-.52,-.49) and (-.27,-.44) .. (-.11,-.39)
+%       .. controls (.05,-.53) and (.38,-.65) .. (.52,-.66)
+%       .. controls (.44,-.42) and (.29,-.31) .. (.12,-.16)
+%       .. controls (.3,0) and (.61,.1) .. (.83,.13);
+%     \draw (-.24,.51) .. controls (.03,.61) .. (.27,.79);
+%     \draw (-.16,.21) .. controls (.25,.37) .. (.51,.63);
+%     \draw (.17,.1) .. controls (.4,.22) .. (.66,.31);
+%     \draw (-.4,-.76) .. controls (-.22,-.59) .. (-.03,-.45);
+%     \draw (.26,-.28) .. controls (.62,-.14) .. (1.01,-.03);
+%     \draw (.08,-.85) .. controls (.2,-.73) .. (.33,-.62);
+%     \draw (.47,-.53) .. controls (.71,-.41) .. (.95,-.33);
+%     \fill (-.52,-.34) circle[radius=.05];
+%   \end{tikzpicture}%
+% }
 
-\declaretheoremstyle[
-  headfont=\sffamily\bfseries,
-  headformat={\inleftmargin[.5\marginparsep]{\blackbird}\NAME \NOTE},
-  postheadhook={%
-    \checkoddpage%
-    \ifoddpageoroneside%
-    \else%
-      \leavevmode\marginpar{\vspace{-8pt}}%
-    \fi%
-  },
-  headpunct={.\,},
-  bodyfont={\itshape}
-]{theorem-bird}
+% \declaretheoremstyle[
+%   headfont=\sffamily\bfseries,
+%   headformat={\inleftmargin[.5\marginparsep]{\blackbird}\NAME \NOTE},
+%   % postheadhook={%
+%   %   \checkoddpage%
+%   %   \ifoddpageoroneside%
+%   %   \else%
+%   %     \leavevmode\marginpar{\vspace{-8pt}}%
+%   %   \fi%
+%   % },
+%   headpunct={.\,},
+%   bodyfont={\itshape}
+% ]{theorem-bird}
 
-\declaretheorem[style=theorem-bird, numbered=no, name=Theorem]{theorem**}
-\declaretheorem[style=theorem-bird, numbered=no, name=Proposition]{proposition**}
+% \declaretheorem[style=theorem-bird, numbered=no, name=Theorem]{theorem**}
+% \declaretheorem[style=theorem-bird, numbered=no, name=Proposition]{proposition**}
 
-\declaretheoremstyle[
-  headfont=\sffamily\bfseries,
-  headformat={\inleftmargin[.5\marginparsep]{\blackbird}\NAME \NOTE},
-  postheadhook={%
-    \checkoddpage%
-    \ifoddpageoroneside%
-    \else%
-      \leavevmode\marginpar{\vspace{-6pt}}%
-    \fi%
-  },
-  headpunct={.\,},
-  qed=$\mdlgblksquare$
-]{plain-bird}
+% \declaretheoremstyle[
+%   headfont=\sffamily\bfseries,
+%   headformat={\inleftmargin[.5\marginparsep]{\blackbird}\NAME \NOTE},
+%   % postheadhook={%
+%   %   \checkoddpage%
+%   %   \ifoddpageoroneside%
+%   %   \else%
+%   %     \leavevmode\marginpar{\vspace{-6pt}}%
+%   %   \fi%
+%   % },
+%   headpunct={.\,},
+%   qed=$\mdlgblksquare$
+% ]{plain-bird}
 
-\declaretheorem[style=plain-bird, numbered=no, name=Definition]{definition**}
+% \declaretheorem[style=plain-bird, numbered=no, name=Definition]{definition**}
 
 % Add a footnote right before the period of the theorem head.
 % This version is designed to be used with cleveref. The commented out lines (1)
@@ -451,44 +457,44 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \def\term{\@dblarg\kthpq@term}
 \newcommand{\kthpq@term}[2][]{\kthpq@highlight[#1]{\textbf{#2}}}
 
-% Fix value (3) for same-note line spacing,
-% Fix value (2) for vertical alignment with the text.
-% After fixing (2) and (3), fix value (1) for multiple-note spacing.
-\marginparpush=1.2\baselineskip  % (1)
-\newcommand{\kthpq@highlight}[2][]{%
-  \leavevmode% I don't remember why
-  \checkoddpage
-  \marginpar{%
-    \ifoddpageoroneside
-      \raggedright
-    \else
-      \raggedleft
-    \fi
-    \vspace{-5pt}  % (2)
-    \begin{spacing}{.7}  % (3)
-      \scriptsize\sffamily #1
-    \end{spacing}
-  }%
-  \penalty\@M% no linebreak after hspace
-  \hspace{0pt}% allow hyphenation by inserting a zero-width thing
-  #2%
-}
-\makeatother
+% % Fix value (3) for same-note line spacing,
+% % Fix value (2) for vertical alignment with the text.
+% % After fixing (2) and (3), fix value (1) for multiple-note spacing.
+% \marginparpush=1.2\baselineskip  % (1)
+% \newcommand{\kthpq@highlight}[2][]{%
+%   \leavevmode% I don't remember why
+%   \checkoddpage
+%   \marginpar{%
+%     \ifoddpageoroneside
+%       \raggedright
+%     \else
+%       \raggedleft
+%     \fi
+%     \vspace{-5pt}  % (2)
+%     \begin{spacing}{.7}  % (3)
+%       \scriptsize\sffamily #1
+%     \end{spacing}
+%   }%
+%   \penalty\@M% no linebreak after hspace
+%   \hspace{0pt}% allow hyphenation by inserting a zero-width thing
+%   #2%
+% }
+% \makeatother
 
-\newcommand{\fallbackhighlight}[1]{%
-  \marginnote{%
-    \ifoddpageoroneside%
-      \raggedright%
-    \else%
-      \raggedleft%
-    \fi%
-    \scriptsize\sffamily #1%
-  }
-}
+% \newcommand{\fallbackhighlight}[1]{%
+%   \marginnote{%
+%     \ifoddpageoroneside%
+%       \raggedright%
+%     \else%
+%       \raggedleft%
+%     \fi%
+%     \scriptsize\sffamily #1%
+%   }
+% }
 
 % % Uncomment to remove margin notes
 \makeatletter
-\renewcommand{\kthpq@highlight}[2][]{\index{#1}#2}
+\newcommand{\kthpq@highlight}[2][]{\index{#1}#2}
 \makeatother
-\renewcommand{\fallbackhighlight}[1]{\index{#1}}
+\newcommand{\fallbackhighlight}[1]{\index{#1}}
 \makeindex[intoc]

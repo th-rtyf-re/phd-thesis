@@ -39,7 +39,8 @@ In TDA, persistence modules first appeared in the form of \textbf{persistent hom
 
 In this section, we will detail what exactly this definition means in the case of simplicial complexes, computing simplicial homology. First, some motivation for studying simplicial complexes.
 
-The persistent homology pipeline begins by viewing a point cloud as a topological space $X$. This space $X$ is then equipped with one or several filtrations. For example, a subset $X$ of a Euclidean space $\R^n$ can be equipped with the filtrations that project onto each coordinate, as a kinds of height maps. \ir{Example of filtration on manifold maybe?} Sublevel sets are of interest for tracking topological changes in the data (see \cref{S:Morse-theory}), but they are somewhat trivial when the underlying space is discrete, as is the case for finite point clouds.
+The persistent homology pipeline begins by viewing a point cloud as a topological space $X$. This space $X$ is then equipped with one or several filtrations. For example, a subset $X$ of a Euclidean space $\R^n$ can be equipped with the filtrations that project onto each coordinate, as a kinds of height maps.  % REVIEW: \ir{Example of filtration on manifold maybe?}
+Sublevel sets are of interest for tracking topological changes in the data (see \cref{S:Morse-theory}), but they are somewhat trivial when the underlying space is discrete, as is the case for finite point clouds.
 Instead, the main example of filtered spaces is filtered simplicial complexes.
 % with the caveat that simplicial complexes are not actual topological spaces, but rather combinatorially constructed spaces\footnote{\ir{I'm fairly certain that it is a topological space with Alexandrov topology (opens are downsets; the inverse image of a downset by a monotone map is a downset)}}.
 % We present here typical constructions for filtered simplicial complexes in TDA.
@@ -50,9 +51,12 @@ Instead, the main example of filtered spaces is filtered simplicial complexes.
   
   Let $K$ and $L$ be simplicial complexes. A \term{morphism of simplicial complexes} $f \colon K \to L$ is a set-theoretic function that is monotone with respect to the face relation: for $\tau \subseteq \sigma$ in $K$, we requires that $f(\tau) \subseteq f(\sigma)$.
   
-  Given a set $X$, we define the \term[full simplicial complex]{full simplicial complex on $X$} to be $\cc{P}(X)$, the set of all subsets of $X$. This is indeed a simplicial complex, whose vertices are exactly $X$ (up to identification of singletons with their only element).
   A \term{filtration} on a simplicial complex $K$ is a real-valued function $f \colon K \to \R$ such that, for all $\tau \subseteq \sigma$ in $K$, $f(\tau) \leq f(\sigma)$. The \term[sublevel set]{sublevel sets} of $K$ are then $K_{\leq t} \coloneq \{\sigma \in K | f(\sigma) \leq t\}$ for all $t \in \R$.
 \end{definition}
+
+\begin{example}
+  Given a set $X$, the \term[full simplicial complex]{full simplicial complex on $X$} is $\cc{P}(X)$, the set of all subsets of $X$. This is indeed a simplicial complex, whose vertices are exactly $X$ (up to identification of singletons with their only element).
+\end{example}
 
 \begin{remark}
   It is not clear from the above definition that simplicial complexes are topological spaces. To make this clearer, we view $K$ as a poset for the inclusion relation and equip it with the Alexandrov topology (\cref{D:Alexandrov}). We can show that a continuous map for this topology is exactly a monotone map with respect to the face relation. We will not be using this topology.
@@ -62,7 +66,7 @@ We now present some typical constructions for filtered simplicial complexes in T
 
 \begin{example}
   Let $(M, d)$ be a metric space, $X$ a subset of $M$, and $t \geq 0$ a positive number.
-  The \term[Čech complex]{Čech complex at radius $t$} is the simplicial complex consisting of all subsets $\sigma$ of $X$ such that there exists a closed ball $B(x, t)$ of radius $t$ in $M$ containing $\sigma$. We denote this complex by $\Cech_t(X)$:
+  The \term[CZZech complex@Čech complex]{Čech complex at radius $t$} is the simplicial complex consisting of all subsets $\sigma$ of $X$ such that there exists a closed ball $B(x, t)$ of radius $t$ in $M$ containing $\sigma$. We denote this complex by $\Cech_t(X)$:
   \[
     \Cech_t(X) \coloneq \{ \sigma \subseteq X \mid \bigcap_{x \in \sigma} B(x, t) \neq \varnothing \}.
   \]
@@ -72,12 +76,39 @@ We now present some typical constructions for filtered simplicial complexes in T
   \]
   As we can see, these complexes are parameterized by the radius $t$. This leads us to our construction of filtered simplicial complexes. Let $K$ be the full simplicial complex on $X$.
 
-  The \term[Čech filtration]{Čech filtration on $K$}, denoted by $\Cech(X)$, assigns to each simplex $\sigma \in K$ the minimal radius of a closed ball in $M$ that contains $\sigma$. 
+  The \term[CZZech filtration@Čech filtration]{Čech filtration on $K$}, denoted by $\Cech(X)$, assigns to each simplex $\sigma \in K$ the minimal radius of a closed ball in $M$ that contains $\sigma$. 
   The \term[Vietoris-Rips filtration]{Vietoris-Rips filtration on $K$}, denoted by $\VR(X)$, assigns to each simplex $\sigma \in K$ the maximum of the pairwise distances of $\sigma$.
   We denote the sublevel sets of $\Cech(X)$ and $\VR(X)$ by $\Cech_t(X)$ and $\VR_t(X)$, respectively, and observe that they coincide with the Čech and Vietoris-Rips complexes defined above. Note that the sublevel sets are empty for $t < 0$.
   
-  \ir{Example of a simplicial complex: flipbook in corner...}
+  The flip book in the corner of the right-side pages is constructing the Čech filtration on a set of vertices; see \cref{F:Cech} for details.
 \end{example}
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \input{figs/flip/leo-0.pgf}
+    \caption{}
+    \label{F:Cech-low}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \input{figs/flip/leo-17.pgf}
+    \caption{}
+    \label{F:Cech-mid}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \input{figs/flip/leo-27.pgf}
+    \caption{}
+    \label{F:Cech-high}
+  \end{subfigure}
+  \caption[The Čech filtration of the flip book example at three threshold levels.]{The Čech filtration of the flip book example, which consists the the points (\subref{F:Cech-low}) in $\R^2$, at three threshold levels.  % REVIEW: which ones?
+  The outline is the subset of $\R^2$ whose distance from the points is the threshold level.}
+  \label{F:Cech}
+\end{figure}
 
 We now define simplicial homology over the field of two elements $\bf{F}_2$ (for topological spaces, we may use singular homology \cite{Hatcher2002}), which will give us persistent homology for simplicial complexes. The choice of field was made to simplify the following constructions; these constructions exist over all fields (see, for example, \cite{Hatcher2002}).
 
@@ -342,13 +373,20 @@ Note that the collection of intervals may be infinite and even uncountable: this
 \begin{example}
   For example, in the case where $I$ is the real line and $V$ is the persistent homology of a finite filtered simplicial complex, $V$ is tame. The bars of its decomposition would then correspond to a topological feature (depending on the degree of homology: a connected component, a loop, a cavity, etc.) that appears at filtration level $s$ and disappears at filtration level $t$. The further these values are from each other, the longer the topological feature \textit{persists}: hence the name of persistent homology.
 
-  \ir{Definitely need a good example here: still flipbook...?}
+  See the left-hand side of \cref{F:barcode-diagram} for an example of the barcodes in degrees $0$ and $1$.
 \end{example}
 
-\begin{notation}
-\label{N:barcode}
-  We fix some graphical conventions for representing barcode decompositions and morphisms between them. Given a barcode decomposition $V \coloneq \bigoplus_{\alpha \in A} \K_{S_\alpha}$, we represent each interval $S_\alpha$ by a horizontal segment whose endpoints' $x$ coordinates correspond to the birth and death times of the interval: \ir{figure}.
-\end{notation}
+% REVIEW: remove colors, split figure into two that are inserted separately
+\begin{figure}[t]
+  \includegraphics[width=\textwidth]{figs/barcode-diagram.png}
+  \caption[Barcodes and persistence diagrams for the flip book example]{Barcodes (left) and persistence diagrams (right) in degrees $0$ and $1$ for the flip book example.}
+  \label{F:barcode-diagram}
+\end{figure}
+
+% \begin{notation}
+% \label{N:barcode}
+%   We fix some graphical conventions for representing barcode decompositions and morphisms between them. Given a barcode decomposition $V \coloneq \bigoplus_{\alpha \in A} \K_{S_\alpha}$, we represent each interval $S_\alpha$ by a horizontal segment whose endpoints' $x$ coordinates correspond to the birth and death times of the interval: \ir{figure}.
+% \end{notation}
 
 \begin{remark}
 \label{R:no-barcode}
@@ -376,7 +414,7 @@ Note that the collection of intervals may be infinite and even uncountable: this
 Let $V$ be a (pointwise finite dimensional) persistence module indexed by $\R$. We can represent its barcode as a multiset of points in $\R^2$.
 
 \begin{definition}
-  Let $V$ be a persistence module indexed by $\R$. Recall from \cref{T:barcode-decomposition} that its barcode is a multiset of intervals $\{S_\alpha\}_{\alpha \in A}$. Recall that to each interval $S_\alpha$ we associate a startpoint $s(S_\alpha)$ and endpoint $t(S_\alpha)$. The \term{persistence diagram} of $V$ is the multiset of points $\cc{D}(V) \coloneq \{(s(S_\alpha), t(S_\alpha))\}_{\alpha \in A}$ in $\R^2$. These points are all above the line $y = x$, and are represented as in \ir{figure}.
+  Let $V$ be a persistence module indexed by $\R$. Recall from \cref{T:barcode-decomposition} that its barcode is a multiset of intervals $\{S_\alpha\}_{\alpha \in A}$. Recall that to each interval $S_\alpha$ we associate a startpoint $s(S_\alpha)$ and endpoint $t(S_\alpha)$. The \term{persistence diagram} of $V$ is the multiset of points $\cc{D}(V) \coloneq \{(s(S_\alpha), t(S_\alpha))\}_{\alpha \in A}$ in $\R^2$. These points are all above the line $y = x$.
 
   Persistence diagrams can also be viewed as discrete measures on $\R^2$ \cite{CdSGO2016}. Specifically, the \term{persistence measure} of $V$ is the sum of Dirac measures
   \[
@@ -384,6 +422,10 @@ Let $V$ be a (pointwise finite dimensional) persistence module indexed by $\R$. 
     \qedhere
   \]
 \end{definition}
+
+\begin{example}
+  The right-hand side of \cref{F:barcode-diagram} is the persistence diagram in degrees $0$ and $1$ of the running Čech filtration example.
+\end{example}
 
 \begin{remark}
   Persistence diagrams contain less information than barcodes. Specifically, they forget about the inclusion of start- and endpoints in the intervals. For tame persistence modules, this is not an issue, as all intervals are of the same form (closed below and open above), but this is relevant for p.f.d.\ modules.
@@ -678,18 +720,53 @@ When $T$ overlaps $S$ above, the morphisms of $\hom(\K_{S}, \K_{T})$ are all of 
   where $\bf{I}\{a_j \leq y_k < b_j \leq z_k\} = 1$ if the inequalities hold and $0$ otherwise. We show in Proposition 2.14 of Paper \ref{PC:GRRS2026} that this corresponds to a matrix representation of $g \circ f$.
 \end{definition}
 
+\begin{example}
+  See the right-hand side of \cref{F:morphism} for an example of an ordered matrix representation. In this case, the morphism $f \colon K(a_1,b_1) \oplus K(a_2,b_2) \rightarrow K(c_1,d_1) \oplus K(c_2,d_2)$ only has one ordered matrix representation.
+\end{example}
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}[t]{.45\textwidth}
+    \[
+    \begin{tikzpicture}[xscale=1.2, yscale=.6, thick]
+      \draw[-] (1.8,2.5) node[left] {$a_1$} -- (2.8,2.5) node[right] {$b_1$};
+      \draw[-] (1.4,1.8) node[left] {$a_2$} -- (3.2,1.8) node[right] {$b_2$};
+          
+      \draw[-] (0.7,0.5) node[left] {$c_1$} -- (2.2,0.5) node[right] {$d_1$};
+      \draw[-] (0.8,-0.2) node[left] {$c_2$} -- (2.8,-0.2) node[right] {$d_2$};
+
+      \draw[->, thin] (2,2.4) -- (2,0.6);
+      \draw[->, thin] (1.5,1.7) -- (1.5,0.6);
+      \draw[->, thin] (2.6,2.4) -- (2.6,-0.1);
+
+      \node (X) at (4, 2.3) {$V$};
+      \node (Y) at (4, 0) {$W$};
+      \draw[->] (X) -- node[right] {$f$} (Y);
+    \end{tikzpicture}
+    \]
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{.45\textwidth}
+    \[
+      F = \bordermatrix{%
+        & (a_2, b_2) & (a_1, b_1) \cr
+        (c_1, d_1) & 1 & 1 \cr
+        (c_2, d_2) & 0 & 1
+      }
+    \]
+  \end{subfigure}
+  \caption[Representation of a morphism and its only ordered matrix representation]{Representation of a morphism $f \colon K(a_1,b_1) \oplus K(a_2,b_2) \rightarrow K(c_1,d_1) \oplus K(c_2,d_2)$ and its only ordered matrix representation $F$. An arrow between two bars $K(a_j,b_j)$ and $K(c_i,d_i)$ corresponds to a nonzero coefficient $F_{ij}$.}
+  \label{F:morphism}
+\end{figure}
+
 \begin{remark}
 \label{R:free}
   This matrix theory works to some extent for persistence modules over arbitrary posets when the morphism $f \colon V \to W$ is between direct sums of modules. For instance, a \term{free persistence module} is a sum $\bigoplus_{s \in I} \K_{\{I \geq s\}}^{\oplus \beta_s}$ of free modules at poset elements, where $\beta_s$ is the multiplicity of $\K_{\{I \geq s\}}$ in the sum. We can do a similar analysis to \eqref{Eq:coef-space} on the hom-space $\hom(\K_{\{I \geq s\}}, \K_{\{I \geq t\}})$, and then the matrix representation of $f$ would have rows and columns labeled by the summands of $V$ and $W$. This is useful when reasoning about projective resolutions: see Paper \ref{PC:CGRST2024}, and in particular the implementation \cite{lowerhooks}.
 \end{remark}
 
 \begin{notation}
-  Extending \cref{N:barcode}, we represent morphisms between barcode decompositions schematically by arrows between bars. Given two barcode decompositions $V \coloneq \bigoplus_{\alpha \in A} \K_{S_\alpha}$ and $W \coloneq \bigoplus_{\beta \in B} \K_{T_\beta}$ and a morphism $f \colon V \to W$, we place a representation of $V$ above one of $W$, on the same horizontal scale, and then draw an arrow from the segment $S_\alpha$ to the segment $T_\beta$ if, and only if, the restricted morphism $f\big|_{\K_{S_\alpha}}^{\K_{T_\beta}} \colon \K_{S_\alpha} \to \K_{T_\beta}$ is nonzero: \ir{figure}.
+  Extending the representation of barcodes in \cref{F:barcode-diagram}, we represent morphisms between barcode decompositions schematically by arrows between bars. Given two barcode decompositions $V \coloneq \bigoplus_{\alpha \in A} \K_{S_\alpha}$ and $W \coloneq \bigoplus_{\beta \in B} \K_{T_\beta}$ and a morphism $f \colon V \to W$, we place a representation of $V$ above one of $W$, on the same horizontal scale, and then draw an arrow from the segment $S_\alpha$ to the segment $T_\beta$ if, and only if, the restricted morphism $f\big|_{\K_{S_\alpha}}^{\K_{T_\beta}} \colon \K_{S_\alpha} \to \K_{T_\beta}$ is nonzero: see the left-hand side of \cref{F:morphism} for an example. This representation can be seen as a continuous version of the commutative diagrams defining morphisms of persistence modules \eqref{Eq:persistence-module-morphism-commute}.
 \end{notation}
-
-\begin{remark}
-  This representation can be seen as a continuous version of the commutative diagrams defining morphisms of persistence modules \eqref{Eq:persistence-module-morphism-commute}. The decomposition of morphisms of barcode decompositions will be developed in \cref{SS:matrix-representations}, where we also introduce a matrix notation for morphisms.
-\end{remark}
 
 \subsection{Matrix reduction and the pairing uniqueness lemma}
 \label{SS:reduction}
@@ -950,7 +1027,7 @@ As we have seen in \cref{D:distance}, matchings of barcodes and persistence diag
 The canonically induced matching is functorial on monomorphisms and epimorphisms \cite[Proposition 5.7]{BauerLesnick2015} but is not additive. That is, $\cc{X}(f \oplus g)$ is not necessarily equal to $\cc{X}(f) \sqcup \cc{X}(g)$. Moreover, it does not really conserve information about the underlying morphism, especially for mono- and epimorphisms: it only requires the existence of such a morphism in order to be defined; the matchings themselves just match longest bars to longest bars. These limitations were a motivation for the definition of partial additive matchings:
 
 \begin{definition}[{\cite{GST2025}}]
-  Let $f \colon V \to W$ be a morphism of tame modules with fixed bases and let $A$ be the ordered matrix representation of $f$ where the columns are ordered lexicographically \ir{def?} by start- then endpoint and the rows by end- then startpoint. We apply \cref{A:spanish} to $A$: the output matrix has unique pivots, and we define the \term[partial additive matching]{partial additive matching of $f$} to be the matching $\cc{P}(f) \in \Match(\barcode(V), \barcode(W))$ consisting of the pairs of labels of the pivots' rows and columns.
+  Let $f \colon V \to W$ be a morphism of tame modules with fixed bases and let $A$ be the ordered matrix representation of $f$ where the columns are ordered lexicographically\footnote{The \textbf{lexicographic order} $\leq_{\text{lex}}$ is given by $(a, b) \leq_{\text{lex}} (a', b')$ if $a < a'$ or if $a = a'$ and $b \leq b'$.} by start- then endpoint and the rows by end- then startpoint. We apply \cref{A:spanish} to $A$: the output matrix has unique pivots, and we define the \term[partial additive matching]{partial additive matching of $f$} to be the matching $\cc{P}(f) \in \Match(\barcode(V), \barcode(W))$ consisting of the pairs of labels of the pivots' rows and columns.
 \end{definition}
 
 \begin{algorithm}
