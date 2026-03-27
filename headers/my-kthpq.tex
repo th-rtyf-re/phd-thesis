@@ -59,6 +59,8 @@
 \usetikzlibrary{babel,cd}
 \usepackage[ruled]{algorithm2e}
 
+\usepackage{imakeidx}
+
 % ---- Load last ----
 
 % Hyperref needs to come after parskip
@@ -485,7 +487,8 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 }
 
 % % Uncomment to remove margin notes
-% \makeatletter
-% \renewcommand{\kthpq@highlight}[2][]{#2}
-% \makeatother
-% \renewcommand{\fallbackhighlight}[1]{}
+\makeatletter
+\renewcommand{\kthpq@highlight}[2][]{\index{#1}#2}
+\makeatother
+\renewcommand{\fallbackhighlight}[1]{\index{#1}}
+\makeindex[intoc]

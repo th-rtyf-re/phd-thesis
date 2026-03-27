@@ -45,7 +45,7 @@ Instead, the main example of filtered spaces is filtered simplicial complexes.
 % We present here typical constructions for filtered simplicial complexes in TDA.
 
 \begin{definition}
-  An (\term[(abstract simplicial complex)]{abstract}) \textbf{simplicial complex} is a set of sets $K$ such that, for every element $\sigma \in K$ and subset $\tau \subseteq \sigma$, $\tau$ is also an element of $K$. An element $\sigma$ of $K$ with size $|\sigma| = k + 1$ is called a \term{$k$-simplex}, and we say that $\sigma$ is of \textbf{dimension $k$}. A \term{face} of a simplex $\sigma$ is a subsimplex $\tau \subseteq \sigma$. Conversely, a \term{coface} of a simplex $\sigma$ is a supersimplex $\tau \supseteq \sigma$.
+  An (\term[abstract simplicial complex]{abstract}) \textbf{simplicial complex} is a set of sets $K$ such that, for every element $\sigma \in K$ and subset $\tau \subseteq \sigma$, $\tau$ is also an element of $K$. An element $\sigma$ of $K$ with size $|\sigma| = k + 1$ is called a \term{$k$-simplex}, and we say that $\sigma$ is of \textbf{dimension $k$}. A \term{face} of a simplex $\sigma$ is a subsimplex $\tau \subseteq \sigma$. Conversely, a \term{coface} of a simplex $\sigma$ is a supersimplex $\tau \supseteq \sigma$.
   For all $k \geq 0$, we denote by $K_k$ the set of $k$-simplices of $K$. Similarly to graphs, the $0$-simplices are called \term[vertex]{vertices}, and the $1$-simplices are called \term[edge]{edges}.
   
   Let $K$ and $L$ be simplicial complexes. A \term{morphism of simplicial complexes} $f \colon K \to L$ is a set-theoretic function that is monotone with respect to the face relation: for $\tau \subseteq \sigma$ in $K$, we requires that $f(\tau) \subseteq f(\sigma)$.
