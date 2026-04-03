@@ -339,6 +339,9 @@ def plot_barcode(diag):
     
     fig, ax = plt.subplots(1, 2, figsize=(9, 5))
     
+    # diagonal line
+    ax[1].plot([0, inf_end], [0, inf_end], 'k--', linewidth=2)
+    
     legend_artists = [None, None]
     for i, (b, d) in enumerate(zip(birth, death)):
         if d == inf_end:
@@ -353,7 +356,6 @@ def plot_barcode(diag):
     # ax[0].plot([0, inf_end], [-1, -1], color="#000061", lw=3)
     # ax[1].plot(0, inf_end, color="#000061", marker='o', markersize=5)
     # diagonal
-    ax[1].plot([0, inf_end], [0, inf_end], 'k--', linewidth=2)
     
     ax[0].set_title('Barcode')
     ax[0].set_xlabel('filtration value')
@@ -367,7 +369,11 @@ def plot_barcode(diag):
     
     fig.tight_layout()
     # plt.show()
-    plt.savefig("../figs/barcode-diagram.png", dpi=300, transparent=True)
+    
+    # extent = ax[0].get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+    # plt.savefig("../figs/baco.png", dpi=300, transparent=True, bbox_inches=extent.expanded(1.15, 1.1))
+    extent = ax[1].get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+    plt.savefig("../figs/pedi.png", dpi=300, transparent=True, bbox_inches=extent.expanded(1.15, 1.1))
     
     return
 
@@ -380,7 +386,8 @@ def barcode_stuff():
     for i, element in enumerate(diag):
         diag_array[i] = (element[1][0], element[1][1], element[0])
     diag_array[:, :2] = np.sqrt(diag_array[:, :2])
-    print(diag_array)
+    diag_array = diag_array[np.lexsort((diag_array[:, 1], diag_array[:, 0], diag_array[:, 2]))]
+    # print(diag_array)
     plot_barcode(diag_array)
 
 def flipbook_stuff():

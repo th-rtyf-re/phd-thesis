@@ -42,14 +42,13 @@ This algebraic encoding of the geometry of a filtered manifold can be developed 
   Let $X$ be a smooth manifold, $f \colon X \to \R$ a smooth function, and $s \leq t$ in $\R$. Recall the notation $X_{\leq t} = f^{-1}((-\infty, t])$. Then:
   \begin{enumerate}
     \item If the interval $[s, t]$ contains no critical values, then $X_{\leq s}$ is diffeomorphic to $X_{\leq t}$ and $X_{\leq t}$ deformation retracts onto $X_{\leq s}$.
-    \item Suppose that there is a unique nondegenerate critical point $x \in X$ whose value $f(x)$ is in the interval $[s, t]$, and let $\iota$ be the index of $x$. Then $X_{\leq t}$ is homotopy equivalent to $X_{\leq s}$ with an $\iota$-cell attached.
+    \item Suppose that there is a unique nondegenerate critical point $x \in X$ whose value $f(x)$ is in the interval $[s, t]$, and let $\iota$ be the index of $x$. Then $X_{\leq t}$ is homotopy equivalent to $X_{\leq s}$ with an $\iota$-cell attached.  \ir{REVIEW: need to explain what attaching a cell means}
   \end{enumerate}
 \end{theorem}
 
-% REVIEW
-% \begin{example}
-%   classic donut
-% \end{example}
+\begin{example}
+  \ir{REVIEW: classic donut}
+\end{example}
 
 In terms of homology, we have the following results.
 
@@ -75,7 +74,7 @@ When the set of critical points is easy to compute, this gives powerful upper bo
 Morse theory was originally developed for smooth function on smooth manifolds. However, it has been generalized in many directions, including Morse-Bott theory \cite{AustinBraam1995}, stratified Morse theory \cite{GoreskyMacPherson1988}, and discrete Morse theory \cite{Forman2002}. In Paper \ref{PC:GLRS2025} we develop Morse theory for continuous selections, as presented in \cite{APS1997}. We recall the original theory here.
 
 \begin{definition}
-\label{D:continuous-selection}
+\label{!D:continuous-selection}
   Let $X$ be a smooth manifold and $\{f_0, \ldots, f_m\} \subseteq \cc{C}^2(X, \R)$ a set of $\cc{C}^2$ functions. A \term[continuous selection]{continuous selection from $\{f_0, \ldots, f_m\}$} is a continuous function $f \colon X \to \R$ such that, for every $x$ in $X$, there exists $i$ in $\{0, \ldots, m\}$ such that $f(x) = f_i(x)$. We denote by $\CS(f_0, \ldots, f_m)$ the collection of all continuous selections from $\{f_0, \ldots, f_m\}$.
   
   Let $f \in \CS(f_0, \ldots, f_m)$ be a continuous selection. The \term{subdifferential} of $f$ at a point $x \in X$ is (see \cite{APS1997} or Paper \ref{PC:GLRS2025} for a more general definition)
@@ -102,7 +101,6 @@ Morse theory was originally developed for smooth function on smooth manifolds. H
 \end{definition}
 
 \begin{figure}
-  \captionsetup[subfigure]{justification=centering}
   \begin{subfigure}[t]{.3\textwidth}
     \centering
     \begin{tikzpicture}[scale=.8]
@@ -169,7 +167,6 @@ Morse theory was originally developed for smooth function on smooth manifolds. H
 \end{figure}
 
 \begin{figure}
-  \captionsetup[subfigure]{justification=centering}
   \begin{subfigure}{.3\textwidth}
     \centering
     \begin{tikzpicture}[scale=.8]
@@ -267,5 +264,5 @@ Algebraic geometers are often interested in integer invariants for algebraic var
 \end{definition}
 
 \begin{remark}
-  Both of these notions fit within the framework of critical points of the distance function from an algebraic variety, restricted to another algebraic variety. In Papers \ref{PC:GRRS2026} and \ref{PC:Ren2026}, we generalize this notion to generic varieties.
+  Both of these notions fit within the framework of critical points of the distance function from an algebraic variety, restricted to another algebraic variety. In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we generalize this notion to generic varieties.
 \end{remark}

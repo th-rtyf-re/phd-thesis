@@ -43,7 +43,7 @@ The paper ends with an extensive list of examples of collection $\cc{P}$ and par
 \begin{figure}
   \includegraphics[width=\textwidth]{figs/lowerhooks.png}
   \caption[Free presentation of an example persistence module and its Betti diagrams relative to lower hooks.]{%
-    Sample output of \texttt{lowerhooks}. \textbf{Leftmost:} free presentation of a two-dimensional persistence module. Black points correspond to generators, white to relations, and lines correspond to nonzero coefficients in the presentation matrix.  % REVIEW: define these things, I guess
+    Sample output of \texttt{lowerhooks}. \textbf{Leftmost:} free presentation of a two-dimensional persistence module. Black points correspond to generators, white to relations, and lines correspond to nonzero coefficients in the presentation matrix.  \ir{REVIEW: define these things, I guess}
     \textbf{Right:} Betti diagrams relative to lower hooks. Lower hooks are parameterized by ordered pairs of points; a segment corresponds to a nonzero Betti number for the pair corresponding to the segment's endpoints. Dotted segments correspond to the Betti diagram one degree lower, for easier comparison between the degrees.%
   }
   \label{F:lowerhooks}
@@ -67,7 +67,7 @@ In \textsection 4.4, we write that a functor $F \colon J \to \Vect$ is isomorphi
       \arrow[u, "\lambda" swap]
   \end{tikzcd}
 \]
-where $\lambda \in \K \setminus \{0, 1\}$. Then $F$ is a filtration with pointwise dimension at most $1$, but is not isomorphic to a subfunctor of $\K_J$. As a correction, we restrict the claim to the case where $J$ is an upper semilattice. There is no impact on the rest of the paper.  % REVIEW: this is correct, right?
+where $\lambda \in \K \setminus \{0, 1\}$. Then $F$ is a filtration with pointwise dimension at most $1$, but is not isomorphic to a subfunctor of $\K_J$. As a correction, we restrict the claim to the case where $J$ is an upper semilattice. There is no impact on the rest of the paper. \ir{REVIEW: this is correct, right?}
 
 \subsection*{Contributions}
 
@@ -76,7 +76,6 @@ In this paper I co-wrote the main results, was the main contributor to the analy
 \textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (equal); formal analysis (equal); software (lead); visualization (lead); writing -- original draft preparation (equal); writing -- review \& editing (equal).
 
 \papersection[shorttitle={Algebraic Wasserstein distances...}]{AGRS2025}
-\label{PS:wasserstein}
 
 In this paper, we define algebraic $p$-Wasserstein distances for tame persistence modules, proving that the sequence of collections $\cc{S} = \{\cc{S}_\varepsilon\}_{\varepsilon \geq 0}$ of \cref{SS:algebraic-wasserstein} is indeed a noise system. This is an alternate proof to that of \cite{SkrabaTurner2023}.
 
@@ -121,7 +120,7 @@ Moreover, when taking the $p$-norm of a persistence module $V \cong \bigoplus_\a
 \[
   \| V \|_p \coloneq \| (T(t(S_\alpha)) - T(s(S_\alpha))) \|_p.
 \]
-This allows us to weight the importance of bars at different points of the indexing set $\R$. Given these parameterized pseudometrics, we are able to explicitly compute the \term{hierarchical stabilization} of persistence modules, which are real-valued functions that we can feed into machine learning frameworks \cite{SCLRÖ2017,GafvertChacholski2021}. In the paper, we apply this analysis pipeline to classification tasks for a synthetic dataset as well as a dataset of brain vessel models of patients of various ages. The classifying model learns the optimal parameters $p$ and $T$ in order to, for example, classify patients by age based on their brain vessel structure. The parameter $q$ is fixed equal to $1$, the standard value, and $T$ is the cumulative density of a mixed Gaussian model. The key observation is that, when $p$ is large, then the model focuses on long bars, and when $p$ is close to $1$, then it focuses on short bars. It had been observed that short bars are more relevant for this dataset \cite{BMMPS2016}, and we recover this result.  % REVIEW: Figure 8? I feel like it might be more misleading to copy only one figure, because this thesis isn't really focused on this part... It's putting more emphasis on this part? idk
+This allows us to weight the importance of bars at different points of the indexing set $\R$. Given these parameterized pseudometrics, we are able to explicitly compute the \term{hierarchical stabilization} of persistence modules, which are real-valued functions that we can feed into machine learning frameworks \cite{SCLRÖ2017,GafvertChacholski2021}. In the paper, we apply this analysis pipeline to classification tasks for a synthetic dataset as well as a dataset of brain vessel models of patients of various ages. The classifying model learns the optimal parameters $p$ and $T$ in order to, for example, classify patients by age based on their brain vessel structure. The parameter $q$ is fixed equal to $1$, the standard value, and $T$ is the cumulative density of a mixed Gaussian model. The key observation is that, when $p$ is large, then the model focuses on long bars, and when $p$ is close to $1$, then it focuses on short bars. It had been observed that short bars are more relevant for this dataset \cite{BMMPS2016}, and we recover this result.  \ir{REVIEW: Figure 8? I feel like it might be more misleading to copy only one figure, because this thesis isn't really focused on this part... It's putting more emphasis on this part? idk}
 
 \subsection*{Contributions}
 
@@ -131,7 +130,7 @@ In this paper I was a main contributor to Section 3, which contains the fundamen
 
 \papersection[misctext=To be submitted]{GRRS2026}
 
-In this paper, we refine the tools introduced in \ref{PS:AGRS2025}. In particular, we extend the notion of bar-to-bar morphisms to pointwise finite-dimensional persistence modules and prove analogous results to those of \ref{PS:AGRS2025}. In particular, we develop a simpler method of constructing bar-to-bar morphisms from mono- and epimorphisms. We present the results with tame persistence modules; see Paper \ref{PC:GRRS2026} for the full results for p.f.d.\ modules.
+In this paper, we refine the tools introduced in Paper \ref{PC:AGRS2025}. In particular, we extend the notion of bar-to-bar morphisms to pointwise finite-dimensional persistence modules and prove analogous results to those of Paper \ref{PC:AGRS2025}. In particular, we develop a simpler method of constructing bar-to-bar morphisms from mono- and epimorphisms. We present the results with tame persistence modules; see Paper \ref{PC:GRRS2026} for the full results for p.f.d.\ modules.
 
 \begin{definition}
   Let $V \cong \bigoplus_j \K_{[a_j, b_j)}$ and $W \cong \bigoplus_i \K_{[c_i, d_i)}$ be tame persistence modules with fixed persistence bases. For every morphism $f \colon V \to W$, we define $\Delta f \colon V \to W$ as the projection of $f$ along the map of vector spaces
@@ -161,7 +160,7 @@ In this more general setting, we also prove the isometry theorem between the alg
   \]
 \end{theorem}
 
-In addition to this new proof of the isometry result, we also study the properties of matchings induced by morphisms. Note that a bar-to-bar morphism can be seen as an algebraic representation of a barcode matching  % REVIEW: elaborate
+In addition to this new proof of the isometry result, we also study the properties of matchings induced by morphisms. Note that a bar-to-bar morphism can be seen as an algebraic representation of a barcode matching  \ir{REVIEW: elaborate}
 and we define induced matchings from mono- and epimorphisms. Building on the results of \cite{BauerLesnick2015} and \cite{GST2025}, we show that our matchings are \term{additive} but not \term{functorial}.
 
 % Moreover, we show the following result.
@@ -183,7 +182,7 @@ I was an equal contributor throughout the conceptualization and writing of the p
 In this paper we generalize Morse theory to distance functions $f \coloneq \dist_Y\big|_X$ from a subset $Y \subseteq \R^n$ restricted to a subset $X \subseteq \R^n$. We show that, under certain conditions, the distance function $f$ is a continuous selection:
 
 \begin{proposition}[{Paper \ref{PC:GLRS2025}, Proposition 2.5.8}]
-  Suppose that $Y$ is smooth and let $x \in \R^n$ be a regular value of the exponential map $\varphi \colon NY \to \R^n$, where $NY$ denotes the normal bundle of $Y$. Then  % REVIEW: elaborate what a normal bundle is?
+  Suppose that $Y$ is smooth and let $x \in \R^n$ be a regular value of the exponential map $\varphi \colon NY \to \R^n$, where $NY$ denotes the normal bundle of $Y$. Then  \ir{REVIEW: elaborate what a normal bundle is?}
   \begin{enumerate}
     \item
       $B(x, \dist_Y(x)) \cap Y$ is a finite set $\{y_0, \ldots, y_k\}$,
@@ -197,7 +196,7 @@ In this paper we generalize Morse theory to distance functions $f \coloneq \dist
     \end{enumerate}
 \end{proposition}
 
-We can therefore apply the results of \cite{APS1997} to distance functions $\dist_Y\big|_X$ where all critical points are regular points of the exponential map on $Y$. Recall from \cref{D:continuous-selection} that a nondegenerate critical point $x$ of a continuous selection has two indices, a piecewise linear index $k(x)$ and a quadratic index $\iota(x)$. Given a pair $(X, Y)$ of subsets of $\R^n$ such that $\dist_Y\big|_X$ only has nondegenerate critical points, we denote by $C_{k, \iota}(X, Y)$ the critical points with indices $(k, \iota)$. We recover the Morse lemmas and inequalities presented in \cref{S:Morse-theory}. Moreover, we can exchange the roles of $X$ and $Y$: if $\dist_X\big|_Y$ also only has nondegenerate critical points, then combining the resulting Morse inequalities gives the following equality relating the Euler characteristics of $X$ and $Y$ and the number of critical points [Paper \ref{PC:GLRS2025}, Corollary 2.6.7]:
+We can therefore apply the results of \cite{APS1997} to distance functions $\dist_Y\big|_X$ where all critical points are regular points of the exponential map on $Y$. Recall from \cref{!D:continuous-selection} that a nondegenerate critical point $x$ of a continuous selection has two indices, a piecewise linear index $k(x)$ and a quadratic index $\iota(x)$. Given a pair $(X, Y)$ of subsets of $\R^n$ such that $\dist_Y\big|_X$ only has nondegenerate critical points, we denote by $C_{k, \iota}(X, Y)$ the critical points with indices $(k, \iota)$. We recover the Morse lemmas and inequalities presented in \cref{S:Morse-theory}. Moreover, we can exchange the roles of $X$ and $Y$: if $\dist_X\big|_Y$ also only has nondegenerate critical points, then combining the resulting Morse inequalities gives the following equality relating the Euler characteristics of $X$ and $Y$ and the number of critical points [Paper \ref{PC:GLRS2025}, Corollary 2.6.7]:
 \[
   \chi(Y) + \sum_{k, \iota \geq 0} (-1)^{k + \iota} \#C_{k, \iota}(X, Y) = \chi(X) + \sum_{k, \iota \geq 0} (-1)^{k + \iota} \#C_{k, \iota}(Y, X).
 \]
@@ -227,7 +226,7 @@ In this paper I was the main contributor to Section 4, which applies the theory 
 
 \papersection[shorttitle={Nondegeneracy of distance functions...}, misctext=To be submitted]{Ren2026}
 
-This paper is a direct generalization of \ref{PS:GLRS2025}'s results on algebraic hypersurfaces to complete intersections. There are no surprises when extending the results, but the computations require some more care.
+This paper is a direct generalization of Paper \ref{PC:GLRS2025}'s results on algebraic hypersurfaces to complete intersections. There are no surprises when extending the results, but the computations require some more care.
 
 \subsection*{Contributions}
 

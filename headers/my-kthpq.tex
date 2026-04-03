@@ -13,7 +13,8 @@
   maxnames=99,
   isbn=false,
   url=false,
-  urldate=ymd
+  urldate=ymd,
+  defernumbers=true
 ]{biblatex-kthpq}
 
 % \makeatletter  % bibliography numbers in margin...
@@ -37,12 +38,6 @@
 \usepackage[
   % demo  % omit inclusion of PDFs
 ]{pdfpages}
-
-% \usepackage{setspace}  % `spacing` environment
-% \usepackage{ifoddpage}  % \ifoddpage(oroneside)
-% \usepackage{mparhack}  % try to fix marginpar on wrong side (typically on the first line of a page)
-% \usepackage{silence}  % suppress marginpar warnings
-% \usepackage{marginnote}  % for fallback highlight command
 
 % longtable: ignoring this error https://github.com/latex3/latex2e/issues/1907
 % with VS Code LaTeX Workshop 
@@ -88,6 +83,7 @@
 % ==== COMMANDS ====
 
 % \WarningFilter{latex}{Marginpar on page}
+\DeclarePrintbibliographyDefaults{title=References}
 
 % ---- Font ----
 
@@ -110,19 +106,13 @@
 
 \addbibresource{bib/mine.bib}
 \addbibresource{bib/kappa.bib}
+\addbibresource{bib/CI.bib}
 
 \DeclareFieldFormat{eprint:github}{%
 GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint}}}
 }
 
 % ---- Layout ----
-
-% \geometry{
-%   outer=3mm,  % originally 18.7mm
-%   marginparwidth=16mm,  % decent width
-%   includemp  % include marginparwidth in computation of outer margin
-% }
-\fancyheadoffset{0pt}  % force update \headwidth
 
 % Custom header and footer with fancyhdr
 \fancypagestyle{fancy}{%
@@ -153,7 +143,6 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
     \fi%
   \fi%
 }
-% \fancyfoot{}  % comment to get flipbook
 
 % Remove fancy headers from front matter and add check for front matter
 \let\oldfrontmatter\frontmatter
@@ -212,8 +201,8 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
   \else
     \section[\@shorttitle]{\thefield{labeltitle}}
   \fi
-  % automatically add label (outside labels don't detect this section)
-  \label{PS:\strfield{entrykey}}
+  % % automatically add label (outside labels don't detect this section)
+  % \label{PS:\strfield{entrykey}}
   \printnames{author}.
   \ifentrytype{article}{%
     In \usebibmacro{tryfjournal},
@@ -306,33 +295,20 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 
 \declaretheoremstyle[
   headfont=\sffamily\bfseries,
-  headformat={\inleftmargin[.5\marginparsep]{\mdseries{\rmfamily\textparagraph}\,\NUMBER}\NAME \NOTE},
-  % postheadhook={%
-  %   \checkoddpage%
-  %   \ifoddpageoroneside%
-  %   \else%
-  %     \leavevmode\marginpar{\vspace{-8pt}}%
-  %   \fi%
-  % },
+  headformat={\inleftmargin[.5\marginparsep]{\mdseries\NUMBER}\NAME \NOTE},
   headpunct={.\,},
   bodyfont={\itshape}
 ]{theorem-margin}
 
-\declaretheorem[style=theorem-margin]{theorem}
+\declaretheorem[style=theorem-margin, parent=chapter]{theorem}
+\declaretheorem[style=theorem-margin, numbered=no, name=Theorem]{theorem*}
 \declaretheorem[style=theorem-margin, sibling=theorem]{proposition}
 \declaretheorem[style=theorem-margin, sibling=theorem]{corollary}
 \declaretheorem[style=theorem-margin, sibling=theorem]{lemma}
 
 \declaretheoremstyle[
   headfont=\sffamily\bfseries,
-  headformat={\inleftmargin[.5\marginparsep]{\mdseries{\rmfamily\textparagraph}\,\NUMBER}\NAME \NOTE},
-  % postheadhook={%
-  %   \checkoddpage%
-  %   \ifoddpageoroneside%
-  %   \else%
-  %     \leavevmode\marginpar{\vspace{-8pt}}%
-  %   \fi%
-  % },
+  headformat={\inleftmargin[.5\marginparsep]{\mdseries\NUMBER}\NAME \NOTE},
   headpunct={.\,},
   qed=$\mdlgblksquare$
 ]{plain-margin}
@@ -341,64 +317,6 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \declaretheorem[style=plain-margin, sibling=theorem]{remark}
 \declaretheorem[style=plain-margin, sibling=theorem]{example}
 \declaretheorem[style=plain-margin, sibling=theorem]{notation}
-
-% \newcommand*{\blackbird}{%
-%   \begin{tikzpicture}[%
-%       scale=.3,  % 1 = 2 x 2cm icon
-%       line width=.8pt,
-%       line cap=round,
-%       baseline={([yshift=-.6ex]current bounding box.center)}
-%     ]
-%     \useasboundingbox (-1,1) rectangle (1,-1);
-%     \draw (-1,0) .. controls (-.83,.12) and (-.57,.09) .. (-.45,.12)
-%       .. controls (-.62,.23) and (-.7,.46) .. (-.79,.62)
-%       .. controls (-.43,.54) and (-.23,.31) .. (-.06,.09)
-%       .. controls (-.75,-.04) and (-.72,-.31) .. (-.83,-.43)
-%       .. controls (-.52,-.49) and (-.27,-.44) .. (-.11,-.39)
-%       .. controls (.05,-.53) and (.38,-.65) .. (.52,-.66)
-%       .. controls (.44,-.42) and (.29,-.31) .. (.12,-.16)
-%       .. controls (.3,0) and (.61,.1) .. (.83,.13);
-%     \draw (-.24,.51) .. controls (.03,.61) .. (.27,.79);
-%     \draw (-.16,.21) .. controls (.25,.37) .. (.51,.63);
-%     \draw (.17,.1) .. controls (.4,.22) .. (.66,.31);
-%     \draw (-.4,-.76) .. controls (-.22,-.59) .. (-.03,-.45);
-%     \draw (.26,-.28) .. controls (.62,-.14) .. (1.01,-.03);
-%     \draw (.08,-.85) .. controls (.2,-.73) .. (.33,-.62);
-%     \draw (.47,-.53) .. controls (.71,-.41) .. (.95,-.33);
-%     \fill (-.52,-.34) circle[radius=.05];
-%   \end{tikzpicture}%
-% }
-
-% \declaretheoremstyle[
-%   headfont=\sffamily\bfseries,
-%   headformat={\inleftmargin[.5\marginparsep]{\blackbird}\NAME \NOTE},
-%   % postheadhook={%
-%   %   \checkoddpage%
-%   %   \ifoddpageoroneside%
-%   %   \else%
-%   %     \leavevmode\marginpar{\vspace{-8pt}}%
-%   %   \fi%
-%   % },
-%   headpunct={.\,},
-%   bodyfont={\itshape}
-% ]{theorem-bird}
-
-% \declaretheorem[style=theorem-bird, numbered=no, name=Theorem]{theorem**}
-% \declaretheorem[style=theorem-bird, numbered=no, name=Proposition]{proposition**}
-
-% \declaretheoremstyle[
-%   headfont=\sffamily\bfseries,
-%   headformat={\inleftmargin[.5\marginparsep]{\blackbird}\NAME \NOTE},
-%   % postheadhook={%
-%   %   \checkoddpage%
-%   %   \ifoddpageoroneside%
-%   %   \else%
-%   %     \leavevmode\marginpar{\vspace{-6pt}}%
-%   %   \fi%
-%   % },
-%   headpunct={.\,},
-%   qed=$\mdlgblksquare$
-% ]{plain-bird}
 
 % \declaretheorem[style=plain-bird, numbered=no, name=Definition]{definition**}
 
@@ -424,6 +342,10 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
   \csname end\@currentthmname\endcsname
 }
 \makeatother
+
+% ---- floats ----
+
+\captionsetup[subfigure]{justification=centering}
 
 % ---- non-math commands ----
 

@@ -35,7 +35,29 @@ Short exact sequences induce long exact sequences in homology: using the $0$'s o
 \]
 Therefore, in order to compute Betti diagrams relative to lower hooks, we can study the Koszul complex of $\coker F(- \leq -)$ instead of $\ker F(- \leq -)$. This has some theoretical computational advantages: in order to compute a kernel basis, we need $O(n^2)$ space, where $n$ is the ambient dimension. In order to compute a cokernel basis, we only need $O(n)$ space, because we can choose representatives in the quotient space that correspond to canonical basis elements.
 
-% REVIEW: add figure
+I have implemented this cokernel approach in Python, to middling success: see \cref{F:coker-results} for some experimental results. In \cref{F:cokerhooks}, we observe the exact same relative Betti diagrams as in \cref{F:lowerhooks}, except translated by $2$ degrees. In \cref{F:dev-time}, we see that the time required to compute relative Betti diagrams does not change when switching to cokernels, and in fact worsens a little bit. This may be explained by the fact that the cokernel complexes are larger in general than the corresponding kernel complexes: see \cref{F:dev-hist}. It is unclear where this is by nature or by the synthetic way in which they were constructed for this experiment, and this is worth exploring further.
+
+\begin{figure}[t]
+  \begin{subfigure}{\textwidth}
+    \includegraphics[width=\textwidth]{figs/cokerhooks.png}
+    \caption{Result of computing the homology of the cokernel complex; compare with \cref{F:lowerhooks}.}
+    \label{F:cokerhooks}
+  \end{subfigure}
+  \\
+  \begin{subfigure}{.4\textwidth}
+    \includegraphics[width=\textwidth]{figs/dev_time.png}
+    \caption{Average (of $5$ runs) time to compute relative Betti diagrams with respect to the number of generators.}
+    \label{F:dev-time}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{.6\textwidth}
+    \includegraphics[width=\textwidth]{figs/dev_hist.png}
+    \caption{Average (of $10$ runs) sum of dimensions per degree in the Koszul complex of kernels and cokernels for randomly generated persistence modules with $5$ (left) and $10$ (right) generators.}
+    \label{F:dev-hist}
+  \end{subfigure}
+  \caption{Results of the cokernel approach to computing Betti diagrams relative to lower hooks.}
+  \label{F:coker-results}
+\end{figure}
 
 % \section{Stabilized relative Betti numbers}  % I've kind of avoided defining stabilized ranks
 
@@ -70,7 +92,7 @@ Therefore, in order to compute Betti diagrams relative to lower hooks, we can st
 
 With Wojiech Chachólski, Andrea Guidolin, Christina Kapatsori, Woojin Kim, Francesca Tombari.
 
-The rank function $\rank V$ of a persistence module $V$ over a poset $I$ (\cref{D:rank-function}) satisfies the following inequalities. For all chains $a \leq b \leq c \leq d$ in $I$,
+The rank function $\rank V$ of a persistence module $V$ over a poset $I$ (\cref{!D:rank-function}) satisfies the following inequalities. For all chains $a \leq b \leq c \leq d$ in $I$,
 \begin{enumerate}
   \item (\term{monotonicity}) $\rank V(a \leq d) \leq \rank V(b \leq c)$, and
   \item (\term{chain-supermodularity}) $\rank V(a \leq d) + \rank V(b \leq c) \leq \rank V(a \leq c) + \rank V(b \leq d)$.
@@ -78,7 +100,7 @@ The rank function $\rank V$ of a persistence module $V$ over a poset $I$ (\cref{
 The name \term{chain-supermodularity} comes from \textbf{supermodularity}, a notion studied in probability and order theory \cite{PromislowYoung2005}. Monotone, chain-supermodular functions form a positive convex cone. The broad aim of this project is to study this cone and investigate if we can express rank functions as convex combinations of extremal rays.
 
 As a first step, we study \term{chain-modular} functions, which satisfy the chain-supermodularity condition but with an equality instead of inequality. An interesting question is: which functors have rank functions that are chain-modular? We give some characterizations of the space of chain-modular functions and functors depending on the structure of the underlying poset $I$.
-% REVIEW: \ir{When $I$ has trivial $H^1$...}
+\ir{REVIEW: When $I$ has trivial $H^1$...}
 
 \section{Rank-based noise systems for multiparameter persistence}
 
@@ -97,7 +119,7 @@ Following Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}, we show the following:
 \end{proposition}
 
 \begin{proof}[Sketch of proof]
-  The first, easier short exact sequence axiom (see \cref{D:noise-system}) comes from [Paper \ref{PC:GRRS2026}, Proposition 4.9], as in the one-dimensional case.
+  The first, easier short exact sequence axiom (see \cref{!D:noise-system}) comes from [Paper \ref{PC:GRRS2026}, Proposition 4.9], as in the one-dimensional case.
 
   To prove the second, harder short exact sequence axiom, we proceed as follows. We restrict the rank function of $V$ to lines in $\R^n$ parameterized as $\ell \colon t \mapsto t \vec{a} + \vec{b}$, where $\vec{a} = (1, a_2, \ldots, a_n)$ and $\vec{b} = (0, b_2, \ldots, b_n)$. Then we parameterize our pairs of points $(\vec{x}, \vec{y})$ in $\Omega$ by scalars $s$ and $t$ in $\R$:
   \[
@@ -196,14 +218,16 @@ When $W$ is arbitrary, Åkesson provides a recursive formula \cite[Theorem 4.1]{
 \end{equation}
 where $\cc{V}(B)$ is a persistence module with barcode $B$. This gives an iterative strategy for computing $\barcode(\Ext(W, V))$: sort the bars of $W$ compatibly with the product order on the start- and endpoints, set $W_2$ equal to the first bar and $W_1$ to the sum of the rest: by construction, we get $\Ext(W_1, W_2) = 0$.
 
-It is still an open problem to determine the extension with largest $p$-norm.
+It is still an open problem to determine the extension with largest $p$-norm. This is useful, for example, in the study of the noise system axioms for $p$-norms.
 
 \section{Pair degree}
 
-Following discussions with Emil Horobeț
+Following discussions with Emil Horobeț.
 
 In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we defined notions of algebraic critical points, and bounded their number. The number of algebraic critical points, in the complex setting, could define a new numerical invariant that generalizes the Euclidean distance degree and the bottleneck degree. Here we sketch its definition:
 
 \begin{definition}
   Let $X$ and $Y$ be complete intersections defined by polynomials $\vec{p}$ and $\vec{q}$, respectively. We define the \term[pair degree]{pair degree of $X$ and $Y$} to be the cardinality of the set $C_k(\vec{p}, \vec{q})$ of algebraic critical points of the distance function $\dist_Y\big|_X$ (see Paper \ref{PC:Ren2026}, Definition 3.3.2).
 \end{definition}
+
+\ir{REVIEW: Say a bit more}

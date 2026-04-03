@@ -1,0 +1,919 @@
+% !TEX root = ../thesis-main.tex
+
+% ---- Metadata ----
+% \title[Nondegeneracy of dist.\ functions between complete intersections]{Nondegeneracy of distance functions between complete intersections}
+% \author{Isaac Ren}
+% \address{KTH, Department of Mathematics, S-10044 Stockholm, Sweden}
+% \email{Isaac Ren <isaacren@kth.se>}
+% \date{\today}
+% \thanks{The author was partially supported by Vetenskapsrådet.}
+% \subjclass[2020]{Primary 14P25;
+%   Secondary 57R70, 58C20}
+% \keywords{Morse theory, distance functions, metric algebraic geometry, critical points, Euclidean distance degree, bottlenecks, parametric transversality.}
+
+\newcommand{\myemph}{\textbf}
+
+% ==== BODY ====
+\paperchapter[Nondegeneracy of distance functions between C.I.s]{Ren2026}
+\newrefsection
+
+\setcounter{footnote}{0}
+\renewcommand*{\thefootnote}{\roman{footnote}}
+{\sffamily Isaac Ren\footnotemark}
+\footnotetext{KTH Royal Institute of Technology}
+\setcounter{footnote}{0}
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+
+\begin{paperabstract}
+  We extend the results of Guidolin, Lerario, Ren, and Scolamiero (arXiv:2402.08639) to show that the distance function between generic real complete intersections, viewed as a continuous selection of locally Lipschitz functions, is nondegenerate in a Morse-theoretic sense. We also give an upper bound for the number of critical points of such distance functions.
+\end{paperabstract}
+
+\section{Introduction}
+
+\subsection{Distance functions and critical points}
+
+This paper extends the results of \cite{GLRS2025} (Paper \ref{PC:GLRS2025}) to distance functions $\distYX \colon X \to \R$ between two real algebraic varieties $X$ and $Y$ in $\R^n$. The original paper considers distance functions as locally Lipschitz continuous selections of differentiable functions \cite{JongenPallaschke1988}, defines critical points following \cite{Clarke}, and studies the Morse theory for these functions presented in \cite{APS1997}. We direct the reader to the introduction of \cite{GLRS2025} for a more detailed history of the study of distance functions.
+
+In this paper, we focus on the theory of distance functions between algebraic varieties. These functions, and in particular their critical points, have been studied previously in specific cases. The Euclidean distance degree, introduced in \cite{EDD_Draisma}, is the number of complex critical points of the distance function from a generic point in ambient space, restricted to a real algebraic variety. The bottleneck degree, introduced in \cite{DiRocco_Eklund_Weinstein}, is the number of complex critical points of the distance function on a real algebraic variety, and can be seen as the number of complex lines orthogonal to two or more points of the variety. Our results generalize these two notions in the real setting.
+
+Outside of the algebraic context, we would like to highlight the following works. \cite{Yomdin1981}, an earlier study on properties of critical points of distance functions from generically embedded manifolds, was the basis for \cref{T:Yomdin}. \cite{cheeger} studies the distance function from a Riemannian manifold to a single point, while \cite{bobrowski2014distance} considers the distance function from $\R^n$ to a finite set of points. More recently, \cite{song2023generalized} defines a Morse theory (slightly different from ours) for distance functions from a smooth bounded surface, and \cite{ACSD2023} show that the number of critical points of the distance function from a generically embedded manifold is finite.
+
+\subsection{Main results}
+
+In order to develop a Morse theory for distance functions, we first need a notion of differential. This is provided by Clarke's \myemph{subdifferential} (\cref{def:subdifferential}), which we define more generally for locally Lipschitz functions as the convex hull of all limits of gradients when converging to a point. This allows us to define \myemph{critical points} as points where the subdifferential contains $0$ (\cref{D:critical}). In order to talk about nondegenerate critical points, we restrict our functions to \myemph{continuous selections} of $\mathcal{C}^2$ functions (\cref{D:continuous-selection}): a continuous selection from a finite set $\{f_0, \ldots, f_m\} \subseteq \mathcal{C}^2(X, \R)$ functions is a continuous function $f \colon X \to \R$ that is equal to one (or more) of the $f_i$ at each point $x \in X$. With this, we can finally define \myemph{nondegenerate} critical points for continuous selections (\cref{D:nondegenerate-crit-pt}).
+
+Given these definitions, we show that, generically, the distance function $\distYX$ between two complete intersections has no degenerate critical points, and that it has a finite number of (nondegenerate) critical points. To properly state this, we first need to show that $\distYX$ is a continuous selection. Moreover, to make sense of the genericity claim, we consider complete intersections: for all $m \in \{1, \ldots, n\}$ and $d \geq 0$, we denote by $\Poly_d$ the space of real polynomials of degree at most $d$ and $\CI_d^m$ the open subset of $(\Poly_d)^m$ whose elements generate complete intersections (see \cref{D:complete-intersection}). As in \cite{GLRS2025}, we collect our main results into one theorem:
+
+\begin{theorem*}
+  Fix $\ell, m \in \{1, \ldots, n\}$ and $d_1, d_2 \geq 0$. Let $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, and let $X = V(\vec{p})$ and $Y = V(\vec{q})$ be the defined varieties. Then, generically,
+  \begin{enumerate}
+  \item
+    if $d_2 \geq 2$, then for every $z \in \R^n$ the set $B(z, \dist_Y(z)) \cap Y$ of closest points in $Y$ to $z$ forms a nondegenerate simplex: in particular, there are at most $n + 1$ closest points (\cref{T:Yomdin});
+  \item
+    if $d_1, d_2 \geq 3$, then $\distYX$ has a finite number of critical points (\cref{T:finite-crit-pt}); in particular, for all $k \in \{1, \ldots, n\}$, denoting by $C_{k, *}(\distYX)$ the set of critical points in $X \setminus Y$ with exactly $k + 1$ closest points (\cref{D:k-crit-pt}), we have
+    \[
+      \#C_{\lini, *}(\distYX) \leq c(k, \ell, m, n) d_1^n d_2^{n (k + 1)},
+    \]
+    for some constant $c(k, \ell, m, n) > 0$ depending on $k$, $\ell$, $m$, and $n$ only;
+  \item
+    if $d_1 \geq 3$ and $d_2 \geq 4$, then the function $\distYX$ is a continuous selection near each of its critical points (\cref{C:C2selection});
+  \item
+    if $d_1, d_2 \geq 4$, then every critical point of $\distYX$ is nondegenerate (\cref{T:genericity-nondegeneracy}).
+  \end{enumerate}
+\end{theorem*}
+
+Analogous results hold when $X = \R^n$: see \cref{R:bottleneck-bounds,R:X-is-Rn-case}.
+In summary, the distance function between complete intersections is generically nondegenerate (i.e., its critical points are all nondegenerate) in a Morse-theoretic sense.
+
+\subsection{Structure of the paper}
+
+In \cref{S:prelim} we recall useful results from \cite{GLRS2025}. In \cref{S:Genericity-algebraic} we prove the main results, closely following the structure of \cite[Section 4]{GLRS2025}. This paper, in particular \cref{S:Genericity-algebraic}, is quite notation-heavy; Appendix \ref{A:not} provides a broad overview of the notation conventions used throughout the text.
+
+\subsection{Acknowledgments}
+The author wishes to thank Antonio Lerario for interesting and productive discussions and Giacomo Maletto for helpful feedback.
+
+\section{Preliminaries}
+\label{S:prelim}
+
+\subsection{Critical points for locally Lipschitz functions}
+
+In this section we recall the notions that will allow us to study distance functions in a Morse-theoretic way: subdifferentials, critical points, and nondegeneracy. The definitions and results of this section come from \cite{GLRS2025}.
+
+\begin{definition}[Subdifferential]
+\label{def:subdifferential}
+  Let $X$ be a Riemannian manifold and $f \colon X \to \R$ a locally Lipschitz function. The \myemph{subdifferential of $f$ at $x\in X$}, denoted by $\partial_x f$, is the convex body defined by
+  \[
+    \partial_x f \coloneq \conv \left\{ \left. \lim_{x_k \to x, x_k \in \Omega(f)} \nabla f(x_k) \; \right| \; \textnormal{the limit exists} \right\} \subseteq T_x X.
+  \]
+  Note that at a strictly differentiable point, the subdifferential reduces to a singleton $\partial_x f = \{\nabla f(x)\}$.
+\end{definition}
+
+\begin{proposition}[{\cite{GLRS2025}}]
+\label{P:subdiff}
+  Let $Y \subseteq \R^n$ be either closed and definable or smooth and $X \subseteq \R^n$ be a smooth manifold transverse to both $Y$ and $\overline{M_Y}$. Then for every $x \in X$,
+  \[
+    \partial_x(\distYX) = \proj_{T_x X} \left( \conv \left\{ \left.
+      \frac{x - y}{\|x - y\|} \, \right| \, y \in B(x, \dist_Y(x)) \cap Y
+    \right\} \right),
+  \]
+  where $\proj_{T_x X} \colon \R^n \to T_xX$ denotes the orthogonal projection.
+\end{proposition}
+
+\begin{definition}[Critical points]
+\label{D:critical}
+  We say that $x \in X$ is a \myemph{critical point} of a locally Lipschitz function $f \colon X \to \R$ if $0$ belongs to $\partial_x f$. We denote by $C(f) \subseteq X$ the set of critical points of $f$.
+  
+  A point $x\in X$ is said to be a \myemph{regular point} of $f$ if it is not critical; a \myemph{critical value} of $f$ is a real number $c \in \R$ such that $f^{-1}\{c\} \cap C(f) \neq \varnothing$ and a \myemph{regular value} of $f$ is a real number $c \in \R$ which is not critical.
+\end{definition}
+
+\begin{definition}[Continuous selections]
+\label{D:continuous-selection}
+  Let $X$ be a smooth manifold and let $\{f_0, \ldots, f_m\}$ be a finite subset of $\mathcal{C}^2(X, \R)$. We will say that $f \colon X \to \R$ is a \myemph{continuous selection} from $\{f_0, \ldots, f_m\}$ if $f$ is continuous and for every $x \in X$ there exists $i \in \{0, \ldots, m\}$ such that $f(x) = f_i(x)$.
+  In this case we will write $f\in \CS(f_0, \ldots, f_m)$.
+\end{definition}
+
+If $f \in \CS(f_0, \ldots, f_m)$, for $i \in \{0, \ldots, m\}$ we denote by $S_i \subseteq X$  the set
+\[
+  S_i \coloneq \left\{ x \in X \mid f(x) = f_i(x) \right\}.
+\]
+Then, given $x \in X$, the \myemph{effective index set} of $f \in \CS(f_0, \ldots, f_m)$ at $x \in X$ is defined to be
+\[
+  I(x) \coloneq \left\{ i \in \{0, \ldots, m\} \mid x \in \overline{\operatorname{int}(S_i)} \right\}.
+\]
+Note that continuous selections (of continuously differentiable functions) are locally Lipschitz \cite{JongenPallaschke1988}, so we can talk about their critical points using the definitions above. Again, below we assume that $X$ is endowed with some Riemannian structure, so as to identify its tangent and cotangent bundles.
+
+\begin{definition}[Nondegenerate critical points of continuous selections]
+\label{D:nondegenerate-crit-pt}
+  Let $f\in \CS(f_0, \ldots, f_m)$. A critical point $x \in C(f)$ is said to be \myemph{nondegenerate} (with respect to $f_0, \ldots, f_m$) if the following conditions are satisfied:
+  \begin{enumerate}
+  \item
+    For every $i\in I(x)$ the set of differentials $\{D_x f_j \mid j \in I(x) \setminus \{i\}\}$ is linearly independent.
+  \item
+    Denote by $(\lambda_i)_{i\in I(x)}$ the unique list of nonnegative real numbers such that 
+    \[
+      \sum_{i \in I(x)} \lambda_i = 1
+      \quad \textnormal{and} \quad
+      \sum_{i \in I(x)} \lambda_i D_x f_i = 0,
+    \]
+    and by $\lambda f \colon X \to \R$ the function defined by $\lambda f(z) \coloneq \sum_{i \in I(x)} \lambda_i f_i(z).$ Then the second differential of $\lambda f$ is nondegenerate on the subspace
+    \[
+      T(x) \coloneq \bigcap_{i \in I(x)} \ker(D_x f_i).
+    \]
+  \end{enumerate}
+  We denote by $\lini(x) \coloneq \#I(x) - 1$ and call this number the \myemph{piecewise linear index}, and by $\quadi(x)$ the negative inertia index of the restriction of the second differential of $\lambda f$ to $T(x)$. We call $\quadi(x)$ the \myemph{quadratic index}.
+
+  Clearly, in the case $X$ is endowed with a Riemannian metric, the above conditions can be rephrased using the gradients of the $f_i$ instead of their differential. Moreover, the nondegeneracy of the second differential of $\lambda f$ on $T(x)$ is equivalent to the nondegeneracy of the restriction of the corresponding quadratic form on it.
+\end{definition}
+
+\begin{remark}
+\label{remark:restriction}
+  An important remark concerns the reformulation of these conditions in the case $X$ is a submanifold of another manifold $N$ and we are considering the restriction of a continuous selection $f = g|_X$ where $g \in \CS(g_0, \ldots, g_k)$ with $g_i \in \mathcal{C}^2(N, \R)$, so that
+  \[
+    f_i = g_i|_{X}, \quad i = 0, \ldots, k.
+  \]
+  Suppose that $X$ is given as the zero set of a set of transversally intersecting regular equations $p_j = 0$, with $p_j \colon N \to \R$ a smooth function (in \cref{S:Genericity-algebraic} we are interested in the case $N = \R^n$ and the $p_j$ are polynomials). Then, for all $i \in \{0, \ldots, k\}$,
+  \[
+    D_x f_i = D_x g_i|_{T_x X} = D_x g_i|_{\bigcap_j \ker(D_x p_j)}.
+  \]
+  Rewriting the above conditions with this notation, we see that $x \in X$ is a nondegenerate critical point of $f = g|_X$ if and only if the following conditions are satisfied:
+  \begin{enumerate}
+  \item
+    For every $i_0 \in I(x)$ the set of differentials $\{D_x g_i|_{\bigcap_j \ker(D_x p_j)} \mid i \in I(x) \setminus \{i_0\}\}$ is linearly independent;
+  \item
+  \label{i:degen2}
+    Denote by $(\lambda_i)_{i\in I(x)}$ and $(\mu_j)_j$ the unique list of numbers such that the $\lambda_i$ are nonnegative,
+    \begin{equation}
+    \label{E:restriction-critical}
+      \sum_{i \in I(x)} \lambda_i = 1,
+      \quad \textnormal{and} \quad
+      \sum_{j = 1}^\ell \mu_j D_x p_j + \sum_{i \in I(x)} \lambda_i D_x g_i = 0,
+    \end{equation}
+    and by $\lambda f \colon X\to \R$ the function defined by $\lambda f(z) \coloneq \sum_{i \in I(x)} \lambda_i f_i(z)$. Then the second differential of $\lambda f$ is nondegenerate on the subspace
+    \[
+      T(x) \coloneq \bigcap_{i\in I(x)} \ker(D_x f_i|_{\bigcap_j \ker(D_x p_j)}) = \left( \bigcap_{j = 1}^\ell \ker(D_x p_j) \right) \cap \left( \bigcap_{i \in I(x)} \ker(D_x f_i) \right).
+    \]
+  \end{enumerate}
+  In order to compute the second differential of $\lambda f$ on $T(x)$ using the original functions, we proceed as follows. We consider the function
+  \[
+    \widetilde{\lambda g} \coloneq \sum_{j = 1}^\ell \mu_j p_j + \sum_{i\in I(x)} \lambda_i g_i \colon N \to \R.
+  \]
+  Observe that, since $X = \{p_j = 0, j = 1, \ldots, \ell\}$, then $\widetilde{\lambda g}|_{X} = \lambda f$. Moreover, by the second equation of \eqref{E:restriction-critical}, $\widetilde{\lambda g}$ has a critical point at $x \in N$ and therefore the second differential of its restriction to $X$ equals the restriction of its second differential to $T_x X$. This means that the condition that the second differential of $\lambda f$ is nondegenerate on $T(x)$ is equivalent to the condition that
+  \[
+    \sum_{j = 1}^\ell \mu_j D_x^2 p_j + \sum_{i \in I(x)} \lambda_i D_x^2 g_i
+  \]
+  is nondegenerate on $T(x)$.
+\end{remark}
+
+Denote by $\varphi \colon NY \to \R^n$ the restriction of the exponential map of $\R^n$ to the normal bundle of $Y$. Note that we can think of elements in $NY$ as pairs $(y, v) \in \R^{2n}$ with $y \in Y$ and $v \in N_y Y$ and $\varphi(y, v) = y + v.$
+
+\begin{proposition}[{\cite{GLRS2025}}]
+\label{P:regular-value}
+  Suppose that $Y$ is smooth and let $x \in \R^n$ be a regular value of $\varphi \colon NY \to \R^n$. Then
+  \begin{enumerate}
+  \item
+    $B(x, \dist_Y(x)) \cap Y$ is a finite set $\{y_0, \ldots, y_k\}$,
+  \end{enumerate}
+  and for all $\varepsilon > 0$ small enough, there exists $\delta >0$ such that
+  \begin{enumerate}[resume]
+  \item
+    for every $i \in \{0, \ldots, k\}$, the function $f_i \coloneq \dist_{B(y_i, \varepsilon) \cap Y}$ is $\mathcal{C}^2$ on $B(x, \delta)$;
+  \item
+    the function $\dist_Y|_{B(x, \delta)}$ is a continuous selection of the $f_i$: specifically, $\dist_Y|_{B(x, \delta)} = \min_i f_i$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+\label{def:setnondegcritpts}
+  Let $Y \subseteq \R^n$ be closed and definable and $X$ be a smooth manifold. We say that a point $x$ of $X$ is a \myemph{nondegenerate critical point of $\distYX$} if $\distYX$ is a continuous selection at $x$ and $x$ is a nondegenerate critical point for the continuous selection. For every $\lini, \quadi \in \N$ we denote by $C_{\lini, \quadi}(X,Y)$ the set of nondegenerate critical points of $\distYX$ with piecewise linear index $\lini$ and quadratic index $\quadi$ and which are not in $X \cap Y$.
+\end{definition}
+
+\subsection{Multijet parametric transversality}
+
+In this section we prove a useful technical tool, \cref{C:submersion}, which is the only new statement compared to \cite[Section 4.1]{GLRS2025}, and is only added for convenience. We first recall the following classic result, which we adapt from \cite[Chapter 3, Theorem 2.7]{Hirsch1976}:
+
+\begin{theorem}[Parametric transversality]
+\label{T:parametric-transversality}
+  Let $M$, $N$, $P$ be smooth manifolds, $W \subseteq N$ a submanifold of $N$, and $F \colon P \times M \to N$ a smooth map. For all $p$ in $P$, we denote by $F_p$ the map $F(p, -) \colon M \to N$.
+
+  If $F$ is transverse to $W$, then the set $\{p \in P \mid F(p, -) \pitchfork W\}$ is residual in $P$. In other words, for generic $p \in P$, the map $F_p$ is transverse to $W$.
+\end{theorem}
+
+We immediately have the following corollary.
+
+\begin{corollary}
+\label{C:param-trans-cor}
+  Let $F \colon P \times M \to N$ be a submersion and $W \subseteq N$ a submanifold. If $\codim_N W = \dim M$, then for generic $p \in P$ we have $\dim(F(p, M) \cap W) = 0$. If $\codim_N W > \dim M$, then for generic $p \in P$ we have $F(p, M) \cap W = \varnothing$.
+\end{corollary}
+
+We will be applying these transversality results to \myemph{jet spaces}.
+
+\begin{definition}[jets and multijets]
+  Let $n, m, r \geq 0$ be integers. The space of \myemph{jets of order $r$ from $\R^m$ to $\R^n$} is
+  \[
+    J^r(\R^m, \R^n) \coloneq \R^m \oplus \bigoplus_{\ell = 0}^r (\Poly_{\ell, m})^n,
+  \]
+  where $\Poly_{\ell, m}$ is the space of homogeneous polynomials of degree $\ell$ in $m$ variables.
+  
+  Let $f \colon \R^m \to \R^n$ be a smooth function and $x \in \R^m$. The \myemph{jet of order $r$ of $f$ at $x$} is
+  \begin{align*}
+    j^r(f)(x) & \coloneq \left( \frac{\partial^{|\alpha|} f}{\partial x^\alpha}(x) \right)_{\alpha \in \N^m, |\alpha| \leq r} \in J^r(\R^m, \R^n) \\
+    & = \left(x, f(x), \ldots, \frac{\partial f}{\partial x_i}(x), \ldots, \frac{\partial^r f}{\partial^r x_i}, \ldots \right).
+  \end{align*}
+  The identification with polynomial spaces comes from identifying the partial derivative $\frac{\partial^{|\alpha|} f}{\partial x^\alpha}(x)$ with the coefficient in front of the monomial $x^\alpha$.
+  
+  Let $k \geq 1$ be an integer. The space of \myemph{$k$-multijets of order $r$} is just $k$ copies of the space of jets of order $r$:
+  \[
+    {}_k J^r(\R^m, \R^n) \coloneq J^r(\R^m, \R^n)^k.
+  \]
+  Similarly, let $f \colon \R^m \to \R^n$ be a smooth function and $\vec{x} \coloneq x_1, \ldots, x_k$ distinct points in $\R^m$ (we write $\vec{x} \in \R^{km} \setminus \Delta$, where $\Delta$ is the \myemph{fat diagonal} of $\R^m$, consisting of all tuples with duplicate points). The \myemph{$k$-multijet of order $r$ of $f$ at $x_1, \ldots, x_k$} is
+  \[
+    {}_k j^r(\vec{x}) \coloneq (j^r(f)(x_i))_{i = 1, \ldots, k}.
+  \]
+\end{definition}
+
+We study jets through parametric jet maps of the form
+\begin{equation}
+\label{E:jet-map}
+  F \colon \left\{
+  \begin{array}{ccc}
+    \Poly_d \times \R^{nk} & \to & {}_k J^r(\R^n, \R) \\
+    (p, \vec{x}) & \mapsto & {}_k j^r(p)(\vec x).
+  \end{array}
+  \right.
+\end{equation}
+The next result is a key technical ingredient for the rest of the paper.
+
+\begin{theorem}
+\label{T:submersion}
+  Let $\Poly_d$ be the space of real polynomials of degree $d$ in $\R^n$. There exists a function $d(n, k, r)$ such that, for all $d \geq d(n, k, r)$, the map $F \colon \Poly_d \times \R^{nk} \to {}_k J^r(\R^n, \R)$ is a submersion.
+\end{theorem}
+
+\begin{proof}
+  Fix $d$ a polynomial degree, $p \in \Poly_d$ a polynomial, and $\vec{x} \coloneq (x_1, \ldots, x_k) \in \R^{nk}$ points in $\R^n$. The differential of $F$ at $(p, \vec{x})$ is the linear map
+  \[
+    DF_{p, \vec{x}} \colon \left\{
+    \begin{array}{ccc}
+      T_{p, \vec{x}} (\Poly_d \times \R^{nk})
+      & \to
+      & T_{F(p, \vec{x})} ({}_k J^r(\R^n, \R))
+    \\
+      (\dot{p}, \vec{\dot{x}})
+      & \mapsto
+      & \begin{array}{c}
+        (\vec{\dot{x}}, \ldots, \dot{p}(x_i) + \nabla p(x_i)^\TT \dot{x}_i, \ldots, \\
+        \ldots, \nabla \dot{p}(x_i) + \nabla^2 p(x_i)^\TT \dot{x}_i, \ldots),
+      \end{array}
+    \end{array}
+    \right.
+  \]
+  where $T_{p, \vec{x}} (\Poly_d \times \R^{nk}) = \Poly_d \times \R^{nk}$ and $T_{F(p, \vec{x})} ({}_k J^r(\R^n, \R)) = \R^{nk} \oplus \bigoplus_{\ell = 0}^r (\Poly_{\ell, n})^k$.
+
+  Let $(\vec{\dot{z}}, \dot{U}) = (\vec{\dot{z}}, \vec{\dot{u}}^{(1)}, \ldots, \vec{\dot{u}}^{(r)}) \in \R^{nk} \oplus \bigoplus_{\ell = 1}^r (\Poly_{\ell, n})^k$. For $F$ to be a submersion at $(p, \vec{x})$, it suffices to find $(\dot{p}, \vec{\dot{x}})$ such that $DF_{p, \vec{x}}(\dot{p}, \vec{\dot{x}}) = (\vec{\dot{z}}, \dot{U})$. This is linear in the coefficients of $\dot{p}$ and in monomials in $\vec{\dot{z}}$. We find that $\vec{\dot{x}} = \vec{\dot{z}}$, and then there are $k \sum_{\ell = 0}^r \binom{n}{\ell}$ equations in the coefficients of $\dot{p}$. For there to be a solution in general, it suffices that
+  \[
+    \dim \Poly_d = \binom{n + d}{d} \geq k \sum_{\ell = 0}^r \binom{n}{\ell}.
+  \]
+  We set $d(n, k, r)$ to be the smallest $d$ satisfying this inequality.
+\end{proof}
+
+\begin{corollary}
+\label{C:submersion}
+  Let $r_1$ and $r_2$ be jet orders, and $L \geq 0$ an integer. For all $d_1 \geq d(n, k, r_1)$ and $d_2 \geq d(n, k, r_2)$, the map
+  \[
+    F \colon \left\{
+    \begin{array}{ccc}
+      \begin{array}{c}
+        \CI_{d_1}^\ell \times \CI_{d_2}^m \times \R^n \times {} \\
+        (\R^{n(k + 1)} \setminus \Delta) \times \R^L
+      \end{array}
+      & \to
+      & J^{r_1}(\R^n, \R^\ell) \times {}_k J^{r_2}(\R^n, \R^m) \times \R^L
+    \\
+      (\vec{p}, \vec{q}, x, \vec{y}, \vec{\kappa})
+      & \mapsto
+      & (j^{r_1}(\vec{p})(\vec{x}), {}_k j^{r_2}(\vec{q})(\vec{y}), \vec{\kappa})
+    \end{array}
+    \right.
+  \]
+  is a submersion.
+\end{corollary}
+
+\begin{proof}
+  We follow the same reasoning as in the proof of \cref{T:submersion}: we want to solve an equation of the form
+  \[
+    DF_\bullet (\vec{\dot{p}}, \vec{\dot{q}}, \dot{x}, \vec{\dot{y}}, \vec{\dot{\kappa}}) =
+    \begin{array}[t]{lcccccl}
+      (
+      & \dot{z}, \vec{\dot{u}},
+      && \vec{\dot{w}}, \dot{V},
+      && \vec{\dot{t}}
+      & )
+    \\
+      \in
+      & T_\bullet J^{r_1}(\R^n, \R^\ell)
+      & \oplus
+      & T_\bullet {}_k J^{r_2}(\R^n, \R^m)
+      & \oplus
+      & T_\bullet \R^L,
+    \end{array}
+  \]
+  where $\mathord{\bullet} = (\vec{p}, \vec{q}, x, \vec{y}, \vec{\kappa})$ is a point of the codomain and $(\vec{\dot{p}}, \vec{\dot{q}}, \dot{x}, \vec{\dot{y}}, \vec{\dot{\kappa}})$ are the unknowns. As before, we first find $\dot{x} = \dot{z}$ and $\vec{\dot{y}} = \vec{\dot{w}}$. Moreover, we have $\vec{\dot{\kappa}} = \vec{\dot{t}}$. The remaining equations each only depend on the coefficients of a single polynomial $\dot{p}_i$ or $\dot{q}_j$, and are identical to those of \cref{T:submersion}. Therefore, since we assume $d_1 \geq d(n, k, r_1)$ and $d_2 \geq d(n, k, r_2)$, we know that we can solve for $\vec{\dot{p}}$ and $\vec{\dot{q}}$. We conclude that $F$ is a submersion.
+\end{proof}
+
+\begin{example}
+\label{Ex:poly-degree}
+  If $k \leq n + 1$ and $r = 1$, then we can take $d(n, k, r) = 3$. Indeed, for all $n \geq 1$, $\binom{n + 3}{3} \geq (n + 1)^2 \geq k (\binom{n}{0} + \binom{n}{1})$.
+  
+  If $k \leq n + 1$ and $r = 2$, then we can take $d(n, k, r) = 4$. Indeed, we compute
+  \begin{align}
+    \dim \Poly_d - k \sum_{\ell = 0}^r \binom{n}{\ell} & \geq \dim \Poly_d - (n + 1) \sum_{\ell = 0}^r \binom{n}{\ell} \nonumber \\
+    & = \binom{n + 4}{4} - (n + 1)(\binom{n}{0} + \binom{n}{1} + \binom{n}{2}) \nonumber \\
+    & = \frac{(n + 1)(n + 2)(n + 3)(n + 4)}{24} - (n + 1)(1 + n + \frac{n (n - 1)}{2}) \nonumber \\
+    & = \frac{n + 1}{24} ((n + 2)(n + 3)(n + 4) - 12 (n^2 + n + 2) \nonumber \\
+    & = \frac{n + 1}{24} (n^3 - 3n^2 + 14n). \label{E:simplified}
+  \end{align}
+  We determine the sign of \eqref{E:simplified} by looking at the derivative of the last factor: $3n^2 - 6n + 14$ has discriminant $36 - 4 \cdot 3 \cdot 14 < 0$ and value $14 > 0$ at $n = 0$, so the derivative is always positive. At $n = 1$, we have $n^3 - 3n^2 + 14n = 12$, so for all $n \geq 1$, \eqref{E:simplified} is positive.
+\end{example}
+
+\section{Genericity in the algebraic setting}
+\label{S:Genericity-algebraic}
+
+Throughout this section, we assume $n \geq 1$. We consider $\ell + m$ real $n$-variable polynomials $p_1, \ldots, p_\ell, q_1, \ldots, q_m$ and two algebraic sets $X \coloneq V(p_1, \ldots, p_\ell)$ and $Y \coloneq V(q_1, \ldots, q_m)$.
+
+\subsection{Setup and preliminary genericities}
+
+\begin{notation}
+\label{N:not}
+  For $d \in \N$, we denote by $\Poly_d$ the set of polynomials on $\R^n$ of degree at most $d$.
+  
+  We will be handling many tuples of functions and vectors. Given functions $\vec{p} = p_1, \ldots, p_\ell$ and vectors $\vec{x} = x_1, \ldots, x_k$, we denote by $\vec{p}(\vec{x})$ the tuple
+  \[
+    (p_1(x_1), \ldots, p_1(x_k), p_2(x_1), \ldots, p_2(x_k), \ldots, p_\ell(x_1), \ldots, p_\ell(x_k)).
+  \]
+  We will also encounter doubly indexed lists of numbers; these are notated with uppercase symbols, e.g.\ $\Xi = (\xi_{ij})$. We also encounter double indexed lists of matrices; these are notated with the blackboard font, e.g.\ $\mathbb{H} = (H_{ij})$.
+\end{notation}
+
+\begin{definition}
+\label{D:complete-intersection}
+  Let $m \in \{1, \ldots, n\}$ and $d \geq 0$. We consider the set of complete intersections in $\R^n$ of codimension $m$ whose defining polynomials all have degree at most $d$. Denote by $\CI_d^m$ the open subset of $(\Poly_d)^m$ whose elements generate such complete intersections.
+  
+  To prove results for generic complete intersections, it then suffices to prove the result for a generic element of $\CI_d^m$, for all $m$ and $d$.
+\end{definition}
+
+We now present some preliminary results about for generic complete intersections. First of all, by Bertini's theorem, generic complete intersections are smooth and their defining hypersurfaces intersect transverally. Next, we show the following:
+
+\begin{proposition}
+\label{P:transverse-Y-MY}
+  For $d_1, d_2 \geq 0$ and generic polynomials $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, $X$ is transverse to both $Y$ and $\overline{M_Y}$.
+\end{proposition}
+
+\begin{proof}
+  We prove the statement by showing that the set
+  \[
+    S \coloneq \{(\vec{p}, \vec{q}) \in \CI_{d_1}^\ell \times \CI_{d_2}^m \mid X \not \pitchfork Y \text{ or } X \not \pitchfork \overline{M_Y}\}
+  \]
+  is semialgebraic of measure $0$ in $\CI_{d_1}^\ell \times \CI_{d_2}^m$. Indeed, this would imply that the set $S$ has codimension at least $1$, making it nowhere dense, and thus its complement is a residual set.
+  
+  The fact that $S$ is semialgebraic follows from the fact that $\overline{M_Y}$ is semialgebraic: taking a stratification of $\overline{M_Y}$, we see that being transverse to it is a semialgebraic property; the same is true for $Y$.
+  
+  Next, let $Z$ be equal to $Y$ or a stratum of $\overline{M_Y}$, and consider the evaluation map $F^{\ev} \colon \CI_{d_1}^\ell \times Z \to \R^\ell$ which sends the pair $(\vec{p}, x)$ to $\vec{p}(x)$. $F^{\ev}$ is a submersion: given $(\vec{p}, x)$ in $\CI_{d_1}^\ell$ and $\vec{\dot{z}}$ in $T_{F^{\ev}(\vec{p}, x)} \R^\ell \cong \R^\ell$, taking for each $i \in \{1, \ldots, \ell\}$ the constant polynomial $\dot{p}_i \equiv \dot{z}_i$, we have
+  \[
+    D F^{\ev}_{\vec{p}, x}(\vec{\dot{p}}, 0) = (\dot{p}_i(x) + \nabla p_i(x)^\TT \cdot 0)_{1 \leq i \leq \ell} = \vec{\dot{z}}.
+  \]
+  By definition, $V(\vec{p})$ is transverse to $Z$ if, and only if, at all points $x \in V(\vec{p}) \cap Z$ the tangent spaces $T_x V(\vec{p})$ and $T_x Z$ generate the ambient space $\R^n$. If such a point $x$ were a critical point of one of the functions $p_i|_Z$, then the vector $\nabla p_i|_Z(x)$ would be orthogonal to both $T_x V(\vec{p})$ and $T_x Z$, implying that $T_x V(\vec{p}) + T_x Z \neq \R^n$, which is equivalent to non-transversality. Therefore, if $V(\vec{p})$ is transverse to $Z$, then every point $x$ in $V(\vec{p}) \cap Z$ is regular for each $p_i|_Z$, i.e.\ $0$ is a regular value of  each $p_i|_Z$. This motivates considering the set
+  \[
+    \{\vec{p} \in \CI_{d_1}^\ell \mid 0 \text{ regular value of each } p_i|_Z\},
+  \]
+  which, by parametric transversality with $W = \{0\}$ (\cref{T:parametric-transversality}), is residual in $\CI_{d_1}^\ell$. Since $\overline{M_Y}$ can be stratified into finitely many disjoint strata, we conclude from the above reasoning that the set $\{\vec{p} \in \CI_{d_1}^\ell \mid X \pitchfork Y \text{ and } X \pitchfork \overline{M_Y}\}$ is contained in the above set, and therefore is residual in $\CI_{d_1}^\ell$. Thus, for all $\vec{q}$ in $\CI_{d_2}^m$, the set $S(\vec{q}) \coloneq \{\vec{p} \in \CI_{d_1}^\ell \mid X \not \pitchfork Y \text{ or } X \not \pitchfork \overline{M_Y}\}$ is semialgebraic of measure $0$. By Fubini's theorem, we conclude that $S$ also has measure $0$.
+\end{proof}
+
+\subsection{Finite number of closest points}
+
+In this section we prove an analogue of \cite[Proposition 3]{Yomdin1981}, showing that generically the function $m_Y$ is bounded by $n+1$. 
+
+\begin{theorem}[cf.\ {\cite[Proposition 3]{Yomdin1981}}]
+\label{T:Yomdin}
+  For the generic $\vec{q} \in (\Poly_d)^m$ with $d \geq 2$, writing $Y = V(\vec{q})$, for every $x \in \R^n$ the set $B(x, \dist_Y(x)) \cap Y$ is a nondegenerate simplex with at most $n + 1$ points.
+\end{theorem}
+
+\begin{proof}
+  For all $k \in \{0, \ldots, n + 1\}$, define the parameterized jet map
+  \[
+    F_k \colon \left\{
+    \begin{array}{ccc}
+      (\Poly_d)^m \times \R^n \times (\R^{n(k + 1)} \setminus \Delta)
+      & \to
+      & {}_{k + 1} J^0(\R^n, \R^{m + 1})
+    \\
+      (\vec{q}, x, \vec{y})
+      & \mapsto
+      & (\vec{y}, \vec{q}(\vec{y}), \| x - \vec{y} \|^2)
+    \end{array}
+    \right.
+  \]
+  induced by the function $y \mapsto (\vec{q}(y), \| x - y \|^2)$. Its differential at a point $(\vec{q}, x, \vec{y})$ is
+  \[
+    DF_{k, (\vec{q}, x, \vec{y})} \colon \left\{
+    \begin{array}{ccc}
+      (\Poly_d)^m \times \R^n \times \R^{n (k + 1)}
+      & \to
+      & \R^{n (k + 1)} \times \R^{(k + 1) m} \times \R^{k + 1}
+    \\
+      (\vec{\dot{q}}, \dot{x}, \vec{\dot{y}})
+      & \mapsto
+      & \begin{array}{c}
+        (\vec{\dot{y}}, \ldots, \dot{q}_j(y_i) + \nabla q_j(y_i)^\TT \dot{y}_i, \ldots, \\
+        \ldots, 2(x - y_i)^\TT (\dot{x} - \dot{y}_i), \ldots).
+      \end{array}
+    \end{array}
+    \right.
+  \]
+  Let
+  \begin{align*}
+    & W_k \coloneq \\
+    & \left\{
+    (\vec z, S, \vec t) \in {}_{k + 1} J^0(\R^n, \R^{m + 1})
+    \left|
+    \begin{array}{l}
+      \forall i \in \{0, \ldots, k\}, \; \forall j \in \{1, \ldots, m\}, \; s_{ij} = 0, \\
+      \forall i \in \{1, \ldots, k\}, \; t_i = t_0
+    \end{array}
+    \right.
+    \right\}
+  \end{align*}
+  be a subspace of ${}_{k + 1} J^0(\R^n, \R^{m + 1})$ and let us prove that $F_k$ is transverse to $W_k$. Let $(\vec{q}, x, \vec{y}) \in (\Poly_d)^m \times \R^n \times (\R^{n(k + 1)} \setminus \Delta)$ such that $F_k(\vec{q}, x, \vec{y}) \in W_k$, and let $(\vec{\dot{z}}, \dot{S}, \vec{\dot{t}}) \in T_{F_k(\vec{q}, x, \vec{y})} {}_{k + 1} J^0(\R^n, \R^{m + 1})$. We are looking for $(\vec{\dot{q}}, \dot{x}, \vec{\dot{y}}) \in T_{(\vec{q}, x, \vec{y})} ((\Poly_d)^m \times \R^n \times (\R^{n(k + 1)} \setminus \Delta))$ and $(\vec{\dot{w}}, 0, 0) \in T_{F_k(\vec{q}, x, \vec{y})} W_k$ such that
+  \begin{align*}
+    (\vec{\dot{z}}, \dot{S}, \vec{\dot{t}}) & = DF_{k, (\vec{q}, x, \vec{y})} (\vec{\dot{q}}, \dot{x}, \vec{\dot{y}}) + (\vec{\dot{w}}, 0, 0) \\
+    & = (\vec{\dot{y}} + \vec{\dot{w}}, \ldots, \dot{q}_j(y_i) + \nabla q_j(y_i)^\TT \dot{y}_i, \ldots, 2(x - y_i)^\TT (\dot{x} - \dot{y}_i), \ldots).
+  \end{align*}
+  Firstly, we observe that $x$ is different from all the $y_i$. Indeed, if not, then we would have $\| x - y_i \|^2 = 0$ for all $i \in \{0, \ldots, k\}$, which contradicts the fact that the $y_i$ are distinct. So we can set $\dot{x} = 0$ and solve the equations $2(x - y_i)^\TT (\dot{x} - \dot{y}_i) = \dot{t}_i$ to obtain the $\dot{y}_i$.
+  Next, since $d \geq 2$, we can find each $\dot{q}_j$ by solving the equations $\dot{q}_j(y_i) + \nabla q_j(y_i)^\TT \dot{y}_i = \dot{s}_{ij}$. Indeed, we have $k + 1$ linear equations in the coefficients of $\dot{q}_j$ and $\dim \Poly_d = \binom{n + d}{d} \geq \binom{n + 2}{2} = \frac{(n + 2)(n + 1)}{2} \geq k + 1$, so a solution exists.
+  Finally, we choose $\vec{\dot{w}} = \vec{\dot{z}} - \vec{\dot{y}}$ and conclude that $F_k$ is transverse to $W_k$.
+  
+  By the parametric transversality theorem (\cref{T:parametric-transversality}), for generic $\vec{q}$, $F_k(\vec{q}, -)$ is transverse to $W_k$. Fix generic $\vec{q}$, let $x \in \R^n$, and take $k + 1$ points $y_0, \ldots, y_k$ from $B(x, \dist_Y(x)) \cap Y$. Then $F_k(\vec{q}, x, \vec{y}) \in W_k$, so we can write the transversality property:
+  \[
+    \im(DF_k(\vec{q}, -)_{x, \vec{y}}) + T_{F_k(\vec{q}, x, \vec{y})} W_k = T_{F_k(\vec{q}, x, \vec{y})} {}_{k + 1} J^0(\R^n, \R^{m + 1}),
+  \]
+  or more explicitly,
+  \[
+    \im(DF_k(\vec{q}, -)_{x, \vec{y}}) + \R^{n (k + 1)} \times 0^{(k + 1) m} \times \R (1, \ldots, 1) = \R^{n (k + 1)} \times \R^{(k + 1) m} \times \R^{k + 1}.
+  \]
+  Using the expression of $DF_k$ above, we know that
+  \[
+    DF_k(\vec{q}, -)_{x, \vec{y}} \colon (\dot{x}, \vec{\dot{y}}) \mapsto (\vec{\dot{y}}, \ldots, \nabla q_j(y_i)^\TT \dot{y}_i, \ldots, 2(x - y_i)^\TT (\dot{x} - \dot{y}_i), \ldots).
+  \]
+  In particular, when the terms $\nabla q_j(y_i)^\TT \dot{y}_i$ equal $0$, then we also have $(x - y_i)^\TT \dot{y}_i = 0$ because $x - y_i$ and $\nabla q_j(y_i)$ are collinear. Thus we need $((x - y_i)^\TT \dot{x})_i$ to span a supplementary space to $\R (1, \ldots, 1)$ (by a dimension argument). For this last part to be satisfied, we need the vectors
+  \[
+    \{(x - y_i) - (x - y_0)\}_{i = 1, \ldots, k} = \{y_i - y_0\}_{i = 1, \ldots ,k}
+  \]
+  to be linearly independent. This is equivalent to $y_0, \ldots, y_k$ forming a nondegenerate simplex in $\R^n$.
+  
+  Finally, we pick $\vec{q}$ transverse to every $W_k$ for $k \in \{1, \ldots, n + 1\}$: this is a generic choice. By the above arguments, any distinct set of at most $n + 2$ points in $B(x, \dist_Y(x)) \cap Y$ forms a nondegenerate simplex. We conclude that the set $B(x, \dist_Y(x)) \cap Y$ has at most $n + 1$ points (any more would lead to a contradiction with nondegeneracy) and that these points form a nondegenerate simplex.
+\end{proof}
+
+\subsection{Finite number of critical points}
+
+In this section we study the structure of critical points for the function $\distYX$. First, we define an indexing for the critical points of $\distYX$ without explicitly assuming that the function is a continuous selection, nor that the critical points are nondegenerate, which was the case in \cref{def:setnondegcritpts}.
+
+\begin{definition}[$k$-critical points]
+\label{D:k-crit-pt}
+  Let $X$ be a subset of $\R^n$ and $Y$ a closed definable subset of $\R^n$. For all $k \geq 0$, we define the \myemph{$k$-critical points of $\distYX$} as the critical points $x$ in $X \setminus Y$ of $\distYX$ such that $\#(B(x, \dist_Y(x)) \cap Y) = k + 1$.
+  We denote by $C_{k, *}(\distYX)$ the set of $k$-critical points of $\distYX$. 
+\end{definition}
+
+As in \cref{def:setnondegcritpts}, we exclude the case $x \in X \cap Y$. By \cref{T:Yomdin}, every critical point not in $Y$ is a $k$-critical point for some $k \in \{0, \ldots, n\}$. Moreover, when $x$ is a nondegenerate critical point, in the sense of \cref{def:setnondegcritpts}, then $k$ is equal to the piecewise linear index $k(x)$ of $x$. 
+
+\begin{definition}[Algebraic critical points]
+\label{D:algebraic-critical-points}
+  Let $d \geq 0$, $\vec{p} \in (\Poly_d)^\ell$, $\vec{q} \in (\Poly_d)^m$, and $k \geq 1$. We define the algebraic set
+  \[
+  \begin{array}{l}
+    C_k(\vec{p}, \vec{q}) \coloneq \\
+    \left\{
+      \left.
+      \begin{aligned}
+        x & \in \R^n, \\
+        y_0, \ldots, y_k & \in \R^{n(k + 1)}, \\
+        \lambda_0, \ldots, \lambda_k & \in \R^{k + 1}, \\
+        \mu_1, \ldots, \mu_\ell & \in \R^\ell, \\
+        \vec{\xi}_0, \ldots, \vec{\xi}_k & \in \R^{m(k + 1)}, \\
+        r & \in \R
+      \end{aligned}
+      \; \right| \;
+      \begin{aligned}
+        & \textstyle x = \sum_{j = 1}^\ell \mu_j \nabla p_j(x) + \sum_{i = 0}^k \lambda_i y_i, \\
+        & \textstyle \sum_{i = 1}^k \lambda_i = 1, \\
+        & \textstyle \forall j \in \{1, \ldots, \ell\}, \; p_j(x) = 0, \\
+        & \textstyle \forall i \in \{0, \ldots, k\}, \; \forall j \in \{1, \ldots, m\}, \; q_j(y_i) = 0, \\
+        & \textstyle \forall i \in \{0, \ldots, k\}, \; \|x - y_i\|^2 = r^2, \\
+        & \textstyle \forall i \in \{0, \ldots, k\}, \; \sum_{j = 1}^m \xi_{ij} \nabla q_j(y_i) = x - y_i
+      \end{aligned}
+    \right\}.
+  \end{array}
+\]
+We then define the \myemph{algebraic $k$-critical points w.r.t.\ $\vec{p}$ and $\vec{q}$} as the set of points $x \in \R^n$ in the projection of $C_k(\vec{p}, \vec{q})$ on the first component.
+\end{definition}
+
+\begin{lemma}
+\label{L:algebraic-critical-points}
+  For generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, every critical point $x$ of $\distYX$ is an algebraic $k$-critical point for some $k \in \{0, \ldots, n\}$.
+\end{lemma}
+
+\begin{proof}
+  By \cref{P:transverse-Y-MY}, we can take $\vec{p}$ and $\vec{q}$ generically such that $X$ is transverse to both $Y$ and $\overline{M_Y}$. Let $x$ be an element of $X$. By \cref{P:subdiff}, we have
+  \[
+    \partial_x f = \proj_{T_x X} \left( \conv \left\{ \left. \frac{x - y}{\| x - y\|} \; \right| \; y \in B(x, \dist_Y(x)) \cap Y \right\} \right).
+  \]
+  Recall that $x$ is a critical point if $0$ belongs to this set. By \cref{T:Yomdin}, for generic $\vec{p}$ and $\vec{q}$ in the open subsets $\CI_{d_1}^\ell \subseteq (\Poly_{d_1})^\ell$ and $\CI_{d_2}^m \subseteq (\Poly_{d_2})^m$, respectively, the set $B(x, \dist_Y(x)) \cap Y$ is finite with at most $n + 1$ elements. Moreover, for each point $y$ in $B(x, \dist_Y(x)) \cap Y$, the function $y \mapsto \| x - y \|$ reaches a local minimum at $x$, so $x - y$ belongs to the subspace spanned by the $\nabla q_j(y)$.
+  
+  Therefore, if $x$ is a critical point of $\distYX$, then there exist $k \in \{0, \ldots, n\}$, $y_0, \ldots, y_k$ in $Y$, $\lambda_0, \ldots, \lambda_k$ in $[0, 1]$, $\mu_1, \ldots, \mu_\ell$ in $\R$, and $\Xi = (\xi_{ij})_{\substack{0 \leq i \leq k \\ 1 \leq j \leq m}}$ in $\R^{(k + 1) \times m}$ such that
+  \begin{equation}
+  \label{eq:criticalabove}
+  \begin{gathered}
+    \sum_{i = 0}^k \lambda_i = 1, \\
+    \sum_{i = 0}^k \lambda_i (x - y_i) = \sum_{j = 1}^\ell \mu_i \nabla p_i(x), \\
+    \forall i \in \{1, \ldots, k\}, \; \| x - y_i \| = \| x - y_0 \|, \\
+    \forall i \in \{0, \ldots, k\}, \; \sum_{j = 1}^m \xi_{ij} \nabla q_j(y_i) = x - y_i,
+  \end{gathered}
+  \end{equation}
+  and so we conclude that $(x, \vec{y}, \vec{\lambda}, \vec{\mu}, \Xi, \dist_Y(x)) \in C_k(\vec{p}, \vec{q})$ and $x$ is an algebraic $k$-critical point.
+\end{proof}
+
+\begin{theorem}[Finite critical points]
+\label{T:finite-crit-pt}
+  For $d_1, d_2 \geq 3$ and $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, let $X = V(\vec{p})$ and $Y = V(\vec{q})$. Then, for the generic choice of $\vec{p}$ and $\vec{q}$, there are only a finite number of critical points of $\distYX$. Moreover, for every $k \in \{0, \ldots, n\}$, the number of $k$-critical points of $\distYX$ is bounded by
+  \[
+    \#C_{k, *}(\distYX) \leq c(k, \ell, m, n) d_1^n d_2^{n (k + 1)},
+  \]
+  for some $c(k, \ell, m, n) > 0$ depending on $k$, $\ell$, $m$, and $n$ only.
+\end{theorem}
+
+\begin{proof}
+  Consider the map
+  \[
+    F^1 \colon \left\{
+    \begin{array}{ccc}
+      \begin{array}{c}
+        \CI_{d_1}^\ell \times \CI_{d_2}^m \times \R^n \times {} \\
+        (\R^{n(k + 1)} \setminus \Delta) \times \R^L
+      \end{array}
+      & \to
+      & J^1(\R^n, \R^\ell) \times {}_{k + 1} J^1(\R^n, \R^m) \times \R^L
+    \\
+      (\vec{p}, \vec{q}, x, \vec{y}, \vec{\lambda}, \vec{\mu}, \Xi, r)
+      & \mapsto
+      & (x, \vec{p}(x), \nabla \vec{p}(x), \vec{y}, \vec{q}(\vec{y}), \nabla \vec{q}(\vec{y}), \vec{\lambda}, \vec{\mu}, \Xi, r),
+    \end{array}
+    \right.
+  \]
+  where $L = (k + 1) + \ell + (k + 1) m + 1 = k + \ell + m + km + 2$. Consider the following subspace of $J^1(\R^n, \R^\ell) \times {}_{k + 1} J^1(\R^n, \R^m) \times \R^L$:
+  \[
+  \begin{array}{l}
+    W^1 \coloneq \\
+    \left\{
+      \left.
+      \begin{aligned}
+        (x, \vec{s}, \vec{u}) & \in J^1(\R^n, \R^\ell), \\
+        (\vec{y}, T, V) & \in {}_{k + 1} J^1(\R^n, \R^m), \\
+        \vec{\lambda} & \in \R^{k + 1}, \\
+        \vec{\mu} & \in \R^\ell, \\
+        \Xi & \in \R^{(k + 1) \times m}, \\
+        r & \in \R \sum_i
+      \end{aligned}
+      \; \right| \;
+      \begin{aligned}
+        & \textstyle x = \sum_{j = 1}^\ell \mu_j u_j + \sum_{i = 0}^k \lambda_i y_i, \\
+        & \textstyle \sum_{i = 0}^k \lambda_i = 1, \\
+        & \textstyle \forall j \in \{1, \ldots, \ell\}, \; s_i = 0, \\
+        & \textstyle \forall i \in \{0, \ldots, k\}, \; \forall j \in \{1, \ldots, m\}, \; t_{ij} = 0, \\
+        & \textstyle \forall i \in \{0, \ldots, k\}, \; \| x - y_i \|^2 = r^2, \\
+        & \textstyle \forall i \in \{0, \ldots, k\}, \; \sum_{j = 1}^m \xi_{ij} v_{ij} = x - y_i
+      \end{aligned}
+    \right\} .
+  \end{array}
+  \]
+  We observe that the projection of $\im F^1(\vec{p}, \vec{q}, -) \cap W^1$ onto the component $x$ contains the set of algebraic $k$-critical points w.r.t.\ $\vec{p}$ and $\vec{q}$. Checking the equations in the definition of $W^1$ from the bottom up, we see that each new equation introduces a new variable. Thus the equations are independent, and so $W^1$ has codimension
+  \begin{align*}
+    \codim W^1 & = (k + 1) n + (k + 1) + (k + 1) m + \ell + 1 + n \\
+    & = k + \ell + m + 2n + km + kn + 2 \\
+    & = 2n + kn + L \\
+    & = \dim(\R^n \times (\R^{n(k + 1)} \setminus \Delta) \times \R^L).
+  \end{align*}
+  By \cref{C:submersion} and \cref{Ex:poly-degree}, for $d_1, d_2 \geq 3$, the first two summands are submersions, and so $F^1$ is as well. By \cref{C:param-trans-cor}, for generic $\vec{p}, \vec{q}$ the set of algebraic $k$-critical points is an algebraic set of dimension $0$, so it is finite. By \cref{L:algebraic-critical-points}, we conclude that the number of critical points is finite. In fact, we have shown that the set of algebraic critical points $C_k(\vec{p}, \vec{q})$ is finite.
+  
+  In order to estimate the cardinality of $C_{k, *}(\distYX)$ under the assumptions of the statement, we observe that  this set is the projection on the $x$-coordinate of the set $\Lambda_k \subseteq \R^n \times \R^{n(k+1)} \times \R^{k + 1} \times \R^\ell \times \R^{m(k + 1)}$ consisting of the points $(x, \vec{y}, \vec{\lambda}, \vec{\mu}, \Xi)$ solving the system \eqref{eq:criticalabove} with $x\in V(\vec{p})$, $y_i\in V(\vec{q})$ for all $i\in \{0, \ldots, k\}$. Since $C_{k, *}(\distYX)$ is finite (recall that we are excluding the critical points in $X \cap Y$), its cardinality equals the number of its connected components; moreover each component of $\Lambda_k$ projects to a component of $C_{k, *}(\distYX)$ and we have
+  \[
+    \#C_{k, *}(\distYX) = b_0(C_{k, *}(\distYX)) \leq b_0(\Lambda_k) \leq b(\Lambda_k),
+  \]
+  where $b(\Lambda_k)$ denotes the sum of the Betti numbers of $\Lambda_k$. In order to control this number, we use \cite[Theorem 2.6]{basu2018multi}, which states that the sum of the Betti numbers of an algebraic set $V \subseteq \R^{n_1 + \cdots + n_a}$ defined by some polynomials $p_j(x_1, \ldots, x_a)$ of degree at most $c_i$\footnote{In the original statement, the authors require $c_i \geq 2$. Since the $c_i$'s are upper bounds, we implicitly replace our $c_i = 1$ with $c_i = 2$, which then gets included into the constant factor.} in the variable $x_i \in \R^{n_i}$ can be bounded by 
+  \[
+    b(V) \leq O(1)^{n_1+\cdots+n_a} a^{3(n_1+\cdots+n_a)} c_1^{n_1}\cdots c_a^{n_a}.
+  \]
+  In our case, the defining polynomials are $\vec{p}$, $\vec{q}$, $\sum \lambda_i - 1$, $\sum \lambda_i (x - y_i) - \sum \mu_i \nabla p_i(x)$, $\| x - y_i \|^2 - \| x - y_0 \|^2$, and $\sum_{j = 1}^m \xi_{ij} \nabla q_j(y_i) - (x - y_i)$. We therefore have $\vec{n} = (n, n(k + 1), k + 1, \ell, m(k + 1))$ and $\vec{c} = (d_1, d_2, 1, 1, 1)$, so that
+  \begin{align*}
+    b(\Lambda_k) & \leq O(1)^{n + n (k + 1) + (k + 1) + \ell + m(k + 1)} d_1^n d_2^{n(k + 1)} \\
+    & \leq c(k, \ell, m, n) d_1^n d_2^{n(k + 1)}.
+    \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{remark}
+\label{R:bottleneck-bounds}
+  The same proof works in the case $(X, Y) = (\R^n, V(\vec{q}))$ (see also \cref{R:X-is-Rn-case}), with $\vec{c} = (1, d, 1, 1, 1)$: for generic polynomials $\vec{q} \in \CI_{d}^m$, the function $\dist_{V(\vec{q})}$ has only finitely many critical points, all these critical points are algebraic and the number of algebraic $k$-critical points is bounded by
+  \[
+    \#C_{k, *}(\dist_{V(q)}) \leq \tilde{c}(k, n) d^{n (k + 1)}.
+  \]
+  In particular this recovers and generalizes to all dimensions the bound $\#C_{1, *} \leq c(n) d^{2n}$ that one can obtain by combining \cite[Corollary 4.5]{Eklund2023} with the EDD estimate \cite[Corollary 2.10]{EDD_Draisma}.
+\end{remark}
+
+\subsection{Continuous selections}
+
+\begin{proposition}
+\label{P:exp-reg-alg}
+  Let $x \in \R^n$. For $d_1 \geq 3$ and $d_2 \geq 4$ and generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, the critical points of $\distYX$ are regular values of the normal exponential map of $Y$.
+\end{proposition}
+
+\begin{proof}
+  The normal exponential map of $Y$ is
+  \[
+    \exp \colon \left\{
+    \begin{array}{ccc}
+      NY \cong Y \times \R^m & \to & \R^n \\
+      (y, t) & \mapsto & y + \sum_j t_j \nabla q_j(y).
+    \end{array}
+    \right.
+  \]
+  Its differential at a point $(y, t) \in NY$ is
+  \[
+    D \exp_{(y, t)} \colon \left\{
+    \begin{array}{ccc}
+      TNY \subseteq \R^n \times \R^m & \to & T \R^n \cong \R^n \\
+      (\dot{y}, \dot{t}) & \mapsto & \dot{y} + \sum_j (t_j H(q_j)(y) \dot{y} + \dot{t}_j \nabla q_j(y)).
+    \end{array}
+    \right.
+  \]
+  Thus a point $x$ in $\R^n$ is a critical value of $\exp$ if, and only if, it can be written as $x = y + \sum_j t_j \nabla q_j(y)$ for some $(y, t)$ in $NY$ such that the block matrix $[I_n + \sum_j t_j H(q_j)(y), \nabla \vec{q}(y)]$ restricted to $T_y Y \times \R^m$ has rank strictly less than $n$. Consider the map
+  \[
+    F^2 \colon \left\{
+    \begin{array}{ccc}
+      \begin{array}{c}
+        \CI_{d_1}^\ell \times \CI_{d_2}^m \times \R^n \times {} \\
+        (\R^{n(k + 1)} \setminus \Delta) \times \R^L
+      \end{array}
+      & \to
+      & J^1(\R^n, \R^\ell) \times {}_{k + 1} J^2(\R^n, \R^m) \times \R^L \\
+      (\vec{p}, \vec{q}, x, \vec{y}, \vec{\lambda}, \vec{\mu}, \Xi, r)
+      & \mapsto &
+      \begin{array}{c}
+        (x, \vec{p}(x), \nabla \vec{p}(x), \\
+        \vec{y}, \vec{q}(\vec{y}), \nabla \vec{q}(\vec{y}), H(\vec{q})(\vec{y}), \vec{\lambda}, \vec{\mu}, \Xi, r),
+      \end{array}
+    \end{array}
+    \right.
+  \]
+  and let
+  \[
+    W^2 \coloneq \left\{
+    \begin{array}{l}
+      (x, \vec{s}, \vec{u}, \vec{y}, T, V, \mathbb{H}, \vec{\lambda}, \vec{\mu}, \Xi, r) \in J^1(\R^n, \R) \times {}_{k + 1} J^2(\R^n, \R) \times \R^{L} : \\
+      (x, \vec{s}, \vec{u}, \vec{y}, T, V, \vec{\lambda}, \vec{\mu}, \Xi r) \in W^1
+    \end{array}
+    \right\},
+  \]
+  where $W^1$ is defined in the proof of \cref{T:finite-crit-pt}. We define the subspace of $J^1(\R^n, \R^\ell) \times {}_{k + 1} J^2(\R^n, \R^m) \times \R^L$
+  \[
+    W^2_{\textnormal{crit}} \coloneq \left\{
+    \begin{array}{l}
+      (x, \vec{s}, \vec{u}, \vec{y}, T, V, \mathbb{H}, \vec{\lambda}, \vec{\mu}, \Xi, r) \in W^2 : \\
+      \forall i \in \{0, \ldots, k\}, \; \textnormal{rank}[(I_n + r \sum_j H_{ij}) (I_n - V_i V_i^\TT), V_i] < n
+    \end{array}
+    \right\}.
+  \]
+  This space is defined by the same equations as $W^1$ and additional equations that involve the $H_i$. These new equations are independent of those defining $W^2$. Indeed, given $(x, \vec{s}, \vec{u}, \vec{y}, T, V, \mathbb{H}, \vec{\lambda}, \vec{\mu}, \Xi, r)$ in $W^2$ and $i \in \{0, \ldots, k\}$, we can assume $H_{ij} = 0$, which gives us $\rank[(I_n - V_i^{} V_i^\TT), V_i] = n$.
+  
+  We deduce that $W^2_{\textnormal{crit}}$ has codimension strictly greater than that of $W^1$, which is equal to the dimension of $\R^n \times (\R^{n(k + 1)} \setminus \Delta) \times \R^L$. 
+  By \cref{C:submersion} and \cref{Ex:poly-degree}, for $d_1 \geq 3$ and $d_2 \geq 4$, the map $F^2$ is a submersion.
+  By \cref{C:param-trans-cor}, for generic $\vec{p}$ and $\vec{q}$, the critical points of $\distYX$ miss $W^2_{\textnormal{crit}}$. We conclude that, for generic $\vec{p}$ and $\vec{q}$, the critical points of $\distYX$ are regular values for the normal exponential map of $Y$.
+\end{proof}
+
+\begin{corollary}
+\label{C:C2selection}
+  For generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$ of respective degrees $d_1 \geq 3$ and $d_2\geq 4$, denoting by $X = V(\vec{p})$ and $Y = V(\vec{q})$ the function $\distYX$ is a continuous selection of $\mathcal{C}^2$ functions around its critical points.
+\end{corollary}
+
+\begin{proof}
+  By \cref{P:exp-reg-alg}, for generic $\vec{p}$ and $\vec{q}$, the critical points of $\distYX$ are regular values of the normal exponential map of $Y$. By \cref{P:regular-value}, we deduce that $\distYX$ is a $\mathcal{C}^2$ selection around its critical points.
+\end{proof}
+
+\subsection{Nondegeneracy of critical points}
+
+Now we describe the degeneracy of points algebraically. To do this, we need to describe the Hessian of $\distYX$ at $x$ in terms of the derivatives of $\vec{p}$ and $\vec{q}$.
+
+For all $y$ in $Y$, we define $g_y \coloneq \dist_{B(y, \varepsilon) \cap Y}$ and $f_y \coloneq g_y |_X$ for $y \in Y$.
+We also introduce the following notation: for a symmetric matrix $H \in \operatorname{Sym}(n, \R)$ and a subspace $V \subseteq \R^n$, we denote by $H|_V$ a matrix representing the restriction of the quadratic form $h(x)=x^\TT Hx$ to $V$. If $U = [v_1, \ldots, v_\ell] \in \R^{n \times \ell}$ is a matrix whose columns form a basis for $V$, then $U (U^\TT U)^{-1} U^\TT$ is the orthogonal projection matrix onto $V$, and so one can take
+\[
+  H|_{V} = (U (U^\TT U)^{-1} U^\TT) H (U (U^\TT U)^{-1} U^\TT).
+\]
+
+\begin{definition}[Algebraic degenerate $k$-critical points]
+  The set of \myemph{algebraic degenerate $k$-critical points w.r.t.\ $\vec{p}$ and $\vec{q}$} is the projection of the set
+  \begin{align}
+  \label{E:alg-degenerate}
+    & D_k(\vec{p}, \vec{q}) \coloneq \\
+    & \left\{
+    \begin{array}{l}
+      (x, \vec{y}, \vec{\lambda}, \vec{\mu}, \Xi, r) \in C_k(\vec{p}, \vec{q}) \vphantom{\sum_{j = 1}^\ell} : \\
+      \det \left( \sum_{j = 1}^\ell \mu_j H(p_j)(x)|_{\partial_x f^\bot} + r \sum_{i = 0}^k \lambda_i H(g_{y_i})(x)|_{\partial_x f^\bot} \right) = 0
+    \end{array}
+    \right\}
+  \end{align}
+  onto the first component $x$, where $C_k(\vec{p}, \vec{q})$ is defined in \cref{D:algebraic-critical-points}.
+\end{definition}
+
+The use of the adjective ``algebraic'' is justified by the following lemma.
+
+\begin{lemma}
+\label{L:alg-deg-is-alg}
+  For all $k \in \{1, \ldots, n\}$, the set $D_k(\vec{p}, \vec{q})$ is algebraic.
+\end{lemma}
+
+\begin{proof}
+  Let $x$ be an element of $\R^n \setminus Y$ and $y$ a closest point in $Y$ at distance $r = \dist(x, y)$. We can decompose $\R^n$ as $T_y Y \oplus \R(x - y) \oplus S$, where $S$ is the subspace of $N_y Y$ orthogonal to $\R(x - y)$. By the discussion after \cite[Proposition 3.3]{Mantegazza-notes}, for all $s \in (0, r]$, the Hessian of $g_y$ at $s x + (r - s) y$ is diagonalizable in a common basis, with an eigenvalue $0$ corresponding to the eigenvector $v \coloneq x - y$, $(m - 1)$ eigenvalues $\frac{1}{s}$ corresponding to the eigenvectors in $S$, and $n - m$ eigenvalues $\beta_1(s), \ldots, \beta_{n - m}(s)$ corresponding to eigenvectors in $T_y Y$. Moreover, the $\beta_i(s)$ are bounded and satisfy the differential equation
+  \[
+    \beta_i'(s) = -\beta_i(s)^2,
+  \]
+  which we solve as $\beta_i(s) = \frac{\beta_i(0)}{1 + s \beta_i(0)}$, where $\beta_i(0)$ is the limit of $\beta(s)$ at $0$. Note that $\beta_i(0)$ is (up to sign) the curvature of $Y$ at $y$ in the direction of the associated eigenvalue. Therefore, denoting by $H$ the Hessian of the $g_y|_{T_y Y}$ at $y$, the Hessian of $g_y$ at $x$ is
+  \[
+    H(g_y)(x) = \left( \frac{H}{I_n + r H} \right) \big|_{T_y Y} \oplus \frac{1}{r} I_n \big|_{S} \oplus 0 \big|_{\R(x - y)}.
+  \]
+  Next, we observe that the Hessian $H$ is nothing but the second fundamental form of $Y$ at $y$ in the direction $(x - y) \in N_y Y$.
+  Since $Y$ is a complete intersection, following \cite[\textsection 6.2]{BKS2024}, we have
+  \[
+    H = \frac{1}{r} \sum_{j = 1}^m \xi_j H(q_j),
+  \]
+  where the $\xi_i$ are given by $(x - y) = \sum_{i = 1}^m \xi_i \nabla q_i$.
+  
+  Finally, since $Y$ is a complete intersection, the columns of the matrix $V \coloneq (\nabla q_i(y))_{1 \leq i \leq m}$ form a basis of $N_y Y$. Therefore $Q \coloneq V (V^\TT V)^{-1} V^\TT$ is the orthogonal projection matrix onto $N_y Y$. Thus we get
+  \[
+    H(g_y)(x)\big|_{T_y Y} = (I_n - Q) \frac{H}{I_n + r H} (I_n - Q).
+  \]
+  We restrict to $T_y Y$ because this is the only relevant part for \eqref{E:alg-degenerate}.
+  
+  Now let $(x, \vec{y}, \vec{\lambda}, \vec{\mu}, \Xi, r) \in D_k(\vec{p}, \vec{q})$. Generically, by transversality of the defining hypersurfaces of $X$ and $Y$, the columns of the matrix $U \coloneq (\nabla \vec{p}(x), \nabla\vec{q}(\vec{y}))$ are linearly independent. We are interested in the projection of the Hessians $H(p_j)(x)$ and $H(g_{y_i})(x)$ onto $T_x X \cap (\bigcap_{i = 0}^k T_{y_i} Y)$. This projection is $L \coloneq (I_n - U (U^\TT U)^{-1} U)$. The equation in \eqref{E:alg-degenerate} then becomes
+  \begin{align*}
+    & \rank \left( \sum_{j = 1}^\ell \mu_j L^\TT H(p_j)(x) L + r \sum_{i = 0}^k \lambda_i L^\TT \frac{\sum_{j = 1}^m \xi_j H(q_j)(y_i)}{r I_n + \sum_{j = 1}^m \xi_j H(q_j)(y_i)} L \right) \\
+    & \quad < n - \ell - (k + 1) m.
+  \end{align*}
+  This equation is algebraic, and this concludes the proof.
+\end{proof}
+
+\begin{remark}
+\label{R:trivial-nondegeneracy}
+  By the above reasoning, the degeneracy condition of \eqref{E:alg-degenerate} never holds if $\ell + (k + 1) m < n$. Indeed, in this case, condition \ref{i:degen2} of \cref{remark:restriction} holds automatically because the subspace $T(x)$ is trivial, and therefore (generically) all critical points are nondegenerate.
+\end{remark}
+
+\begin{lemma}
+\label{L:deg-is-alg-deg}
+  For generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$ with $d_1 \geq 3$ and $d_2 \geq 4$, every degenerate critical point of $\distYX$ is an algebraic degenerate $k$-critical point for some $k \in \{0, \ldots, n\}$.
+\end{lemma}
+
+\begin{proof}
+  We pick generic $\vec{p}$ and $\vec{q}$ such that, for all $x$ in $X$, the set $B(x, \dist_Y(x)) \cap Y$ is a nondegenerate simplex (\cref{T:Yomdin}) and that $\distYX$ is a $\mathcal{C}^2$ selection around each of its critical points (\cref{C:C2selection}). In this context, a critical point is degenerate if, and only if, condition \ref{i:degen2} of \cref{remark:restriction} holds.
+  
+  Let $x$ be a critical point of $\distYX$. As in the proof of \cref{L:algebraic-critical-points}, there exist $k \in \{0, \ldots, n\}$, $y_0, \ldots, y_k$ in $Y$, $\lambda_0, \ldots, \lambda_k$ in $[0, 1]$, $\mu_1, \ldots, \mu_\ell$ in $\R$, and $\Xi = (\xi_{ij})_{\substack{0 \leq i \leq k \\ 1 \leq j \leq m}}$ in $\R^{(k + 1) \times m}$ such that $(x, \vec{y}, \vec{\lambda}, \vec{\mu}, \Xi, \dist_Y(x))$ is an element of $C_k(p, q)$.
+  
+  We can write $\distYX$ as the continuous selection of $\mathcal{C}^2$ functions
+  \[
+    \distYX = \min_{i = 0, \ldots, k} f_{y_i}.
+  \]
+  Using \cref{remark:restriction}, we see that the critical point $x$ is degenerate if, and only if, the matrix
+  \begin{align*}
+    & \sum_{i = 0}^k \left( \lambda_i H(g_{y_i})(x)|_{\partial_x f^\bot} + \lambda_i \sum_{j = 1}^\ell \mu_{ij} H(p_j)(x)|_{\partial_x f^\bot} \right) \\
+    = {} & \frac{1}{\dist_Y(x)} \sum_{j = 1}^\ell \mu_j H(p_j)(x)|_{\partial_x f^\bot} + \sum_{i = 0}^k \lambda_i H(g_{y_i})(x)|_{\partial_x f^\bot},
+  \end{align*}
+  is singular. We conclude that if $x$ is a degenerate critical point of $\distYX$, then $(x, \vec{y}, \vec{\lambda}, \vec{\mu}, \Xi, \dist_Y(x))$ is an element of $D_k(\vec{p}, \vec{q})$, and so $x$ is an algebraic degenerate $k$-critical point with $k \leq n$.
+\end{proof}
+
+\begin{theorem}[Genericity of nondegeneracy]
+\label{T:genericity-nondegeneracy}
+  For generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$ with $d_1, d_2 \geq 4$, all of the critical points of $\distYX$ are nondegenerate.
+\end{theorem}
+
+\begin{proof}
+  Consider the map
+  \[
+    F^3 \colon \left\{
+    \begin{array}{ccc}
+      \begin{array}{c}
+        \CI_{d_1}^\ell \times \CI_{d_2}^m \times \R^n \times {} \\
+        (\R^{n(k + 1)} \setminus \Delta) \times \R^L
+      \end{array}
+      & \to &
+      J^2(\R^n, \R) \times {}_{k + 1} J^2(\R^n, \R) \times \R^L \\
+      (\vec{p}, \vec{q}, x, \vec{y}, \vec{\lambda}, \vec{\mu}, \Xi, r)
+      & \mapsto &
+      \begin{array}{c}
+        (x, \vec{p}(x), \nabla \vec{p}(x), H(\vec{p})(x), \\
+        \vec{y}, \vec{q}(\vec{y}), \nabla \vec{q}(\vec{y}), H(\vec{q})(\vec{y}), \vec{\lambda}, \vec{\mu}, \Xi, r),
+      \end{array}
+    \end{array}
+    \right.
+  \]
+  and let
+  \begin{align*}
+    & W^3 \coloneq \\
+    & \left\{
+    \begin{array}{l}
+      (x, \vec{s}, \vec{u}, \vec{G}, \vec{y}, T, V, \mathbb{H}, \vec{\lambda}, \vec{\mu}, \Xi, r) \in J^2(\R^n, \R^\ell) \times {}_{k + 1} J^2(\R^n, \R^m) \times \R^{L} :
+      \\
+      (x, \vec{s}, \vec{u}, \vec{y}, T, V, \vec{\lambda}, \vec{\mu}, \Xi, r) \in W^1
+    \end{array}
+    \right\},
+  \end{align*}
+  where $W^1$ is defined in the proof of \cref{T:finite-crit-pt}.
+  
+  Let us find a system equations of equations such that, for generic $\vec{p}$ and $\vec{q}$, elements of $F^3(\{\vec{p}\} \times \{\vec{q}\} \times D_k(\vec{p}, \vec{q}))$ satisfy these equations.
+  We define the subspace of $J^2(\R^n, \R^\ell) \times {}_{k + 1} J^2(\R^n, \R^m) \times \R^L$
+  \[
+    W^3_{\textnormal{deg}} \coloneq \left\{
+    \begin{array}{l}
+      (x, \vec{s}, \vec{u}, \vec{G}, \vec{y}, T, V, \mathbb{H}, \vec{\lambda}, \vec{\mu}, \Xi, r) \in W^3 : \medskip
+      \\
+      \begin{aligned}
+        & U = (\vec{u}, V) \in \R^{n \times (\ell + (k + 1)m)}, \\
+        & L = I_n - U (U^\TT U)^{-1} U^\TT \in \R^{n \times n}, \\
+        & \rank \left( \sum_{j = 1}^\ell \mu_j L^\TT G_j L + r \sum_{i = 0}^k \lambda_i L^\TT \frac{\sum_{j = 1}^m \xi_j H_{ij}}{r I_n + \sum_{j = 1}^m \xi_j H_{ij}} L \right) \\
+        & \quad < n - \ell - (k + 1) m
+      \end{aligned}
+    \end{array}
+    \right\}.
+  \]
+  If $\ell + (k + 1) m \geq n$, then this last condition is never satisfied, which means that all critical points are nondegenerate, which concludes the proof (see \cref{R:trivial-nondegeneracy}).
+  
+  We now assume that $\ell + (k + 1) m < n$. We need to check that the last inequality is independent of the other equations defining $W^3$. It suffices to find an element of $W^3$ such that this rank is $n - \ell - (k + 1) m$. Since the equations defining $W^3$ do not involve $\vec{G}$ nor $\mathbb{H}$, we can choose these terms freely. Let $(x, \vec{s}, \vec{u}, \vec{y}, T, V, \mathbb{H}, \vec{\lambda}, \vec{\mu}, \Xi, r)$ be an element of $W^3$. Without loss of generality, we assume $\lambda_0 \neq 0$ and $\xi_0 \neq 0$, and we set $G_j = 0$ for all $j \in \{1, \ldots, \ell\}$, $H_{ij} = 0$ for all $(i, j) \neq (0, 0)$, and $H_{00} = I_n$. Up to scaling, we can assume that $r \neq -\xi_0$. In this case, we are considering the rank of the matrix
+  \[
+    \lambda_0 \frac{\xi_0}{r + \xi_0} L,
+  \]
+  which is $n - \ell - (k + 1) m$ by transversality of the polynomials $\vec{p}$ and $\vec{q}$.
+  
+  We deduce that $W^3_{\textnormal{deg}}$ has codimension strictly greater than that of $W^1$, which is equal to the dimension of $\R^n \times (\R^{n(k + 1)} \setminus \Delta) \times \R^L$. By \cref{C:submersion} and \cref{Ex:poly-degree}, for $d_1, d_2 \geq 4$, the map $F^3$ is a submersion.
+  By \cref{C:param-trans-cor}, for generic $\vec{p}$ and $\vec{q}$, the image $\im F^3(\vec{p}, \vec{q}, -)$ misses $W^3_{\textnormal{deg}}$. In particular, the image of $D_k(\vec{p}, \vec{q})$ by $F^3(\vec{p}, \vec{q}, -)$ misses $W^3_{\textnormal{deg}}$. By \cref{L:alg-deg-is-alg,L:deg-is-alg-deg}, we conclude that, for generic $\vec{p}$ and $\vec{q}$, the critical points of $\distYX$ are nondegenerate.
+\end{proof}
+
+\begin{remark}
+\label{R:X-is-Rn-case}
+  The proofs throughout \cref{S:Genericity-algebraic} do not work as-is for the case $X = \R^n$ because we require $\vec{p}$ to be of degree at least $3$. However, the results are still true, as can be verified by running through the proofs of \cref{T:finite-crit-pt,P:exp-reg-alg,T:genericity-nondegeneracy} with the parameters $\vec{p}$, $\vec{\mu}$, $\vec{s}$, $\vec{u}$, and $\vec{G}$ removed from the definition of $W^1$, $W^2$, and $W^3$, and noting that \cref{C:submersion} can still be applied.
+\end{remark}
+
+\printbibliography
+
+\appendix
+
+\let\theoldsection\thesection
+\renewcommand*{\thesection}{\thepaper.\Alph{section}}
+\section{Summary of notations for variables}
+\let\thesection\theoldsection
+\label{A:not}
+
+The following conventions are used for variables in this paper (exceptions may occur):
+
+\begin{tabular}{c|l}
+  Symbol & Description \\
+  \hline
+  $X$, $Y$ & subset of $\R^n$ \\
+  $x$, $y$ & (real vector) element of $X$, $Y$ resp. \\
+  $z$ & (real vector) element of $\R^n$ \\
+  $f$, $g$ & real-valued function \\
+  $p$, $q$ & real-valued polynomial function \\
+  $d$ & (integer) polynomial degree \\
+  $i$, $j$ & (integer) index \\
+  $k$, $\ell$, $m$, $n$ & (integer) size of tuple, (co)dimension \\
+  $\kappa$, $\lambda$, $\mu$, $\xi$ & (real number) linear coefficient \\
+  $r$ & (real number) distance, (integer) jet order \\
+  $s$, $t$ & (real number) $0^{\text{th}}$ order derivative \\
+  $u$, $v$ & (real vector) $1^{\text{st}}$ order derivative \\
+  $G$, $H$ & (real matrix) $2^{\text{nd}}$ order derivative \\
+  $U$, $V$ & (real matrix) basis of normal space \\
+  $L$, $Q$ & (real matrix) projection matrix
+\end{tabular}
+
+\noindent As explained in \cref{N:not}, for every symbol $a$, we can write a tuple as $\vec a \coloneq (a_1, \ldots, a_k)$. For a lower case symbol $a$, we write a doubly indexed set as $A = (a_{ij})_{ij}$; for an upper case symbol $A$, we write a double indexed set as $\mathbb{A} = (A_{ij})_{ij}$. In addition, given an element $a$ of a manifold, we denote an element of the tangent space at $a$ by $\dot{a}$.
