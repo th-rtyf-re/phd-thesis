@@ -1,6 +1,8 @@
 # -*-coding:utf8-*-
 
 import gudhi as gd
+import itertools as it
+import miniball
 
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
@@ -63,7 +65,7 @@ for _, ra, dec, _ in data:
     normalized_coords.append((-ra_seconds / 3600 * 15, dec_seconds / 3600))
 
 n_stars = len(data)
-coords = np.array(normalized_coords, dtype=float) * 2
+coords = np.array(normalized_coords, dtype=float) * 2  # manual scaling factor
 dist = squareform(pdist(coords))
 
 magnitude = (8. - np.array([d[3] for d in data], dtype=float)) / 4.
@@ -85,7 +87,6 @@ for s0 in range(n_stars):
                 x2, y2 = coords[s2]
                 area = np.abs((x0 - x2) * (y1 - y0) - (x0 - x1) * (y2 - y0)) / 2  # from Wikipedia
                 triangles[s0, s1, s2] = dist[s0, s1] * dist[s1, s2] * dist[s0, s2] / (4 * area)
-
 
 def visualize():
     fig, ax = plt.subplots(1, 1, figsize=(6, 4))
@@ -187,11 +188,11 @@ def get_geoms(obj):
     else:  # simple geometry
         return [obj]
 
-def render_frame(threshold, file_prefix=None, frame_id=None):
+def render_frame(threshold, file_prefix=None, frame_id=None, render_tetras=False, debug=False):
     if frame_id is None:
         frame_id = threshold
     if file_prefix is None:
-        file_prefix = "leo"
+        file_prefix = "../figs/leo"
     
     # Create collections of edges and faces (lines and triangles)
     lines = []
@@ -210,7 +211,6 @@ def render_frame(threshold, file_prefix=None, frame_id=None):
     line_dist, lines = zip(*sorted(zip(line_dist, lines), key = lambda t: t[0]))
     i = bisect.bisect(line_dist, threshold)
     lines = lines[:i]
-    # _, tris = zip(*sorted(zip(tri_dist, tris), key = lambda t: t[0]))
     
     # Get better polygon for triangles (giving up on drawing tetrahedra by opacity or whatever)
     multitri = shapely.MultiPolygon([(shell, []) for shell in tris])
@@ -219,6 +219,22 @@ def render_frame(threshold, file_prefix=None, frame_id=None):
     for geom in geoms:
         if shapely.get_num_coordinates(geom):
             tri_patch_xys.append((geom.exterior.xy, [int_geom.xy for int_geom in geom.interiors]))
+    
+    # Get tetrahedra
+    tetras = []
+    tetra_patch_xys = []
+    if render_tetras:
+        t2 = threshold * threshold
+        for tetra in it.combinations(coords, 4):
+            c, r2 = miniball.get_bounding_ball(np.array(tetra))
+            if r2 <= t2:
+                tetras.append(tetra)
+                # print(tetra)
+        multitetra = shapely.GeometryCollection([shapely.convex_hull(shapely.MultiPoint(tetra)) for tetra in tetras])
+        geoms = get_geoms(multitetra.buffer(0))
+        for geom in geoms:
+            if shapely.get_num_coordinates(geom):
+                tetra_patch_xys.append((geom.exterior.xy, [int_geom.xy for int_geom in geom.interiors]))
     
     # Ripple guy
     sublevelset = shapely.MultiPoint(coords)
@@ -232,11 +248,9 @@ def render_frame(threshold, file_prefix=None, frame_id=None):
     filename = f"{file_prefix}-{frame_id}.pgf"
     with open(filename, 'w', encoding="utf-8") as f:
         render_to_pgf(
-            f, sls_xys, tri_patch_xys, lines, coords, magnitude,
-            tri_gray=.7,
-            ripple_line_width=.4,
+            f, sls_xys, tri_patch_xys, tetra_patch_xys, lines, coords, magnitude,
             edge_line_width=(30 - threshold) / 20,
-            debug=False
+            debug=debug
         )
     
     return
@@ -245,10 +259,12 @@ def render_to_pgf(
         f,                      # output file
         sls_xys,                # ripple coords
         tri_patch_xys,          # triangle coords (unioned)
+        tetra_patch_xys,        # tetrahedra coords (unioned)
         lines,                  # edge coords
         coords,                 # point coords
         magnitude,              # point radii
-        tri_gray=.7,            # triangle grayscale shade
+        tri_gray=.8,            # triangle grayscale shade
+        tetra_gray=.5,          # tetrahedra grayscale shade
         ripple_line_width=.4,   # ripple line width
         edge_line_width=1.5,    # edge line width
         debug=False
@@ -259,6 +275,7 @@ def render_to_pgf(
     # start PGF
     f.write("\\begin{pgfpicture}" + endline)
     f.write(f"\\definecolor{{tri}}{{gray}}{{{tri_gray}}}" + endline)
+    f.write(f"\\definecolor{{tetra}}{{gray}}{{{tetra_gray}}}" + endline)
     
     # Add ripple
     if debug:
@@ -288,6 +305,24 @@ def render_to_pgf(
                 f.write(f"\\pgfpathqlineto{{{xs[i]:.5f}pt}}{{{ys[i]:.5f}pt}}" + endline)
             f.write("\\pgfpathclose" + endline)
     f.write("\\pgfusepathqfill" + endline)
+    
+    # Add tetrahedra
+    if debug:
+        f.write("% ==== TETRAHEDRA ====\n")
+    f.write("\\pgfsetfillcolor{tetra}" + endline)
+    for ext_xys, int_xys_list in tetra_patch_xys:
+        xs, ys = ext_xys
+        f.write(f"\\pgfpathqmoveto{{{xs[0]:.5f}pt}}{{{ys[0]:.5f}pt}}" + endline)
+        for i in range(len(xs) - 1):
+            f.write(f"\\pgfpathqlineto{{{xs[i]:.5f}pt}}{{{ys[i]:.5f}pt}}" + endline)
+        f.write("\\pgfpathclose" + endline)
+        for xs, ys in int_xys_list:
+            f.write(f"\\pgfpathqmoveto{{{xs[0]:.5f}pt}}{{{ys[0]:.5f}pt}}" + endline)
+            for i in range(len(xs) - 1):
+                f.write(f"\\pgfpathqlineto{{{xs[i]:.5f}pt}}{{{ys[i]:.5f}pt}}" + endline)
+            f.write("\\pgfpathclose" + endline)
+    if tetra_patch_xys:  # nonempty
+        f.write("\\pgfusepathqfill" + endline)
     
     # Add edges
     if debug:
@@ -337,7 +372,7 @@ def plot_barcode(diag):
         inf_end = 2
     death[death == np.inf] = inf_end
     
-    fig, ax = plt.subplots(1, 2, figsize=(9, 5))
+    fig, ax = plt.subplots(1, 2, figsize=(9 * .8, 5 * .8))
     
     # diagonal line
     ax[1].plot([0, inf_end], [0, inf_end], 'k--', linewidth=2)
@@ -349,7 +384,7 @@ def plot_barcode(diag):
             ax[1].plot(b, d, color="#000061", marker='o', markersize=5)
         else:
             dim = int(diag[i, 2])
-            c = ("#000061", "#e86a58")[dim]
+            c = ("#000061", "#E86A58")[dim]
             ax[0].plot([b, d], [i, i], color=c, lw=3)
             legend_artists[dim], = ax[1].plot(b, d, color=c, marker='o', markersize=5)
     # random infinite bar?
@@ -370,16 +405,12 @@ def plot_barcode(diag):
     fig.tight_layout()
     # plt.show()
     
-    # extent = ax[0].get_window_extent().transformed(fig.dpi_scale_trans.inverted())
-    # plt.savefig("../figs/baco.png", dpi=300, transparent=True, bbox_inches=extent.expanded(1.15, 1.1))
-    extent = ax[1].get_window_extent().transformed(fig.dpi_scale_trans.inverted())
-    plt.savefig("../figs/pedi.png", dpi=300, transparent=True, bbox_inches=extent.expanded(1.15, 1.1))
-    
+    plt.savefig("../figs/barcode-diagram.png", dpi=300, transparent=True)
     return
 
 
 def barcode_stuff():
-    cpx = gd.AlphaComplex(points=coords).create_simplex_tree()
+    cpx = gd.AlphaComplex(points=coords).create_simplex_tree()  # output_squared_values=False is an option
     cpx.compute_persistence()
     diag = cpx.persistence(persistence_dim_max=2)
     diag_array = np.zeros((len(diag), 3), dtype=float)
@@ -392,9 +423,12 @@ def barcode_stuff():
 
 def flipbook_stuff():
     for i, t in enumerate(np.linspace(0, 17, endpoint=True, num=30)):
-        render_frame(t, file_prefix="../figs/flip/leo", frame_id=i)
+        print(f"[flipbook] rendering frame {i}...")
+        render_frame(t, file_prefix="../figs/flip/leo", frame_id=i, render_tetras=True)
+        print(f"[flipbook] done!")
 
 if __name__ == "__main__":
     # visualize()
-    # flipbook_stuff()
-    barcode_stuff()
+    # render_frame(10, render_tetras=True, debug=True)
+    flipbook_stuff()
+    # barcode_stuff()

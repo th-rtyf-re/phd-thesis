@@ -86,7 +86,7 @@ I have implemented this cokernel approach in Python, to middling success: see \c
 
 % with Wojciech Chachólski and Marve Grönblad Vesterinen.
 
-% This was a Master's thesis. We define a notion of \term[dual element]{dual elements} for lattices $I$ such that the Betti diagrams of the minimal projective and injective resolutions of a functor over $I$ are dual in some sense.
+% This was a Master's thesis. We define a notion of \index{dual element}\textbf{dual elements} for lattices $I$ such that the Betti diagrams of the minimal projective and injective resolutions of a functor over $I$ are dual in some sense.
 
 \section{Space of rank functions}
 
@@ -94,12 +94,12 @@ With Wojiech Chachólski, Andrea Guidolin, Christina Kapatsori, Woojin Kim, Fran
 
 The rank function $\rank V$ of a persistence module $V$ over a poset $I$ (\cref{!D:rank-function}) satisfies the following inequalities. For all chains $a \leq b \leq c \leq d$ in $I$,
 \begin{enumerate}
-  \item (\term{monotonicity}) $\rank V(a \leq d) \leq \rank V(b \leq c)$, and
-  \item (\term{chain-supermodularity}) $\rank V(a \leq d) + \rank V(b \leq c) \leq \rank V(a \leq c) + \rank V(b \leq d)$.
+  \item (\index{monotonicity}\textbf{monotonicity}) $\rank V(a \leq d) \leq \rank V(b \leq c)$, and
+  \item (\index{chain-supermodularity}\textbf{chain-supermodularity}) $\rank V(a \leq d) + \rank V(b \leq c) \leq \rank V(a \leq c) + \rank V(b \leq d)$.
 \end{enumerate}
-The name \term{chain-supermodularity} comes from \textbf{supermodularity}, a notion studied in probability and order theory \cite{PromislowYoung2005}. Monotone, chain-supermodular functions form a positive convex cone. The broad aim of this project is to study this cone and investigate if we can express rank functions as convex combinations of extremal rays.
+The name \index{chain-supermodularity}\textbf{chain-supermodularity} comes from \textbf{supermodularity}, a notion studied in probability and order theory \cite{PromislowYoung2005}. Monotone, chain-supermodular functions form a positive convex cone. The broad aim of this project is to study this cone and investigate if we can express rank functions as convex combinations of extremal rays.
 
-As a first step, we study \term{chain-modular} functions, which satisfy the chain-supermodularity condition but with an equality instead of inequality. An interesting question is: which functors have rank functions that are chain-modular? We give some characterizations of the space of chain-modular functions and functors depending on the structure of the underlying poset $I$.
+As a first step, we study \index{chain-modularity}\textbf{chain-modular} functions, which satisfy the chain-supermodularity condition but with an equality instead of inequality. An interesting question is: which functors have rank functions that are chain-modular? We give some characterizations of the space of chain-modular functions and functors depending on the structure of the underlying poset $I$.
 \ir{REVIEW: When $I$ has trivial $H^1$...}
 
 \section{Rank-based noise systems for multiparameter persistence}
@@ -136,14 +136,14 @@ Following Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}, we show the following:
   where the proof relies on the computation of the Jacobian of the change of parameters:
   \[
     J_\varphi = \bordermatrix{%
-    & s & t & a_2 & b_2 & a_3 & b_3 & \cdots \cr
+    & s & t & a_2 & b_2 & \cdots & a_n & b_n & \cr
     p_1 & 1 & 0 \cr
     q_1 & 0 & 1 \cr
     p_2 & a_2 & 0 & s & 1 \cr
     q_2 & 0 & a_2 & t & 1 \cr
-    p_3 & a_3 & 0 &&& s & 1 \cr
-    q_3 & 0 & a_3 &&& t & 1 \cr
-    \vdots & \vdots & \vdots &&&&& \ddots
+    \vdots & \vdots & \vdots &&& \ddots \cr
+    p_n & a_n & 0 &&&& s & 1 \cr
+    q_n & 0 & a_n &&&& t & 1
     }
   \]
   In particular, we have $|\det J_\varphi| = (t - s)^{n - 1}$.
@@ -179,7 +179,7 @@ Following Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}, we show the following:
 
 This is the content of Hugo Åkesson's Masters thesis \cite{Åkesson2023}, which I co-supervised with Wojciech Chachólski.
 
-Let $V$ and $W$ be persistence modules. An \term[extension]{extension of $V$ by $W$} is a persistence module $E$ that fits into a short exact sequence
+Let $V$ and $W$ be persistence modules. An \index{extension (of persistence modules)}\textbf{extension of $V$ by $W$} is a persistence module $E$ that fits into a short exact sequence
 \[
   0 \to W \to E \to V \to 0.
 \]
@@ -227,7 +227,7 @@ Following discussions with Emil Horobeț.
 In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we defined notions of algebraic critical points, and bounded their number. The number of algebraic critical points, in the complex setting, could define a new numerical invariant that generalizes the Euclidean distance degree and the bottleneck degree. Here we sketch its definition:
 
 \begin{definition}
-  Let $X$ and $Y$ be complete intersections defined by polynomials $\vec{p}$ and $\vec{q}$, respectively. We define the \term[pair degree]{pair degree of $X$ and $Y$} to be the cardinality of the set $C_k(\vec{p}, \vec{q})$ of algebraic critical points of the distance function $\dist_Y\big|_X$ (see Paper \ref{PC:Ren2026}, Definition 3.3.2).
+  Let $X$ and $Y$ be complete intersections defined by polynomials $\vec{p}$ and $\vec{q}$, respectively. We define the \index{pair degree}\textbf{pair degree of $X$ and $Y$} to be the cardinality of the set $C_k(\vec{p}, \vec{q})$ of algebraic critical points of the distance function $\dist_Y\big|_X$ (see Paper \ref{PC:Ren2026}, Definition 3.3.2).
 \end{definition}
 
 \ir{REVIEW: Say a bit more}

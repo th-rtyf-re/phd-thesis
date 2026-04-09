@@ -65,6 +65,15 @@
 \newcommand{\quadi}{\iota}
 \newcommand{\TT}{\top}  % transpose
 
+% ==== INDEXING ====
+
+\makeatletter
+\newcommand{\gobblecomma}[1]{\@gobble{#1}\ignorespaces}
+\makeatother
+\index{complex!ZZc@\gobblecomma|see{chain complex}}
+\index{complex!ZZs@\gobblecomma|see{simplicial complex}}
+\index{chain complex!ZZKoszul@\gobblecomma|seealso{Koszul complex, local}}
+
 % ==== METADATA ====
 
 \title{Algebraic invariants for filtered spaces and their computation}
