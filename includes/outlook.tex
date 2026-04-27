@@ -1,6 +1,6 @@
 % !TEX root = ../thesis-main.tex
 
-\chapter{Outlook}
+\chapter{Conclusions and outlook}
 \label{C:outlook}
 
 \begin{epigraph}
@@ -11,7 +11,11 @@
   In the cedar-limbs.
 \end{epigraph}
 
-In this thesis we explored many ways in which algebraic invariants for filtered spaces can be defined and computed. There is still much more to investigate, and we present some ongoing work. We freely use the notations and results of the included papers.
+In this thesis, we explored several ways in which algebraic invariants for filtered spaces can be defined and computed. On the one hand, we contributed to the theory of \index{persistent algebra}\textbf{persistent algebra}, a collection of research efforts applying linear and homological algebra to the study of persistence modules. Paper \ref{PC:CGRST2024} develops relative homological algebra for general poset-indexed persistence modules and demonstrates the computational power of local Koszul complexes in the computation of relative Betti diagrams. Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026} use linear algebra, and in particular matrix representations of morphisms, to pass from algebraic persistence modules to combinatorial barcode matchings.
+
+On the other hand, we contributed to the emerging field of \index{metric algebraic geometry}\textbf{metric algebraic geometry} with our study of Morse theory for distance functions between algebraic varieties in Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}. In particular, we identify two indices for nondegenerate critical points, which encode the topological and algebraic properties of filtered spaces, and we show that generic distance functions between algebraic varieties are ``Morse,'' i.e., their critical points are all nondegenerate.
+
+None of the research directions taken in this thesis are closed-ended, and there is still much more to investigate. We now present some ongoing work and interesting partial results in these directions. We freely use the notations and results of the included papers.
 
 \section{Replacing kernels with cokernels}
 
@@ -37,7 +41,8 @@ Therefore, in order to compute Betti diagrams relative to lower hooks, we can st
 
 I have implemented this cokernel approach in Python, to middling success: see \cref{F:coker-results} for some experimental results. In \cref{F:cokerhooks}, we observe the exact same relative Betti diagrams as in \cref{F:lowerhooks}, except translated by $2$ degrees. In \cref{F:dev-time}, we see that the time required to compute relative Betti diagrams does not change when switching to cokernels, and in fact worsens a little bit. This may be explained by the fact that the cokernel complexes are larger in general than the corresponding kernel complexes: see \cref{F:dev-hist}. It is unclear where this is by nature or by the synthetic way in which they were constructed for this experiment, and this is worth exploring further.
 
-\begin{figure}[t]
+\begin{figure}[tbp]
+  \captionsetup[subfigure]{width=.95\textwidth}
   \begin{subfigure}{\textwidth}
     \includegraphics[width=\textwidth]{figs/cokerhooks.png}
     \caption{Result of computing the homology of the cokernel complex; compare with \cref{F:lowerhooks}.}
@@ -99,20 +104,17 @@ The rank function $\rank V$ of a persistence module $V$ over a poset $I$ (\cref{
 \end{enumerate}
 The name \index{chain-supermodularity}\textbf{chain-supermodularity} comes from \textbf{supermodularity}, a notion studied in probability and order theory \cite{PromislowYoung2005}. Monotone, chain-supermodular functions form a positive convex cone. The broad aim of this project is to study this cone and investigate if we can express rank functions as convex combinations of extremal rays.
 
-As a first step, we study \index{chain-modularity}\textbf{chain-modular} functions, which satisfy the chain-supermodularity condition but with an equality instead of inequality. An interesting question is: which functors have rank functions that are chain-modular? We give some characterizations of the space of chain-modular functions and functors depending on the structure of the underlying poset $I$.
-\ir{REVIEW: When $I$ has trivial $H^1$...}
+As a first step, we study \index{chain-modularity}\textbf{chain-modular} functions, which satisfy the chain-supermodularity condition but with an equality instead of inequality. An interesting question is: which functors have rank functions that are chain-modular? This is ongoing work.
 
 \section{Rank-based noise systems for multiparameter persistence}
 
 With Håvard Bakke Bjerkevik, Andrea Guidolin, and Martina Scolamiero.
 
-For $p \geq n + 1$ and $V \colon \R^n \to \Vect$ an $n$-dimensional persistence module, consider the following integral:
+In Paper \ref{PC:GRRS2026} \ir{ref the specific result}, we show that the $p$-norm for a one-dimensional persistence module can be computed using the integral of its rank function. Here, we generalize this to multiparameter persistence. For $p \geq n + 1$ and $V \colon \R^n \to \Vect$ an $n$-dimensional persistence module, consider the following integral:
 \[
   \| V \|_{p} \coloneq \left( \int_{\vec{x} \leq \vec{y} \in \Omega} p (p - 1)(y_1 - x_1)^{p - n - 1} \rank V(\vec{x} \leq \vec{y}) \right)^{\frac{1}{p}},
 \]
-where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{y}\}$ for the product order on $\R^n$.
-
-Following Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}, we show the following:
+where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{y}\}$ for the product order on $\R^n$. We have the following result:
 
 \begin{proposition}
   Let $p \in [n + 1, \infty)$. The $p$-norm on $n$-dimensional persistence modules defines in amplitude. In other words, the $p$-norm defines a noise system.
@@ -171,6 +173,8 @@ Following Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}, we show the following:
   and this is the hard axiom of noise systems.
 \end{proof}
 
+From here, we can study the pseudometric induced by this noise system, including its computation and applications.
+
 % \section{Matching costs}
 
 % $\| \mu_1 \bullet \mu_2 \|_p \leq \| \mu_1 \|_p \| \mu_2 \|_p$ ?
@@ -224,10 +228,10 @@ It is still an open problem to determine the extension with largest $p$-norm. Th
 
 Following discussions with Emil Horobeț.
 
-In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we defined notions of algebraic critical points, and bounded their number. The number of algebraic critical points, in the complex setting, could define a new numerical invariant that generalizes the Euclidean distance degree and the bottleneck degree. Here we sketch its definition:
+In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we defined notions of algebraic critical points, and bounded their number. The number of algebraic critical points could define a new numerical invariant that generalizes the Euclidean distance degree \cite{EDD_Draisma} and the bottleneck degree \cite{DiRocco_Eklund_Weinstein}. Here we sketch its definition:
 
 \begin{definition}
-  Let $X$ and $Y$ be complete intersections defined by polynomials $\vec{p}$ and $\vec{q}$, respectively. We define the \index{pair degree}\textbf{pair degree of $X$ and $Y$} to be the cardinality of the set $C_k(\vec{p}, \vec{q})$ of algebraic critical points of the distance function $\dist_Y\big|_X$ (see Paper \ref{PC:Ren2026}, Definition 3.3.2).
+  Let $X$ and $Y$ be real complete intersections defined by polynomials $\vec{p}$ and $\vec{q}$, respectively. We define the \index{pair degree}\textbf{pair degree of $X$ and $Y$} to be the cardinality of the set $C_1(\vec{p}, \vec{q})$ of algebraic $1$-critical points of the distance function $\dist_Y\big|_X$ (see Paper \ref{PC:Ren2026}, Definition 3.3.2).
 \end{definition}
 
-\ir{REVIEW: Say a bit more}
+When $X$ is the entire space $\R^n$, this is the Euclidean distance degree, and when $X$ is equal to $Y$, this is the bottleneck degree. Future works includes numerically computing the pair degree on examples, studying properties such as stability with respect to perturbations of $X$ and $Y$, and studying algebraic $k$-critical points with $k \geq 2$.

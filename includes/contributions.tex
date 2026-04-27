@@ -43,7 +43,7 @@ The paper ends with an extensive list of examples of collection $\cc{P}$ and par
 \begin{figure}
   \includegraphics[width=\textwidth]{figs/lowerhooks.png}
   \caption[Free presentation of an example persistence module and its Betti diagrams relative to lower hooks.]{%
-    Sample output of \texttt{lowerhooks}. \textbf{Leftmost:} free presentation of a two-dimensional persistence module. Black points correspond to generators, white to relations, and lines correspond to nonzero coefficients in the presentation matrix.  \ir{REVIEW: define these things, I guess}
+    Sample output of \texttt{lowerhooks}. \textbf{Leftmost:} free presentation of a two-dimensional persistence module. Black points correspond to generators, white to relations, and lines correspond to nonzero coefficients in the presentation matrix (see \cref{R:generators-and-relations}).
     \textbf{Right:} Betti diagrams relative to lower hooks. Lower hooks are parameterized by ordered pairs of points; a segment corresponds to a nonzero Betti number for the pair corresponding to the segment's endpoints. Dotted segments correspond to the Betti diagram one degree lower, for easier comparison between the degrees.%
   }
   \label{F:lowerhooks}
@@ -67,7 +67,7 @@ In \textsection 4.4, we write that a functor $F \colon J \to \Vect$ is isomorphi
       \arrow[u, "\lambda" swap]
   \end{tikzcd}
 \]
-where $\lambda \in \K \setminus \{0, 1\}$. Then $F$ is a filtration with pointwise dimension at most $1$, but is not isomorphic to a subfunctor of $\K_J$. As a correction, we restrict the claim to the case where $J$ is an upper semilattice. There is no impact on the rest of the paper. \ir{REVIEW: this is correct, right?}
+where $\lambda \in \K \setminus \{0, 1\}$. Then $F$ is a filtration with pointwise dimension at most $1$, but is not isomorphic to a subfunctor of $\K_J$. As a correction, we restrict the claim to the case where $J$ is an upper semilattice. There is no impact on the rest of the paper.
 
 \subsection*{Contributions}
 
@@ -92,6 +92,7 @@ The difficult noise system axiom to prove is the exact sequence, and specificall
 Our proof strategy is to observe that the morphism $f$ is a monomorphism and that $W \cong \coker f$, and then study cases where the $p$-norm of $\coker f$ is easy to compute. We identify the following notion.
 
 \begin{definition}
+\label{!D:bar-to-bar}
   A morphism $f \colon V \to W$ of tame persistence modules is \index{bar-to-bar morphism}\textbf{bar-to-bar} when there exists a matrix representation of $f$ such that each row and column has at most one nonzero coefficient.
 \end{definition}
 
@@ -120,7 +121,7 @@ Moreover, when taking the $p$-norm of a persistence module $V \cong \bigoplus_\a
 \[
   \| V \|_p \coloneq \| (T(t(S_\alpha)) - T(s(S_\alpha))) \|_p.
 \]
-This allows us to weight the importance of bars at different points of the indexing set $\R$. Given these parameterized pseudometrics, we are able to explicitly compute the \index{hierarchical stabilization}\textbf{hierarchical stabilization} of persistence modules, which are real-valued functions that we can feed into machine learning frameworks \cite{SCLRÖ2017,GafvertChacholski2021}. In the paper, we apply this analysis pipeline to classification tasks for a synthetic dataset as well as a dataset of brain vessel models of patients of various ages. The classifying model learns the optimal parameters $p$ and $T$ in order to, for example, classify patients by age based on their brain vessel structure. The parameter $q$ is fixed equal to $1$, the standard value, and $T$ is the cumulative density of a mixed Gaussian model. The key observation is that, when $p$ is large, then the model focuses on long bars, and when $p$ is close to $1$, then it focuses on short bars. It had been observed that short bars are more relevant for this dataset \cite{BMMPS2016}, and we recover this result.  \ir{REVIEW: Figure 8? I feel like it might be more misleading to copy only one figure, because this thesis isn't really focused on this part... It's putting more emphasis on this part? idk}
+This allows us to weight the importance of bars at different points of the indexing set $\R$. Given these parameterized pseudometrics, we are able to explicitly compute the \index{hierarchical stabilization}\textbf{hierarchical stabilization} of persistence modules, which are real-valued functions that we can feed into machine learning frameworks \cite{SCLRÖ2017,GafvertChacholski2021}. In the paper, we apply this analysis pipeline to classification tasks for a synthetic dataset as well as a dataset of brain vessel models of patients of various ages. The classifying model learns the optimal parameters $p$ and $T$ in order to, for example, classify patients by age based on their brain vessel structure. The parameter $q$ is fixed equal to $1$, the standard value, and $T$ is the cumulative density of a mixed Gaussian model. The key observation is that, when $p$ is large, then the model focuses on long bars, and when $p$ is close to $1$, then it focuses on short bars. It had been observed that short bars are more relevant for this dataset \cite{BMMPS2016}, and we recover this result.  %\ir{REVIEW: Figure 8? I feel like it might be more misleading to copy only one figure, because this thesis isn't really focused on this part... It's putting more emphasis on this part? idk}
 
 \subsection*{Contributions}
 
@@ -130,7 +131,7 @@ In this paper I was a main contributor to Section 3, which contains the fundamen
 
 \papersection[misctext=To be submitted]{GRRS2026}
 
-In this paper, we refine the tools introduced in Paper \ref{PC:AGRS2025}. In particular, we extend the notion of bar-to-bar morphisms to pointwise finite-dimensional persistence modules and prove analogous results to those of Paper \ref{PC:AGRS2025}. In particular, we develop a simpler method of constructing bar-to-bar morphisms from mono- and epimorphisms. We present the results with tame persistence modules; see Paper \ref{PC:GRRS2026} for the full results for p.f.d.\ modules.
+In this paper, we refine the tools introduced in Paper \ref{PC:AGRS2025}. In particular, we extend the notion of bar-to-bar morphisms (\cref{!D:bar-to-bar}) to pointwise finite-dimensional persistence modules and prove analogous results to those of Paper \ref{PC:AGRS2025}. In particular, we develop a simpler method of constructing bar-to-bar morphisms from mono- and epimorphisms. We present the results with tame persistence modules; see Paper \ref{PC:GRRS2026} for the full results for p.f.d.\ modules.
 
 \begin{definition}
   Let $V \cong \bigoplus_j \K_{[a_j, b_j)}$ and $W \cong \bigoplus_i \K_{[c_i, d_i)}$ be tame persistence modules with fixed persistence bases. For every morphism $f \colon V \to W$, we define $\Delta f \colon V \to W$ as the projection of $f$ along the map of vector spaces
@@ -160,8 +161,7 @@ In this more general setting, we also prove the isometry theorem between the alg
   \]
 \end{theorem}
 
-In addition to this new proof of the isometry result, we also study the properties of matchings induced by morphisms. Note that a bar-to-bar morphism can be seen as an algebraic representation of a barcode matching  \ir{REVIEW: elaborate}
-and we define induced matchings from mono- and epimorphisms. Building on the results of \cite{BauerLesnick2015} and \cite{GST2025}, we show that our matchings are \index{additive matching}\textbf{additive} but not \index{functorial matching}\textbf{functorial}.
+In addition to this new proof of the isometry result, we also study the properties of matchings induced by morphisms. Note that a bar-to-bar morphism can be seen as an algebraic representation of a barcode matching: by \cref{!D:bar-to-bar}, such a morphism has a matrix representation with at most one nonzero coefficient in each row and column. The set of coordinates of nonzero coefficients defines a matching between the persistence bases, and therefore the barcodes, of the domain and codomain. We thus define matchings induced by morphisms. Building on the results of \cite{BauerLesnick2015} and \cite{GST2025}, we show that our matchings are \index{additive matching}\textbf{additive} but not \index{functorial matching}\textbf{functorial}.
 
 % Moreover, we show the following result.
 
@@ -169,7 +169,7 @@ and we define induced matchings from mono- and epimorphisms. Building on the res
 %   An operator that maps monomorphisms (resp.\ epimorphisms) to matchings cannot be both additive and functorial.
 % \end{theorem}
 
-Using the strategy of \cite{BauerLesnick2015}, we define the induced matching of a morphism $f \colon V \to W$ by taking an epi-mono factorization $f = m \circ e$, inducing matchings on $m$ and $e$, and then composing them together. In particular, there exists an algorithm that computes the epi-mono factorization such that the resulting matching $\mu(f)$ is that of \cite{GST2025}.
+Using the strategy of \cite{BauerLesnick2015}, we define the induced matching of a morphism $f \colon V \to W$ by taking an epi-mono factorization $f = m \circ e$, inducing matchings on $m$ and $e$, and then composing them together. In particular, there exists an algorithm that computes the epi-mono factorization such that the resulting matching $\mu(f)$ is that of \cite{GST2025}. % \ir{Along the way, we also derive a simple algorithm for computing the barcode of the image of a morphism of persistence modules.}
 
 \subsection*{Contributions}
 
@@ -182,7 +182,7 @@ I was an equal contributor throughout the conceptualization and writing of the p
 In this paper we generalize Morse theory to distance functions $f \coloneq \dist_Y\big|_X$ from a subset $Y \subseteq \R^n$ restricted to a subset $X \subseteq \R^n$. We show that, under certain conditions, the distance function $f$ is a continuous selection:
 
 \begin{proposition}[{Paper \ref{PC:GLRS2025}, Proposition 2.5.8}]
-  Suppose that $Y$ is smooth and let $x \in \R^n$ be a regular value of the exponential map $\varphi \colon NY \to \R^n$, where $NY$ denotes the normal bundle of $Y$. Then  \ir{REVIEW: elaborate what a normal bundle is?}
+  Suppose that $Y$ is smooth and let $x \in \R^n$ be a regular value of the exponential map $\varphi \colon NY \to \R^n$, where $NY$ denotes the normal bundle of $Y$\footnote{At every point $y$ in $Y$, the normal space $N_y Y$ is the orthogonal space to the tangent space $T_y Y$.}. Then
   \begin{enumerate}
     \item
       $B(x, \dist_Y(x)) \cap Y$ is a finite set $\{y_0, \ldots, y_k\}$,

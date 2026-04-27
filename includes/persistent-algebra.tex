@@ -8,12 +8,13 @@
   The blackbird must be flying.
 \end{epigraph}
 
-\textbf{Persistent algebra} is my name for the study of persistence modules using linear and homological algebra. This is a setting where the theory is mostly without surprises: persistence modules often behave like vector spaces (\cref{S:persistent-linear-algebra}), and their homological theory is also quite simple (\cref{S:persistent-homological-algebra}). But there are subtleties nonetheless that require attention and care, including the proper definition of persistence modules (\cref{S:ways-of-looking}). The aim of this chapter is to showcase the theory of persistent algebra as it will be used in the included papers.
+\index{persistent algebra}\textbf{Persistent algebra} is my name for the study of persistence modules using linear and homological algebra: see \cite{BubenikMilicevic2021,BSS2023,JNT2023,Miller2025,TorrasCasas2023} for examples of this study in the literature. This is a setting where the theory is mostly without surprises: persistence modules often behave like vector spaces (\cref{S:persistent-linear-algebra}), and their homological theory is also quite simple (\cref{S:persistent-homological-algebra}). Nonetheless, there are subtleties that require attention and care, including the proper definition of persistence modules (\cref{S:ways-of-looking}). The aim of this chapter is to showcase the theory of persistent algebra as it will be used in the included papers.
 
 \section{Ten Ways of Looking at a Persistence Module}
 \label{S:ways-of-looking}
 
-If you are familiar with TDA, then you may be aware of the perhaps excessive number of resources introducing the field and its central tool, persistent homology \cite[][and the ``Preliminaries'' section of many papers]{CdSGO2016,DeyWang2022,EdelsbrunnerMorozov2013,OPTGH2017,Oudot2015}. This section is yet another presentation of TDA, through ten perspectives. The aim here is not to be exhaustive, but instead to showcase the multifaceted and nature of persistence modules. Not everything introduced here will be used in the thesis (see the following sections for thesis-specific results), but all preliminary definitions will be provided here.
+If you are familiar with TDA, then you may be aware of the perhaps excessive number of resources introducing the field and its central tool, persistent homology \cite[][and the ``Preliminaries'' section of many papers]{CdSGO2016,DeyWang2022,EdelsbrunnerMorozov2013,OPTGH2017,Oudot2015}. This section is yet another presentation of TDA, through ten perspectives. The aim here is not to be exhaustive, but instead to showcase the multifaceted nature of persistence modules.
+% Not everything introduced here will be used in the thesis (see the following sections for thesis-specific results), but all preliminary definitions will be provided here.
 % Mathematical detours that are not directly used in the thesis are marked by a \blackbird{} symbol.
 You may skip to \cref{S:persistent-linear-algebra} and return as needed for exact definitions and notational conventions.
 
@@ -39,7 +40,7 @@ In TDA, persistence modules first appeared in the form of \textbf{persistent hom
 
 In this section, we will detail what exactly this definition means in the case of simplicial complexes, computing simplicial homology. First, some motivation for studying simplicial complexes.
 
-The persistent homology pipeline begins by viewing a point cloud as a topological space $X$. This space $X$ is then equipped with one or several filtrations. For example, a subset $X$ of a Euclidean space $\R^n$ can be equipped with the filtrations that project onto each coordinate, as a kinds of height maps: see \cref{F:donut} for such an example.
+A typical persistent homology pipeline begins by viewing a point cloud as a topological space $X$. This space $X$ is then equipped with one or several filtrations. For example, a subset $X$ of a Euclidean space $\R^n$ can be equipped with the filtrations that project onto each coordinate, as a kinds of height maps: see \cref{F:donut} for such an example.
 Sublevel sets are of interest for tracking topological changes in the data (see \cref{S:Morse-theory}), but they are somewhat trivial when the underlying space is discrete, as is the case for finite point clouds.
 Instead, the main example of filtered spaces is filtered simplicial complexes.
 % with the caveat that simplicial complexes are not actual topological spaces, but rather combinatorially constructed spaces\footnote{\ir{I'm fairly certain that it is a topological space with Alexandrov topology (opens are downsets; the inverse image of a downset by a monotone map is a downset)}}.
@@ -60,7 +61,7 @@ Instead, the main example of filtered spaces is filtered simplicial complexes.
 \end{example}
 
 \begin{remark}
-  It is not clear from the above definition that simplicial complexes are topological spaces. To make this clearer, we view $K$ as a poset for the inclusion relation and equip it with the Alexandrov topology (\cref{!D:Alexandrov}). We can show that a continuous map for this topology is exactly a monotone map with respect to the face relation. We will not be using this topology.
+  It is not immediate from the above definition that simplicial complexes are topological spaces. To make this clearer, we view $K$ as a poset for the inclusion relation and equip it with the Alexandrov topology (\cref{!D:Alexandrov}). We can show that a continuous map for this topology is exactly a monotone map with respect to the face relation. We will not be using this topology.
 \end{remark}
 
 We now present some typical constructions for filtered simplicial complexes in TDA.
@@ -75,16 +76,16 @@ We now present some typical constructions for filtered simplicial complexes in T
   \[
     \VR_t(X) \coloneq \{ \sigma \subseteq X \mid \forall x, y \in \sigma, \; d(x, y) \leq t \}.
   \]
-  As we can see, these complexes are parameterized by the radius $t$. This leads us to our construction of filtered simplicial complexes. Let $K$ be the full simplicial complex on $X$.
-
-  The \index{filtration!CZZech@Čech}\textbf{Čech filtration on $K$}, denoted by $\Cech(X)$, assigns to each simplex $\sigma \in K$ the minimal radius of a closed ball in $M$ that contains $\sigma$. 
+  As we can see, these complexes are parameterized by the radius $t$. This leads us to our construction of filtered simplicial complexes.
+  
+  Let $K$ be the full simplicial complex on $X$. The \index{filtration!CZZech@Čech}\textbf{Čech filtration on $K$}, denoted by $\Cech(X)$, assigns to each simplex $\sigma \in K$ the minimal radius of a closed ball in $M$ that contains $\sigma$. 
   The \index{filtration!Vietoris-Rips}\textbf{Vietoris-Rips filtration on $K$}, denoted by $\VR(X)$, assigns to each simplex $\sigma \in K$ the maximum of the pairwise distances of $\sigma$.
   We denote the sublevel sets of $\Cech(X)$ and $\VR(X)$ by $\Cech_t(X)$ and $\VR_t(X)$, respectively, and observe that they coincide with the Čech and Vietoris-Rips complexes defined above. Note that the sublevel sets are empty for $t < 0$.
   
   As an example, the flip book in the corner of the right-side pages is constructing the Čech filtration on a set of vertices; see \cref{F:Cech} for details.
 \end{example}
 
-\begin{figure}[t]
+\begin{figure}[tbp]
   \centering
   \begin{subfigure}{.3\textwidth}
     \centering
@@ -192,6 +193,7 @@ and then apply a homology functor. In this section, we will define what a homolo
 \end{notation}
 
 \begin{definition}
+\label{!D:functor}
   A functor is a way to pass from one category to another. Formally, let $\cat{C}$ and $\cat{D}$ be two categories. A \index{functor}\textbf{functor} $F \colon \cat{C} \to \cat{D}$ consists of
   \begin{itemize}
     \item for each object $x$ in $\cat{C}$, an object $F(x)$ in $\cat{D}$, and
@@ -229,7 +231,7 @@ and then apply a homology functor. In this section, we will define what a homolo
 \end{definition}
 
 \begin{example}
-  For example, we can construct a functor from $\Set$ to $\Vect_{\bf{k}}$ by mapping a set $X$ to the vector space \index{.kx@$\bf{k} X$}$\bf{k} X$ generated by formal sums of elements of $X$, and mapping a set-valued function $f \colon X \to Y$ to the linear map that sends each basis element $x$ in $\bf{k} X$ to the corresponding basis element $f(x)$ in $\bf{k} Y$.
+  For example, given a field $\K$, we can construct a functor from $\Set$ to $\Vect_{\bf{k}}$ by mapping a set $X$ to the vector space \index{.kx@$\bf{k} X$}$\bf{k} X$ generated by formal sums of elements of $X$, and mapping a set-valued function $f \colon X \to Y$ to the linear map that sends each basis element $x$ in $\bf{k} X$ to the corresponding basis element $f(x)$ in $\bf{k} Y$.
 \end{example}
 
 It can be shown that homology is a functor from $\Top$ to $\Vect_{\bf{k}}$ \cite{Hatcher2002}. For example, the construction of the homology spaces in \cref{!D:simplicial-homology} is functorial. We can thus view persistent homology more generally as the application of the homology functor to a subcategory of topological spaces (or simplicial complexes). Specifically, let $I$ be a totally ordered set, $(X_t)_{t \in I}$ a collection of spaces (or simplicial complexes), and $X_{s \leq t} \colon X_s \to X_t$ a morphism for each $s \leq t$ in $I$, satisfying the composition and identity axioms for categories (see \cref{!D:category}). This defines a category, which we denote by $X$, whose objects are the $X_t$ and morphisms are the $X_{s \leq t}$. For all integers $k \geq 0$, we then call the image of $X$ by the functor $H_k(-)$ the \textbf{$k^{\th}$ persistent homology of $X$}.
@@ -281,12 +283,12 @@ Persistence modules have been extensively studied as graded modules over polynom
   Conversely, let $V$ be a graded module over $\bf{k}[x]$. We define $V_t$ to be the summand of $V$ of grade $t$, and, for all $s \leq t$, we define $V_{s \leq t}$ to be the action of $x^{t - s}$ on $V_s$. We check that this satisfies the associativity and unit conditions of \cref{!D:persistence-module}.
 \end{proof}
 
-We remark that nothing prevents us from considering multigraded modules over multivariate polynomial rings. This is the approach of \cite{CarlssonZomorodian2009}, where the authors call such modules multidimensional persistence. They are more commonly called \index{persistence module!multiparameter}\textbf{multiparameter persistence modules}, and we immediately generalize this further to arbitrary posets.
+We remark that nothing prevents us from considering multigraded modules over multivariate polynomial rings. This is the approach of \cite{CarlssonZomorodian2009}, where the authors call such modules multidimensional persistence. Nowadays, they are more commonly called \index{persistence module!multiparameter}\textbf{multiparameter persistence modules}, and we immediately generalize this further to arbitrary posets.
 
 \subsection{As a functor itself}
 \label{SS:functor}
 
-As remarked in \cref{SS:vector-spaces}, the definition of a persistence module closely resembles that of a functor. As remarked in \cref{SS:graded-module}, persistence modules may be indexed by more general posets than totally ordered sets. We formalize both of these remarks here:
+In \cref{SS:vector-spaces}, we noted that the definition of a persistence module closely resembles that of a functor. In \cref{SS:graded-module}, we remarked that persistence modules may be indexed by more general posets than totally ordered sets. We formalize both of these observations here:
 
 \begin{definition}
   Let $\bf{k}$ be a field and $(I, \mathord{\leq})$ a poset. Note that $(I, \mathord{\leq})$ is a category (see \cref{!D:category}) where $\obj(I, \mathord{\leq}) = I$ and, for all $s, t$ in $I$, $\mor_{(I, \mathord{\leq})}(s, t) = \{*\}$ if $s \leq t$ and $\varnothing$ otherwise. We define a \index{persistence module!generalized}\textbf{generalized persistence module indexed by} (or \textbf{over}) \textbf{$I$} to be a functor $V \colon (I, \mathord{\leq}) \to \Vect_{\bf{k}}$.
@@ -294,7 +296,7 @@ As remarked in \cref{SS:vector-spaces}, the definition of a persistence module c
   A \index{morphism!of generalized persistence modules}\textbf{morphism of persistence modules} is then a natural transformation between persistence modules.
 \end{definition}
 
-We check that this definition coincides with \cref{!D:persistence-module} when $I$ is totally ordered. \textbf{From now on, the term ``persistence module'' refers to refer to this functorial definition.}
+We check that this definition coincides with \cref{!D:persistence-module} when $I$ is totally ordered. \textbf{From now on, the term ``persistence module'' refers to this functorial definition.}
 
 \subsection{As a sheaf}
 
@@ -347,7 +349,9 @@ We have strayed far enough our persistent homology pipeline. Let us return to th
 \end{definition}
 
 \begin{definition}
-  A \index{multiset}\textbf{multiset} is a set $X$ equipped with a \index{multiplicity}\textbf{multiplicity} function $m_X \colon X \to \N \setminus \{0\}$. A multiset is \textbf{finite} if its underlying set is finite. We often write omit the multiplicity function when writing multisets.
+  A \index{multiset}\textbf{multiset} is a set $X$ equipped with a \index{multiplicity}\textbf{multiplicity} function $m_X \colon X \to \N \setminus \{0\}$. A multiset is \textbf{finite} if its underlying set is finite. We often omit the multiplicity function when writing multisets.
+  
+  We can iterate over a multiset $X$ by indexing its elements by a set. For instance, we can write $X = \{x_\alpha\}_{\alpha \in A}$ with $A$ the indexing set.
 \end{definition}
 
 \begin{theorem}[{\cite[Theorem 1.2]{BotnanCrawleyBoevey2020}}]
@@ -369,7 +373,7 @@ Note that the collection of intervals may be infinite and even uncountable: this
 
 \begin{definition}
 \label{!D:tame}
-  A persistence module is \index{persistence module!tame}\textbf{tame} is a pointwise finite-dimensional persistence module $V$ over a total order $(I, \mathord{\leq})$ such that there exists a finite sequence $t_1 < \cdots < t_n$ such that, for $s \leq t$ in $I$, $V(s \leq t)$ is a non-isomorphism only if $s < t_k \leq t$ for some $k \in \{1, \ldots, n\}$. In this case, the barcode decomposition must consist of tame interval modules: each interval is of the form $[s, t)$, that is, closed from below and open from above \cite{ZomorodianCarlsson2005}.
+  A \index{persistence module!tame}\textbf{tame persistence module} is a pointwise finite-dimensional persistence module $V$ over a total order $(I, \mathord{\leq})$ such that there exists a finite sequence $t_1 < \cdots < t_n$ such that, for $s \leq t$ in $I$, $V(s \leq t)$ is a non-isomorphism only if $s < t_k \leq t$ for some $k \in \{1, \ldots, n\}$. In this case, the barcode decomposition must consist of tame interval modules: each interval is of the form $[s, t)$, that is, closed from below and open from above \cite{ZomorodianCarlsson2005}.
 \end{definition}
 
 \begin{example}
@@ -378,7 +382,7 @@ Note that the collection of intervals may be infinite and even uncountable: this
   See \cref{F:baco} for an example of the barcodes in degrees $0$ and $1$.
 \end{example}
 
-\begin{figure}[t]
+\begin{figure}[tbp]
   \includegraphics[width=\textwidth]{figs/barcode-diagram.png} \\[-2ex]
   \begin{subfigure}{.49\textwidth}
     \caption{}
@@ -453,7 +457,15 @@ In TDA, not only are we interested in the topological features of a data set, bu
 
   A partial matching of multisets is defined similarly, as a sub-multiset $M$ of $X \times Y$ (the multiplicity of $(x, y)$ is $m_{X \times Y}(x, y) \coloneq m_X(x) m_Y(y)$) such that each element $x$ of $X$ (resp.\ $y$ of $Y$) appears at most $m_X(x)$ (resp.\ $m_Y(y)$) times.
   
-  Let $D$ and $D'$ be persistence diagrams. Denote by $\Delta \coloneq \{(t, t) \mid t \in \R\}$ the diagonal of $\R^2$. Fix $p \in [1, +\infty]$, denote by $d_p$ the $p$-norm distance, and denote by $\Delta$ the diagonal $\{(t, t) \mid t \in \R\}$ in $\R^2$. Let $M$ be a matching of $D$ and $D'$. We define the \index{cost (of a matching)}\textbf{$p$-cost of $M$} to be the number
+  Let $D$ and $D'$ be persistence diagrams. Denote by $\Delta$ the diagonal $\{(t, t) \mid t \in \R\}$ in $\R^2$. Fix $p \in [1, +\infty]$ and denote by $d_p$ the $p$-norm distance in $\R^2$: recall that, for $x, y \in \R^2$,
+  \begin{align*}
+    d_p(x, y) & \coloneq \| x - y \|_p \\
+    & \coloneq \begin{cases}
+      \left( (x_1 - y_1)^p + (x_2 - y_2)^p \right)^{\frac{1}{p}} & \text{if } p < \infty, \\
+      \max(|x_1 - y_1|, |x_2 - y_2|) & \text{if } p = +\infty.
+    \end{cases}
+  \end{align*}
+  Let $M$ be a matching of $D$ and $D'$. We define the \index{cost (of a matching)}\textbf{$p$-cost of $M$} to be the number
   \[
     c_p(M) \coloneq \left(
       \sum_{(a, b) \in M} d_p(a, b)^p + \sum_{\substack{a \in D \\ \mathclap{\text{unmatched}}}} d_p(a, \Delta)^p + \sum_{\substack{b \in D' \\ \mathclap{\text{unmatched}}}} d_p(b, \Delta)^p
@@ -469,7 +481,7 @@ In TDA, not only are we interested in the topological features of a data set, bu
   \]
   if $p = \infty$. That is, $c_p(M)$ is the $p$-norm of the vector of distances between matched pairs of points and distances between unmatched points and the diagonal.
   
-  We define the \index{distance!Wasserstein}\textbf{$p$-Wasserstein distance between $D$ and $D'$} as
+  We define the \index{distance!Wasserstein}\textbf{$p$-Wasserstein distance} between the persistence diagrams $D$ and $D'$ to be
   \[
     d_p(D, D') \coloneq \inf_{M \in \Match(D, D')} c_p(M).
   \]
@@ -562,7 +574,7 @@ We can also define distances on persistence modules.
   \end{enumerate}
 \end{remark}
 
-Remarkably, the interleaving distance on persistence modules and the bottleneck distance on persistence diagrams/barcodes are equal:
+Remarkably, the interleaving distance on persistence modules and the bottleneck distance on the corresponding persistence diagrams and barcodes are equal:
 
 \begin{theorem}[{\cite[Theorem 3.5]{BauerLesnick2015}}]
 \label{T:isometry-infty}
@@ -612,7 +624,7 @@ Recall that a persistence module is a functor from a poset $(I, \mathord{\leq})$
 
 \begin{definition}
 \label{!D:pointwise-defs}
-  Direct sums, kernels, and cokernels of persistence modules all exist and are defined pointwise. That is, given persistence modules $V$ and $W$, a morphism $f \colon V \to W$, and $t \in I$, we have
+  Direct sums, kernels, and cokernels of persistence modules all exist and are defined pointwise\footnote{This is true in general for functor categories (\cref{!D:functor}) with values in $\Vect$ or any other abelian category}. That is, given persistence modules $V$ and $W$, a morphism $f \colon V \to W$, and $t \in I$, we have
   \begin{itemize}
     \item $(V \oplus W)(t) = V(t) \oplus W(t)$,
     \item $(\ker f)(t) = \ker (f_t \colon V(t) \to W(t))$,
@@ -625,55 +637,74 @@ Recall that a persistence module is a functor from a poset $(I, \mathord{\leq})$
   \end{itemize}
 \end{definition}
 
-The objective of this section is to develop linear algebra for persistence modules. \ir{cite this Bubenik/Scott/Sheehy Wasserstein paper, Section 6?}
+The objective of this section is to develop linear algebra for persistence modules.
 
 \subsection{Persistence vectors and generators}
 
-Considering persistence modules that are graded modules, there is an immediate notion of an ``element'' of a persistence module. We first define this for tame persistence modules over $\R$. This section is in part inspired by the framework of \cite{TorrasCasas2023}.
+Considering persistence modules that are graded modules, there is an immediate notion of an ``element'' of a persistence module. We first define this for tame persistence modules over $\R$. This section is in part inspired by the framework of \cite{TorrasCasas2023}; compare also with \cite[Section 6]{BSS2023}. First, we define the notion of persistence vectors.
 
 \begin{definition}
   Let $V$ be a tame persistence module over $\R$. A \index{persistence vector}\textbf{persistence vector of $V$} is an element $v$ in $V(s)$, for some $s \in \R$.
   Equivalently, it is the given of a map $v \colon \K_{[s, +\infty)} \to V$, since such a map is determined by its value at $s$: for all $t \geq s$, we have $v_t = V(s \leq t) \circ v_s$, and for all $t \not\geq s$, we have $v_t = 0$.
   
   We call $s$ the \index{grade}\textbf{grade} of $v$, and write $\grade(v) \coloneq s$. Viewing $v$ as a function, we denote by $\death(v) \coloneq \inf\{t \geq I \mid v(t) = 0\}$ the \index{death time}\textbf{death time} of $v$.
+\end{definition}
+
+Next, we define persistent versions of generating sets and linear independence.
+
+\begin{definition}
+  Let $S \coloneq \{v_\alpha\}_{\alpha \in A}$ be a set of persistence vectors of $V$ and denote by $s_\alpha$ the grade of $v_\alpha$ for all $\alpha \in A$.
   
-  Let $S \coloneq \{v_\alpha\}_{\alpha \in A}$ be a set of vectors of $V$ and denote by $s_\alpha$ the grade of $v_\alpha$ for all $\alpha \in A$. We say that $S$ is a \index{generating set}\textbf{generating set of $V$} if, for every (standard) vector $w$ in the vector space $V(s)$, there exists a subset $A' \subseteq A$ and coefficients $\lambda_\alpha \in \K$ for all $\alpha \in A'$ such that
+  We say that $S$ is a \index{generating set}\textbf{generating set of $V$} if, for every (standard) vector $w$ in the vector space $V(s)$, there exists a subset $A' \subseteq A$ and coefficients $\lambda_\alpha \in \K$ for all $\alpha \in A'$ such that
   \begin{equation}
   \label{Eq:generating-set}
     w = \sum_{\alpha \in A'} \lambda_\alpha V(s_\alpha \leq s)(v_\alpha).
   \end{equation}
   In particular, each $\alpha$ in $A'$ must satisfy the inequality $s_\alpha \leq s$.
+  
+  We say that $S$ is \index{linear independence}\textbf{linearly independent} if, for all $t \in \R$, the set $\{v_\alpha(t) \mid \alpha \in A, \, v_\alpha(t) \neq 0\}$ is linearly independent as standard vectors in $V(t)$.
 \end{definition}
 
-\begin{remark}
-  Recall from \cref{!D:tame} that we have a barcode decomposition of $V$, which is an isomorphism, of the form
-  \[
-    \varphi \colon \bigoplus_{\alpha \in A} \K_{[s_\alpha, t_\alpha)} \to V.
-  \]
-  Note that $\varphi$ decomposes into a sum of morphisms $\varphi_\alpha \colon \K_{[s_\alpha, t_\alpha)} \to V$. Each morphism $\varphi_\alpha$ necessarily lifts to a morphism $\varphi_\alpha' \colon \K_{[s_\alpha, +\infty)} \to V$, where, for all $t \geq b_\alpha$, $(\varphi_\alpha')_t$ is determined by the value of $\varphi_\alpha$ at $s_\alpha$. Thus $\varphi$ can be seen as the sum of persistence vectors in their functional definition. Moreover, by construction, these persistence vectors $\varphi_\alpha'$ generate $V$. We therefore call such a barcode decomposition a \index{persistence basis}\textbf{persistence basis}.
+Recall from \cref{!D:tame} that we have a barcode decomposition of $V$, which is an isomorphism, of the form
+\[
+  \varphi \colon \bigoplus_{\alpha \in A} \K_{[s_\alpha, t_\alpha)} \to V.
+\]
+Note that $\varphi$ decomposes into a sum of morphisms $\varphi_\alpha \colon \K_{[s_\alpha, t_\alpha)} \to V$. Each morphism $\varphi_\alpha$ necessarily lifts to a morphism $\varphi_\alpha' \colon \K_{[s_\alpha, +\infty)} \to V$, where, for all $t \geq b_\alpha$, $(\varphi_\alpha')_t$ is determined by the value of $\varphi_\alpha$ at $s_\alpha$. Thus $\varphi$ can be seen as the sum of persistence vectors in their functional definition. Moreover, by construction, these persistence vectors $\varphi_\alpha'$ generate $V$. This motivates the following definition.
+
+\begin{definition}
+  Let $V$ be a tame persistence module over $\R$ and $B \coloneq \{v_\alpha \colon \K_{[s_\alpha, +\infty)} \to V\}_{\alpha \in A}$ a collection of persistence vectors of $V$. For each $\alpha \in A$, denote by $t_\alpha$ the death time of $v_\alpha$. Then $v_\alpha$ factors through $\varphi_\alpha \colon \K_{[s_\alpha, t_\alpha)} \to V$.
   
-  This framework includes a notion of \textbf{linear independence}, which essentially is linear independence of the nonzero vectors at each time $t \in \R$. We will not need this notion; see \cite{TorrasCasas2023} for further details.
+  The collection $B$ is a \index{persistence basis}\textbf{persistence basis of $V$} if the morphism
+  \[
+    \sum_{\alpha \in A} \varphi_\alpha \colon \bigoplus_{\alpha \in A} \K_{[s_\alpha, t_\alpha)} \to V
+  \]
+  is an isomorphism. We also refer to this isomorphism as a persistence basis.
+\end{definition}
+  
+\begin{remark}
+  The equivalent notion in \cite{TorrasCasas2023} is called a \textit{barcode basis}. In addition, a collection of persistence vectors is a persistence basis if, and only if, it generates $V$ and is linearly independent \cite[Proposition 3.11]{TorrasCasas2023}.
 \end{remark}
 
 Persistence vectors can be generalized to persistence modules over arbitrary posets and to p.f.d.\ (pointwise finite dimensional) persistence modules over $\R$, but these two generalizations to do not necessarily coincide.
 
 \begin{definition}
 \label{!D:free}
+\label{!D:generalized-persistence-vector}
   Fix $(I, \mathord{\leq})$ a poset and $s$ an element of $I$. The \index{persistence module!free (at an element)}\textbf{free module at $s$} is the persistence module $\bf{k}_{\{I \geq t\}}$, where $\{I \geq s\} \coloneq \{t \in I \mid t \geq s\}$ is an interval of $I$ (see \cref{!D:interval}).
   
   Let $V$ be a persistence module over $I$. A \index{persistence vector!generalized}\textbf{persistence vector of $V$} is an element $v$ in $V(s)$. As before, we call $s$ the grade of $v$, and write $\grade(v) \coloneq s$. Unlike before, there is no generalized notion of death-time (or not a unique one, at least). The notion of \index{generating set!generalized}\textbf{generating sets} is the same as that of \eqref{Eq:generating-set}.
   
-  Now let $V$ be a p.f.d.\ persistence module over $\R$. A \index{persistence vector!p.f.d.}\textbf{persistence vector of $V$} is a map $v \colon \K_{U} \to V$, where $U$ is an upset (a subset of $\R$ such that, for all $u$ in $U$ and $t \geq u$ in $\R$, $t$ is also in $U$). Essentially, $U$ is an interval of the form $[s, \infty)$ or $(s, \infty)$. We denote by $\cc{L}(v) \coloneq \{t \in \R \mid v(t) \neq 0\}$ the \index{support (of a persistence vector)}\textbf{support of $v$}. By the properties of persistence modules, $\cc{L}(v)$ is an interval with either closed or open ends.
+  Now let $V$ be a p.f.d.\ persistence module over $\R$. A \index{persistence vector!p.f.d.}\textbf{persistence vector of $V$} is a map $v \colon \K_{U} \to V$, where $U$ is an upset (\cref{!D:Alexandrov}). Explicitly, $U$ is an interval of the form $[s, \infty)$ or $(s, \infty)$. We denote by $\cc{L}(v) \coloneq \{t \in \R \mid v(t) \neq 0\}$ the \index{support (of a persistence vector)}\textbf{support of $v$}. By the properties of persistence modules, $\cc{L}(v)$ is an interval with either closed or open ends.
   
   For p.f.d.\ modules over $\R$, the notions of grade and death time can defined as the start- and endpoint of the support of the persistence vector, but these definitions are not so useful. The notion of \index{generating set!p.f.d.}\textbf{generating sets} is almost that of \eqref{Eq:generating-set}, except that we use the functional notation:
   \[
     w = \sum_{\alpha \in A'} \lambda_\alpha V_{s_\alpha \leq s} \circ v_\alpha.
   \]
-  Moreover, we recover the notion of \index{persistence basis!p.f.d.}\textbf{persistence basis} as the barcode decomposition isomorphism
+  Moreover, we recover the notion of \index{persistence basis!p.f.d.}\textbf{persistence basis} from the barcode decomposition isomorphism
   \[
     \varphi \colon \bigoplus_{\alpha \in A} \K_{S_\alpha} \to V
   \]
-  of \cref{T:barcode-decomposition}: this isomorphism decomposes as a sum of morphisms $\varphi_\alpha \colon \K_{S_\alpha} \to V$, which lift to persistence vectors $\varphi_\alpha' \colon K_{U_\alpha} \to V$, with $U_\alpha \coloneq \{t \in \R \mid \exists s \in S_\alpha, \; t \geq s\}$ the upset generated by $S_\alpha$.
+  of \cref{T:barcode-decomposition}: this isomorphism decomposes as a sum of morphisms $\varphi_\alpha \colon \K_{S_\alpha} \to V$, which lift to persistence vectors $v_\alpha \colon K_{U_\alpha} \to V$, with $U_\alpha \coloneq \{t \in \R \mid \exists s \in S_\alpha, \; t \geq s\}$ the upset generated by $S_\alpha$. These persistence vectors form a persistence basis of $V$.
 \end{definition}
 
 \subsection{Matrix representations}
@@ -713,7 +744,7 @@ The second idea behind matrix representations is the isomorphism, for intervals 
 When $T$ overlaps $S$ above, the morphisms of $\hom(\K_{S}, \K_{T})$ are all of the form $\lambda f_0$, where $\lambda \in \K$ and $f_0 \colon \K_S \to \K_T$ has identity components over $S \cap T$. We choose the isomorphism to $\K$ that maps $f_0$ to $1_{\K}$. We now define our matrix representations.
 
 \begin{definition}
-  Let $f \colon V \to W$ be a morphism in $\Tame$ with fixed persistence bases $\varphi \colon V \cong \bigoplus_{j \in J} \K_{[a_j, b_j)}$ and $\psi \colon W \cong \bigoplus_{i \in I} \K_{[c_i, d_i)}$ (note the swapped indices). For all $i$ in $I$ and $j$ in $J$, denote by $f_{ij}$ the restriction of the morphism
+  Let $f \colon V \to W$ be a morphism in $\Tame$ with fixed persistence bases $\varphi \colon \bigoplus_{j \in J} \K_{[a_j, b_j)} \cong V$ and $\psi \colon \bigoplus_{i \in I} \K_{[c_i, d_i)} \cong W$ (note the swapped indices). For all $i$ in $I$ and $j$ in $J$, denote by $f_{ij}$ the restriction of the morphism
   \[
     \psi f \varphi^{-1} \colon \bigoplus_{j \in J} \K_{[a_j, b_j)} \to \bigoplus_{i \in I} \K_{[c_i, d_i)}
   \]
@@ -723,7 +754,7 @@ When $T$ overlaps $S$ above, the morphisms of $\hom(\K_{S}, \K_{T})$ are all of 
   
   A matrix representation is \index{matrix representation!ordered}\textbf{ordered} if the intervals $\{[a_j, b_j)\}_j$ and $\{[c_i, d_i)\}_j$ are ordered in a way that is compatible with the product order on start- and endpoints\footnote{The \textbf{product order} $\leq_{\text{prod}}$ is given by $(a_j, b_j) \leq_{\text{prod}} (c_i, d_i)$ if $a_j \leq c_i$ and $b_j \leq d_i$.}. In other words, for all $j, j'$ in $J$, if $[a_{j'}, b_{j'})$ overlaps $[a_j, b_j)$ above, then $j' > j$.
   
-  Matrix multiplication is not exactly the same as in linear algebra. Let $f \colon U \to V$ and $g \colon V \to W$ be morphisms of tame persistence modules with fixed persistence bases $U \cong \bigoplus_{k} \K_{[y_k, z_k)}$, $V \cong \bigoplus_{j} \K_{[a_j, b_j)}$, and $W \cong \bigoplus_{i} \K_{[c_i, d_i)}$, and $F$ and $G$ matrix representations of $f$ and $g$, respectively. The product $GF$ is given by
+  Matrix multiplication is not exactly the same as in linear algebra. Let $f \colon U \to V$ and $g \colon V \to W$ be morphisms of tame persistence modules with fixed persistence bases $\bigoplus_{k} \K_{[y_k, z_k)} \cong U$, $\bigoplus_{j} \K_{[a_j, b_j)} \cong V$, and $\bigoplus_{i} \K_{[c_i, d_i)} \cong W$, and $F$ and $G$ matrix representations of $f$ and $g$, respectively. The product $GF$ is given by
   \[
     (GF)_{ik} = \sum_{j} G_{ij} F_{jk} \bf{I}\{a_j \leq y_k < b_j \leq z_k\},
   \]
@@ -734,9 +765,9 @@ When $T$ overlaps $S$ above, the morphisms of $\hom(\K_{S}, \K_{T})$ are all of 
   See the right-hand side of \cref{F:morphism} for an example of an ordered matrix representation. In this case, the morphism $f \colon K(a_1,b_1) \oplus K(a_2,b_2) \rightarrow K(c_1,d_1) \oplus K(c_2,d_2)$ only has one ordered matrix representation.
 \end{example}
 
-\begin{figure}[t]
+\begin{figure}[tbp]
   \centering
-  \begin{subfigure}[t]{.45\textwidth}
+  \begin{subfigure}[tbp]{.45\textwidth}
     \[
     \begin{tikzpicture}[xscale=1.2, yscale=.6, thick]
       \draw[-] (1.8,2.5) node[left] {$a_1$} -- (2.8,2.5) node[right] {$b_1$};
@@ -756,7 +787,7 @@ When $T$ overlaps $S$ above, the morphisms of $\hom(\K_{S}, \K_{T})$ are all of 
     \]
   \end{subfigure}
   \hfill
-  \begin{subfigure}[t]{.45\textwidth}
+  \begin{subfigure}[tbp]{.45\textwidth}
     \[
       F = \bordermatrix{%
         & (a_2, b_2) & (a_1, b_1) \cr
@@ -797,7 +828,7 @@ where each summand is seen as a morphism from $C_{k + 1}$ to $\ker \partial_k$. 
 \]
 which directly gives the barcode.
 
-As it turns out, there is an algorithm for reducing matrix representations to this ideal form. Consider \cref{A:std-red} where, given a matrix $A \in \K^{m \times n}$, $A_{i, *}$ denotes the $i^{\th}$ row of $A$, $A_{*, j}$ denotes the $j^{\th}$ column of $A$, and $\low(j) \coloneq \max\{i \geq 1 \mid A_{i, j} \neq 0\}$ denotes the lowest nonzero element of $A_{*, j}$.
+As it turns out, there is an algorithm for reducing matrix representations to this ideal form. Consider \cref{A:std-red} where, given a matrix $A \in \K^{m \times n}$, $A_{i, *}$ denotes the $i^{\th}$ row of $A$, $A_{*, j}$ denotes the $j^{\th}$ column of $A$, and $\low(j) \coloneq \max\{i \geq 1 \mid A_{i, j} \neq 0\}$ denotes the index of the lowest nonzero element of $A_{*, j}$.
 
 \begin{algorithm}
 \caption{Standard reduction algorithm.}
@@ -811,13 +842,14 @@ As it turns out, there is an algorithm for reducing matrix representations to th
     }
     \While{$\exists i' < i, \; A_{i', j} \neq 0$}{%
       $\lambda \leftarrow A_{i', j} / A_{i, j}$\;
-      $A_{i', *} \leftarrow A_{i', *} - \lambda A_{i, *}$\; 
+      $A_{i', *} \leftarrow A_{i', *} - \lambda A_{i, *}$\;
     }
   }
   \Return{$A$}
 \end{algorithm}
 
-In the first while loop, we reduce $A$ so that its lowest nonzero coefficient is not on the same row as the lowest nonzero coefficient of a previous column. In the second while loop, we clear all nonzero coefficients above the lowest one. A key observation is both types of these operations --- left-to-right column addition and bottom-to-top row addition --- correspond to isomorphisms on the domain or codomain: indeed, these operations correspond to multiplications by upper triangular matrices on the right or left, and these matrices represent valid morphisms of persistence modules due to the ordering of columns and rows.  \ir{REVIEW: could be said better}
+In the first while loop, we reduce $A$ so that its lowest nonzero coefficient is not on the same row as the lowest nonzero coefficient of a previous column. In the second while loop, we clear all nonzero coefficients above the lowest one. We check that both types of operations --- left-to-right column addition and bottom-to-top row addition --- return valid matrix representations. Indeed, adding column $j'$ to $j$ with $j' < j$ corresponds to multiplying the matrix $A$ on the right by the matrix $(I_n + E_{j', j})$, where $E_{j', j}$ is the matrix with all $0$'s except for a $1$ in position $(j' ,j)$. Since the rows and columns of this matrix are ordered increasingly by their label's birth time, and $j' < j$, we deduce that we can have a nonzero coefficient at $(j', j)$. We reason similarly for bottom-to-top row operations.
+
 The output matrix has at most one nonzero coefficient in each row and column, and while the algorithm does not specify exactly in which order to do matrix reductions, there is the following fundamental result:
 
 \begin{theorem}[Pairing uniqueness lemma, {\cite{MorozovLewis2015}}]
@@ -876,6 +908,11 @@ where the second functor is the functor that takes a set and returns a vector sp
   \]
   where the $F_d$, $d \geq 0$, are projective. Similarly to covers, a resolution is \index{projective resolution!minimal}\textbf{minimal} if its endomorphisms (morphisms $F_* \to F_*$ as chain complexes) are isomorphisms, and this minimal resolution exists and is unique up to isomorphism.
 \end{definition}
+
+\begin{remark}
+\label{R:generators-and-relations}
+  One way of presenting a persistence module $V$ is by the first two terms of a projective resolution. Indeed, given a projective resolution $(F_k)_{k \geq 0}$ of $V$, the cokernel of the map $\partial_0 \colon F_1 \to F_0$ is isomorphic to $V$. Since $F_0$ and $F_1$ are free, we can construct generating sets (\cref{!D:generalized-persistence-vector}). For example, writing $F_0 = \bigoplus_{\alpha \in A} \K_{[s_\alpha, \infty)}$, we have the immediate generating set $\{\K_{[s_\alpha, \infty)} \hookrightarrow F_0\}_{\alpha \in A}$. We call this generating set of $F_0$ the set of \textbf{generators of $V$}, and the analogous generating set of $F_1$ the set of \textbf{relations of $V$}. The matrix representation of $\partial_0$ is called a \textbf{presentation matrix of $V$}.
+\end{remark}
 
 \subsection{Betti diagrams and local Koszul complexes}
 
@@ -1021,17 +1058,18 @@ As we have seen in \cref{!D:distance}, matchings of barcodes and persistence dia
   \[
     \cc{X}(f) \coloneq \bigcup_{t \in \R, \tau \in \{-, +\}} \cc{X}_{t^\tau}.
   \]
-  We similarly define the $\cc{X}$-matching $\cc{X}(f)$ for an epimorphism $f \colon V \twoheadrightarrow W$, where we classify bars in $\barcode(V)$ and $\barcode(W)$ by startpoint instead of endpoint.
+  We similarly define the $\cc{X}$-matching $\cc{X}(f)$ for an epimorphism $f \colon V \twoheadrightarrow W$, where we sort bars in $\barcode(V)$ and $\barcode(W)$ by startpoint instead of endpoint.
   
   Now let $f \colon V \to W$ be an arbitrary morphism of p.f.d.\ modules, and consider $f = m \circ e$ an \index{epi-mono factorization}\textbf{epi-mono factorization}: that is, $e$ is an epimorphism, $m$ is a monomorphism, and we have the composition
   \[
     f \colon V \xrightarrow{e} \im(f) \xrightarrow{m} W.
   \]
-  Then the \textbf{$\cc{X}$-matching of $f$} is
+  Note that this epi-mono factorization is only unique up to isomorphism on $\im(f)$. Then the \textbf{$\cc{X}$-matching of $f$} is
   \begin{align*}
     \cc{X}(f) & \coloneq \cc{X}(m) \circ \cc{X}(e) \\
-    & \coloneq \{(a, c) \mid \exists b \in \barcode(\im(f)), \, (a, b) \in \cc{X}(e), (b, c) \in \cc{X}(m)\}.
+    & \coloneq \{(a, c) \mid \exists b \in \barcode(\im(f)), \, (a, b) \in \cc{X}(e), (b, c) \in \cc{X}(m)\},
   \end{align*}
+  and this matching does not depend on the choice of epi-mono factorization.
 \end{definition}
 
 The $\cc{X}$-matching is functorial on monomorphisms and epimorphisms \cite[Proposition 5.7]{BauerLesnick2015} but is not additive. That is, $\cc{X}(f \oplus g)$ is not necessarily equal to $\cc{X}(f) \sqcup \cc{X}(g)$. Moreover, it does not really conserve information about the underlying morphism, especially for mono- and epimorphisms: it only requires the existence of such a morphism in order to be defined; the matchings themselves just match longest bars to longest bars. These limitations were a motivation for the definition of $\cc{P}$-matchings:

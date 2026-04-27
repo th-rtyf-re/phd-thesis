@@ -422,7 +422,7 @@ def barcode_stuff():
     plot_barcode(diag_array)
 
 def flipbook_stuff():
-    for i, t in enumerate(np.linspace(0, 17, endpoint=True, num=30)):
+    for i, t in enumerate(np.linspace(0, 17, endpoint=True, num=35)):
         print(f"[flipbook] rendering frame {i}...")
         render_frame(t, file_prefix="../figs/flip/leo", frame_id=i, render_tetras=True)
         print(f"[flipbook] done!")

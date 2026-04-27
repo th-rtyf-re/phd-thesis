@@ -53,17 +53,55 @@
 
 % ==== PAPERS ====
 
+\newcounter{footnotevalue}
+
+% ---- btb ----
+
+\usepackage[ruled]{algorithm2e}
+\usepackage{blkarray}
+
+\def\th{\text{th}}
+\def\TT{\top}%transpose symbol
+
+\def\E{\mathbb{E}}
+\def\R{\mathbb{R}}
+
+\def\B{\mathcal{B}}
+\def\Int{\mathsf{Int}}
+
+% \DeclareMathOperator{\BarDec}{\mathsf{BarDec}}
+\DeclareMathOperator{\Dgm}{\mathsf{Dgm}}
+
+\DeclareMathOperator{\vect}{\mathsf{vect}}
+\DeclareMathOperator{\Mch}{\mathbf{Mch}}
+\DeclareMathOperator{\MchR}{\mathbf{Mch}^{\mathbf{R}}}
+\DeclareMathOperator{\Barc}{\mathbf{Barc}}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\mult}{mult}
+\DeclareMathOperator{\PVect}{PVect}
+
+% ---- gM ----
+
+% \newcommand{\Po}{P}
+
+\newcommand{\Z}{\bf{Z}}
+% \newcommand{\RP}{\mathbb{R}\mathrm{P}}
+% \newcommand{\CP}{\mathbb{C}\mathrm{P}}
+% \newcommand{\dist}{{\mathrm{dist}_Y|_X}}
+
+\newcommand{\Poly}{\cc{P}}
+
+\DeclareMathOperator{\Id}{Id}
+\newcommand{\lini}{k}
+\newcommand{\quadi}{\iota}
+
 % ---- CI ----
 
 \newcommand{\CI}{\mathcal{C}}
-\newcommand{\Poly}{\mathcal{P}}
 
 \newcommand{\distYX}{\mathord{\dist}_Y|_X}
 \newcommand{\ev}{\operatorname{ev}}
-\newcommand{\lini}{k}
 \newcommand{\proj}{\operatorname{proj}}
-\newcommand{\quadi}{\iota}
-\newcommand{\TT}{\top}  % transpose
 
 % ==== INDEXING ====
 
@@ -73,6 +111,8 @@
 \index{complex!ZZc@\gobblecomma|see{chain complex}}
 \index{complex!ZZs@\gobblecomma|see{simplicial complex}}
 \index{chain complex!ZZKoszul@\gobblecomma|seealso{Koszul complex, local}}
+\index{matching, partial!ZZp@\gobblecomma|seealso{$\cc{P}$-matching}}
+\index{matching, partial!ZZx@\gobblecomma|seealso{$\cc{X}$-matching}}
 
 % ==== METADATA ====
 
@@ -81,7 +121,7 @@
 \author{Isaac Ren}
 
 \copyrighttext{%
-  The poem ``Thirteen Ways of Looking at a Blackbird'' by Wallace Stevens (1879-1955) is in the public domain as of 2012 in the United States (95 years after publication), where it was first published in 1917, and as of 2025 in the European Union (70 years after the poet's death).
+  The poem ``Thirteen Ways of Looking at a Blackbird'' by Wallace Stevens (1879-1955) is in the public domain as of 2012 in the United States (95 years after publication), where the poem was first published in 1917, and as of 2025 in the European Union (70 years after the poet's death).
 
   All Rights Reserved. No part of this work may be reproduced in any form without the written permission of the copyright owner.
   

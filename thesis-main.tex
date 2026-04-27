@@ -4,7 +4,7 @@
 \input{headers/my-macros}  % math macros and metadata
 
 % ==== FLIPBOOK TOGGLE ====
-\fancyfoot{}  % comment to get flipbook
+% \fancyfoot{}  % comment to get flipbook
 % ====
 
 % % Debug code for infinite recompiles due to changing labels. Comment out
@@ -50,33 +50,32 @@
 \part*{Papers}
 \label{Part:papers}
 \newrefsection% Reset the bibliography
+\captionsetup[figure]{list=no}
 
 \papertitlepage[color=light blue]{CGRST2024}
 \label{PC:CGRST2024}
 
-% \includepdf[pages=-]{papers/CGRST2024}
+\includepdf[pages=-,frame]{papers/CGRST2024}
 
 \papertitlepage[color=light blue]{AGRS2025}
 \label{PC:AGRS2025}
 
-% \includepdf[pages=-]{papers/AGRS2025}
+\includepdf[pages=-,frame]{papers/AGRS2025}
 
 \papertitlepage[color=light blue,misctext=To be submitted]{GRRS2026}
 \label{PC:GRRS2026}
 
-% \includepdf[pages=-]{papers/btb-draft}
-% \paperchapter{GRRS2026}
+\input{papers/btb}
 
 \papertitlepage[color=light blue,misctext=Submitted]{GLRS2025}
 \label{PC:GLRS2025}
 
-% \includepdf[pages=-]{papers/gM-arXiv-v3}
-% \paperchapter[Morse theory of Euclidean distance functions]{GLRS2025}
+\input{papers/gM}
 
 \papertitlepage[color=light blue,misctext=To be submitted]{Ren2026}
 \label{PC:Ren2026}
 
-% \input{papers/CI.tex}
+\input{papers/CI}
 
 % ==== BACK MATTER ====
 \input{includes/back-matter}

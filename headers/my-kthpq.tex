@@ -11,6 +11,7 @@
 \usepackage[%
   bibstyle=numeric,
   maxnames=99,
+  doi=false,
   isbn=false,
   url=false,
   urldate=ymd,
@@ -59,7 +60,7 @@
 
 \usepackage{tikz}
 \usetikzlibrary{babel,calc,cd}
-\usepackage[ruled]{algorithm2e}
+\usepackage[ruled,algochapter]{algorithm2e}
 
 \usepackage{imakeidx}
 
@@ -106,11 +107,15 @@
 
 \addbibresource{bib/mine.bib}
 \addbibresource{bib/kappa.bib}
+\addbibresource{bib/btb.bib}
+\addbibresource{bib/gM.bib}
 \addbibresource{bib/CI.bib}
 
 \DeclareFieldFormat{eprint:github}{%
 GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint}}}
 }
+
+\renewcommand*{\bibfont}{\normalfont\small}
 
 % ---- Layout ----
 
@@ -134,7 +139,7 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \fancyfoot{}  % reset footer
 \fancyfoot[RO]{%
   \if@mainmatter%
-    \ifnum\thepage<60\relax%
+    \ifnum\thepage<70\relax%
       \AddToHookNext{shipout/background}{\put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-\fpeval{trunc((\thepage - 1) / 2, 0)}.pgf}}}%
     \fi%
   \else%
@@ -345,7 +350,7 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 
 % ---- floats ----
 
-\captionsetup[subfigure]{justification=centering}
+% \captionsetup[subfigure]{justification=centering}
 
 % ---- non-math commands ----
 
@@ -419,4 +424,6 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \newcommand{\kthpq@highlight}[2][]{\index{#1}#2}
 \makeatother
 \newcommand{\fallbackhighlight}[1]{\index{#1}}
+
+\indexsetup{othercode=\small}
 \makeindex[intoc]
