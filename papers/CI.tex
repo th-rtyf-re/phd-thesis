@@ -11,8 +11,6 @@
 %   Secondary 57R70, 58C20}
 % \keywords{Morse theory, distance functions, metric algebraic geometry, critical points, Euclidean distance degree, bottlenecks, parametric transversality.}
 
-\newcommand{\myemph}{\textbf}
-
 % ==== BODY ====
 \paperchapter[Nondegeneracy of distance functions between C.I.s]{Ren2026}
 \newrefsection
@@ -32,11 +30,15 @@
 
 \subsection{Distance functions and critical points}
 
-This paper extends the results of \cite{GLRS2025} (Paper \ref{PC:GLRS2025}) to distance functions $\distYX \colon X \to \R$ between two real algebraic varieties $X$ and $Y$ in $\R^n$. The original paper considers distance functions as locally Lipschitz continuous selections of differentiable functions \cite{JongenPallaschke1988}, defines critical points following \cite{Clarke}, and studies the Morse theory for these functions presented in \cite{APS1997}. We direct the reader to the introduction of \cite{GLRS2025} for a more detailed history of the study of distance functions.
+This paper extends the results of \cite{GLRS2025} to distance functions
+\[
+  \distYX \colon X \to \R
+\]
+between two real algebraic varieties $X$ and $Y$ in $\R^n$. The original paper considers distance functions as locally Lipschitz continuous selections of differentiable functions \cite{JongenPallaschke1988}, defines critical points following \cite{Clarke}, and studies the Morse theory for these functions presented in \cite{APS1997}. We direct the reader to the introduction of \cite{GLRS2025} for a more detailed history of the study of distance functions.
 
-In this paper, we focus on the theory of distance functions between algebraic varieties. These functions, and in particular their critical points, have been studied previously in specific cases. The Euclidean distance degree, introduced in \cite{EDD_Draisma}, is the number of complex critical points of the distance function from a generic point in ambient space, restricted to a real algebraic variety. The bottleneck degree, introduced in \cite{DiRocco_Eklund_Weinstein}, is the number of complex critical points of the distance function on a real algebraic variety, and can be seen as the number of complex lines orthogonal to two or more points of the variety. Our results generalize these two notions in the real setting.
+In this paper, we focus on the theory of distance functions between algebraic varieties. These functions, and in particular their critical points, have been studied previously in specific cases. The \index{Euclidean distance degree (EDD)}Euclidean distance degree, introduced in \cite{DHOST2016}, is the number of complex critical points of the distance function from a generic point in ambient space, restricted to a real algebraic variety. The \index{bottleneck degree (BND)}bottleneck degree, introduced in \cite{DREW2020}, is the number of complex critical points of the distance function on a real algebraic variety, and can be seen as the number of complex lines orthogonal to two or more points of the variety. Our results generalize these two notions in the real setting.
 
-Outside of the algebraic context, we would like to highlight the following works. \cite{Yomdin1981}, an earlier study on properties of critical points of distance functions from generically embedded manifolds, was the basis for \cref{E!T:Yomdin}. \cite{cheeger} studies the distance function from a Riemannian manifold to a single point, while \cite{bobrowski2014distance} considers the distance function from $\R^n$ to a finite set of points. More recently, \cite{song2023generalized} defines a Morse theory (slightly different from ours) for distance functions from a smooth bounded surface, and \cite{ACSD2023} show that the number of critical points of the distance function from a generically embedded manifold is finite.
+Outside of the algebraic context, we would like to highlight the following works. \cite{Yomdin1981}, an earlier study on properties of critical points of distance functions from generically embedded manifolds, was the basis for \cref{E!T:Yomdin}. \cite{cheeger} studies the distance function from a Riemannian manifold to a single point, while \cite{bobrowski2014distance} considers the distance function from $\R^n$ to a finite set of points. More recently, \cite{SYM2025} defines a Morse theory (slightly different from ours) for distance functions from a smooth bounded surface, and \cite{ACSD2023} show that the number of critical points of the distance function from a generically embedded manifold is finite.
 
 \subsection{Main results}
 
@@ -81,7 +83,7 @@ In this section we recall the notions that will allow us to study distance funct
 
 \begin{definition}[Subdifferential]
 \label{E!def:subdifferential}
-  Let $X$ be a Riemannian manifold and $f \colon X \to \R$ a locally Lipschitz function. The \myemph{subdifferential of $f$ at $x\in X$}, denoted by $\partial_x f$, is the convex body defined by
+  Let $X$ be a Riemannian manifold and $f \colon X \to \R$ a locally Lipschitz function. The \index{subdifferential}\myemph{subdifferential of $f$ at $x\in X$}, denoted by $\partial_x f$, is the convex body defined by
   \[
     \partial_x f \coloneq \conv \left\{ \left. \lim_{x_k \to x, x_k \in \Omega(f)} \nabla f(x_k) \; \right| \; \textnormal{the limit exists} \right\} \subseteq T_x X.
   \]
@@ -90,7 +92,8 @@ In this section we recall the notions that will allow us to study distance funct
 
 \begin{proposition}[{\cite{GLRS2025}}]
 \label{E!P:subdiff}
-  Let $Y \subseteq \R^n$ be either closed and definable or smooth and $X \subseteq \R^n$ be a smooth manifold transverse to both $Y$ and $\overline{M_Y}$. Then for every $x \in X$,
+  % Let $Y \subseteq \R^n$ be either closed and definable or smooth and $X \subseteq \R^n$ be a smooth manifold transverse to both $Y$ and $\overline{M_Y}$. Then for every $x \in X$,
+  Let $Y \subseteq \R^n$ be closed and $X \subseteq \R^n$ a smooth manifold. Then, for every $x \in X \setminus Y$,
   \[
     \partial_x(\distYX) = \proj_{T_x X} \left( \conv \left\{ \left.
       \frac{x - y}{\|x - y\|} \, \right| \, y \in B(x, \dist_Y(x)) \cap Y
@@ -101,14 +104,14 @@ In this section we recall the notions that will allow us to study distance funct
 
 \begin{definition}[Critical points]
 \label{E!D:critical}
-  We say that $x \in X$ is a \myemph{critical point} of a locally Lipschitz function $f \colon X \to \R$ if $0$ belongs to $\partial_x f$. We denote by $C(f) \subseteq X$ the set of critical points of $f$.
+  We say that $x \in X$ is a \index{critical point}\myemph{critical point} of a locally Lipschitz function $f \colon X \to \R$ if $0$ belongs to $\partial_x f$. We denote by $C(f) \subseteq X$ the set of critical points of $f$.
   
-  A point $x\in X$ is said to be a \myemph{regular point} of $f$ if it is not critical; a \myemph{critical value} of $f$ is a real number $c \in \R$ such that $f^{-1}\{c\} \cap C(f) \neq \varnothing$ and a \myemph{regular value} of $f$ is a real number $c \in \R$ which is not critical.
+  A point $x\in X$ is said to be a \index{regular point}\myemph{regular point} of $f$ if it is not critical; a \index{critical value}\myemph{critical value} of $f$ is a real number $c \in \R$ such that $f^{-1}\{c\} \cap C(f) \neq \varnothing$ and a \index{regular value}\myemph{regular value} of $f$ is a real number $c \in \R$ which is not critical.
 \end{definition}
 
 \begin{definition}[Continuous selections]
 \label{E!D:continuous-selection}
-  Let $X$ be a smooth manifold and let $\{f_0, \ldots, f_m\}$ be a finite subset of $\mathcal{C}^2(X, \R)$. We will say that $f \colon X \to \R$ is a \myemph{continuous selection} from $\{f_0, \ldots, f_m\}$ if $f$ is continuous and for every $x \in X$ there exists $i \in \{0, \ldots, m\}$ such that $f(x) = f_i(x)$.
+  Let $X$ be a smooth manifold and $\{f_0, \ldots, f_m\}$ a finite subset of $\mathcal{C}^2(X, \R)$. We will say that $f \colon X \to \R$ is a \index{continuous selection}\myemph{continuous selection} from $\{f_0, \ldots, f_m\}$ if $f$ is continuous and for every $x \in X$ there exists $i \in \{0, \ldots, m\}$ such that $f(x) = f_i(x)$.
   In this case we will write $f\in \CS(f_0, \ldots, f_m)$.
 \end{definition}
 
@@ -124,7 +127,7 @@ Note that continuous selections (of continuously differentiable functions) are l
 
 \begin{definition}[Nondegenerate critical points of continuous selections]
 \label{E!D:nondegenerate-crit-pt}
-  Let $f\in \CS(f_0, \ldots, f_m)$. A critical point $x \in C(f)$ is said to be \myemph{nondegenerate} (with respect to $f_0, \ldots, f_m$) if the following conditions are satisfied:
+  Let $f\in \CS(f_0, \ldots, f_m)$. A critical point $x \in C(f)$ is said to be \index{critical point!nondegenerate!for continuous selections}\myemph{nondegenerate} (with respect to $f_0, \ldots, f_m$) if the following conditions are satisfied:
   \begin{enumerate}
   \item
     For every $i\in I(x)$ the set of differentials $\{D_x f_j \mid j \in I(x) \setminus \{i\}\}$ is linearly independent.
@@ -140,7 +143,7 @@ Note that continuous selections (of continuously differentiable functions) are l
       T(x) \coloneq \bigcap_{i \in I(x)} \ker(D_x f_i).
     \]
   \end{enumerate}
-  We denote by $\lini(x) \coloneq \#I(x) - 1$ and call this number the \myemph{piecewise linear index}, and by $\quadi(x)$ the negative inertia index of the restriction of the second differential of $\lambda f$ to $T(x)$. We call $\quadi(x)$ the \myemph{quadratic index}.
+  We denote by $\lini(x) \coloneq \#I(x) - 1$ and call this number the \index{index (of a critical point)!piecewise linear}\myemph{piecewise linear index}, and by $\quadi(x)$ the negative inertia index of the restriction of the second differential of $\lambda f$ to $T(x)$. We call $\quadi(x)$ the \index{index (of a critical point)!quadratic}\myemph{quadratic index}.
 
   Clearly, in the case $X$ is endowed with a Riemannian metric, the above conditions can be rephrased using the gradients of the $f_i$ instead of their differential. Moreover, the nondegeneracy of the second differential of $\lambda f$ on $T(x)$ is equivalent to the nondegeneracy of the restriction of the corresponding quadratic form on it.
 \end{definition}
@@ -204,7 +207,7 @@ Denote by $\varphi \colon NY \to \R^n$ the restriction of the exponential map of
 
 \begin{definition}
 \label{E!def:setnondegcritpts}
-  Let $Y \subseteq \R^n$ be closed and definable and $X$ be a smooth manifold. We say that a point $x$ of $X$ is a \myemph{nondegenerate critical point of $\distYX$} if $\distYX$ is a continuous selection at $x$ and $x$ is a nondegenerate critical point for the continuous selection. For every $\lini, \quadi \in \N$ we denote by $C_{\lini, \quadi}(X,Y)$ the set of nondegenerate critical points of $\distYX$ with piecewise linear index $\lini$ and quadratic index $\quadi$ and which are not in $X \cap Y$.
+  Let $Y \subseteq \R^n$ be closed and definable and $X$ be a smooth manifold. We say that a point $x$ of $X$ is a \index{critical point!nondegenerate}\myemph{nondegenerate critical point of $\distYX$} if $\distYX$ is a continuous selection at $x$ and $x$ is a nondegenerate critical point for the continuous selection. For every $\lini, \quadi \in \N$ we denote by $C_{\lini, \quadi}(X,Y)$ the set of nondegenerate critical points of $\distYX$ with piecewise linear index $\lini$ and quadratic index $\quadi$ and which are not in $Y$.
 \end{definition}
 
 \subsection{Multijet parametric transversality}
@@ -228,7 +231,7 @@ We immediately have the following corollary.
 We will be applying these transversality results to \myemph{jet spaces}.
 
 \begin{definition}[jets and multijets]
-  Let $n, m, r \geq 0$ be integers. The space of \myemph{jets of order $r$ from $\R^m$ to $\R^n$} is
+  Let $n, m, r \geq 0$ be integers. The space of \index{jet}\myemph{jets of order $r$ from $\R^m$ to $\R^n$} is
   \[
     J^r(\R^m, \R^n) \coloneq \R^m \oplus \bigoplus_{\ell = 0}^r (\Poly_{\ell, m})^n,
   \]
@@ -241,13 +244,14 @@ We will be applying these transversality results to \myemph{jet spaces}.
   \end{align*}
   The identification with polynomial spaces comes from identifying the partial derivative $\frac{\partial^{|\alpha|} f}{\partial x^\alpha}(x)$ with the coefficient in front of the monomial $x^\alpha$.
   
-  Let $k \geq 1$ be an integer. The space of \myemph{$k$-multijets of order $r$} is just $k$ copies of the space of jets of order $r$:
+  Let $k \geq 1$ be an integer. The space of \index{multijet}\myemph{$k$-multijets of order $r$} is just $k$ copies of the space of jets of order $r$:
   \[
     {}_k J^r(\R^m, \R^n) \coloneq J^r(\R^m, \R^n)^k.
   \]
-  Similarly, let $f \colon \R^m \to \R^n$ be a smooth function and $\vec{x} \coloneq x_1, \ldots, x_k$ distinct points in $\R^m$ (we write $\vec{x} \in \R^{km} \setminus \Delta$, where $\Delta$ is the \myemph{fat diagonal} of $\R^m$, consisting of all tuples with duplicate points). The \myemph{$k$-multijet of order $r$ of $f$ at $x_1, \ldots, x_k$} is
+  Similarly, let $f \colon \R^m \to \R^n$ be a smooth function and $\vec{x} \coloneq x_1, \ldots, x_k$ distinct points in $\R^m$ (we write $\vec{x} \in \R^{km} \setminus \Delta$, where $\Delta$ is the \index{fat diagonal}\myemph{fat diagonal} of $\R^m$, consisting of all tuples with duplicate points). The \myemph{$k$-multijet of order $r$ of $f$ at $x_1, \ldots, x_k$} is
   \[
     {}_k j^r(\vec{x}) \coloneq (j^r(f)(x_i))_{i = 1, \ldots, k}.
+    \qedhere
   \]
 \end{definition}
 
@@ -288,7 +292,7 @@ The next result is a key technical ingredient for the rest of the paper.
   \]
   where $T_{p, \vec{x}} (\Poly_d \times \R^{nk}) = \Poly_d \times \R^{nk}$ and $T_{F(p, \vec{x})} ({}_k J^r(\R^n, \R)) = \R^{nk} \oplus \bigoplus_{\ell = 0}^r (\Poly_{\ell, n})^k$.
 
-  Let $(\vec{\dot{z}}, \dot{U}) = (\vec{\dot{z}}, \vec{\dot{u}}^{(1)}, \ldots, \vec{\dot{u}}^{(r)}) \in \R^{nk} \oplus \bigoplus_{\ell = 1}^r (\Poly_{\ell, n})^k$. For $F$ to be a submersion at $(p, \vec{x})$, it suffices to find $(\dot{p}, \vec{\dot{x}})$ such that $DF_{p, \vec{x}}(\dot{p}, \vec{\dot{x}}) = (\vec{\dot{z}}, \dot{U})$. This is linear in the coefficients of $\dot{p}$ and in monomials in $\vec{\dot{z}}$. We find that $\vec{\dot{x}} = \vec{\dot{z}}$, and then there are $k \sum_{\ell = 0}^r \binom{n}{\ell}$ equations in the coefficients of $\dot{p}$. For there to be a solution in general, it suffices that
+  Let $(\vec{\dot{z}}, \dot{U}) = (\vec{\dot{z}}, \vec{\dot{u}}^{(1)}, \ldots, \vec{\dot{u}}^{(r)}) \in \R^{nk} \oplus \bigoplus_{\ell = 1}^r (\Poly_{\ell, n})^k$. For $F$ to be a submersion at $(p, \vec{x})$, it suffices to find $(\dot{p}, \vec{\dot{x}})$ such that $DF_{p, \vec{x}}(\dot{p}, \vec{\dot{x}}) = (\vec{\dot{z}}, \dot{U})$. This is linear in the coefficients of $\dot{p}$ and in monomials in $\vec{\dot{x}}$. We find that $\vec{\dot{x}} = \vec{\dot{z}}$, and then there are $k \sum_{\ell = 0}^r \binom{n}{\ell}$ equations in the coefficients of $\dot{p}$. Since the $x_i$ are pairwise distinct points in $\R^n$, these equations are independent. For there to be a solution in general, it suffices that
   \[
     \dim \Poly_d = \binom{n + d}{d} \geq k \sum_{\ell = 0}^r \binom{n}{\ell}.
   \]
@@ -374,37 +378,37 @@ Throughout this section, we assume $n \geq 1$. We consider $\ell + m$ real $n$-v
 
 \begin{definition}
 \label{E!D:complete-intersection}
-  Let $m \in \{1, \ldots, n\}$ and $d \geq 0$. We consider the set of complete intersections in $\R^n$ of codimension $m$ whose defining polynomials all have degree at most $d$. Denote by $\CI_d^m$ the open subset of $(\Poly_d)^m$ whose elements generate such complete intersections.
+  Let $m \in \{1, \ldots, n\}$ and $d \geq 0$. We consider the set of \index{complete intersection}complete intersections in $\R^n$ of codimension $m$ whose defining polynomials all have degree at most $d$. Denote by $\CI_d^m$ the open subset of $(\Poly_d)^m$ whose elements generate such complete intersections.
   
   To prove results for generic complete intersections, it then suffices to prove the result for a generic element of $\CI_d^m$, for all $m$ and $d$.
 \end{definition}
 
-We now present some preliminary results about for generic complete intersections. First of all, by Bertini's theorem, generic complete intersections are smooth and their defining hypersurfaces intersect transverally. Next, we show the following:
+% We now present some preliminary results about for generic complete intersections. First of all, by Bertini's theorem, generic complete intersections are smooth and their defining hypersurfaces intersect transverally. Next, we show the following:
 
-\begin{proposition}
-\label{E!P:transverse-Y-MY}
-  For $d_1, d_2 \geq 0$ and generic polynomials $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, $X$ is transverse to both $Y$ and $\overline{M_Y}$.
-\end{proposition}
+% \begin{proposition}
+% \label{E!P:transverse-Y-MY}
+%   For $d_1, d_2 \geq 0$ and generic polynomials $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, $X$ is transverse to both $Y$ and $\overline{M_Y}$.
+% \end{proposition}
 
-\begin{proof}
-  We prove the statement by showing that the set
-  \[
-    S \coloneq \{(\vec{p}, \vec{q}) \in \CI_{d_1}^\ell \times \CI_{d_2}^m \mid X \not \pitchfork Y \text{ or } X \not \pitchfork \overline{M_Y}\}
-  \]
-  is semialgebraic of measure $0$ in $\CI_{d_1}^\ell \times \CI_{d_2}^m$. Indeed, this would imply that the set $S$ has codimension at least $1$, making it nowhere dense, and thus its complement is a residual set.
+% \begin{proof}
+%   We prove the statement by showing that the set
+%   \[
+%     S \coloneq \{(\vec{p}, \vec{q}) \in \CI_{d_1}^\ell \times \CI_{d_2}^m \mid X \not \pitchfork Y \text{ or } X \not \pitchfork \overline{M_Y}\}
+%   \]
+%   is semialgebraic of measure $0$ in $\CI_{d_1}^\ell \times \CI_{d_2}^m$. Indeed, this would imply that the set $S$ has codimension at least $1$, making it nowhere dense, and thus its complement is a residual set.
   
-  The fact that $S$ is semialgebraic follows from the fact that $\overline{M_Y}$ is semialgebraic: taking a stratification of $\overline{M_Y}$, we see that being transverse to it is a semialgebraic property; the same is true for $Y$.
+%   The fact that $S$ is semialgebraic follows from the fact that $\overline{M_Y}$ is semialgebraic: taking a stratification of $\overline{M_Y}$, we see that being transverse to it is a semialgebraic property; the same is true for $Y$.
   
-  Next, let $Z$ be equal to $Y$ or a stratum of $\overline{M_Y}$, and consider the evaluation map $F^{\ev} \colon \CI_{d_1}^\ell \times Z \to \R^\ell$ which sends the pair $(\vec{p}, x)$ to $\vec{p}(x)$. $F^{\ev}$ is a submersion: given $(\vec{p}, x)$ in $\CI_{d_1}^\ell$ and $\vec{\dot{z}}$ in $T_{F^{\ev}(\vec{p}, x)} \R^\ell \cong \R^\ell$, taking for each $i \in \{1, \ldots, \ell\}$ the constant polynomial $\dot{p}_i \equiv \dot{z}_i$, we have
-  \[
-    D F^{\ev}_{\vec{p}, x}(\vec{\dot{p}}, 0) = (\dot{p}_i(x) + \nabla p_i(x)^\TT \cdot 0)_{1 \leq i \leq \ell} = \vec{\dot{z}}.
-  \]
-  By definition, $V(\vec{p})$ is transverse to $Z$ if, and only if, at all points $x \in V(\vec{p}) \cap Z$ the tangent spaces $T_x V(\vec{p})$ and $T_x Z$ generate the ambient space $\R^n$. If such a point $x$ were a critical point of one of the functions $p_i|_Z$, then the vector $\nabla p_i|_Z(x)$ would be orthogonal to both $T_x V(\vec{p})$ and $T_x Z$, implying that $T_x V(\vec{p}) + T_x Z \neq \R^n$, which is equivalent to non-transversality. Therefore, if $V(\vec{p})$ is transverse to $Z$, then every point $x$ in $V(\vec{p}) \cap Z$ is regular for each $p_i|_Z$, i.e.\ $0$ is a regular value of  each $p_i|_Z$. This motivates considering the set
-  \[
-    \{\vec{p} \in \CI_{d_1}^\ell \mid 0 \text{ regular value of each } p_i|_Z\},
-  \]
-  which, by parametric transversality with $W = \{0\}$ (\cref{E!T:parametric-transversality}), is residual in $\CI_{d_1}^\ell$. Since $\overline{M_Y}$ can be stratified into finitely many disjoint strata, we conclude from the above reasoning that the set $\{\vec{p} \in \CI_{d_1}^\ell \mid X \pitchfork Y \text{ and } X \pitchfork \overline{M_Y}\}$ is contained in the above set, and therefore is residual in $\CI_{d_1}^\ell$. Thus, for all $\vec{q}$ in $\CI_{d_2}^m$, the set $S(\vec{q}) \coloneq \{\vec{p} \in \CI_{d_1}^\ell \mid X \not \pitchfork Y \text{ or } X \not \pitchfork \overline{M_Y}\}$ is semialgebraic of measure $0$. By Fubini's theorem, we conclude that $S$ also has measure $0$.
-\end{proof}
+%   Next, let $Z$ be equal to $Y$ or a stratum of $\overline{M_Y}$, and consider the evaluation map $F^{\ev} \colon \CI_{d_1}^\ell \times Z \to \R^\ell$ which sends the pair $(\vec{p}, x)$ to $\vec{p}(x)$. $F^{\ev}$ is a submersion: given $(\vec{p}, x)$ in $\CI_{d_1}^\ell$ and $\vec{\dot{z}}$ in $T_{F^{\ev}(\vec{p}, x)} \R^\ell \cong \R^\ell$, taking for each $i \in \{1, \ldots, \ell\}$ the constant polynomial $\dot{p}_i \equiv \dot{z}_i$, we have
+%   \[
+%     D F^{\ev}_{\vec{p}, x}(\vec{\dot{p}}, 0) = (\dot{p}_i(x) + \nabla p_i(x)^\TT \cdot 0)_{1 \leq i \leq \ell} = \vec{\dot{z}}.
+%   \]
+%   By definition, $V(\vec{p})$ is transverse to $Z$ if, and only if, at all points $x \in V(\vec{p}) \cap Z$ the tangent spaces $T_x V(\vec{p})$ and $T_x Z$ generate the ambient space $\R^n$. If such a point $x$ were a critical point of one of the functions $p_i|_Z$, then the vector $\nabla p_i|_Z(x)$ would be orthogonal to both $T_x V(\vec{p})$ and $T_x Z$, implying that $T_x V(\vec{p}) + T_x Z \neq \R^n$, which is equivalent to non-transversality. Therefore, if $V(\vec{p})$ is transverse to $Z$, then every point $x$ in $V(\vec{p}) \cap Z$ is regular for each $p_i|_Z$, i.e.\ $0$ is a regular value of  each $p_i|_Z$. This motivates considering the set
+%   \[
+%     \{\vec{p} \in \CI_{d_1}^\ell \mid 0 \text{ regular value of each } p_i|_Z\},
+%   \]
+%   which, by parametric transversality with $W = \{0\}$ (\cref{E!T:parametric-transversality}), is residual in $\CI_{d_1}^\ell$. Since $\overline{M_Y}$ can be stratified into finitely many disjoint strata, we conclude from the above reasoning that the set $\{\vec{p} \in \CI_{d_1}^\ell \mid X \pitchfork Y \text{ and } X \pitchfork \overline{M_Y}\}$ is contained in the above set, and therefore is residual in $\CI_{d_1}^\ell$. Thus, for all $\vec{q}$ in $\CI_{d_2}^m$, the set $S(\vec{q}) \coloneq \{\vec{p} \in \CI_{d_1}^\ell \mid X \not \pitchfork Y \text{ or } X \not \pitchfork \overline{M_Y}\}$ is semialgebraic of measure $0$. By Fubini's theorem, we conclude that $S$ also has measure $0$.
+% \end{proof}
 
 \subsection{Finite number of closest points}
 
@@ -460,7 +464,7 @@ In this section we prove an analogue of \cite[Proposition 3]{Yomdin1981}, showin
     \right.
     \right\}
   \end{align*}
-  be a subspace of ${}_{k + 1} J^0(\R^n, \R^{m + 1})$ and let us prove that $F_k$ is transverse to $W_k$. Let $(\vec{q}, x, \vec{y}) \in (\Poly_d)^m \times \R^n \times (\R^{n(k + 1)} \setminus \Delta)$ such that $F_k(\vec{q}, x, \vec{y}) \in W_k$, and let $(\vec{\dot{z}}, \dot{S}, \vec{\dot{t}}) \in T_{F_k(\vec{q}, x, \vec{y})} {}_{k + 1} J^0(\R^n, \R^{m + 1})$. We are looking for $(\vec{\dot{q}}, \dot{x}, \vec{\dot{y}}) \in T_{(\vec{q}, x, \vec{y})} ((\Poly_d)^m \times \R^n \times (\R^{n(k + 1)} \setminus \Delta))$ and $(\vec{\dot{w}}, 0, 0) \in T_{F_k(\vec{q}, x, \vec{y})} W_k$ such that
+  be a subspace of ${}_{k + 1} J^0(\R^n, \R^{m + 1})$ and let us prove that $F_k$ is transverse to $W_k$. Let $(\vec{q}, x, \vec{y})$ be a point in $(\Poly_d)^m \times \R^n \times (\R^{n(k + 1)} \setminus \Delta)$ such that $F_k(\vec{q}, x, \vec{y}) \in W_k$, and $(\vec{\dot{z}}, \dot{S}, \vec{\dot{t}})$ a tangent vector in $T_{F_k(\vec{q}, x, \vec{y})} {}_{k + 1} J^0(\R^n, \R^{m + 1})$. We are looking for $(\vec{\dot{q}}, \dot{x}, \vec{\dot{y}}) \in T_{(\vec{q}, x, \vec{y})} ((\Poly_d)^m \times \R^n \times (\R^{n(k + 1)} \setminus \Delta))$ and $(\vec{\dot{w}}, 0, 0) \in T_{F_k(\vec{q}, x, \vec{y})} W_k$ such that
   \begin{align*}
     (\vec{\dot{z}}, \dot{S}, \vec{\dot{t}}) & = DF_{k, (\vec{q}, x, \vec{y})} (\vec{\dot{q}}, \dot{x}, \vec{\dot{y}}) + (\vec{\dot{w}}, 0, 0) \\
     & = (\vec{\dot{y}} + \vec{\dot{w}}, \ldots, \dot{q}_j(y_i) + \nabla q_j(y_i)^\TT \dot{y}_i, \ldots, 2(x - y_i)^\TT (\dot{x} - \dot{y}_i), \ldots).
@@ -496,7 +500,7 @@ In this section we study the structure of critical points for the function $\dis
 
 \begin{definition}[$k$-critical points]
 \label{E!D:k-crit-pt}
-  Let $X$ be a subset of $\R^n$ and $Y$ a closed definable subset of $\R^n$. For all $k \geq 0$, we define the \myemph{$k$-critical points of $\distYX$} as the critical points $x$ in $X \setminus Y$ of $\distYX$ such that $\#(B(x, \dist_Y(x)) \cap Y) = k + 1$.
+  Let $X$ be a subset of $\R^n$ and $Y$ a closed definable subset of $\R^n$. For all $k \geq 0$, we define the \index{critical point!$k$-indexed}\myemph{$k$-critical points of $\distYX$} as the critical points $x$ in $X \setminus Y$ of $\distYX$ such that $\#(B(x, \dist_Y(x)) \cap Y) = k + 1$.
   We denote by $C_{k, *}(\distYX)$ the set of $k$-critical points of $\distYX$. 
 \end{definition}
 
@@ -530,16 +534,17 @@ As in \cref{E!def:setnondegcritpts}, we exclude the case $x \in X \cap Y$. By \c
     \right\}.
   \end{array}
 \]
-We then define the \myemph{algebraic $k$-critical points w.r.t.\ $\vec{p}$ and $\vec{q}$} as the set of points $x \in \R^n$ in the projection of $C_k(\vec{p}, \vec{q})$ on the first component.
+We then define the \index{critical point!algebraic}\myemph{algebraic $k$-critical points w.r.t.\ $\vec{p}$ and $\vec{q}$} as the set of points $x \in \R^n$ in the projection of $C_k(\vec{p}, \vec{q})$ on the first component.
 \end{definition}
 
 \begin{lemma}
 \label{E!L:algebraic-critical-points}
-  For generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, every critical point $x$ of $\distYX$ is an algebraic $k$-critical point for some $k \in \{0, \ldots, n\}$.
+  For generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, every critical point $x$ of $\distYX$ not in $Y$ is an algebraic $k$-critical point for some $k \in \{0, \ldots, n\}$.
 \end{lemma}
 
 \begin{proof}
-  By \cref{E!P:transverse-Y-MY}, we can take $\vec{p}$ and $\vec{q}$ generically such that $X$ is transverse to both $Y$ and $\overline{M_Y}$. Let $x$ be an element of $X$. By \cref{E!P:subdiff}, we have
+  % By \cref{E!P:transverse-Y-MY}, we can take $\vec{p}$ and $\vec{q}$ generically such that $X$ is transverse to both $Y$ and $\overline{M_Y}$.
+  Let $x$ be an element of $X \setminus Y$. By \cref{E!P:subdiff}, we have
   \[
     \partial_x f = \proj_{T_x X} \left( \conv \left\{ \left. \frac{x - y}{\| x - y\|} \; \right| \; y \in B(x, \dist_Y(x)) \cap Y \right\} \right).
   \]
@@ -560,7 +565,7 @@ We then define the \myemph{algebraic $k$-critical points w.r.t.\ $\vec{p}$ and $
 
 \begin{theorem}[Finite critical points]
 \label{E!T:finite-crit-pt}
-  For $d_1, d_2 \geq 3$ and $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, let $X = V(\vec{p})$ and $Y = V(\vec{q})$. Then, for the generic choice of $\vec{p}$ and $\vec{q}$, there are only a finite number of critical points of $\distYX$. Moreover, for every $k \in \{0, \ldots, n\}$, the number of $k$-critical points of $\distYX$ is bounded by
+  For $d_1, d_2 \geq 3$ and $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$, let $X = V(\vec{p})$ and $Y = V(\vec{q})$. Then, for the generic choice of $\vec{p}$ and $\vec{q}$, there are only a finite number of critical points of $\distYX$ not in $Y$. Moreover, for every $k \in \{0, \ldots, n\}$, the number of $k$-critical points of $\distYX$ is bounded by
   \[
     \#C_{k, *}(\distYX) \leq c(k, \ell, m, n) d_1^n d_2^{n (k + 1)},
   \]
@@ -642,7 +647,7 @@ We then define the \myemph{algebraic $k$-critical points w.r.t.\ $\vec{p}$ and $
   \[
     \#C_{k, *}(\dist_{V(q)}) \leq \tilde{c}(k, n) d^{n (k + 1)}.
   \]
-  In particular this recovers and generalizes to all dimensions the bound $\#C_{1, *} \leq c(n) d^{2n}$ that one can obtain by combining \cite[Corollary 4.5]{Eklund2023} with the EDD estimate \cite[Corollary 2.10]{EDD_Draisma}.
+  In particular this recovers and generalizes to all dimensions the bound $\#C_{1, *} \leq c(n) d^{2n}$ that one can obtain by combining \cite[Corollary 4.5]{Eklund2023} with the EDD estimate \cite[Corollary 2.10]{DHOST2016}.
 \end{remark}
 
 \subsection{Continuous selections}
@@ -757,7 +762,7 @@ The use of the adjective ``algebraic'' is justified by the following lemma.
 \end{lemma}
 
 \begin{proof}
-  Let $x$ be an element of $\R^n \setminus Y$ and $y$ a closest point in $Y$ at distance $r = \dist(x, y)$. We can decompose $\R^n$ as $T_y Y \oplus \R(x - y) \oplus S$, where $S$ is the subspace of $N_y Y$ orthogonal to $\R(x - y)$. By the discussion after \cite[Proposition 3.3]{Mantegazza-notes}, for all $s \in (0, r]$, the Hessian of $g_y$ at $s x + (r - s) y$ is diagonalizable in a common basis, with an eigenvalue $0$ corresponding to the eigenvector $v \coloneq x - y$, $(m - 1)$ eigenvalues $\frac{1}{s}$ corresponding to the eigenvectors in $S$, and $n - m$ eigenvalues $\beta_1(s), \ldots, \beta_{n - m}(s)$ corresponding to eigenvectors in $T_y Y$. Moreover, the $\beta_i(s)$ are bounded and satisfy the differential equation
+  Let $x$ be an element of $\R^n \setminus Y$ and $y$ a closest point in $Y$ at distance $r = \dist(x, y)$. We can decompose $\R^n$ as $T_y Y \oplus \R(x - y) \oplus S$, where $S$ is the subspace of $N_y Y$ orthogonal to $\R(x - y)$. By the discussion after \cite[Proposition 3.3]{Mantegazza2010}, for all $s \in (0, r]$, the Hessian of $g_y$ at $s x + (r - s) y$ is diagonalizable in a common basis, with an eigenvalue $0$ corresponding to the eigenvector $v \coloneq x - y$, $(m - 1)$ eigenvalues $\frac{1}{s}$ corresponding to the eigenvectors in $S$, and $n - m$ eigenvalues $\beta_1(s), \ldots, \beta_{n - m}(s)$ corresponding to eigenvectors in $T_y Y$. Moreover, the $\beta_i(s)$ are bounded and satisfy the differential equation
   \[
     \beta_i'(s) = -\beta_i(s)^2,
   \]
@@ -793,7 +798,7 @@ The use of the adjective ``algebraic'' is justified by the following lemma.
 
 \begin{lemma}
 \label{E!L:deg-is-alg-deg}
-  For generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$ with $d_1 \geq 3$ and $d_2 \geq 4$, every degenerate critical point of $\distYX$ is an algebraic degenerate $k$-critical point for some $k \in \{0, \ldots, n\}$.
+  For generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$ with $d_1 \geq 3$ and $d_2 \geq 4$, every degenerate critical point of $\distYX$ not in $Y$ is an algebraic degenerate $k$-critical point for some $k \in \{0, \ldots, n\}$.
 \end{lemma}
 
 \begin{proof}
@@ -815,7 +820,7 @@ The use of the adjective ``algebraic'' is justified by the following lemma.
 
 \begin{theorem}[Genericity of nondegeneracy]
 \label{E!T:genericity-nondegeneracy}
-  For generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$ with $d_1, d_2 \geq 4$, all of the critical points of $\distYX$ are nondegenerate.
+  For generic $\vec{p} \in \CI_{d_1}^\ell$ and $\vec{q} \in \CI_{d_2}^m$ with $d_1, d_2 \geq 4$, all critical points of $\distYX$ that are not in $Y$ are nondegenerate.
 \end{theorem}
 
 \begin{proof}

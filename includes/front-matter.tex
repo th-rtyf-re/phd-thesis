@@ -11,11 +11,11 @@
 % \end{dedication}
 
 \begin{abstract}
-  This thesis explores the construction and computation of algebraic invariants for filtered topological spaces. These invariants are derived from the classical algebraic object, homology, which is invariant under homeomorphisms, that is, continuous transformations of topological spaces with continuous inverses. Filtered spaces, however, are richer structures that often encode geometric information, and thus our algebraic constructions are invariant with respect to isometries and scaling operations. We are also interested in the stability of invariants with respect to small perturbations of the input data, including the addition of noise.
+  This thesis explores the construction and computation of algebraic invariants for filtered topological spaces. These invariants are derived from the classical algebraic object of homology, which is invariant under homeomorphisms, i.e., continuous transformations of topological spaces with continuous inverses. Filtered spaces, however, are richer structures that often encode geometric information, and thus our algebraic constructions are invariant with respect to isometries and scaling operations. We are also interested in the stability of invariants with respect to small perturbations of the input data, including the addition of noise.
   
   Given a space with a poset-valued filtration function, the homology (with field coefficients) of sublevel sets forms a functor from the poset to vector spaces: this functor is called a \emph{persistence module}, and is a central object in the field of topological data analysis (TDA). In Paper \ref{PC:CGRST2024}, we develop the theory of relative homological algebra for persistence modules, including the use of \emph{local Koszul complexes} as a tool for computing \emph{relative Betti diagrams}, which are a numerical invariant of minimal relative projective resolutions. In Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}, we study the case where the indexing poset is a total order. In this case, persistence modules decompose as sums of simple \emph{bar modules}, and we introduce the notion of \emph{bar-to-bar morphisms} between persistence modules as an algebraic version of bar matchings. Moreover, we develop algorithms for computing matchings induced by morphisms, passing through bar-to-bar morphisms.
   
-  Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026} generalize a more classical invariant, the critical points of a Morse function, to the setting of \emph{metric algebraic geometry}, an emerging field that combines (or reunites) algebraic and differential geometry. Specifically, we develop a Morse theory for distance functions from an algebraic variety, restricted to an algebraic variety, and show that, generically, such a distance function is Morse. We define both geometric and algebraic notions of (nondegenerate) critical points and provide upper bounds on their number. In this sense, we construct and compute invariants for filtered algebraic spaces.
+  Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026} generalize a more classical invariant, the critical points of a Morse function, to the setting of \emph{metric algebraic geometry}, an emerging field that combines (or reunites) algebraic and differential geometry. Specifically, we develop a Morse theory for distance functions from an algebraic variety, restricted to an algebraic variety, and show that, generically, such a distance function is Morse. We define both geometric and algebraic notions of critical points and provide upper bounds on their number. In this sense, we construct and compute invariants for filtered algebraic spaces.
 \end{abstract}
 
 \begin{abstract}[swedish]
@@ -23,7 +23,7 @@
   
   Givet ett rum med en pomängdvärderad filtreringsfunktion, bildar homologin (med fältkoefficienter) hos delnivåmängder en funktor från pomängden till vektorrummen: denna funktor kallas en \emph{persistensmodul} och är ett centralt objekt inom området topologisk dataanalys (TDA). I Artikel \ref{PC:CGRST2024} utvecklar vi teorin om relativ homologisk algebra för persistensmoduler, inklusive användningen av \emph{lokala Koszulkomplex} som ett verktyg för att beräkna \emph{relativa Bettidiagram}, vilka är en numerisk invariant av minimala relativa projektiva upplösningar. I Artiklarna \ref{PC:AGRS2025} och \ref{PC:GRRS2026} studerar vi fallet där indexeringspomängden är en total ordning. I detta fall sönderfaller persistensmoduler som summor av enkla \emph{streckmoduler}, och vi introducerar begreppet \emph{streck-till-streck-morfismer} mellan persistensmoduler som en algebraisk version av streckmatchningar. Dessutom utvecklar vi algoritmer för att beräkna matchningar inducerade av morfismer, som passerar genom streck-till-streck-morfismer.
   
-  Artiklar \ref{PC:GLRS2025} och \ref{PC:Ren2026} generaliserar en mer klassisk invariant, de kritiska punkterna för en Morsefunktion, till \emph{metrisk algebraisk geometri}, ett framväxande område som kombinerar (eller återförenar) algebraisk och differentialgeometri. Mer specifikt utvecklar vi en Morseteori för avståndsfunktioner från en algebraisk varietet, begränsad till en algebraisk varietet, och visar att en sådan avståndsfunktion generellt är Morse. Vi definierar både geometriska och algebraiska begrepp för (icke-degenererade) kritiska punkter och anger övre gränser för deras antal. I denna mening konstruerar och beräknar vi invarianter för filtrerade algebraiska rum.
+  Artiklar \ref{PC:GLRS2025} och \ref{PC:Ren2026} generaliserar en mer klassisk invariant, de kritiska punkterna för en Morsefunktion, till \emph{metrisk algebraisk geometri}, ett framväxande område som kombinerar (eller återförenar) algebraisk och differentialgeometri. Mer specifikt utvecklar vi en Morseteori för avståndsfunktioner från en algebraisk varietet, begränsad till en algebraisk varietet, och visar att en sådan avståndsfunktion generellt är Morse. Vi definierar både geometriska och algebraiska begrepp för kritiska punkter och anger övre gränser för deras antal. I denna mening konstruerar och beräknar vi invarianter för filtrerade algebraiska rum.
 \end{abstract}
 
 \chapter{Popular science summary}
@@ -46,9 +46,9 @@ Thank you to the organizers of the many conferences and workshops that I have at
 
 Thank you to the administrative support at KTH, especially Ann-Britt, for taking care of the logistical aspects of doing a PhD. Thank you to KTH's IT support for answering my pestering questions about webpages and Polopoly. Thank you to Vetenskapsrådet for funding my doctoral studies, including my travels, and the WASP Affiliated PhD Student Program for their courses, summer schools, and conferences.
 
-Over the last five years, I have come to understand that mathematics does not exist in a vacuum. On the contrary, it is a fundamentally social domain: mathematics would not exist, or at least would be a lot less interesting, if no one talked about it. Thank you to the current and previous members TDA group at KTH, including Wojtek, Martina, Andrea, Barbara, Pepijn, Matteo, Belén, Anna, Wout, Alvin, Francesca, Jens, Björn, Christina, and Léon, for our weekly lunches, reading groups, seminar dinners, and wonderful conversations, academic or otherwise. In addition to those named above, thank you to my research collaborators Antonio, Arthur, Woojin, Philippe, and Yoann, even if (for some) we are not officially coauthors yet! Thank you also to Luis, Tada, Matías, Håvard, Bjørnar, Giacomo, and Emil for interesting and insightful discussions over the years.
+Over the last five years, I have come to understand that mathematics does not exist in a vacuum. On the contrary, it is a fundamentally social domain: mathematics would not exist, or at least would be a lot less interesting, if no one talked about it. Thank you to the current and previous members TDA group at KTH, including Wojtek, Martina, Andrea, Barbara, Pepijn, Matteo, Belén, Anna, Wout, Alvin, Francesca, Jens, Björn, Christina, and Léon, for our weekly lunches, reading groups, seminar dinners, and wonderful conversations, academic or otherwise. In addition to those named above, thank you to my research collaborators Antonio, Arthur, Woojin, Philippe, and Yoann, even if, for some, we are not officially coauthors yet! Thank you also to Luis, Tada, Matías, Håvard, Bjørnar, Giacomo, and Emil for interesting and insightful discussions over the years.
 
-I sincerely appreciate the community of PhD students at the KTH math department. I thank you all for making working in the office something to look forward to every day. Thank you to my officemates Viktor, Vahid, Ellen, Federica, and Mathias for your company and interesting conversations. Thank you to my co-TAs Giulia and Hanqing for managing the Regression Analysis course together. Thank you to the co-organizers of the KTH PhD math seminar Aryaman, Leo, and Léon, as well as all speakers and attendees of the seminar, for creating a welcoming environment for PhDs to present their work and eat fika. Thank you to the regular lunch-buyers Andrés, Elmo, Jon-Magnus, Björn, and Rasmus for the countless lunch trips. Thank you to Ned and Emanuel for your friendship, even though I could not fit you in one of the previous categories. Last, but not least, thank you to the co-organizers of the Young Topologists Meeting 2025 Benedetta, Ronno, Christina, Oliver, Jan, Elmo, and Björn for creating such a great event. I am very proud of what we have accomplished!
+I am sincerely grateful for the community of PhD students at the KTH math department. I thank you all for making working in the office something to look forward to every day. Thank you to my officemates Viktor, Vahid, Ellen, Federica, and Mathias for your company and interesting conversations. Thank you to my co-TAs Giulia and Hanqing for managing the Regression Analysis course together. Thank you to the co-organizers of the KTH PhD math seminar Aryaman, Leo, and Léon, as well as all speakers and attendees of the seminar, for creating a welcoming environment for PhDs to present their work and eat fika. Thank you to the regular lunch-buyers Andrés, Elmo, Jon-Magnus, Björn, and Rasmus for the countless lunch trips. Thank you to Ned and Emanuel for your friendship, even though I could not fit you in one of the previous categories. Last, but not least, thank you to the co-organizers of the Young Topologists Meeting 2025 Benedetta, Ronno, Christina, Oliver, Jan, Elmo, and Björn for creating such a great event. I am very proud of what we have accomplished!
 
 Outside of the math department, my time in Sweden was marked by my introduction to the world of \textit{studentorkestrar}. Thank you to Promenadorquestern och med Baletten Paletten and Kårsdraget och Baletten Kårsetten for the incredible opportunity of performing the coolest and silliest jazz (and other genres) with like-minded musicians and dancers.
 
@@ -66,31 +66,33 @@ Finally, I thank my family. To my parents Xiaofan and Hongge, thank you for rais
 \section*{Abbreviations}
 
 \begin{tabular}{c|l}
+  BND & bottleneck degree \\
   CI & complete intersection \\
+  EDD & Euclidean distance degree \\
   p.f.d. & pointwise finite-dimensional \\
   TDA & Topological data analysis
 \end{tabular}
 
 \section*{Notations}
 
-\begin{longtable}[l]{c|l}
+\begin{longtable}[l]{c|p{.8\textwidth}}
   Symbol & Description \\
   \hline\endhead
   $a$, $b$ & element of poset \\
+  $B(x, r)$ & closed ball of center $x$ and radius $r$ \\
   $\cat{Cat}$ & category \\
-  $d$ & polynomial degree \\
+  $d$ & simplex dimension, homological degree, (pseudo)metric, polynomial degree \\
   $\partial$ & boundary map of chain complex \\
   $f$, $g$, $h$ & real-valued functions \\
   $F$, $G$ & functor \\
-  $i$, $j$ & index \\
+  $i$, $j$, $k$ & index \\
   $I$, $J$ & poset \\
-  $k$ & simplex dimension, homological degree \\
   $K$ & simplicial complex \\
   $\K$ & underlying field for vector spaces \\
   $M$ & matching of sets or multisets \\
   $\N$ & set or poset of natural numbers \\
-  $\R$ & poset of real numbers \\
-  $s$, $t$ & element of poset; start and endpoint of an interval \\
+  $\R$ & set or poset of real numbers \\
+  $s$, $t$ & element of poset; start- and end-point of an interval \\
   $S$, $T$ & subset of poset \\
   $v$ & vertex \\
   $U$, $V$, $W$ & persistence module \\
@@ -101,8 +103,8 @@ Finally, I thank my family. To my parents Xiaofan and Hongge, thank you for rais
   $\sigma$, $\tau$ & simplices \\
 \end{longtable}
 
-\section*{A note on reading this thesis.}
+\section*{A note on reading this thesis}
 
 Defined terms are printed in \textbf{boldface} and are searchable in the index at the back of this thesis. Relevant notations are also listed in the index. The ends of numbered passages, such as definitions, examples, and remarks, are marked by a black square ($\mdlgblksquare$), as opposed to the ends of proofs, which are marked by a white square ($\qedsymbol$).
 
-The notations used in this \textit{kappa} differ from those of the included papers, as it was impossible to harmonize all notations while avoiding ambiguities. Notably, persistence modules here are denoted by $V$, $W$, and so on, while they are denoted by $F$, $M$, etc.\ in Paper \ref{PC:CGRST2024} and by $X$, $Y$, etc.\ in Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}.
+The notations used in the \textit{kappa} sometimes differ from those of the included papers, as it was impossible to harmonize all notations while avoiding ambiguities. Notably, persistence modules here are denoted by $V$, $W$, and so on, while they are denoted by $F$, $M$, etc.\ in Paper \ref{PC:CGRST2024} and by $X$, $Y$, etc.\ in Papers \ref{PC:AGRS2025} and \ref{PC:GRRS2026}.

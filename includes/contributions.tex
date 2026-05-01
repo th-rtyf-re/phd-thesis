@@ -1,5 +1,11 @@
 % !TEX root = ../thesis-main.tex
 
+% Custom section numbering
+\let\theoldsection\thesection%
+\renewcommand{\thesection}{\Alph{section}}%
+\let\oldsectionmark\sectionmark
+\renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{\papername\ \thesection. \ #1}}}
+
 \chapter{Papers and contributions}
 \label{C:contributions}
 
@@ -7,14 +13,13 @@
   The blackbird whirled in the autumn winds. \\
   It was a small part of the pantomime.
 \end{epigraph}
-\vspace{-1.5\baselineskip}
+\vspace{-1\baselineskip}
 
-\papersection{CGRST2024}
+\section[Koszul complexes and relative homological algebra]{\citefield{CGRST2024}{title}}
 
-In this paper, we study persistence modules over a finite poset $(I, \mathord{\leq})$ using the functorial perspective (\cref{SS:functor}). We extend the results of \cref{S:persistent-homological-algebra} to the \index{relative homological algebra}\textbf{relative homological case}. Instead of approximating functors over $I$ by projective resolutions, where each term is a sum of free functors, we approximate them by other ``simple'' functors. Given a collection $\cc{P}$ of such simple functors, we define $\cc{P}$-exactness, $\cc{P}$-projectives, $\cc{P}$-covers, and $\cc{P}$-resolutions, which are the relative versions of the ``absolute'' notions defined in \cref{S:persistent-homological-algebra}. A \index{.pfree@$\cc{P}$-free}\textbf{$\cc{P}$-free functor} is a functor that is isomorphic to a direct sum of elements of $\cc{P}$. The collection $\cc{P}$ is then \index{acyclic}\textbf{acyclic} if every $\cc{P}$-projective is $\cc{P}$-free. Under this condition, we can then define Betti diagrams relative to $\cc{P}$.
+In this paper, we study persistence modules over a finite poset $(I, \mathord{\leq})$ using the functorial perspective (\cref{SS:functor}). We extend the results of \cref{S:persistent-homological-algebra} to the \index{relative homological algebra}\textbf{relative homological case}. Instead of approximating functors over $I$ by projective resolutions, where each term is a sum of free functors, we approximate them by other ``simple'' functors. Given a collection $\cc{P}$ of such simple functors, we define $\cc{P}$-exactness, $\cc{P}$-projectives, $\cc{P}$-covers, and $\cc{P}$-resolutions, which are the relative versions of the ``absolute'' notions defined in \cref{S:persistent-homological-algebra}. A \index{free functor!relative ($\symcal {P}$-)}\textbf{$\cc{P}$-free functor} is a functor that is isomorphic to a direct sum of elements of $\cc{P}$. The collection $\cc{P}$ is then \index{acyclic (collection of functors)}\textbf{acyclic} if every $\cc{P}$-projective is $\cc{P}$-free. Under this condition, we can then define \index{Betti diagram!relative ($\symcal {P}$-)}\textbf{Betti diagrams relative to $\cc{P}$}: given a functor $M \colon I \to \Vect$ and an element $a \in J$ such that $\cc{T}(a) \neq 0$, we denote by $\beta_{\cc{P}}^d M(a)$ the multiplicity of $\cc{T}(a)$ in the $d^{\th}$ term of the minimal $\cc{P}$-projective resolution of $M$.
 
-The principal result of this paper is that, under reasonable conditions on $\cc{P}$, we can compute the relative Betti diagrams using local Koszul complexes. First, assume that the collection $\cc{P}$ is parameterized by a functor $\cc{T} \colon (J, \mathord{\preceq})^{\op} \to \Fun(I, \Vect)$ where $(J, \mathord{\preceq})$ is a finite upper semilattice (see Paper \ref{PC:CGRST2024}, \textsection 3.6) and $\cc{P} = \{\cc{T}(a) \mid \cc{T}(a) \neq 0, \; a \in J\}$. The parameterization functor $\cc{T}$ is \index{thin}\textbf{thin} if, for all $a \preceq b$ in $J$, the space of natural transformation $\Nat(\cc{T}(b), \cc{T}(a))$ is of dimension at most $1$. In this case, the collection $\cc{P}$ is acyclic, and so we can talk about Betti diagrams relative to $\cc{P}$: given a functor $M \colon I \to \Vect$ and an element $a \in J$ such that $\cc{T}(a) \neq 0$, we denote by $\beta_{\cc{P}}^d M(a)$ the multiplicity of $\cc{T}(a)$ in the $d^{\th}$ term of the minimal $\cc{P}$-projective resolution of $M$.
-
+The principal result of this paper is that, under reasonable conditions on $\cc{P}$, we can compute the relative Betti diagrams using local Koszul complexes. First, assume that the collection $\cc{P}$ is parameterized by a functor $\cc{T} \colon (J, \mathord{\preceq})^{\op} \to \Fun(I, \Vect)$ where $(J, \mathord{\preceq})$ is a finite upper semilattice (see Paper \ref{PC:CGRST2024}, \textsection 3.6) and $\cc{P} = \{\cc{T}(a) \mid \cc{T}(a) \neq 0, \; a \in J\}$. The parameterization functor $\cc{T}$ is \index{parameterization functor!thin}\textbf{thin} if, for all $a \preceq b$ in $J$, the space of natural transformation $\Nat(\cc{T}(b), \cc{T}(a))$ is of dimension at most $1$. In this case, the collection $\cc{P}$ is acyclic, and so we can talk about Betti diagrams relative to $\cc{P}$.
 Given a functor $M \colon I \to \Vect$, we define the functor indexed by $J$
 \[
   \cc{R} M \colon \left\{ \begin{array}{ccc}
@@ -22,7 +27,7 @@ Given a functor $M \colon I \to \Vect$, we define the functor indexed by $J$
     a & \mapsto & \Nat(\cc{T}(a), M).
   \end{array} \right.
 \]
-The main result is the following.
+The main result is the following; compare with \cref{!T:Koszul-computes-Betti}.
 
 \begin{theorem}[{Paper \ref{PC:CGRST2024}, Corollary 5.20}]
   Let $(J, \mathord{\preceq})$ be an upper semilattice and $\cc{T}$ a thin parameterization functor. Assume that
@@ -38,9 +43,9 @@ The main result is the following.
 
 In other words, under the listed conditions, we can compute the Betti diagrams relative to $\cc{P}$ using the standard Koszul complexes defined on $\cc{R} M \colon J \to \Vect$.
 
-The paper ends with an extensive list of examples of collection $\cc{P}$ and parameterization functors $\cc{T}$ where the conditions of the theorem hold. This includes examples that have been studied in previous works, including \textbf{rectangles}, \textbf{lower hooks} \cite{BOO2025}, and \textbf{single-source spread modules} \cite{BBH2024}. In fact, this work was in part motivated by the study of exact structures for persistence modules, in particular relative to lower hooks, in \cite[Section 4]{BOO2025}. We have also implemented the computation of Betti diagrams relative to lower hooks in Python \cite{lowerhooks}: see \cref{F:lowerhooks} for a sample output.
+Paper \ref{PC:CGRST2024} ends with an extensive list of examples of collection $\cc{P}$ and parameterization functors $\cc{T}$ where the conditions of the theorem hold. This includes examples that have been studied in previous works, including \textbf{rectangles}, \textbf{lower hooks} \cite{BOO2025}, and \textbf{single-source spread modules} \cite{BBH2024}. In fact, this work was in part motivated by the study of exact structures for persistence modules, in particular relative to lower hooks, in \cite[Section 4]{BOO2025}. We have also implemented the computation of Betti diagrams relative to lower hooks in Python \cite{lowerhooks}: see \cref{F:lowerhooks} for a sample output.
 
-\begin{figure}
+\begin{figure}[tbp]
   \includegraphics[width=\textwidth]{figs/lowerhooks.png}
   \caption[Free presentation of an example persistence module and its Betti diagrams relative to lower hooks.]{%
     Sample output of \texttt{lowerhooks}. \textbf{Leftmost:} free presentation of a two-dimensional persistence module. Black points correspond to generators, white to relations, and lines correspond to nonzero coefficients in the presentation matrix (see \cref{R:generators-and-relations}).
@@ -75,11 +80,11 @@ In this paper I co-wrote the main results, was the main contributor to the analy
 
 \textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (equal); formal analysis (equal); software (lead); visualization (lead); writing -- original draft preparation (equal); writing -- review \& editing (equal).
 
-\papersection[shorttitle={Algebraic Wasserstein distances...}]{AGRS2025}
+\section[Algebraic Wasserstein distances]{\citefield{AGRS2025}{title}}
 
 In this paper, we define algebraic $p$-Wasserstein distances for tame persistence modules, proving that the sequence of collections $\cc{S} = \{\cc{S}_\varepsilon\}_{\varepsilon \geq 0}$ of \cref{SS:algebraic-wasserstein} is indeed a noise system. This is an alternate proof to that of \cite{SkrabaTurner2023}.
 
-The difficult noise system axiom to prove is the exact sequence, and specifically the following result (a simplified version of [Paper \ref{PC:AGRS2025}, Lemma 4.15]):
+The difficult noise system axiom to prove is the exact sequence one (\cref{!D:noise-system}), and specifically the following result (a simplified version of [Paper \ref{PC:AGRS2025}, Lemma 4.15]):
 
 \begin{proposition}
 \label{P:triangular-ineq}
@@ -113,7 +118,7 @@ In other words, for a bar-to-bar morphism, there exist barcode decompositions of
   The first inequality comes from the previous observation, and the second from \cref{T:induced-btb}.
 \end{proof}
 
-In this paper, we also introduce additional parameterizations on $p$-Wasserstein distances. First, in the definition of $\varepsilon$-close, we can replace the sum in \eqref{Eq:epsilon-close} with any $q$-norm, $q \in [1, \infty]$:
+In this paper, we also introduce additional parameterizations on $p$-Wasserstein distances. First, in the definition of $\varepsilon$-closeness, we can replace the sum in \eqref{Eq:epsilon-close} with any $q$-norm, $q \in [1, \infty]$:
 \[
   \| \alpha(\ker f), \alpha(\coker f), \alpha(\ker g), \alpha(\coker g) \|_q \leq \varepsilon.
 \]
@@ -121,7 +126,7 @@ Moreover, when taking the $p$-norm of a persistence module $V \cong \bigoplus_\a
 \[
   \| V \|_p \coloneq \| (T(t(S_\alpha)) - T(s(S_\alpha))) \|_p.
 \]
-This allows us to weight the importance of bars at different points of the indexing set $\R$. Given these parameterized pseudometrics, we are able to explicitly compute the \index{hierarchical stabilization}\textbf{hierarchical stabilization} of persistence modules, which are real-valued functions that we can feed into machine learning frameworks \cite{SCLRÖ2017,GafvertChacholski2021}. In the paper, we apply this analysis pipeline to classification tasks for a synthetic dataset as well as a dataset of brain vessel models of patients of various ages. The classifying model learns the optimal parameters $p$ and $T$ in order to, for example, classify patients by age based on their brain vessel structure. The parameter $q$ is fixed equal to $1$, the standard value, and $T$ is the cumulative density of a mixed Gaussian model. The key observation is that, when $p$ is large, then the model focuses on long bars, and when $p$ is close to $1$, then it focuses on short bars. It had been observed that short bars are more relevant for this dataset \cite{BMMPS2016}, and we recover this result.  %\ir{REVIEW: Figure 8? I feel like it might be more misleading to copy only one figure, because this thesis isn't really focused on this part... It's putting more emphasis on this part? idk}
+This allows us to weight the importance of bars at different points of the indexing set $\R$. Given these parameterized pseudometrics, we are able to explicitly compute the \index{hierarchical stabilization}\textbf{hierarchical stabilization} of persistence modules, which are real-valued functions that we can feed into machine learning frameworks \cite{GafvertChacholski2021,SCLRÖ2017}. In the paper, we apply this analysis pipeline to classification tasks for a synthetic dataset, as well as a dataset of brain vessel models of patients of various ages. The classifying model learns the optimal parameters $p$ and $T$ in order to, for example, classify patients by age based on their brain vessel structure. The parameter $q$ is fixed equal to $1$, the standard value, and $T$ is the cumulative density of a mixed Gaussian model. The key observation is that, when $p$ is large, then the model focuses on long bars, and when $p$ is close to $1$, then it focuses on short bars. It had been observed that short bars are more relevant for this dataset \cite{BMMPS2016}, and we recover this result.
 
 \subsection*{Contributions}
 
@@ -129,9 +134,9 @@ In this paper I was a main contributor to Section 3, which contains the fundamen
 
 \textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (equal); formal analysis (lead); visualization (equal); writing -- original draft preparation (equal); writing -- review \& editing (equal).
 
-\papersection[misctext=To be submitted]{GRRS2026}
+\section[Barcode matchings and \texorpdfstring{$p$}{p}-norms]{\citefield{GRRS2026}{title}}
 
-In this paper, we refine the tools introduced in Paper \ref{PC:AGRS2025}. In particular, we extend the notion of bar-to-bar morphisms (\cref{!D:bar-to-bar}) to pointwise finite-dimensional persistence modules and prove analogous results to those of Paper \ref{PC:AGRS2025}. In particular, we develop a simpler method of constructing bar-to-bar morphisms from mono- and epimorphisms. We present the results with tame persistence modules; see Paper \ref{PC:GRRS2026} for the full results for p.f.d.\ modules.
+In this paper, we refine the tools introduced in Paper \ref{PC:AGRS2025}. In particular, we extend the notion of bar-to-bar morphisms (\cref{!D:bar-to-bar}) to pointwise finite-dimensional persistence modules and prove analogous results to those of Paper \ref{PC:AGRS2025}. In particular, we develop a simpler method of constructing bar-to-bar morphisms from mono- and epimorphisms. We present the results here for tame persistence modules; see Paper \ref{PC:GRRS2026} for the full results for p.f.d.\ modules.
 
 \begin{definition}
   Let $V \cong \bigoplus_j \K_{[a_j, b_j)}$ and $W \cong \bigoplus_i \K_{[c_i, d_i)}$ be tame persistence modules with fixed persistence bases. For every morphism $f \colon V \to W$, we define $\Delta f \colon V \to W$ as the projection of $f$ along the map of vector spaces
@@ -140,36 +145,30 @@ In this paper, we refine the tools introduced in Paper \ref{PC:AGRS2025}. In par
     & \to \bigoplus_{\substack{i, j \\ b_j = d_i}} \hom(\K_{[a_j, b_j)}, \K_{[c_i, d_i)}) \\
     & \hookrightarrow \hom(X, Y).
   \end{align*}
-  In other words, considering a matrix representation of $f$, we only keep the nonzero coefficients whose row and column are labeled by bars with the same endpoint.
+  In other words, considering a matrix representation of $f$, we only keep the nonzero coefficients whose row and column are labeled by bars with the same end-point.
 \end{definition}
 
-\begin{theorem}[{Paper \ref{PC:GRRS2026}, Theorem 3.15}]
+\begin{theorem}[{\cref{C!T:Delta-is-btb}}]
   For every morphism $f$ in $\Tame$, the morphism $\Delta f$ is bar-to-bar.
 \end{theorem}
 
-We also prove that $p$-Wasserstein distances are pseudometrics for p.f.d.\ persistence modules using the noise system approach. Our approach to proving the inequality of $p$-norms of cokernels goes through the integral of the rank function. In particular, we observe that, for all $p \in (1, \infty)$, [Paper \ref{PC:GRRS2026}, Proposition 4.7]
+We also prove that $p$-Wasserstein distances are pseudometrics for p.f.d.\ persistence modules using the noise system approach. Our approach to proving the inequality of $p$-norms of cokernels uses the integral of the rank function. In particular, by \cref{C!P:p-norm-by-integral}, for all $p \in (1, \infty)$,
 \[
   \| V \|_p^p = \int_{\Omega(\R)} p (p - 1) (t - s)^{p - 2} \rank V(s \leq t) \text{d}s \text{d}t.
 \]
 
 In this more general setting, we also prove the isometry theorem between the algebraic and combinatorial Wasserstein distances.
 
-\begin{theorem}[{\ref{PC:GRRS2026}, Theorem 4.12}]
+\begin{theorem}[{\cref{C!T:isometry}}]
   For all $p \in [1, \infty]$ and all $V$ and $W$ in $\Pfd$, we have
   \[
     d_{\cc{S}^p}(V, W) = d_p(\barcode(V), \barcode(W)).
   \]
 \end{theorem}
 
-In addition to this new proof of the isometry result, we also study the properties of matchings induced by morphisms. Note that a bar-to-bar morphism can be seen as an algebraic representation of a barcode matching: by \cref{!D:bar-to-bar}, such a morphism has a matrix representation with at most one nonzero coefficient in each row and column. The set of coordinates of nonzero coefficients defines a matching between the persistence bases, and therefore the barcodes, of the domain and codomain. We thus define matchings induced by morphisms. Building on the results of \cite{BauerLesnick2015} and \cite{GST2025}, we show that our matchings are \index{additive matching}\textbf{additive} but not \index{functorial matching}\textbf{functorial}.
+In addition to this new proof of the isometry result, we also study the properties of matchings induced by morphisms. Note that a bar-to-bar morphism can be seen as an algebraic representation of a barcode matching: by \cref{!D:bar-to-bar}, such a morphism has a matrix representation with at most one nonzero coefficient in each row and column. The set of coordinates of nonzero coefficients defines a matching between the persistence bases, and therefore the barcodes, of the domain and codomain. We thus define matchings induced by morphisms. Building on the results of \cite{BauerLesnick2015,GST2025}, we show that our matchings are \textbf{additive} but not \textbf{functorial} (\cref{C!D:matching-operator}). In fact, we show that an operator that associates to each morphism a matching cannot be both additive and functorial (\cref{C!P:split-nand-functorial}).
 
-% Moreover, we show the following result.
-
-% \begin{theorem}[\ir{ref}]
-%   An operator that maps monomorphisms (resp.\ epimorphisms) to matchings cannot be both additive and functorial.
-% \end{theorem}
-
-Using the strategy of \cite{BauerLesnick2015}, we define the induced matching of a morphism $f \colon V \to W$ by taking an epi-mono factorization $f = m \circ e$, inducing matchings on $m$ and $e$, and then composing them together. In particular, there exists an algorithm that computes the epi-mono factorization such that the resulting matching $\mu(f)$ is that of \cite{GST2025}. % \ir{Along the way, we also derive a simple algorithm for computing the barcode of the image of a morphism of persistence modules.}
+Using the strategy of \cite{BauerLesnick2015}, we define the induced matching of a morphism $f \colon V \to W$ by taking an epi-mono factorization $f = m \circ e$, inducing matchings on $m$ and $e$, and then composing them together. In particular, there exists an algorithm that computes the epi-mono factorization such that the resulting matching $\mu(f)$ is that of \cite{GST2025} (\cref{C!SS:P-matching}).% Along the way, we also derive a simple algorithm for computing the barcode of the image of a morphism of persistence modules.
 
 \subsection*{Contributions}
 
@@ -177,11 +176,11 @@ I was an equal contributor throughout the conceptualization and writing of the p
 
 \textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (equal); formal analysis (lead); writing -- original draft preparation (equal); writing -- review \& editing (equal).
 
-\papersection[shorttitle={Morse theory of Euclidean distance functions...}, misctext=Submitted]{GLRS2025}
+\section[Morse theory of Euclidean distance functions]{\citefield{GLRS2025}{title}}
 
-In this paper we generalize Morse theory to distance functions $f \coloneq \dist_Y\big|_X$ from a subset $Y \subseteq \R^n$ restricted to a subset $X \subseteq \R^n$. We show that, under certain conditions, the distance function $f$ is a continuous selection:
+In this paper we generalize Morse theory to distance functions $f \coloneq \distYX$ from a subset $Y \subseteq \R^n$ restricted to a subset $X \subseteq \R^n$. We show that, under certain conditions, the distance function $f$ is a continuous selection:
 
-\begin{proposition}[{Paper \ref{PC:GLRS2025}, Proposition 2.5.8}]
+\begin{proposition}[{\cref{D!P:regular-value}}]
   Suppose that $Y$ is smooth and let $x \in \R^n$ be a regular value of the exponential map $\varphi \colon NY \to \R^n$, where $NY$ denotes the normal bundle of $Y$\footnote{At every point $y$ in $Y$, the normal space $N_y Y$ is the orthogonal space to the tangent space $T_y Y$.}. Then
   \begin{enumerate}
     \item
@@ -196,27 +195,27 @@ In this paper we generalize Morse theory to distance functions $f \coloneq \dist
     \end{enumerate}
 \end{proposition}
 
-We can therefore apply the results of \cite{APS1997} to distance functions $\dist_Y\big|_X$ where all critical points are regular points of the exponential map on $Y$. Recall from \cref{!D:continuous-selection} that a nondegenerate critical point $x$ of a continuous selection has two indices, a piecewise linear index $k(x)$ and a quadratic index $\iota(x)$. Given a pair $(X, Y)$ of subsets of $\R^n$ such that $\dist_Y\big|_X$ only has nondegenerate critical points, we denote by $C_{k, \iota}(X, Y)$ the critical points with indices $(k, \iota)$. We recover the Morse lemmas and inequalities presented in \cref{S:Morse-theory}. Moreover, we can exchange the roles of $X$ and $Y$: if $\dist_X\big|_Y$ also only has nondegenerate critical points, then combining the resulting Morse inequalities gives the following equality relating the Euler characteristics of $X$ and $Y$ and the number of critical points [Paper \ref{PC:GLRS2025}, Corollary 2.6.7]:
+We can therefore apply the results of \cite{APS1997} to distance functions $\distYX$ where all critical points are regular points of the exponential map on $Y$. Recall from \cref{!D:continuous-selection} that a nondegenerate critical point $x$ of a continuous selection has two indices, a piecewise linear index $k(x)$ and a quadratic index $\iota(x)$. Given a pair $(X, Y)$ of subsets of $\R^n$ such that $\distYX$ only has nondegenerate critical points, we denote by $C_{k, \iota}(X, Y)$ the critical points with indices $(k, \iota)$. We recover the Morse lemmas and inequalities presented in \cref{S:Morse-theory}. Moreover, we can exchange the roles of $X$ and $Y$: if $\dist_X\big|_Y$ also only has nondegenerate critical points, then combining the resulting Morse inequalities gives the following equality relating the Euler characteristics of $X$ and $Y$ and the number of critical points (\cref{D!coro:duality}):
 \[
   \chi(Y) + \sum_{k, \iota \geq 0} (-1)^{k + \iota} \#C_{k, \iota}(X, Y) = \chi(X) + \sum_{k, \iota \geq 0} (-1)^{k + \iota} \#C_{k, \iota}(Y, X).
 \]
 
 In the second half of the paper, we study the case where $X$ and $Y$ are generic algebraic hypersurfaces, i.e., zero sets of polynomial functions. By \index{generic property}\textbf{generic} we mean that the results hold for a dense open subset of polynomials. We summarize our results as follows:
 
-\begin{theorem}[Paper \ref{PC:GLRS2025}]
+\begin{theorem}
   Let $p \in \cc{P}_{d_1}$ and $q \in \cc{P}_{d_2}$ be generic polynomials, and let $X = Z(p)$ and $Y = Z(q)$ be their zero sets. Then, depending on the values of $d_1 = \deg(X)$ and $d_2 = \deg(Y)$ the following is true:
   \begin{enumerate}
-    \item if $d_1 \geq 3$ and $d_2 \geq 4$, then the function $\dist$ is a continuous selection near each of its critical points (Corollary 4.5.2);
-    \item if $d_1, d_2 \geq 4$, then every critical point of $\dist$ not in $Y$ is nondegenerate (Theorem 4.6.6);
-    \item if $d_1, d_2 \geq 3$, then for every $k \in \{1, \ldots, n\}$, the number of $k$-critical points of $\dist_Y\big|_X$ can be bounded by
+    \item if $d_1 \geq 3$ and $d_2 \geq 4$, then the function $\dist$ is a continuous selection near each of its critical points (\cref{D!C:C2selection});
+    \item if $d_1, d_2 \geq 4$, then every critical point of $\dist$ not in $Y$ is nondegenerate (\cref{D!T:genericity-nondegeneracy});
+    \item if $d_1, d_2 \geq 3$, then for every $k \in \{1, \ldots, n\}$, the number of $k$-critical points of $\distYX$ can be bounded by
     \[
       \#C_{k, *}(X, Y) \leq c(k, n) \deg(X)^n \deg(Y)^{n (k + 1)},
     \]
-    for some number $c(k, n) > 0$ depending on $n$ and $k$ only (Theorem 4.4.4).
+    for some number $c(k, n) > 0$ depending on $n$ and $k$ only (\cref{D!T:finite-crit-pt}).
   \end{enumerate}
 \end{theorem}
 
-We get analogous results when $X = \R^n$ [Paper \ref{PC:GLRS2025}, Remark 4.6.7].
+We get analogous results when $X = \R^n$ (\cref{D!R:X-is-Rn-case}).
 
 \subsection*{Contributions}
 
@@ -224,12 +223,17 @@ In this paper I was the main contributor to Section 4, which applies the theory 
 
 \textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (equal); formal analysis (lead); visualization (lead); writing -- original draft preparation (equal); writing -- review \& editing (equal).
 
-\papersection[shorttitle={Nondegeneracy of distance functions...}, misctext=To be submitted]{Ren2026}
+% \papersection[shorttitle={Nondegeneracy of distance functions between C.I.s}, misctext=To be submitted]{Ren2026}
+\section[Nondegeneracy of distance functions between C.I.s]{\citefield{Ren2026}{title}}
 
-This paper is a direct generalization of Paper \ref{PC:GLRS2025}'s results on algebraic hypersurfaces to complete intersections. There are no surprises when extending the results, but the computations require some more care.
+This paper is a direct generalization of Paper \ref{PC:GLRS2025}'s results on algebraic hypersurfaces to complete intersections. There are no surprises when extending the results, but the computations require some extra care.
 
 \subsection*{Contributions}
 
 I was the sole contributor to this paper.
 
 \textbf{\sffamily CRediT classification.} \textbf{Isaac Ren:} conceptualization (lead); formal analysis (lead); writing -- original draft preparation (lead); writing -- review \& editing (lead).
+
+% Reset section numbering
+\let\sectionmark\oldsectionmark
+\let\thesection\theoldsection

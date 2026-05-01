@@ -3,25 +3,16 @@
 \input{headers/my-kthpq}  % load class and packages, define more complicated commands
 \input{headers/my-macros}  % math macros and metadata
 
+\def\dividercolor{light blue}
+
+% ==== PRINT VERSION TOGGLE ====
+% uncomment for print version
+% \def\dividercolor{white}
+% \hypersetup{hidelinks}
+
 % ==== FLIPBOOK TOGGLE ====
 % \fancyfoot{}  % comment to get flipbook
 % ====
-
-% % Debug code for infinite recompiles due to changing labels. Comment out
-% % `\begin{document}` line and uncomment this block.
-% % (https://tex.stackexchange.com/a/169245/216213)
-% \makeatletter
-% \def\@testdef #1#2#3{%
-%   \def\reserved@a{#3}\expandafter \ifx \csname #1@#2\endcsname
-%  \reserved@a  \else
-% \typeout{^^Jlabel #2 changed:^^J%
-% \meaning\reserved@a^^J%
-% \expandafter\meaning\csname #1@#2\endcsname^^J}%
-% \@tempswatrue \fi}
-% \begin{document}
-% \providecommand\r@foo{{1}{1}}
-% \edef\@currentlabel{.\expandafter\@firstoftwo\r@foo}
-% \makeatother
 
 \begin{document}
 
@@ -32,6 +23,7 @@
 \mainmatter
 \newrefsection
 
+\addtocontents{toc}{\cftpagenumbersoff{part}}
 \part*{Background and results}
 
 \input{includes/introduction}
@@ -47,32 +39,54 @@
 
 % ==== PAPERS ====
 
+\defbibheading{bibliography}[\bibname]{\section*{#1}}
 \part*{Papers}
 \label{Part:papers}
 \newrefsection% Reset the bibliography
-\captionsetup[figure]{list=no}
+\captionsetup[figure]{list=no}% Hide figures from List of figures
 
-\papertitlepage[color=light blue]{CGRST2024}
+\papertitlepage[color=\dividercolor]{CGRST2024}
 \label{PC:CGRST2024}
 
-\includepdf[pages=-,frame]{papers/CGRST2024}
+\newgeometry{top=15.8mm,right=12.5mm,headsep=0mm,bottom=22.7mm}
+\fancyhfoffset{0pt}
+\includepdf[
+  pages=1,
+  offset=11.5mm 0,
+  pagecommand={\thispagestyle{plain}\paperAindex}
+]{papers/CGRST2024}
+\includepdf[
+  pages=2-,
+  offset=11.5mm 0,
+  pagecommand={\thispagestyle{paper-fancy}\paperAindex}
+]{papers/CGRST2024}
+\restoregeometry
+\fancyhfoffset{0pt}
 
-\papertitlepage[color=light blue]{AGRS2025}
+\papertitlepage[color=\dividercolor]{AGRS2025}
 \label{PC:AGRS2025}
 
-\includepdf[pages=-,frame]{papers/AGRS2025}
+\newgeometry{top=15.8mm,right=12.5mm,headsep=0mm}
+\fancyhfoffset{0pt}
+\includepdf[
+  pages=-,
+  offset=11.5mm 0,
+  pagecommand={\thispagestyle{paper-fancy}\paperBindex}
+]{papers/AGRS2025}
+\restoregeometry
+\fancyhfoffset{0pt}
 
-\papertitlepage[color=light blue,misctext=To be submitted]{GRRS2026}
+\papertitlepage[color=\dividercolor,misctext=To be submitted]{GRRS2026}
 \label{PC:GRRS2026}
 
 \input{papers/btb}
 
-\papertitlepage[color=light blue,misctext=Submitted]{GLRS2025}
+\papertitlepage[color=\dividercolor,misctext=Submitted]{GLRS2025}
 \label{PC:GLRS2025}
 
 \input{papers/gM}
 
-\papertitlepage[color=light blue,misctext=To be submitted]{Ren2026}
+\papertitlepage[color=\dividercolor,misctext=To be submitted]{Ren2026}
 \label{PC:Ren2026}
 
 \input{papers/CI}

@@ -9,7 +9,7 @@
   Of one of many circles.
 \end{epigraph}
 
-In the previous chapter, we presented a general theory for algebraically studying filtered spaces using the tools of persistent homology. In this section, we present tools from a slightly older theory, namely Morse theory, for studying filtered manifolds. We cover preliminaries on Morse theory and related studies of critical points of distance functions in metric algebraic geometry.
+In the previous chapter, we presented a general theory for algebraically studying filtered spaces using the tools of persistent homology. In this chapter, we present tools from a slightly older theory, namely Morse theory, for studying filtered manifolds. We cover preliminaries on Morse theory and related studies of critical points of distance functions in metric algebraic geometry.
 
 \section{A combinatorial encoding of topology}
 \label{S:Morse-theory}
@@ -18,9 +18,7 @@ In the previous chapter, we presented a general theory for algebraically studyin
   Let $X$ be a smooth manifold and $f \colon X \to \R$ a smooth function. A \index{critical point}\textbf{critical point of $f$} is a point $x$ of $X$ where the differential $\partial_x f$ of $f$ is $0$. A \index{critical value}\textbf{critical value} is the image $f(x)$ of a critical point.
   
   The \index{Hessian}\textbf{Hessian of $f$ at $x$} is the matrix of second partial derivatives of $f$ at $x$, denoted by $H(f)(x)$. A critical point $x$ of $X$ is \index{critical point!nondegenerate}\textbf{nondegenerate} if $H(f)(x)$ is nonsingular, and \index{critical point!degenerate}\textbf{degenerate} otherwise.
-  
-  Recall that the Hessian is a symmetric real matrix, and therefore is diagonalizable. The \index{index (of critical point)}\textbf{index} of a nondegenerate critical point is the number of negative eigenvalues of its Hessian.
-  
+  Recall that the Hessian is a symmetric real matrix, and therefore is diagonalizable. The \index{index (of a critical point)}\textbf{index} of a nondegenerate critical point is the number of negative eigenvalues of its Hessian.
   A \index{Morse function}\textbf{Morse function} is a smooth function on a smooth manifold that has no degenerate critical points.
 \end{definition}
 
@@ -34,12 +32,12 @@ The index of a nondegenerate critical point has the following interpretation in 
   \end{equation}
 \end{proposition}
 
-Viewing the filtration $f \colon X \to \R$ as a height function and considering the \index{normal form}\textbf{normal form} \eqref{E:normal-form}, we can then consider the nondegenerate critical point $x$ to be a saddle point of $X$ where the manifold slopes downwards in $\iota$ directions and upwards in $n - \iota$ directions.
+Viewing the filtration $f \colon X \to \R$ as a height function and considering the \index{normal form}\textbf{normal form} \eqref{E:normal-form}, we can then interpret the nondegenerate critical point $x$ as a saddle point of $X$ where the manifold slopes downwards in $\iota$ directions and upwards in $n - \iota$ directions.
 
 This algebraic encoding of the geometry of a filtered manifold can be developed further by the \index{Morse lemmas}\textbf{Morse lemmas}, which we present as a theorem:
 
 \begin{theorem}[{\cite[Theorems 3.1 \& 3.2]{Milnor1963}}]
-  Let $X$ be a smooth manifold, $f \colon X \to \R$ a smooth function, and $s \leq t$ in $\R$. Recall the notation $X_{\leq t} = f^{-1}((-\infty, t])$. Then:
+  Let $X$ be a smooth manifold, $f \colon X \to \R$ a smooth function, and $s \leq t$ in $\R$. Recall the notation $X_{\leq t} \coloneq f^{-1}((-\infty, t])$.
   \begin{enumerate}
     \item If the interval $[s, t]$ contains no critical values, then $X_{\leq s}$ is diffeomorphic to $X_{\leq t}$ and $X_{\leq t}$ deformation retracts onto $X_{\leq s}$. In terms of homology, we get $H_*(X_{\leq s}) \cong H_*(X_{\leq t})$.
     \item Suppose that there is a unique nondegenerate critical point $x \in X$ whose value $f(x)$ is in the interval $[s, t]$, and let $\iota$ be the index of $x$. Then $X_{\leq t}$ is homotopy equivalent to $X_{\leq s}$ with an $\iota$-cell attached (i.e., an $\iota$-disk glued to $X_{\leq s}$ along their boundaries). In terms of homology, this means that
@@ -99,7 +97,7 @@ Morse theory was originally developed for smooth function on smooth manifolds. H
   \[
     \partial f(x) \coloneq \conv\{\nabla f_i(x) \mid i \in I(x)\},
   \]
-  where $I(x)$ is the set of indices $i \in \{0, \ldots, m\}$ such that $x$ belongs to $\operatorname{clos} \operatorname{int} \{f(y) = f_i(y)\}$, i.e., the closure of the interior of the set where $f$ is equal to $f_i$.
+  where $I(x)$ is the set of indices $i \in \{0, \ldots, m\}$ such that $x \in \overline{\operatorname{int} \{f(y) = f_i(y)\}}$, i.e., $x$ is in the closure of the interior of the set where $f$ is equal to $f_i$.
   
   A point $x$ in $X$ is a \index{critical point!for continuous selections}\textbf{critical point of $f$} if $0$ belongs to its subdifferential $\partial f(x)$. A critical point $x \in X$ is \index{critical point!nondegenerate!for continuous selections}\textbf{nondegenerate} if the following two conditions hold:
   \begin{enumerate}
@@ -115,10 +113,10 @@ Morse theory was originally developed for smooth function on smooth manifolds. H
       V(x) \coloneq \bigcap_{i \in I(x)} \ker(D_x f_i).
     \]
   \end{enumerate}
-  We write $k(x) \coloneq \#I(x) - 1$ and call this number the \index{piecewise linear index}\textbf{piecewise linear index of $x$}. We denote by $\iota(x)$ the number of negative eigenvalues of the restriction of the second differential of $\lambda f$ to $V(x)$, and call it the \index{quadratic index}\textbf{quadratic index of $x$}. See \cref{F:nondegenerate} for an illustration of nondegenerate and degenerate critical points of $\dist_Y\big|_X$ and \cref{F:indices} for an illustration of different indices for $\dist_Y\big|_X$.
+  We write $k(x) \coloneq \#I(x) - 1$ and call this number the \index{index (of a critical point)!piecewise linear}\textbf{piecewise linear index of $x$}. We denote by $\iota(x)$ the number of negative eigenvalues of the restriction of the second differential of $\lambda f$ to $V(x)$, and call it the \index{index (of a critical point)!quadratic}\textbf{quadratic index of $x$}. See \cref{F:nondegenerate} for an illustration of nondegenerate and degenerate critical points of $\distYX$ and \cref{F:indices} for an illustration of different indices for $\distYX$.
 \end{definition}
 
-\begin{figure}
+\begin{figure}[tbp]
   \captionsetup[subfigure]{justification=centering}
   \begin{subfigure}[tbp]{.3\textwidth}
     \centering
@@ -142,7 +140,7 @@ Morse theory was originally developed for smooth function on smooth manifolds. H
     \label{F:sub-nondegen}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[tbp]{.3\textwidth}
+  \begin{subfigure}[tbp]{.35\textwidth}
     \centering
     \begin{tikzpicture}[scale=.8]
       \coordinate (x) at (0, 0);
@@ -185,7 +183,7 @@ Morse theory was originally developed for smooth function on smooth manifolds. H
   \label{F:nondegenerate}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[tbp]
   \begin{subfigure}{.3\textwidth}
     \centering
     \begin{tikzpicture}[scale=.8]
@@ -240,7 +238,7 @@ Morse theory was originally developed for smooth function on smooth manifolds. H
   \label{F:indices}
 \end{figure}
 
-For a nondegenerate critical point, we recover the Morse lemma: writing $k = k(x)$ and $\iota = \iota(x)$, there exists a neighborhood $U$ of $x$ and a locally Lipschitz homeomorphism $\psi \colon \R^k \times \R^{n - k} \to U$ (where $n$ is the dimension of the manifold $X$) such that
+For a nondegenerate critical point, we recover the second Morse lemma: writing $k = k(x)$ and $\iota = \iota(x)$, there exists a neighborhood $U$ of $x$ and a locally Lipschitz homeomorphism $\psi \colon \R^k \times \R^{n - k} \to U$ (where $n$ is the dimension of the manifold $X$) such that
 \[
   f(\psi(t_1, \ldots, t_n)) = f(x) + \ell(t_1, \ldots, t_k) - \sum_{j = k + 1}^{k + \iota} t_j^2 + \sum_{j = k + \iota + 1}^n t_j^2,
 \]
@@ -248,10 +246,10 @@ where $\ell(t) \in CS(t_1, \ldots, t_k, -(t_1 + \cdots + t_k))$ is a continuous 
 
 \section{Distance functions between algebraic varieties}
 
-For algebraic spaces, the notion of critical points of distance functions has been studied extensively in the past few decades, as part of the growing field of \index{metric algebraic geometry}\textbf{metric algebraic geometry}.
+For algebraic spaces, the notion of critical points of distance functions has been studied extensively in the past few decades, as part of the growing field of \index{metric algebraic geometry}\textbf{metric algebraic geometry} \cite{BKS2024}.
 
 \begin{definition}
-  A \index{real algebraic variety}\textbf{real algebraic variety} is the set of solutions of a system of multivariate polynomial equations over the real numbers.
+  A \index{variety, real algebraic}\textbf{real algebraic variety} is the set of solutions of a system of multivariate polynomial equations over the real numbers.
   
   Consider the space $\R^n$ for some $n \geq 1$ and an integer $d \geq 0$. Denote by $\cc{P}_{n, d}$ the space of real polynomials in $n$ variables, of degree $d$. Given polynomials $\vec{p} = p_1, \ldots, p_k$ in $\cc{P}_{n, d}$, we denote by $V(\vec{p})$ the algebraic variety that is the set of solutions of the equations $p_i(x) = 0$, for all $i \in \{1, \ldots, k\}$.
   
@@ -260,7 +258,7 @@ For algebraic spaces, the notion of critical points of distance functions has be
   An algebraic variety $X$ is a \index{complete intersection}\textbf{complete intersection} if there exist $\codim V$ many polynomials $p_1, \ldots, p_{\codim X}$ such that $X = V(p_1, \ldots, p_{\codim X})$.
 \end{definition}
 
-Algebraic geometers are often interested in integer invariants for algebraic varieties, and metric algebraic geometers are no exception. We present two of these \textit{degrees}:
+Algebraic geometers are often interested in integer invariants for algebraic varieties, and metric algebraic geometers are no exception. We present two of these \textbf{degrees}:
 
 \begin{definition}
   Let $X$ be a real algebraic variety and $u$ an arbitrary point in $\R^n$. Consider the function
@@ -272,7 +270,7 @@ Algebraic geometers are often interested in integer invariants for algebraic var
   \]
   defined as the squared Euclidean distance. It turns out that the number of critical points of $\dist_u$ is constant for a dense open subset of choices of $\R^n$: the \index{Euclidean distance degree (EDD)}\textbf{Euclidean distance degree} (\textbf{EDD}) \textbf{of $X$} is then this constant number \cite{DHOST2016}. An interpretation of the EDD is as a measure of the complexity of finding the closest point on $X$ to a given point $u$ in $\R^n$.
   
-  Now let $X$ be a real algebraic variety. The \index{bottleneck}\textbf{bottlenecks of $X$} are pairs $(x, y)$ of distinct points of $X$ such that the line passing through $x$ and $y$ is normal (orthogonal) to $X$ at both points. Equivalently, bottlenecks are the nontrivial critical points of the squared distance function on $X$, that is, the critical points of the function
+  The \index{bottleneck}\textbf{bottlenecks of $X$} are pairs $(x, y)$ of distinct points of $X$ such that the line passing through $x$ and $y$ is normal (orthogonal) to $X$ at both points. Equivalently, bottlenecks are the nontrivial critical points of the squared distance function on $X$, that is, the critical points of the function
   \[
     \dist\big|_X \colon \left\{ \begin{array}{ccc}
       X \times X & \to & [0, \infty) \\
@@ -282,6 +280,4 @@ Algebraic geometers are often interested in integer invariants for algebraic var
   with the extra condition that $x \neq y$. The \index{bottleneck degree (BND)}\textbf{bottleneck degree} (\textbf{BND}) \textbf{of $X$} is the number of bottlenecks, under some regularity conditions on $X$ \cite{DREW2020}.
 \end{definition}
 
-\begin{remark}
-  Both of these notions fit within the framework of critical points of the distance function from an algebraic variety, restricted to another algebraic variety. In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we generalize this notion to generic varieties.
-\end{remark}
+Both the Euclidean distance degree and the bottleneck degree fit within the framework of critical points of the distance function from an algebraic variety, restricted to another algebraic variety. In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we study this generalized notion for generic varieties.

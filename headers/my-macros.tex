@@ -60,14 +60,13 @@
 \usepackage[ruled]{algorithm2e}
 \usepackage{blkarray}
 
-\def\th{\text{th}}
-\def\TT{\top}%transpose symbol
+% \newcommand{\th}{\text{th}}
+\newcommand{\TT}{\top}%transpose symbol
 
-\def\E{\mathbb{E}}
-\def\R{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
 
-\def\B{\mathcal{B}}
-\def\Int{\mathsf{Int}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Int}{\mathsf{Int}}
 
 % \DeclareMathOperator{\BarDec}{\mathsf{BarDec}}
 \DeclareMathOperator{\Dgm}{\mathsf{Dgm}}
@@ -95,15 +94,19 @@
 \newcommand{\lini}{k}
 \newcommand{\quadi}{\iota}
 
+\newcommand{\myemph}{\textbf}
+
 % ---- CI ----
 
 \newcommand{\CI}{\mathcal{C}}
 
-\newcommand{\distYX}{\mathord{\dist}_Y|_X}
+\newcommand{\distYX}{\mathord{\dist}_Y\big|_X}
 \newcommand{\ev}{\operatorname{ev}}
 \newcommand{\proj}{\operatorname{proj}}
 
 % ==== INDEXING ====
+
+% ---- kappa ----
 
 \makeatletter
 \newcommand{\gobblecomma}[1]{\@gobble{#1}\ignorespaces}
@@ -111,8 +114,140 @@
 \index{complex!ZZc@\gobblecomma|see{chain complex}}
 \index{complex!ZZs@\gobblecomma|see{simplicial complex}}
 \index{chain complex!ZZKoszul@\gobblecomma|seealso{Koszul complex, local}}
-\index{matching, partial!ZZp@\gobblecomma|seealso{$\cc{P}$-matching}}
-\index{matching, partial!ZZx@\gobblecomma|seealso{$\cc{X}$-matching}}
+\index{matching, partial!ZZp@\gobblecomma|see{$\cc{P}$-matching}}
+\index{matching, partial!ZZx@\gobblecomma|see{$\cc{X}$-matching}}
+\index{tameness|see{persistence module, tame}}
+\index{.g δ@$\Delta$!ZZsame-endpoint@\gobblecomma|see{same-endpoint operator}}
+\index{.g δ@$\Delta$!ZZfat diagonal@\gobblecomma|see{fat diagonal}}
+\index{variety, real algebraic!ZZcomplete@\gobblecomma|seealso{complete intersection}}
+
+% ---- papers ----
+
+% Switch case for numbers: https://tex.stackexchange.com/a/629224/216213
+\makeatletter
+\ExplSyntaxOn
+% Paper A: rha
+\NewExpandableDocumentCommand{\paperAindex}{}{
+  \str_case_e:nnF {\AM@page}{
+    {7}{%
+      \index{relative~ homological~ algebra}
+      \index{free~ functor!relative~ ($\symcal {P}$-)}
+      \index{independent~ (collection~ of~ functors)}
+      \index{exact~ sequence!relative~ ($\symcal {P}$-)}
+    }
+    {8}{%
+      \index{epimorphism!relative~ ($\symcal {P}$-)}
+      \index{projective~ module!relative~ ($\symcal {P}$-)}
+      \index{acyclic~ (collection~ of~ functors)}
+      \index{cover!relative~ ($\symcal {P}$-)}
+      \index{enough~ projectives}
+      \index{cover!minimal}
+      \index{resolution!relative~ ($\symcal {P}$-)}
+    }
+    {9}{%
+      \index{resolution!relative~ ($\symcal {P}$-)!minimal}
+      \index{Betti~ diagram!relative~ ($\symcal {P}$-)}
+    }
+    {10}{%
+      \index{free~ functor}
+    }
+    {12}{%
+      \index{resolution!projective}
+      \index{cover!projective}
+      \index{Betti~ diagram}
+      \index{generator}
+      \index{upper~ semilattice}
+      \index{join}
+      \index{meet}
+      \index{parent}
+      \index{cover~ (in~ a~ poset)}
+      \index{Koszul~ complex,~ local|(}
+    }
+    {13}{%
+      \index{Koszul~ complex,~ local|)}
+    }
+    {15}{\index{filtration~ (functor)}}
+    {17}{%
+      \index{upset}
+      \index{support!of~ a~ functor}
+    }
+    {18}{%
+      \index{antichain}
+      \index{Koszul~ complex,~ global}
+    }
+    {20}{%
+      \index{parameterization~ functor}
+      \index{.c~ t@$\cc{T}$|see~ {parameterization~ functor}}
+    }
+    {22}{%
+      \index{parameterization~ functor!thin}
+      \index{thin|see~ {parameterization~ functor}}
+    }
+    {23}{%
+      \index{parameterization~ functor!flat}
+      \index{flat|see~ {parameterization~ functor}}
+    }
+    % {27}{\index{degeneracy~ locus}}
+    {34}{\index{spread~ module}}
+    {36}{\index{spread~ module!single-source}}
+    {38}{\index{lower~ hook~ (module)}}
+    {40}{\index{rank~ additivity}}
+    {41}{\index{rectangle~ module}}
+  }{}%
+}
+% Paper B: pWass
+\NewExpandableDocumentCommand{\paperBindex}{}{
+  \str_case_e:nnF {\AM@page}{
+    {5}{%
+      \index{persistence~ module!over~ $[0, \infty)$}
+      \index{morphism!of~ persistence~ modules}
+      \index{persistence~ module!tame}
+    }
+    {6}{%
+      \index{bar~ (module)}
+      \index{start-point}
+      \index{end-point}
+      \index{support!of~ a~ bar}
+      \index{barcode~ decomposition}
+      \index{rank~ function}
+      \index{generator}
+      \index{generating~ set}
+    }
+    {8}{%
+      \index{noise~ system}
+      \index{amplitude}
+    }
+    {9}{%
+      \index{hierarchical~ stabilization}
+      \index{pseudometric!for~ persistence~ modules}
+    }
+    {10}{%
+      \index{stable~ rank}
+      \index{distance!interleaving}
+      \index{.a~ p-norm@$p$-norm}
+    }
+    {13}{%
+      \index{bar-to-bar~ morphism}
+    }
+    {24}{%
+      \index{.c~ xmatching@$\symcal {X}$-matching!(also called induced matching)}
+    }
+    {27}{%
+      \index{span}
+      \index{.g~ εclose@$\mitvarepsilon $-close}
+      \index{.g~ εclose@$\mitvarepsilon $-close!in~ $p$-norm}
+    }
+    {33}{\index{distance!Wasserstein!algebraic}}
+    {35}{%
+      \index{persistence~ diagram}
+      \index{distance!Wasserstein!combinatorial|(}
+    }
+    {36}{\index{distance!Wasserstein!combinatorial|(}}
+    {42}{\index{stable~ rank!Wasserstein}}
+  }{}%
+}
+\ExplSyntaxOff
+\makeatother
 
 % ==== METADATA ====
 
@@ -121,9 +256,9 @@
 \author{Isaac Ren}
 
 \copyrighttext{%
+  Cover illustration: \textit{The Persistence of Homology} by Varga Hägg, 2026.
+  
   The poem ``Thirteen Ways of Looking at a Blackbird'' by Wallace Stevens (1879-1955) is in the public domain as of 2012 in the United States (95 years after publication), where the poem was first published in 1917, and as of 2025 in the European Union (70 years after the poet's death).
-
-  All Rights Reserved. No part of this work may be reproduced in any form without the written permission of the copyright owner.
   
   Published articles have been reprinted with permission from their respective copyright holders.%
 }

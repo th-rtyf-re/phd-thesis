@@ -98,6 +98,7 @@
 }
 \setcounter{footnote}{\value{footnotevalue}}
 \renewcommand*{\thefootnote}{\arabic{footnote}}
+\vspace{1ex}
 
 \begin{paperabstract}
 We construct barcode matchings induced by morphisms of pointwise finite-dimensional persistence modules. To do this, we use an algebraic decomposition of the space of morphisms between persistence modules.
@@ -107,28 +108,28 @@ We also study the interaction between our matching and a notion of cost for morp
 
 \section{Introduction}
 
-One of the central results in topological data analysis (TDA) is the barcode decomposition theorem, which states that, under some mild assumptions, every one-dimensional persistence module is isomorphic to a direct sum of basic interval modules, parameterized by intervals of the indexing poset. We can then represent the algebraic data of a persistence module by the combinatorial multiset of intervals. In this paper, we consider \textbf{pointwise finite dimensional} (\textbf{p.f.d.}) \textbf{persistence modules} over a fixed field $K$, which are defined as the functors from the poset $(\R, \leq)$ to the category $\Vect_K$ of finite dimensional vector spaces. In particular, p.f.d.\ modules admit a barcode decomposition theorem \cite{crawley2015decomposition,botnan2020decomposition}.
+One of the central results in topological data analysis (TDA) is the barcode decomposition theorem, which states that, under some mild assumptions, every one-dimensional persistence module is isomorphic to a direct sum of basic interval modules, parameterized by intervals of the indexing poset. We can then represent the algebraic data of a persistence module by the combinatorial multiset of intervals. In this paper, we consider \textbf{pointwise finite-dimensional} (\textbf{p.f.d.}) \textbf{persistence modules} over a fixed field $K$, which are defined as the functors from the poset $(\R, \mathord{\leq})$ to the category $\Vect_K$ of finite dimensional vector spaces. In particular, p.f.d.\ modules admit a barcode decomposition theorem \cite{CrawleyBoevey2015,BotnanCrawleyBoevey2020}.
 
-In this context, it is natural to ask whether morphisms of persistence modules also admit a combinatorial representation. The natural candidate for such representatives are (partial) \textbf{matchings}, or partial bijections, between barcodes. Barcode matchings are in fact quite central to the stability theory of persistent homology, as they form the basis of the definitions of the bottleneck and Wasserstein distances \cite[Section VIII.2]{EdelsbrunnerHarer2010}. Barcode matchings induced by morphisms of persistence modules were studied previously by Bauer and Lesnick \cite{bauer2015induced,bauer2020persistence}, who recover various stability results for p.f.d.\ modules, and by Gonzalez-Diaz, Sorriano-Trigueros, and Torras-Casas \cite{gonzalez2021partial,GST2025}, who construct an additive barcode matching for persistence modules with finite barcodes.
+In this context, it is natural to ask whether morphisms of persistence modules also admit a combinatorial representation. The natural candidate for such representatives are (partial) \textbf{matchings}, or partial bijections, between barcodes. Barcode matchings are in fact quite central to the stability theory of persistent homology, as they form the basis of the definitions of the bottleneck and Wasserstein distances \cite[Section VIII.2]{EdelsbrunnerHarer2010}. Barcode matchings induced by morphisms of persistence modules were studied previously by Bauer and Lesnick \cite{BauerLesnick2015,BauerLesnick2020}, who recover various stability results for p.f.d.\ modules, by Skraba and Turner \cite{SkrabaTurner2023}, who use induced matchings to show an isometry result between algebraic and combinatorial Wasserstein distances, and by Gonzalez-Diaz, Sorriano-Trigueros, and Torras-Casas \cite{gonzalez2021partial,GST2025}, who construct an additive barcode matching for persistence modules with finite barcodes.
 
-Going back to the question of combinatorial representations of morphisms, Jacquard, Nanda, and Tillman provide a decomposition theorem for morphisms between persistence modules with finite barcodes that do not contain strictly nested bars \cite[Theorem 5.3]{jacquard2023space}. More precisely, given a morphism of persistence modules $f \colon \bigoplus_{i \in I} K(a_i, b_i) \to \bigoplus_{j \in J} K(c_j, d_j)$, where $K(a, b)$ denote the interval module with support $[a, b)$, if there is no pair of indices $i, i'$ in $I$ such that $[a_i, b_i)$ is a strict subset of $[a_{i'}, b_{i'})$, and no similar pair $j, j'$ in $J$, then there exists a partial bijection $\mu \subseteq I \times J$ (i.e., each element of $I$ and $J$ appears at most once in $\mu$) such that
+Going back to the question of combinatorial representations of morphisms, Jacquard, Nanda, and Tillman provide a decomposition theorem for morphisms between persistence modules with finite barcodes that do not contain strictly nested bars \cite[Theorem 5.3]{JNT2023}. More precisely, given a morphism of persistence modules $f \colon \bigoplus_{i \in I} K(a_i, b_i) \to \bigoplus_{j \in J} K(c_j, d_j)$, where $K(a, b)$ denote the interval module with support $[a, b)$, if there is no pair of indices $i, i'$ in $I$ such that $[a_i, b_i)$ is a strict subset of $[a_{i'}, b_{i'})$, and no similar pair $j, j'$ in $J$, then there exists a partial bijection $\mu \subseteq I \times J$ (i.e., each element of $I$ and $J$ appears at most once in $\mu$) such that
 \begin{equation}
 \label{C!E:intro-btb}
 f \cong \bigoplus_{(i, j) \in \mu} f_{i, j} \oplus \bigoplus_{i \in I \setminus \pi_I(\mu)} g_i \oplus \bigoplus_{j \in J \setminus \pi_J(\mu)} h_j , 
 \end{equation}
-where each $f_{ij}$ is a nonzero morphism $K(a_i, b_i) \to K(c_j, d_j)$, each $g_i$ denotes the zero morphism $K(a_i, b_i) \to 0$ and each $h_j$ denotes the zero morphism $0 \to K(c_j, d_j)$. In \cite{AGRS2025}, the authors (some of whom are authors of the current paper) call a morphism \textbf{bar-to-bar} if it admits a decomposition as in \eqref{C!E:intro-btb}. Such bar-to-bar morphisms can be seen as an algebraic version of barcode matchings; indeed, $\mu$ is the corresponding matching. The authors then induce bar-to-bar morphisms from mono- and epimorphisms, and recover an isometry result between algebraic and combinatorial Wasserstein distances as first described in \cite{skraba2020wasserstein}.
+where each $f_{ij}$ is a nonzero morphism $K(a_i, b_i) \to K(c_j, d_j)$, each $g_i$ denotes the zero morphism $K(a_i, b_i) \to 0$ and each $h_j$ denotes the zero morphism $0 \to K(c_j, d_j)$. In \cite{AGRS2025}, the authors (some of whom are authors of the current paper) call a morphism \textbf{bar-to-bar} if it admits a decomposition as in \eqref{C!E:intro-btb}. Such bar-to-bar morphisms can be seen as an algebraic version of barcode matchings; indeed, $\mu$ is the corresponding matching. In particular, the authors provide an algorithm for inducing bar-to-bar morphisms from mono- and epimorphisms.
 
 \subsection{Our contributions}
 
-In this paper, we continue the analysis of \cite{AGRS2025} by studying the matching induced by bar-to-bar morphisms. Following the strategy of \cite{bauer2015induced}, we induce a barcode matching for an arbitrary morphism $f \colon X \to Y$ by first finding an epi-mono factorization
+In this paper, we continue the analysis of \cite{AGRS2025} by studying the association of matchings to morphisms. Following the strategy of \cite{BauerLesnick2015}, we induce a barcode matching for an arbitrary morphism $f \colon X \to Y$ by first finding an epi-mono factorization
 \[
 f \colon X \xrightarrow{e} \im(f) \xrightarrow{m} Y
 \]
-where $\im(f)$ is the image of $f$, $e \colon X \to \im(f)$ is an epimorphism, and $m \colon \im(f) \to Y$ is a monomorphism. We then compute the induced matchings of $e$ and $m$ via their induced bar-to-bar morphisms, and then compose them together to obtain the induced matching of $f$. Note that this depends \textit{a priori} on the choice of epi-mono factorization; in practice, this is not the case for the induced matching of \cite{bauer2015induced} but is the case for our matchings (\ref{C!ex:counterex2}).
+where $\im(f)$ denotes the image of $f$, $e \colon X \to \im(f)$ an epimorphism, and $m \colon \im(f) \to Y$ a monomorphism. We then compute the matchings of $e$ and $m$ associated to their induced bar-to-bar morphisms, and then compose them together to obtain a matching associated with $f$. Note that this depends \textit{a priori} on the choice of epi-mono factorization; in practice, this is not the case for the induced matching of \cite{BauerLesnick2015} but is the case for our matchings (\cref{C!ex:counterex2}).
 
-The key insight of this paper is that we can induced bar-to-bar morphisms by projecting morphisms down to a subspace of morphisms that only map nontrivially between bars with the same endpoint: this is the \textbf{same-end operator}, denoted by $\Delta$ (\cref{C!D:Delta}). Given a morphism $f$, $\Delta f$ is a direct sum of morphisms between persistence modules with no nested bars. We prove, in the p.f.d.\ setting, that these morphisms are bar-to-bar, which implies that $\Delta f$ is bar-to-bar (\cref{C!T:Delta-is-btb}). As described above, this naturally induces a barcode matching $\mu_\Delta(f)$ (\cref{C!D:Delta-matching}). In particular, this matching is additive: given morphisms $f$ and $g$, $\mu_\Delta(f \oplus g) = \mu_\Delta(f) \oplus \mu_\Delta(g)$.
+The key insight of this paper is that we can induce bar-to-bar morphisms by projecting morphisms down to a subspace of morphisms that only map nontrivially between bars with the same end-point: this is the \textbf{same-endpoint operator}, denoted by $\Delta$ (\cref{C!D:Delta}). Given a morphism $f$, $\Delta f$ is a direct sum of morphisms between persistence modules with no nested bars. We prove, in the p.f.d.\ setting, that these morphisms are bar-to-bar, which implies that $\Delta f$ is bar-to-bar (\cref{C!T:Delta-is-btb}). Notably, this simplifies the construction of induced bar-to-bar morphisms from \cite{AGRS2025}. As described above, this naturally induces a barcode matching $\mu_\Delta(f)$ (\cref{C!D:Delta-matching}). In particular, this matching is additive: given morphisms $f$ and $g$, $\mu_\Delta(f \oplus g) = \mu_\Delta(f) \oplus \mu_\Delta(g)$.
 
-Our proof techniques rely on matrix representations of morphisms. To this end, we introduce the notion of labeled matrices and their multiplication (\cref{C!D:labeled-matrix}). In particular, to show that $\Delta f$ is bar-to-bar, we reduce a matrix representation of $\Delta f$ to a matrix with at most one nonzero coefficient in each row and column (\cref{C!A:inf-red}. The induced matching is then read from the pivots of this reduced matrix representation.
+Our proof techniques rely on matrix representations of morphisms. To this end, we introduce the notion of labeled matrices and their multiplication (\cref{C!D:labeled-matrix}). In particular, to show that $\Delta f$ is bar-to-bar, we reduce a matrix representation of $\Delta f$ to a matrix with at most one nonzero coefficient in each row and column (\cref{C!A:inf-red}). The induced matching is then read from the pivots of this reduced matrix representation. This matrix reduction is similar to \cite[Theorem 5.3]{JNT2023}, the decomposition theorem for morphisms of persistence modules without nested bars.
 
 \subsection{Organization of the paper}
 
@@ -136,20 +137,20 @@ In \cref{C!S:preliminaries}, we define the notions used in this paper, including
 
 In \cref{C!S:btb}, we introduce the notion of bar-to-bar morphisms and describe how to induce barcode matchings from an arbitrary morphisms using the same-end operator and epi-mono factorizations. In particular, we recover the $\cc{P}$-matching of \cite{GST2025} in \cref{C!SS:P-matching}. Along the way, we obtain a simple algorithm for computing the barcode of the image of a morphism of persistence modules (\cref{C!P:image-barcode}).
 
-We apply bar-to-bar morphisms to (algebraic) Wasserstein distances in \cref{C!S:Wasserstein}. In \cref{C!SS:coker}, we provide a simpler proof of \cite[Theorem 3.14]{AGRS2025} (while also generalizing the result to p.f.d. modules), which states that, for a given monomorphism $f \colon X \hookrightarrow Y$, there exists a bar-to-bar monomorphism $f_b \colon X \hookrightarrow Y$ such that $\| \coker f_b \|_p \leq \| \coker f \|_p$, where $\| - \|_p$ denotes the $p$-norm of p.f.d.\ persistence modules (\cref{C!thm:cost-coker-btb}). As part of this new proof, we obtain an expression of the $p$-norm of a persistence module as an integral of the rank function (\cref{C!P:p-norm-by-integral}). In \cref{C!SS:isometry}, we use the $p$-norm inequality result, and the dual result for epimorphisms, to prove the isometry between the algebraically defined and combinatorially defined Wasserstein distances (\cref{C!T:isometry}).
+We apply bar-to-bar morphisms to (algebraic) Wasserstein distances in \cref{C!S:Wasserstein}. In \cref{C!SS:coker}, we provide a simpler proof of \cite[Theorem 3.14]{AGRS2025} (while also generalizing the result to p.f.d.\ modules), which states that, for a given monomorphism $f \colon X \hookrightarrow Y$, there exists a bar-to-bar monomorphism $f_b \colon X \hookrightarrow Y$ such that $\| \coker f_b \|_p \leq \| \coker f \|_p$, where $\| - \|_p$ denotes the $p$-norm of p.f.d.\ persistence modules (\cref{C!thm:cost-coker-btb}). As part of this new proof, we obtain an expression of the $p$-norm of a persistence module as an integral of the rank function (\cref{C!P:p-norm-by-integral}). In \cref{C!SS:isometry}, we use the $p$-norm inequality result, and the dual result for epimorphisms, to prove the isometry between the algebraically defined and combinatorially defined Wasserstein distances (\cref{C!T:isometry}).
 
 \section{Preliminaries}
 \label{C!S:preliminaries}
 
 \subsection{Persistence modules} 
 
-We fix a field $K$ and denote by $\Vect_\mathit{K}$ the category of finite dimensional vector spaces over $K$. Viewing $(\R, \leq)$ as a poset category, a \textbf{pointwise finite dimensional persistence module over $K$} is a functor $X \colon \R \to \Vect_\mathit{K}$, consisting therefore of a collection of finite dimensional vector spaces $\{X_t\}_{t \in \mathbb{R}}$ and linear maps between them $X_{s \leq t}$ for $s \leq t$,  we call transition functions. We denote the category of pointwise finite dimensional persistence modules and natural transformations between them by $\Pfd$. In the following, pointwise finite dimensional persistence modules are referred to as persistence modules for brevity. The category $\Pfd$ has biproducts (i.e.\ direct sums), which are computed pointwise\footnote{It is a general fact that limits and colimits in functor categories are computed pointwise; $\Pfd$ is a functor category and biproducts are both limits and colimits.}.
+We fix a field $K$ and denote by $\Vect_\mathit{K}$ the category of finite dimensional vector spaces over $K$. Viewing $(\R, \mathord{\leq})$ as a poset category, a \index{persistence module!pointwise finite-dimensional (p.f.d.)}\textbf{pointwise finite-dimensional persistence module over $K$} is a functor $X \colon \R \to \Vect_\mathit{K}$, consisting therefore of a collection of finite dimensional vector spaces $\{X_t\}_{t \in \mathbb{R}}$ and linear maps between them $X_{s \leq t}$ for $s \leq t$,  we call transition functions. We denote the category of pointwise finite-dimensional persistence modules and natural transformations between them by \index{.b pfd@$\Pfd$}$\Pfd$. In the following, pointwise finite-dimensional persistence modules are referred to as persistence modules for brevity. The category $\Pfd$ has biproducts (i.e.\ direct sums), which are computed pointwise\footnote{It is a general fact that limits and colimits in functor categories are computed pointwise; $\Pfd$ is a functor category and biproducts are both limits and colimits.}.
 
 In this setting, interval modules are not parameterized by the real line, but rather by an extension of the real line:
 
 \begin{definition}[Decorated real line and intervals]
 \label{C!def:decoratedE}
-This definition is adapted from \cite[\textsection 2.3]{bauer2015induced}.
+This definition is adapted from \cite[\textsection 2.3]{BauerLesnick2015}.
 We consider the \textbf{decorated real line}
 \[
 \E \coloneq \R \times \{-, +\} \cup \{(-\infty, +), (+\infty, -)\} \subseteq [-\infty, +\infty] \times \{-, +\}
@@ -158,7 +159,8 @@ equipped with the following lexicographic order: for $(s, \sigma)$ and $(t, \tau
 
 Ordered pairs of elements of $\E$ are in one-to-one correspondence with all intervals on the real line: for $s^\sigma < t^\tau$ in $\E$, we define the interval
 \[
-\langle s^\sigma, t^\tau \rangle \coloneq \{u \in \R \mid s < u < t \text{ or } s^\sigma = u^- \text{ or } t^\tau = u^+\}.
+  \langle s^\sigma, t^\tau \rangle \coloneq \{u \in \R \mid s < u < t \text{ or } s^\sigma = u^- \text{ or } t^\tau = u^+\}.
+  \qedhere
 \]
 \end{definition}
 
@@ -171,12 +173,12 @@ In particular, for $s < t$ in $\R$, we have the following equality of intervals:
 \end{align*}
 
 \begin{definition}[Overlapping intervals]
-Let $a, b, c, d \in \E$. Following \cite{bauer2020persistence}, we say that \textbf{the interval $\langle a, b \rangle$ overlaps the interval $\langle c, d \rangle$ above} (and antisymmetrically, $\langle c, d \rangle$ \textbf{overlaps $\langle a, b \rangle$ below}) if $c \leq a < d \leq b$.
+Let $a, b, c, d \in \E$. Following \cite{BauerLesnick2020}, we say that \index{overlap above/below}\textbf{the interval $\langle a, b \rangle$ overlaps the interval $\langle c, d \rangle$ above} (and antisymmetrically, $\langle c, d \rangle$ \textbf{overlaps $\langle a, b \rangle$ below}) if $c \leq a < d \leq b$.
 \end{definition}
 
 \begin{definition}[Interval modules]
 Let $a < b$ be elements of $\E$.
-A \textbf{bar} (or \textbf{interval module}) with \textbf{start-point} $a$ and \textbf{end-point} $b$, denoted as $K(a, b)$, is the persistence module defined as follows: for any $u$ in $\R$,
+A \textbf{bar} (or \textbf{interval module}) with \index{start-point}\textbf{start-point} $a$ and \index{end-point}\textbf{end-point} $b$, denoted as $K(a, b)$, is the persistence module defined as follows: for any $u$ in $\R$,
 \begin{equation*}
 K(a, b)_u \coloneq
 \begin{cases}
@@ -200,29 +202,29 @@ In particular, the \textbf{support} of $K(a, b)$, i.e.\ the real values where th
 We observe that there exists a nonzero morphism $K(a, b) \to K(c, d)$ if, and only if, $\langle a, b \rangle$ overlaps $\langle c, d \rangle$ above.
 \end{remark}
 
-In order to better manage these interval modules, we will be considering the following subcategory of $\Pfd$. Recall that a \textbf{multiset} is a set $S$ equipped with a \textbf{multiplicity} $m_S \colon S \to \N$, and that when there is no ambiguity, $S$ and $m_S$ may be used interchangeably.
+In order to better manage these interval modules, we will be considering the following subcategory of $\Pfd$. Recall that a \index{multiset}\textbf{multiset} is a set $S$ equipped with a \index{multiplicity (for multisets)}\textbf{multiplicity} $m_S \colon S \to \N$, and that when there is no ambiguity, $S$ and $m_S$ may be used interchangeably.
 
 
 \begin{definition}[Subcategory of bars]
-We denote by $\Bar$ the full subcategory of $\Pfd$ whose objects are the (potentially infinite) direct sums of bars $\bigoplus_{i \in I} K(a_i, b_i)$. We call this the \textbf{category of bars}.
+We denote by \index{.b bar@$\Bar$}$\Bar$ the full subcategory of $\Pfd$ whose objects are the (potentially infinite) direct sums of bars $\bigoplus_{i \in I} K(a_i, b_i)$. We call this the \textbf{category of bars}.
 
-Given an object $X = \bigoplus_{i \in I} K(a_i, b_i)$ of $\Bar$, we define its \textbf{barcode} as a representation of the multiset $\cc{B}(X) \coloneq \{\langle a_i, b_i \rangle\}_{i \in I}$ of intervals appearing in $X$ (recall the definition of multiset representations from \cite{bauer2020persistence}).
+Given an object $X = \bigoplus_{i \in I} K(a_i, b_i)$ of $\Bar$, we define its \index{barcode}\textbf{barcode} as a representation of the multiset $\cc{B}(X) \coloneq \{\langle a_i, b_i \rangle\}_{i \in I}$ of intervals appearing in $X$ (recall the definition of multiset representations from \cite{BauerLesnick2020}).
 \end{definition}
 
 \begin{definition}
 \label{C!D:barcode-decomp}
-Let $X$ be a persistence module in $\Pfd$. A \textbf{barcode decomposition} of $X$ is the given of an object $\bigoplus_i K(a_i, b_i)$ in $\Bar$ and an isomorphism $\varphi_X \colon X \cong \bigoplus_i K(a_i, b_i)$.
+Let $X$ be a persistence module in $\Pfd$. A \index{barcode decomposition}\textbf{barcode decomposition} of $X$ is the given of an object $\bigoplus_i K(a_i, b_i)$ in $\Bar$ and an isomorphism $\varphi_X \colon X \cong \bigoplus_i K(a_i, b_i)$.
 \end{definition}
 
 \begin{remark}
-The decomposition theorem \cite{crawley2015decomposition,botnan2020decomposition} states that every persistence module  $X$ in $\Pfd$ admits a barcode decomposition  $\varphi_X \colon X \cong \bigoplus_i K(a_i, b_i)$. While the isomorphism $\varphi_X$ is not unique
+The decomposition theorem \cite{CrawleyBoevey2015,BotnanCrawleyBoevey2020} states that every persistence module  $X$ in $\Pfd$ admits a barcode decomposition  $\varphi_X \colon X \cong \bigoplus_i K(a_i, b_i)$. While the isomorphism $\varphi_X$ is not unique
 % \ir{(give an example)}
 , the direct sum of bars $\bigoplus_i K(a_i, b_i)$ is, up to reordering of the bars. In particular, we can speak of the \textbf{barcode} of an object in $\Pfd$ as well.  
 \end{remark}
 
 \begin{remark}
 \label{C!R:ephemeral}
-Every persistence module in $\Pfd$ has at most countably many bars $K(s, t)$ with $s < t \in E$ in its barcode decomposition. In other words, up to an \textbf{ephemeral} summand (see \cite{Chazal2012TheSA}), which is a direct sum of bars of the form $K(s^-, s^+)$ supported on $\{s\}$, every persistence module $X$ in $\Pfd$ has at most countably many bars. 
+Every persistence module in $\Pfd$ has at most countably many bars $K(s, t)$ with $s < t \in E$ in its barcode decomposition. In other words, up to an \index{ephemeral module}\textbf{ephemeral} summand (see \cite{CdSGO2016}), which is a direct sum of bars of the form $K(s^-, s^+)$ supported on $\{s\}$, every persistence module $X$ in $\Pfd$ has at most countably many bars. 
 Moreover, for each $s \in \R$, $X$ has a finite number of bars $K(s^-, s^+)$, since the dimension of $X_s$ is finite. As a consequence, for all $b \in \E$, $X$ only has countably many bars with start-point $b$, and likewise countably many with end-point $b$.
 \end{remark}
 
@@ -241,19 +243,20 @@ All the bars in the barcode decompositon of a tame persistence module are of the
  
 
 
-As a notion of \emph{size} for persistence modules, we use the $p$-norm first introduced in \cite{p-norm_Edesbrunner} and \cite{skraba2020wasserstein}, also studied in \cite{AGRS2025} for tame persistence modules.  
+As a notion of \emph{size} for persistence modules, we use the $p$-norm first introduced in \cite{p-norm_Edesbrunner} and \cite{SkrabaTurner2023}, also studied in \cite{AGRS2025} for tame persistence modules.  
 
 \begin{definition}
-\label{C!def:pnorm}
-For $p\in [1,\infty]$, the \textbf{$p$-norm} of a persistence module with barcode decomposition $X\cong \bigoplus_{i} K(a_i, b_i)$ is:
+\label{C!def:p-norm}
+For $p\in [1,\infty]$, the \index{.a p-norm@$p$-norm}\textbf{$p$-norm} of a persistence module with barcode decomposition $X\cong \bigoplus_{i} K(a_i, b_i)$ is:
 \begin{equation*}
 \left\| X\right\|_{p} =  \begin{cases}
 \left( \sum_{i} (b_i-a_i)^{p} \right)^{\frac{1}{p}} &\text{for $p\in [1,\infty)$},\\
 \sup_i \{ (b_i-a_i) \} &\text{for $p=\infty$} .
 \end{cases}
+\qedhere
 \end{equation*}
 \end{definition}
-By Remark \ref{C!R:ephemeral}, the $p$-norm of a persistence module in $\Pfd$ involves an infinite sum with at most countably many positive summands. Following \cite{skraba2020wasserstein} (Definition $2.11$) we say that a persistence module $X$ has \emph{bounded p-norm} if $\left\| X\right\|_{p}^p<\infty$.
+By Remark \ref{C!R:ephemeral}, the $p$-norm of a persistence module in $\Pfd$ involves an infinite sum with at most countably many positive summands. Following \cite{SkrabaTurner2023} (Definition $2.11$) we say that a persistence module $X$ has \emph{bounded p-norm} if $\left\| X\right\|_{p}^p<\infty$.
 
 \subsection{Morphisms and matrices}\label{C!sec:mor-mtrx}
 
@@ -283,9 +286,9 @@ A matrix $M \in K^{I \times J}$ with rows indexed by $I$ and columns indexed by 
 
 \begin{definition}[Labeled matrices]
 \label{C!D:labeled-matrix}
-A \textbf{labeled matrix} is a (potentially infinite) matrix $A \in K^{I \times J}$ where $I$ and $J$ are the totally ordered indexing sets for rows and columns, respectively, and where each row and column is labeled by an interval of $\R$ such that, for all $(i, j) \in I \times J$, writing $\langle a_i, b_i \rangle$ for the row label and $\langle c_j, d_j \rangle$ for the column label, $A_{ij}$ is nonzero only if $\langle c_j, d_j \rangle$ overlaps $\langle a_i, b_i \rangle$ above.
+A \index{labeled matrix}\textbf{labeled matrix} is a (potentially infinite) matrix $A \in K^{I \times J}$ where $I$ and $J$ are the totally ordered indexing sets for rows and columns, respectively, and where each row and column is labeled by an interval of $\R$ such that, for all $(i, j) \in I \times J$, writing $\langle a_i, b_i \rangle$ for the row label and $\langle c_j, d_j \rangle$ for the column label, $A_{ij}$ is nonzero only if $\langle c_j, d_j \rangle$ overlaps $\langle a_i, b_i \rangle$ above.
 
-Let $A \in K^{I \times J}$ and $B \in K^{J \times L}$ be labeled, column-finite matrices where the columns of $A$ and the rows of $B$ have the same labels. The \textbf{overlap multiplication} of $A$ and $B$, written as the usual product $AB$, is defined by, for all $(i, \ell) \in I \times L$,
+Let $A \in K^{I \times J}$ and $B \in K^{J \times L}$ be labeled, column-finite matrices where the co\-lumns of $A$ and the rows of $B$ have the same labels. The \index{overlap multiplication}\textbf{overlap multiplication} of $A$ and $B$, written as the usual product $AB$, is defined by, for all $(i, \ell) \in I \times L$,
 \begin{equation}
 \label{C!E:labeled-matrix}
 (AB)_{i \ell} = \sum_{j \in J} A_{ij} B_{j\ell} \bb{I}\{a_i \leq e_\ell < b_i \leq f_\ell\},
@@ -297,17 +300,17 @@ where the label of row $i$ in $A$ is $\langle a_i, b_i \rangle$ and the label of
 \begin{enumerate}
 \item We check that overlap multiplication is associative, with the usual identity matrix as the unit.
 \item The reason we assume that $F$ and $G$ are column-finite is to ensure that the sums in \eqref{C!E:labeled-matrix} are well-defined. There are other settings where the sums are well-defined, e.g.\ for row-finite matrices, but we will only need the result for column-finite matrices.
-\item When every interval indexed by $L$ overlaps every interval indexed by $I$, overlap multiplication corresponds exactly to standard matrix multiplication. For example, this is the case when every interval has the same endpoint.
+\item When every interval indexed by $L$ overlaps every interval indexed by $I$, overlap multiplication corresponds exactly to standard matrix multiplication. For example, this is the case when every interval has the same end-point. \qedhere
 \end{enumerate}
 \end{remark}
 
 \begin{definition}[Matrix representations of bar morphisms]
 \label{C!D:matrix}
-Let $f \colon \bigoplus_{j \in J} K(a_j, b_j) \to \bigoplus_{i \in I} K(c_i, d_i)$ be a morphism in $\Bar$ (note the swapped indices). An \textbf{ordered matrix representation of $f$} is a labeled matrix $(F_{ij})_{i \in I, j \in J}$ where
+Let $f \colon \bigoplus_{j \in J} K(a_j, b_j) \to \bigoplus_{i \in I} K(c_i, d_i)$ be a morphism in $\Bar$ (note the swapped indices). An \index{matrix representation!ordered}\textbf{ordered matrix representation of $f$} is a labeled matrix $(F_{ij})_{i \in I, j \in J}$ where
 \begin{enumerate}
-\item for all $i \in I$ and $j \in J$, the entry $F_{ij}$ is the projection of $f$ to $\hom(K(a_j, b_j), K(c_i, d_i))$ via the canonical isomorphisms \eqref{C!E:iso1} and \eqref{C!E:iso2},
+\item for all $i \in I$ and $j \in J$, the entry $F_{ij}$ is the projection of the morphism $f$ to $\hom(K(a_j, b_j), K(c_i, d_i))$ via the canonical isomorphisms \eqref{C!E:iso1} and \eqref{C!E:iso2},
 \item $I$ and $J$ are ordered in a way compatible with the product order on the pairs $(a_j, b_j)$ and $(c_i, d_i)$, and
-\item row $i$ is labeled by $\langle c_i, d_i \rangle$ and column $j$ is labeled by $\langle a_j, b_j \rangle$.
+\item row $i$ is labeled by $\langle c_i, d_i \rangle$ and column $j$ is labeled by $\langle a_j, b_j \rangle$. \qedhere
 \end{enumerate}
 \end{definition}
 
@@ -318,6 +321,7 @@ For example, the only ordered matrix representation of the morphism represented 
     & \langle a_1,b_1 \rangle & \langle a_2,b_2 \rangle \cr 
     \langle c_1,d_1 \rangle & 1 & 1 \cr
     \langle c_2,d_2 \rangle & 1 & 0 \cr}
+    \qedhere
 \]
 \end{example}
 
@@ -364,16 +368,16 @@ and this concludes the proof.
 
 \subsection{Matchings}
 
-Set-theoretic \textbf{matchings} are defined as partial injective functions between sets \cite{bauer2020persistence}, but we will use the following equivalent definition in order to more easily generalize to multiset matchings.
+Set-theoretic \textbf{matchings} are defined as partial injective functions between sets \cite{BauerLesnick2020}, but we will use the following equivalent definition in order to more easily generalize to multiset matchings.
 
 \begin{definition}[Matchings]
-Let $I$ and $J$ be sets. A (\textbf{set-theoretic partial}) \textbf{matching between $I$ and $J$} is a subset $\mu \subseteq I \times J$ such that the projections $\pi_I$ and $\pi_J$ onto $I$ and $J$, respectively, are injective. We denote by $\Match(I, J)$ the set of matchings between $I$ and $J$.
+Let $I$ and $J$ be sets. A \index{matching, partial}(\textbf{set-theoretic partial}) \textbf{matching between $I$ and $J$} is a subset $\mu \subseteq I \times J$ such that the projections $\pi_I$ and $\pi_J$ onto $I$ and $J$, respectively, are injective. We denote by \index{.b match@$\Match$}$\Match(I, J)$ the set of matchings between $I$ and $J$.
 \end{definition}
 
-We use the definitions of the category $\mathbf{Mch}$ (including composition of matchings $\circ$), \textbf{multiset representations}, \textbf{barcodes}, and the category $\Barc$ (including the overlap composition of matchings $\bullet$) from \cite{bauer2020persistence}. We also define multiset matchings:
+We use the definitions of the category $\mathbf{Mch}$ (including composition of matchings $\circ$), \textbf{multiset representations}, \textbf{barcodes}, and the category $\Barc$ (including the \index{composition!of barcode matchings}overlap composition of matchings $\bullet$) from \cite{BauerLesnick2020}. We also define multiset matchings:
 
 \begin{definition}[Multiset matchings {\cite[Definition 2.4]{GST2025}}]
-Let $(S, m_S)$ and $(T, m_T)$ be two multisets. A (\textbf{partial multiset}) \textbf{matching between $S$ and $T$} is a multiset $(M, m_M)$ where $M = S \times T$ and, for all $s \in S$ and $t \in T$,
+Let $(S, m_S)$ and $(T, m_T)$ be two multisets. A \index{matching, partial!for multisets}(\textbf{partial multiset}) \textbf{matching between $S$ and $T$} is a multiset $(M, m_M)$ where $M = S \times T$ and, for all $s \in S$ and $t \in T$,
 \[
 \sum_{t' \in T} m_M(s, t') \leq m_S(s)
 \quad \text{and} \quad
@@ -386,7 +390,7 @@ We denote by $\Match(S, T)$ the set of matchings between $S$ and $T$.
 In particular, this definition coincides with the set-theoretic one when $S$ and $T$ are sets ($m_S$ and $m_T$ bounded above by $1$).
 
 \begin{definition}[Matching costs]
-Let $S$ and $T$ be multisets of intervals of the real line, $M \in \Match(S, T)$ a matching, and $p \in [1, \infty]$. The \textbf{$p$-cost of $M$} is
+Let $S$ and $T$ be multisets of intervals of the real line, $M \in \Match(S, T)$ a matching, and $p \in [1, \infty]$. The \index{cost (of a matching)}\textbf{$p$-cost of $M$} is
 \[
 c_p(M) \coloneq \left( \sum_{(\langle s^\sigma, t^\tau \rangle, \langle s^{\prime \sigma'}, t^{\prime \tau'} \rangle) \in M} m_M(\langle s^\sigma, t^\tau \rangle, \langle s^{\prime \sigma'}, t^{\prime \tau'} \rangle) (|s - s'|^p + |t - t'|^p) \right)^{\frac{1}{p}}.
 \]
@@ -397,15 +401,16 @@ In other words, $c_p(M)$ is the $p$-norm of the vector of lengths of intervals i
 \subsection{Dualization of persistence modules and matchings}
 \label{C!SS:dual}
 
-In this paper, we will mainly prove results for monomorphisms in $\Pfd$. Analogous results hold for epimorphisms by a duality argument. Specifically, we consider the contravariant dualization endofunctor $(\cdot)^* \colon \Pfd \to \Pfd$ defined by \cite[Section 3.4]{bauer2015induced}, which send a map $f \colon X \to Y$ to the \textbf{dual map} $f^* \colon Y^* \to X^*$. In particular, this functor it sends epimorphisms to monomorphisms, and vice versa. It also sends the bar $K(a, b)$ to the bar $K(-b, -a)$, where the negative sign acts on the decorated real line $\bb{E}$ by $-(t^\tau) = (-t)^\tau$.
+In this paper, we will mainly prove results for monomorphisms in $\Pfd$. Analogous results hold for epimorphisms by a duality argument. Specifically, we consider the contravariant dualization endofunctor $(\cdot)^* \colon \Pfd \to \Pfd$ defined by \cite[Section 3.4]{BauerLesnick2015}, which send a map $f \colon X \to Y$ to the \index{dualization}\textbf{dual map} $f^* \colon Y^* \to X^*$. In particular, this functor it sends epimorphisms to monomorphisms, and vice versa. It also sends the bar $K(a, b)$ to the bar $K(-b, -a)$, where the negative sign acts on the decorated real line $\bb{E}$ by $-(t^\tau) = (-t)^\tau$.
 
 We also define the dual of a matching as follows.
 
 \begin{definition}
-Let $X$ and $Y$ be persistence modules in $\Pfd$ and $\mu \in \Match(\cc{B}(X), \cc{B}(Y))$ be a matching of barcodes. The \textbf{dual of $\mu$} is the matching $\mu^*$ in $\Match(\cc{B}(Y^*), \cc{B}(X^*))$ defined by
+Let $X$ and $Y$ be persistence modules in $\Pfd$ and $\mu$ a matching in $\Match(\cc{B}(X), \cc{B}(Y))$. The \textbf{dual of $\mu$} is defined as the matching $\mu^*$
 \[
-\mu^* \coloneq \{ (\langle -d, -c \rangle, \langle -b, -a \rangle) \mid (\langle a, b \rangle, \langle c, d \rangle) \in \mu \}.
+\mu^* \coloneq \{ (\langle -d, -c \rangle, \langle -b, -a \rangle) \mid (\langle a, b \rangle, \langle c, d \rangle) \in \mu \}
 \]
+in $\Match(\cc{B}(Y^*), \cc{B}(X^*))$.
 \end{definition}
 
 \section{Bar-to-bar morphisms and induced matchings}
@@ -415,7 +420,7 @@ Let $X$ and $Y$ be persistence modules in $\Pfd$ and $\mu \in \Match(\cc{B}(X), 
 
 \begin{definition}
 \label{C!D:btb}
-A morphism $f \colon X \to Y$ of persistence modules in $\Bar$ is \textbf{strictly bar-to-bar}
+A morphism $f \colon X \to Y$ of persistence modules in $\Bar$ is \index{bar-to-bar morphism!strictly}\textbf{strictly bar-to-bar}
 if, writing $X = \bigoplus_{i \in I} K(a_i, b_i)$ and $Y = \bigoplus_{j \in J} K(c_j, d_j)$, there exists a (set-theoretic) matching $\mu \in \Match(I, J)$ such that
 \begin{equation}
 \label{C!eq:btb}
@@ -423,14 +428,15 @@ f = \bigoplus_{(i, j) \in \mu} f_{i, j} \oplus \bigoplus_{i \in I \setminus \pi_
 \end{equation}
 where each $f_{ij}$ is a nonzero morphism $K(a_i, b_i) \to K(c_j, d_j)$, each $g_i$ denotes the zero morphism $K(a_i, b_i) \to 0$ and each $h_j$ denotes the zero morphism $0 \to K(c_j, d_j)$. The matrix associated to a strictly bar-to-bar morphism has at most one non zero entry for each column and one non zero entry for each row.
 
-A morphism $f \colon X \to Y$ in $\Pfd$ is \textbf{bar-to-bar} if there exist barcode decompositions of $X$ and $Y$ such that the associated morphism in $\Bar$ is strictly bar-to-bar. In other words, there exist barcode decompositions $(\varphi_X,\bigoplus_i K(a_i,b_i))$, $(\varphi_Y,\bigoplus_j K(c_j,d_j))$ of $X$ and $Y$ respectively and $g \colon \bigoplus_i K(a_i,b_i) \rightarrow \bigoplus_j K(c_j,d_j)$ strictly bar-to-bar such that the following diagram commutes:
+A morphism $f \colon X \to Y$ in $\Pfd$ is \index{bar-to-bar morphism}\textbf{bar-to-bar} if there exist barcode decompositions of $X$ and $Y$ such that the associated morphism in $\Bar$ is strictly bar-to-bar. In other words, there exist barcode decompositions $(\varphi_X,\bigoplus_i K(a_i,b_i))$, $(\varphi_Y,\bigoplus_j K(c_j,d_j))$ of $X$ and $Y$ respectively and $g \colon \bigoplus_i K(a_i,b_i) \rightarrow \bigoplus_j K(c_j,d_j)$ strictly bar-to-bar such that the following diagram commutes:
 \[
-\begin{tikzcd}
+\begin{tikzcd}[baseline=default]
     \bigoplus_i K(a_i, b_i) \arrow[d, "g"']
     & X \arrow[d, "f"]  \arrow[l, "\varphi_X"'] \\
     \bigoplus_j K(c_j, d_j)
     & Y  \arrow[l, "\varphi_Y"]
 \end{tikzcd}
+\qedhere
 \]
 \end{definition}
 
@@ -504,11 +510,11 @@ The composition of two strictly bar-to-bar monomorphisms is strictly bar-to-bar.
 
 \begin{proof}
 Consider strictly bar-to-bar morphisms $f \colon X \to Y$ and $f' \colon Y \to Z$ with decompositions
-\[
-f = \bigoplus_{(i, j) \in \mu} f_{ij} \oplus \bigoplus_{i \in I \setminus \pi_I(\mu)} g_i \oplus \bigoplus_{j \in J \setminus \pi_J(\mu)} h_j
-\quad \text{and} \quad
-f' = \bigoplus_{(j, \ell) \in \mu'} f'_{j\ell} \oplus \bigoplus_{j \in J \setminus \pi_J(\mu')} g'_j \oplus \bigoplus_{\ell \in L \setminus \pi_L(\mu)} h'_\ell,
-\]
+\begin{align*}
+f & = \bigoplus_{(i, j) \in \mu} f_{ij} \oplus \bigoplus_{i \in I \setminus \pi_I(\mu)} g_i \oplus \bigoplus_{j \in J \setminus \pi_J(\mu)} h_j \\
+\text{and} \quad
+f' & = \bigoplus_{(j, \ell) \in \mu'} f'_{j\ell} \oplus \bigoplus_{j \in J \setminus \pi_J(\mu')} g'_j \oplus \bigoplus_{\ell \in L \setminus \pi_L(\mu)} h'_\ell,
+\end{align*}
 where in particular $\mu \in \Match(I, J)$ and $\mu' \in \Match(J, L)$ are set-theoretic matchings. Their composition $f' \circ f$ has the decomposition
 \[
 f' \circ f = \bigoplus_{\substack{(i, \ell) \in \mu' \circ \mu \\ (i, j) \in \mu, \; (j, \ell) \in \mu'}} f'_{j\ell} \circ f_{ij} \oplus \bigoplus_{i \in I \setminus \pi_I(\mu)} g_i \oplus \bigoplus_{\ell \in L \setminus \pi_L(\mu')} h'_{\ell},
@@ -532,7 +538,7 @@ where the sign decorations of the start- and end-points are not important.
 Clearly the left map is bar-to-bar. The right map is bar-to-bar by doing a base change on the middle persistence module. However, the composition is a morphism between persistence modules with trivial automorphism groups, but its matrix representation looks like that of the right morphism, and therefore the composition morphism is not bar-to-bar.
 \end{remark}
 
-\begin{figure}
+\begin{figure}[tbp]
 \centering
 \begin{tikzpicture}[scale = 0.4]%, baseline = {([yshift = .5ex](0, 2))}]
 \draw[line width=1pt]
@@ -576,13 +582,13 @@ We view $f$ as an object in the category $\Fun(\R \times \{0 < 1\}, \Vect_K)$. A
 \[
 f \cong g \cong \bigoplus_{(i, j) \in \mu} \bf{R}^{\langle a_i, b_i \rangle}_{\langle c_j, d_j \rangle} \oplus \bigoplus_{i \in I \setminus \pi_I(\mu)} \bf{I}^{\langle a_i, b_i \rangle}_0 \oplus \bigoplus_{j \in J \setminus \pi_J(\mu)} \bf{I}^0_{\langle c_j, d_j \rangle},
 \]
-where the indecomposables $\bf{R}^*_*$ and $\bf{I}^*_*$ are adapted from \cite[Definition~5.2]{jacquard2023space} and defined as follows:
+where the indecomposables $\bf{R}^*_*$ and $\bf{I}^*_*$ are adapted from \cite[Definition~5.2]{JNT2023} and defined as follows:
 \begin{itemize}
 \item $\bf{R}^{\langle a_i, b_i \rangle}_{\langle c_j, d_j \rangle}$, where $\langle a_i, b_i \rangle$ overlaps $\langle c_j, d_j \rangle$ above, is the representation of a nonzero morphism $K(a_i, b_i) \to K(c_j, d_j)$.
 \item $\bf{I}^{\langle a_i, b_i \rangle}_0$ is the representation of the zero morphism $K(a_i, b_i) \to 0$.
 \item Similarly, $\bf{I}^0_{\langle c_j, d_j \rangle}$ is the representation of the zero morphism $0 \to K(c_j, d_j)$.
 \end{itemize}
-By the Krull-Remak-Schimdt-Azumaya theorem \cite{Goro1950} (see also \cite{botnan2020decomposition}), this decomposition is unique up to permutation of the indecomposables. This implies that the matching $\mu$ is unique up to permutations of indices $i, i'$ in $I$ such that $a_i = a_{i'}$ and $b_i = b_{i'}$, and similarly for $J$. In particular, the induced matching $M$ on barcodes is unique. The fact that $M$ is an overlap matching is clear from its construction, and this concludes the proof.
+By the Krull-Remak-Schimdt-Azumaya theorem \cite{Goro1950} (see also \cite{BotnanCrawleyBoevey2020}), this decomposition is unique up to permutation of the indecomposables. This implies that the matching $\mu$ is unique up to permutations of indices $i, i'$ in $I$ such that $a_i = a_{i'}$ and $b_i = b_{i'}$, and similarly for $J$. In particular, the induced matching $M$ on barcodes is unique. The fact that $M$ is an overlap matching is clear from its construction, and this concludes the proof.
 \end{proof}
 
 
@@ -596,13 +602,12 @@ We define the same-endpoint operator on direct sums of bars, and then show that 
 \begin{definition}[same-endpoint operator $\Delta$]
 \label{C!D:Delta}
 We define $\Delta$ as the operator $\Bar \to \Bar$ that is the identity on objects and the projection
-\[
-\hom(X, Y) \cong \bigoplus_{i, j} \hom(K(a_i, b_i), K(c_j, d_j))
-\longrightarrow
-\bigoplus_{\substack{i, j \\ b_i \: = \: d_j}} \hom(K(a_i, b_i), K(c_j, d_j))
-\hookrightarrow \hom(X, Y)
-\]
-on morphisms, where $X = \bigoplus_i K(a_i, b_i)$ and $Y = \bigoplus_j K(c_j, d_j)$. We call $\Delta$ the \textbf{same-endpoint operator}.
+\begin{align*}
+\hom(X, Y) & \cong \bigoplus_{i, j} \hom(K(a_i, b_i), K(c_j, d_j)) \\
+& \longrightarrow \bigoplus_{\substack{i, j \\ b_i \: = \: d_j}} \hom(K(a_i, b_i), K(c_j, d_j)) \\
+& \hookrightarrow \hom(X, Y)
+\end{align*}
+on morphisms, where $X = \bigoplus_i K(a_i, b_i)$ and $Y = \bigoplus_j K(c_j, d_j)$. We call $\Delta$ the \index{same-endpoint operator}\textbf{same-endpoint operator}.
 \end{definition}
 
 \begin{remark}
@@ -688,7 +693,7 @@ The operator $\Delta$ is a functor.
 \end{proposition}
 
 \begin{proof}
-Clearly $\Delta \id = \id$. For compatibility with composition, consider $f \colon \bigoplus_i K(a_i, b_i) \to \bigoplus_j K(c_j, d_j)$ and $g \colon \bigoplus_j K(c_j, d_j) \to \bigoplus_k K(s_k, t_k)$ composable morphisms. We write $f_{ij}$ for the corresponding morphism
+Clearly $\Delta \id = \id$. For compatibility with composition, consider the composable morphisms $f \colon \bigoplus_i K(a_i, b_i) \to \bigoplus_j K(c_j, d_j)$ and $g \colon \bigoplus_j K(c_j, d_j) \to \bigoplus_k K(s_k, t_k)$. We write $f_{ij}$ for the corresponding morphism
 \[
 \bigoplus_i K(a_i, b_i) \xrightarrow{p_i} K(a_i, b_i) \to K(c_j, d_j) \xrightarrow{\iota_j} \bigoplus_j K(c_j, d_j)
 \]
@@ -823,14 +828,15 @@ Let $f \colon X \to Y$ be a morphism in $\Pfd$. Let $\varphi_X \colon X \cong \b
 \end{proposition}
 
 \begin{proof}
-Let $\psi_X$ and $\psi_Y$ be other choices of isomorphisms. Then
-\begin{align*}
-\psi_Y^{-1} \Delta(\psi_Y f \psi_X^{-1}) \psi_X & = \psi_Y^{-1} \Delta (\psi_Y \varphi_Y^{-1} \varphi_Y f \varphi_X^{-1} \varphi_X \psi_X^{-1}) \psi_X \\
-& \cong \Delta(\underbrace{\psi_Y \varphi_Y^{-1}}_{\in \Bar} \underbrace{\varphi_Y f \varphi_X^{-1}}_{\in \Bar} \underbrace{\varphi_X \psi_X^{-1}}_{\in \Bar}) \\
-& = \Delta(\psi_Y \varphi_Y^{-1}) \Delta(\varphi_Y f \varphi_X^{-1}) \Delta(\varphi_X \psi_X^{-1}) \tag{by functoriality in $\Bar$} \\
-& \cong \Delta(\varphi_Y f \varphi_X^{-1}) \\
-& \cong \varphi_Y^{-1} \Delta(\varphi_Y f \varphi_X^{-1}) \varphi_X.
-\end{align*}
+  Let $\psi_X$ and $\psi_Y$ be other choices of isomorphisms. Then
+  \begin{align*}
+    \psi_Y^{-1} \Delta(\psi_Y f \psi_X^{-1}) \psi_X & = \psi_Y^{-1} \Delta (\psi_Y \varphi_Y^{-1} \varphi_Y f \varphi_X^{-1} \varphi_X \psi_X^{-1}) \psi_X \\
+    & \cong \Delta(\underbrace{\psi_Y \varphi_Y^{-1}}_{\in \Bar} \underbrace{\varphi_Y f \varphi_X^{-1}}_{\in \Bar} \underbrace{\varphi_X \psi_X^{-1}}_{\in \Bar}) \\
+    & = \Delta(\psi_Y \varphi_Y^{-1}) \Delta(\varphi_Y f \varphi_X^{-1}) \Delta(\varphi_X \psi_X^{-1}) \tag{by functoriality in $\Bar$} \\
+    & \cong \Delta(\varphi_Y f \varphi_X^{-1}) \\
+    & \cong \varphi_Y^{-1} \Delta(\varphi_Y f \varphi_X^{-1}) \varphi_X.
+    \qedhere
+  \end{align*}
 \end{proof}
 
 \begin{remark}
@@ -848,7 +854,7 @@ In $\Pfd$, the morphism $\Delta f$ is defined only up to isomorphism, see \cref{
 
 To show \cref{C!T:Delta-is-btb}, we will be working with infinite (unlabeled) matrices. In particular with infinite column-finite matrices (see \cref{C!D:column-finite-matrices}).
 
-In \cite{Paraskevopoulos2012} the author presents a reduction algorithm for infinite row-finite matrices (defined analogously to column-finite ones). We proceed similarly with \cref{C!A:inf-red}: compare with the standard algorithm of persistent homology, see \cite{cohen2006vines}.
+In \cite{Paraskevopoulos2012} the author presents a reduction algorithm for infinite row-finite matrices (defined analogously to column-finite ones). We proceed similarly with \cref{C!A:inf-red}: compare with the standard algorithm of persistent homology, see \cite{CSEM2006}.
 
 \begin{algorithm}[tbp]
 \caption{Infinite column-finite (unlabeled) matrix reduction.
@@ -899,29 +905,31 @@ Thus we can apply \cref{C!A:inf-red} and \cref{C!L:good-alg} to obtain invertibl
 
 \subsection{Induced matchings}
 
-Recall that we use the the category $\Barc$ from \cite{bauer2020persistence}. While for their canonically induced matchings compose naturally, we need more structure on our persistence modules to make the matchings compose in an intuitive way.
+Recall that we use the the category $\Barc$ from \cite{BauerLesnick2020}. While for their canonically induced matchings compose naturally, we need more structure on our persistence modules to make the matchings compose in an intuitive way.
 
 \begin{definition}[Matching operators]
-A \textbf{matching operator} is a function $\mu$ that takes a morphism $f \colon X \to Y$ in $\Bar$ and returns a matching (i.e., morphism) $\mu(f) \colon \cc{B}(X) \to \cc{B}(Y)$ in $\Barc$. The second argument is sometimes omitted. The operator $\mu$ is
+\label{C!D:matching-operator}
+A \index{matching operator}\textbf{matching operator} is a function $\mu$ that takes a morphism $f \colon X \to Y$ in $\Bar$ and returns a matching (i.e., morphism) $\mu(f) \colon \cc{B}(X) \to \cc{B}(Y)$ in $\Barc$. The second argument is sometimes omitted. The operator $\mu$ is
 \begin{enumerate}
-\item \textbf{additive} if, given morphisms $f$ and $g$, $\mu(f \oplus g) = \mu(f) \sqcup \mu(g)$.
-\item \textbf{split} if, for a strictly bar-to-bar morphism $f$, $\mu(f)$ is the matching of \cref{C!D:btb}\footnote{more precisely, the definition's matching is $\{(i, j) \mid ((\langle a_i, b_i \rangle, i), (\langle c_j, d_j \rangle, j)) \in \mu(f)\}$.}.
-\item \textbf{functorial on monomorphisms} (resp.\ \textbf{epimorphisms}) if, given composable monomorphisms (resp.\ epimorphisms) $f$ and $g$, $\mu(g \circ f) = \mu(g) \bullet \mu(f)$.
+\item \index{additive matching}\textbf{additive} if, given morphisms $f$ and $g$, $\mu(f \oplus g) = \mu(f) \sqcup \mu(g)$.
+\item \index{split matching}\textbf{split} if, for a strictly bar-to-bar morphism $f$, $\mu(f)$ is the matching of \cref{C!D:btb}\footnote{more precisely, the definition's matching is $\{(i, j) \mid ((\langle a_i, b_i \rangle, i), (\langle c_j, d_j \rangle, j)) \in \mu(f)\}$.}.
+\item \index{functorial matching}\textbf{functorial on monomorphisms} (resp.\ \textbf{epimorphisms}) if, given composable monomorphisms (resp.\ epimorphisms) $f$ and $g$, $\mu(g \circ f) = \mu(g) \bullet \mu(f)$. \qedhere
 \end{enumerate}
 \end{definition}
 
 \begin{remark}
 \begin{enumerate}
-\item Matching operators are well-defined. In particular, they are equivariant under reindexing of the barcode multiset representations \cite{bauer2020persistence}.
-\item By \cite[Proposition 5.10]{bauer2015induced}, such operators are never functorial over all morphisms. Moreover, the \textbf{canonically induced matching} of that paper is functorial on monomorphisms and epimorphisms.
+\item Matching operators are well-defined. In particular, they are equivariant under reindexing of the barcode multiset representations \cite{BauerLesnick2020}.
+\item By \cite[Proposition 5.10]{BauerLesnick2015}, such operators are never functorial over all morphisms. Moreover, the \textbf{canonically induced matching} of that paper is functorial on monomorphisms and epimorphisms.
 \item Note that being split is equivalent to being additive and mapping morphisms $K(a, b) \to K(c, d)$ between single bars nontrivially.
-\item Using the axiom of choice, and viewing morphisms as objects in the additive category $\Fun(\R \times \{0 < 1\}, \Vect_K)$, we can define arbitrary additive matchings by choosing a matching for each indecomposable morphism.
+\item Using the axiom of choice, and viewing morphisms as objects in the additive category $\Fun(\R \times \{0 < 1\}, \Vect_K)$, we can define arbitrary additive matchings by choosing a matching for each indecomposable morphism. \qedhere
 \end{enumerate}
 \end{remark}
 
 We now show that being split and functorial on monomorphisms (resp.\ epipmorphisms) are mutually exclusive.
 
 \begin{proposition}
+\label{C!P:split-nand-functorial}
 A matching operator cannot be split and functorial on monomorphisms (resp.\ epimorphisms).
 \end{proposition}
 
@@ -1026,11 +1034,11 @@ Given a morphism $f \colon X \to Y$ in $\Bar$, we know by \cref{C!T:Delta-is-btb
 \begin{enumerate}
 \item In the case where $X$ and $Y$ have finitely many bars, this induced matching is constructed for monomorphisms and epimorphisms in \cite[Theorems 6.11 \& 6.13]{bubenik2018algebraic}, where it is called an \textit{induced algebraic matching}.
 \item We can show that the matching operator $\mu_\Delta$ is additive. Moreover, it is split by construction. As a consequence, it is not functorial on either monomorphisms nor epimorphisms.
-\item The matching operator $\mu_\Delta$ is not very informative on arbitrary morphisms. Indeed, it is empty as soon as no bars of $X$ or $Y$ have the same end-point.
+\item The matching operator $\mu_\Delta$ is not very informative on arbitrary morphisms. Indeed, it is empty as soon as no bars of $X$ or $Y$ have the same end-point. \qedhere
 \end{enumerate}
 \end{remark}
 
-Instead, we may follow the strategy of \cite{bauer2015induced}: given a morphism $f \colon X \to Y$ in $\Bar$, consider an epi-mono factorization of $f$,
+Instead, we may follow the strategy of \cite{BauerLesnick2015}: given a morphism $f \colon X \to Y$ in $\Bar$, consider an epi-mono factorization of $f$,
 \[
 X \xrightarrow{e} \im(f) \xrightarrow{m} Y,
 \]
@@ -1059,8 +1067,8 @@ Consider the following morphism (over the field $\mathbb{F}_2$) along with an ep
     \draw[->] (5.2, 5.8) -- (5.2, 1.2);
     \draw[->] (5.6, 5.8) -- (5.6, 0.2);
     
-    \node (X) at (12, 6.5) {$X$};
-    \node (Y) at (12, .5) {$Y$};
+    \node (X) at (11, 6.5) {$X$};
+    \node (Y) at (11, .5) {$Y$};
     \draw[->] (X) -- node[right] {$f$} (Y);
 \end{tikzpicture}
 =
@@ -1083,9 +1091,9 @@ Consider the following morphism (over the field $\mathbb{F}_2$) along with an ep
     \draw[->] (5.2, 2.8) -- (5.2, 1.2);
     \draw[->] (5.6, 2.8) -- (5.6, 0.2);
     
-    \node (X) at (12, 6.5) {$X$};
-    \node (im) at (12, 3.5) {$\im(f)$};
-    \node (Y) at (12, .5) {$Y$};
+    \node (X) at (11, 6.5) {$X$};
+    \node (im) at (11, 3.5) {$\im(f)$};
+    \node (Y) at (11, .5) {$Y$};
     \draw[->] (X) -- node[right] {$e$} (im);
     \draw[->] (im) -- node[right] {$m$} (Y);
 \end{tikzpicture}
@@ -1252,6 +1260,7 @@ Reading the pivots of the relevant matrices, we find that $\mu_\Delta(f) = \mu_\
 
 \subsection{Example: recovering the \texorpdfstring{$\mathcal{P}$}{P}-matching}
 \label{C!SS:P-matching}
+\index{.c pmatching@$\cc{P}$-matching}
 
 We can define an induced matching on $\Pfd$ as soon as we determine a strategy for selecting, for a given morphism $f$ in $\Pfd$, an epi-mono factorization $f = me$. As an example, in this section we recover the induced matchings of \cite{gonzalez2020additive,GST2025} via epi-mono factorizations.
 
@@ -1306,7 +1315,7 @@ $A \leftarrow M$\;
 \end{algorithm}
 
 \begin{proof}
-First, we observe that $\im(f) \cong \im(\tilde{f})$. Next, we recall that we have assumed that $X$ and $Y$ have countably many bars. Moreover, the row labels (resp.\ column labels) of $\tilde{F}$ are totally ordered, as they all share the same startpoint (resp.\ endpoint). We can therefore apply \cref{C!A:labeled-red} with $\tilde{F}$ as input. By the assumption that the row and column labels are totally ordered, we know that all left-to-right column operations and bottom-to-top row operations on the matrix $\tilde{F}$ are valid matrix operations.
+First, we observe that $\im(f) \cong \im(\tilde{f})$. Next, we recall that we have assumed that $X$ and $Y$ have countably many bars. Moreover, the row labels (resp.\ column labels) of $\tilde{F}$ are totally ordered, as they all share the same start-point (resp.\ end-point). We can therefore apply \cref{C!A:labeled-red} with $\tilde{F}$ as input. By the assumption that the row and column labels are totally ordered, we know that all left-to-right column operations and bottom-to-top row operations on the matrix $\tilde{F}$ are valid matrix operations.
 
 Note that \cref{C!A:labeled-red} is very similar to \cref{C!A:inf-red}, the difference being that we are reducing a labeled matrix instead of an unlabeled matrix. In particular, we use matrix multiplications, specifically overlap multiplications (\cref{C!D:labeled-matrix}), to denote the column and row operations. The proof of correctness of the algorithm is analogous to \cref{C!L:good-alg}. Thus we can apply \cref{C!A:labeled-red} to obtain a matrix $A$. As in \cref{C!L:good-alg}, this matrix has at most one nonzero coefficient in each row and column. In particular, we obtain the barcode of the image of the morphism that the matrix $A$ represents: explicitly, this barcode is
 \[
@@ -1316,7 +1325,7 @@ Moreover, since $A$ is a reduction of $\tilde{F}$, the image of $A$ is isomorphi
 \end{proof}
 
 \begin{remark}
-The morphism $\tilde{f} \colon \tilde{X} \to \tilde{Y}$ is a \textbf{fringe presentation} of $\im(f)$ as defined in \cite{Miller2025}. We also note that the ordered matrix representation of $\tilde{F}$ is exactly that of $F$, but with relabeled rows and columns. Thus \cref{C!P:image-barcode} provides an effective way of computing the barcode of the image of a morphism, provided a matrix representation of the morphism.
+The morphism $\tilde{f} \colon \tilde{X} \to \tilde{Y}$ is a \index{fringe presentation}\textbf{fringe presentation} of $\im(f)$ as defined in \cite{Miller2025}. We also note that the ordered matrix representation of $\tilde{F}$ is exactly that of $F$, but with relabeled rows and columns. Thus \cref{C!P:image-barcode} provides an effective way of computing the barcode of the image of a morphism, provided a matrix representation of the morphism.
 \end{remark}
 
 Let $f \colon X \to Y$ be a morphism in $\Bar$. Denote by $F$ the matrix representation of $f$ where rows are ordered (lexicographically) by end-point then start-point and the columns by start-point then end-point. Applying \cref{C!P:image-barcode}, we obtain a matrix $\tilde{F}$ with the same coefficients as $F$ but different labels, and $A = U \tilde{F} V$ its reduced form, with $U$ and $V$ invertible upper triangular matrices.
@@ -1348,7 +1357,7 @@ M_{i, i'} E_{i', j} = R_{ij}.
 If $R_{ij} = 0$, then we set $M_{i, i'} = 0$. Otherwise, we need to check that we can set $M_{i, i'}$ to be nonzero. We know that $i \leq i'$ ($R_{i', j}$ is the pivot, so $R_{ij}$ must be above it). Column $i'$ of $M$ is labeled by $\langle a_j, d_{i'} \rangle$ and row $i$ of $M$ is labeled by $\langle c_i, d_i \rangle$. We have $d_{i'} \geq d_i$ because $i' \geq i$ and we assume that the $\langle c_i, d_i \rangle$ are ordered compatibly with the product order. We also have $a_j \geq c_i$ because $R_{ij}$ is nonzero (and so $\langle a_j, b_j \rangle$ must overlap $\langle c_i, d_i \rangle$ above). Thus we have checked that $\langle a_j, d_{i'} \rangle$ overlaps $\langle c_i, d_i \rangle$ above, so we can set $M_{i, i'}$ to be nonzero.
 \item Otherwise, $M_{i, i'}$ has no equations to satisfy, and we choose to set $M_{i, i'} = 0$.
 \end{itemize}
-We observe that the resulting $M$ is in reduced row echelon form, with pivots at the coordinates $(i, i)$ for $i$ in $\tilde{I}$. Each column as a pivot and the pivots' row and column labels have the same endpoint $d_i$, so we deduce that $M$ represents a monomorphism: indeed, at every time $t \in \R$, $M_t$ represents an injective linear map.
+We observe that the resulting $M$ is in reduced row echelon form, with pivots at the coordinates $(i, i)$ for $i$ in $\tilde{I}$. Each column as a pivot and the pivots' row and column labels have the same end-point $d_i$, so we deduce that $M$ represents a monomorphism: indeed, at every time $t \in \R$, $M_t$ represents an injective linear map.
 
 We thus obtain $F = M E V^{-1}$, giving us an epi-mono factorization $f = m e$ by the morphisms $e$ and $m$ represented by $E V^{-1}$ and $M$, respectively.
 \end{proof}
@@ -1364,7 +1373,7 @@ By the last observation on $M$, we deduce that the induced matching $\mu_\Delta(
 
 In the case where $X$ and $Y$ are tame persistence modules (i.e., they have finite barcodes), \cite[Algorithm 1]{GST2025} is a matrix reduction algorithm to obtain a multiset matching from a morphism $f \colon X \to Y$, which we will call the $\cc{P}$-matching.
 
-We first show the pairing uniqueness lemma \cite{cohen2006vines} for tame fringe presentations, following the reasoning and notations of the original proof. Given a matrix $A \in K^{m \times n}$, for all $i \in \{1, \ldots, m\}$ and $j \in \{1, \ldots, n\}$, denote by $A_i^j$ the lower left minor of $A$ obtained by removing the first $i - 1$ rows and the last $n - j$ columns. Define
+We first show the pairing uniqueness lemma \cite{CSEM2006} for tame fringe presentations, following the reasoning and notations of the original proof. Given a matrix $A \in K^{m \times n}$, for all $i \in \{1, \ldots, m\}$ and $j \in \{1, \ldots, n\}$, denote by $A_i^j$ the lower left minor of $A$ obtained by removing the first $i - 1$ rows and the last $n - j$ columns. Define
 \[
 r_A(i, j) \coloneq \rank A_i^j - \rank A_{i + 1}^j - \rank A_i^{j - 1} + \rank A_{i + 1}^{j - 1},
 \]
@@ -1441,14 +1450,14 @@ We deduce that our induced matching $\mu(f)$ is a representation of the (multise
 % \begin{itemize}
 % \item $\varphi$ is an isomorphism.
 % \item For all $t \in \R$, $\varphi_t \colon X_t \to X_t$ is an isomorphism.
-% \item For all $t \in \R$, every same-startpoint block of $\Phi_t$ (the matrix $\Phi$ restricted to rows and columns whose label contains $t$) is invertible.
-% \item For all $t \in \R$, every same-startpoint block of $\tilde{\Phi}_t$ is invertible.
+% \item For all $t \in \R$, every same-start-point block of $\Phi_t$ (the matrix $\Phi$ restricted to rows and columns whose label contains $t$) is invertible.
+% \item For all $t \in \R$, every same-start-point block of $\tilde{\Phi}_t$ is invertible.
 % \item For all $t \in \R$, $\tilde{\varphi}_t$ is an isomorphism.
 % \item $\tilde{\varphi}$ is an isomorphism.
 % \end{itemize}
-% Thus $\tilde{\varphi}$ is an isomorphism. We reason similarly for $\tilde{\psi}$, ordering the matrix labels by death than birth, and using same-endpoint blocks instead of same-startpoint blocks. We deduce that $\tilde{g}$ and $\tilde{h}$ are isomorphic.
+% Thus $\tilde{\varphi}$ is an isomorphism. We reason similarly for $\tilde{\psi}$, ordering the matrix labels by death than birth, and using same-endpoint blocks instead of same-start-point blocks. We deduce that $\tilde{g}$ and $\tilde{h}$ are isomorphic.
 
-% Similarly to \cref{C!P:unique-induced-matching}, we can view the morphisms $\tilde{g}$ and $\tilde{h}$ as objects in the category $\Fun(\R \times \{0 < 1 \}, \Vect_K)$. Applying \cref{C!A:labeled-red}, we deduce that these objects decompose into simple indecomposables (compare also with \cite[Theorem 5.3]{jacquard2023space}). As this decomposition is unique, we conclude that the pivots of $\tilde{G}$ and $\tilde{H}$ are the same up to permutation of identically labeled bars.
+% Similarly to \cref{C!P:unique-induced-matching}, we can view the morphisms $\tilde{g}$ and $\tilde{h}$ as objects in the category $\Fun(\R \times \{0 < 1 \}, \Vect_K)$. Applying \cref{C!A:labeled-red}, we deduce that these objects decompose into simple indecomposables (compare also with \cite[Theorem 5.3]{JNT2023}). As this decomposition is unique, we conclude that the pivots of $\tilde{G}$ and $\tilde{H}$ are the same up to permutation of identically labeled bars.
 
 % \textcolor{red}{(Isaac) continue from here, but I'm not sure if this is going to lead to something correct. The issue is that I don't know how to guarantee that these permutations are only between bars that were originally identical in $X$ and $Y$.}
 % \end{proof}
@@ -1490,8 +1499,8 @@ We deduce that our induced matching $\mu(f)$ is a representation of the (multise
 % \begin{proof}
 % We assume that the rows and columns of $\Phi$ are ordered lexicographically by birth than death; the other case is handled analogously. Consider the application of \cref{C!A:invertible-reduction} to $\Phi$. The algorithm is properly defined; we check some aspects here.
 % \begin{itemize}
-% \item In the first while loop, column operations only happen between columns with the same startpoint. Indeed, the block in $\Phi$ whose rows and columns are labeled with a given startpoint is a diagonal block of $\Phi$. Since $\Phi$ is invertible, this block must be of full rank, and so the lowest nonzero element of a column in this block must belong to a row in the block. Moreover, no column to the left of this block may have a lowest nonzero coefficient on a row of this block, as that column's label would not overlap above this block's rows' labels. In this block, the endpoints are in increasing order, so all operations are valid: in particular, nonzero coefficients are always between overlapping bars.
-% \item In the second while loop, by design, the row operations only happen between rows with the same endpoint. Once again, since the startpoints in this block are in increasing order, all operations are valid.
+% \item In the first while loop, column operations only happen between columns with the same start-point. Indeed, the block in $\Phi$ whose rows and columns are labeled with a given start-point is a diagonal block of $\Phi$. Since $\Phi$ is invertible, this block must be of full rank, and so the lowest nonzero element of a column in this block must belong to a row in the block. Moreover, no column to the left of this block may have a lowest nonzero coefficient on a row of this block, as that column's label would not overlap above this block's rows' labels. In this block, the end-points are in increasing order, so all operations are valid: in particular, nonzero coefficients are always between overlapping bars.
+% \item In the second while loop, by design, the row operations only happen between rows with the same end-point. Once again, since the start-points in this block are in increasing order, all operations are valid.
 % \item In the third while loop, the column index $j'$ always exists because $\varphi$ is an isomorphism. Moreover, this $j'$ column only has one nonzero coefficient, so the column operation is valid.
 % \end{itemize}
 % The convergence of this algorithm can be verified as in the proof of \cref{C!L:good-alg}.
@@ -1514,7 +1523,7 @@ We deduce that our induced matching $\mu(f)$ is a representation of the (multise
 %     $V \leftarrow V (I - \lambda E_{j', j})$\;
 %   }
 %   $i \leftarrow \low(j)$\;
-%   $i_0 \leftarrow \min\{i' \in I \mid a_{i'} = a_i\}$ \tcp*{highest row with same startpoint}
+%   $i_0 \leftarrow \min\{i' \in I \mid a_{i'} = a_i\}$ \tcp*{highest row with same start-point}
 %   \While(\tcp*[f]{reduce nonzero entries above low in same-start block}){$\exists i' \in \{i_0, \ldots, i - 1\}, \; A_{i', j} \neq 0$}{%
 %     $\lambda \leftarrow A_{i', j} / A_{i, j}$\;
 %     $A \leftarrow (I - \lambda E_{i', i}) A$\; 
@@ -1584,43 +1593,43 @@ where $Y_{s \leq t} + f_t \colon Y_s \oplus X_t \to Y_t$.
 \end{lemma}
 
 \begin{proof}
-Consider the following diagram of vector spaces:
-\[
-\begin{tikzcd}
-X_s
-  \arrow[r, hook, "f_s"]
-  \arrow[d, "X_{s \leq t}" swap]
-&
-Y_s
-  \arrow[r, two heads]
-  \arrow[d, "Y_{s \leq t}" swap]
-&
-(\coker f)_s
-  \arrow[d, "(\coker f)_{s \leq t}"]
-\\
-X_t
-  \arrow[r, hook, "f_t" swap]
-&
-Y_t
-  \arrow[r, two heads]
-  \arrow[d, two heads]
-&
-(\coker f)_t
-  \arrow[d, two heads]
-\\
-&
-\coker Y_{s \leq t}
-  \arrow[r, two heads]
-&
-C
-\end{tikzcd}
-\]
-where $C$ is the cokernel of the map $(\coker f)_{s \leq t}$. We observe (by a diagram chase, for instance) that $C$ is also the cokernel of the map $g \coloneq Y_{s \leq t} + f_t \colon Y_s \oplus X_t \to Y_t$. Thus $\dim C = \dim Y_t - \rk g$, and we conclude the proof by observing that
-\begin{align*}
-\rk((\coker f)_{s \leq t}) & = \dim (\coker f)_t - \dim C \\
-& = \dim Y_t - \dim X_t - \dim Y_t + \rk g \\
-& = \rk g - \dim X_t.
-\end{align*}
+  Consider the following diagram of vector spaces:
+  \[
+    \begin{tikzcd}
+    X_s
+      \arrow[r, hook, "f_s"]
+      \arrow[d, "X_{s \leq t}" swap]
+    &
+    Y_s
+      \arrow[r, two heads]
+      \arrow[d, "Y_{s \leq t}" swap]
+    &
+    (\coker f)_s
+      \arrow[d, "(\coker f)_{s \leq t}"]
+    \\
+    X_t
+      \arrow[r, hook, "f_t" swap]
+    &
+    Y_t
+      \arrow[r, two heads]
+      \arrow[d, two heads]
+    &
+    (\coker f)_t
+      \arrow[d, two heads]
+    \\
+    &
+    \coker Y_{s \leq t}
+      \arrow[r, two heads]
+    &
+    C
+    \end{tikzcd}
+  \]
+  where $C$ is the cokernel of the map $(\coker f)_{s \leq t}$. We observe (by a diagram chase, for instance) that $C$ is also the cokernel of the map $g \coloneq Y_{s \leq t} + f_t \colon Y_s \oplus X_t \to Y_t$. Thus $\dim C = \dim Y_t - \rk g$, and we conclude the proof by observing that
+  \begin{align*}
+    \rk((\coker f)_{s \leq t}) & = \dim (\coker f)_t - \dim C \\
+    & = \dim Y_t - \dim X_t - \dim Y_t + \rk g \\
+    & = \rk g - \dim X_t. \qedhere
+  \end{align*}
 \end{proof}
 
 \begin{lemma}
@@ -1647,17 +1656,17 @@ where $Y_{s \leq t} + f_t$ and $Y_{s \leq t} + (\Delta f)_t \colon Y_s \oplus X_
 \end{lemma}
 
 \begin{proof}
-Since we are concerned with ranks, which are invariant by isomorphisms of morphisms, we can assume without loss of generality that $X$, $Y$, and $f$ are in $\Bar$.
+  Since we are concerned with ranks, which are invariant by isomorphisms of morphisms, we can assume without loss of generality that $X$, $Y$, and $f$ are in $\Bar$.
 
-Consider $Y[-\delta]$, the persistence module defined as $Y[-\delta]_a \coloneq Y_{a - \delta}$. Then there exists a natural morphism in $\Pfd$ $Y_{\bullet - \delta \leq \bullet} \colon Y[-\delta] \to Y$.
-The image of this morphism then has the same barcode as $Y$, except that every birth time has been increased by $\delta$, with resulting bars with a birth time greater than the death time being removed. Denote by $\iota \colon \im Y_{\bullet - \delta \leq \bullet} \hookrightarrow Y$ the monomorphism through which $Y_{\bullet - \delta \leq \bullet}$ factors. Then $\rk(Y_{s \leq t} + f_t) = \rk(\iota_t + f_t)$. Moreover, $\iota$ is strictly bar-to-bar, so by \cref{C!C:Delta-idempot} $\Delta \iota = \iota$.
-By linearity of $\Delta$ (\cref{C!P:Delta-linear}), we deduce that $\Delta(\iota + f) = \iota + \Delta f$. We conclude as follows:
-\begin{align*}
-\rk(Y_{s \leq t} + f_t) & = \rk(\iota + f)_t \\
-& \geq \rk(\Delta(\iota + f))_t \tag{by \cref{C!L:delta-rank-ineq}}\\
-& = \rk(\iota_t + (\Delta f)_t) \\
-& = \rk(Y_{s \leq t} + (\Delta f)_t).
-\end{align*}
+  Consider $Y[-\delta]$, the persistence module defined as $Y[-\delta]_a \coloneq Y_{a - \delta}$. Then there exists a natural morphism in $\Pfd$ $Y_{\bullet - \delta \leq \bullet} \colon Y[-\delta] \to Y$.
+  The image of this morphism then has the same barcode as $Y$, except that every birth time has been increased by $\delta$, with resulting bars with a birth time greater than the death time being removed. Denote by $\iota \colon \im Y_{\bullet - \delta \leq \bullet} \hookrightarrow Y$ the monomorphism through which $Y_{\bullet - \delta \leq \bullet}$ factors. Then $\rk(Y_{s \leq t} + f_t) = \rk(\iota_t + f_t)$. Moreover, $\iota$ is strictly bar-to-bar, so by \cref{C!C:Delta-idempot} $\Delta \iota = \iota$.
+  By linearity of $\Delta$ (\cref{C!P:Delta-linear}), we deduce that $\Delta(\iota + f) = \iota + \Delta f$. We conclude as follows:
+  \begin{align*}
+    \rk(Y_{s \leq t} + f_t) & = \rk(\iota + f)_t \\
+    & \geq \rk(\Delta(\iota + f))_t \tag{by \cref{C!L:delta-rank-ineq}}\\
+    & = \rk(\iota_t + (\Delta f)_t) \\
+    & = \rk(Y_{s \leq t} + (\Delta f)_t). \qedhere
+  \end{align*}
 \end{proof}
 
 \begin{lemma}
@@ -1670,36 +1679,37 @@ where $(-)_+$ is the positive part function.
 \end{lemma}
 
 \begin{proof}
-Denote by $b$ this common end-point. Since $f_\varphi$ is induced by the canonical matching, we can assume without loss of generality that $X = \bigoplus_{i = 1}^m K(a_i, b)$, $Y = \bigoplus_{i = 1}^n K(c_i, b)$ with $m \leq n$ in $\N \cup \{\omega\}$, the $a_i$ and $c_i$ are ordered in nondecreasing order, and the canonical matching $\varphi$ is the inclusion of $\{1, \ldots, m\}$ in $\{1, \ldots, n\}$. The fact that $X$ and $Y$ have at most countably many bars with end-point $b$ is explained in \cref{C!R:ephemeral}. Then
-\[
-f_\varphi = \bigoplus_{i = 1}^m (K(a_i, b) \to K(c_i, b)) \oplus \bigoplus_{j = m + 1}^n (0 \to K(c_i, b)).
-\]
-Therefore
-\[
-\coker f_\varphi = \bigoplus_{i = 1}^m K(c_i, a_i) \oplus \bigoplus_{j = m + 1}^n K(c_i, b).
-\]
-If $t^- \geq b$, then the result holds trivially.
-Now consider the case $t^- < b$. Since the $a_i$ and $c_i$ are in nondecreasing order, there exist integers $k_a$ and $k_c$ such that
-\[
-\{i \in \{1, \ldots, m\} : a_i \leq t^-\} = \{1, \ldots, k_a\}
-\quad \text{and} \quad
-\{i \in \{1, \ldots, n\} : c_i \leq s^-\} = \{1, \ldots, k_c\}.
-\]
-Therefore
-\[
-\{i \in \{1, \ldots, n\} : c_i \leq s^-\} \setminus \{i \in \{1, \ldots, m\} : a_i \leq t^-\} = \begin{cases}
-\{k_a + 1, \ldots, k_c\} & \text{if } k_a < k_c, \\
-\varnothing & \text{otherwise},
-\end{cases}
-\]
-and we conclude that
-\begin{align*}
-\rk((\coker f_\varphi)_{s \leq t}) & = |\{i \in \{1, \ldots, m\} : c_i \leq s^-, t^- < a_i\} \sqcup \{j \in \{m + 1, \ldots, n\} : c_i \leq s^-\}| \\
-& = |\{i \in \{1, \ldots, n\} : c_i \leq s^-\} \setminus \{i \in \{1, \ldots, m\} : a_i \leq t^-\}| \\
-& = (k_c - k_a)_+ \\
-& = (\rk Y_{s \leq t} - \dim X_t)_+,
-\end{align*}
-where the second equality comes from the equality between the sets, and the fourth equality comes from the fact that $k_a = \dim X_t$ and $k_c = \rk Y_{s \leq t}$.
+  Denote by $b$ this common end-point. Since $f_\varphi$ is induced by the canonical matching, we can assume without loss of generality that $X = \bigoplus_{i = 1}^m K(a_i, b)$, $Y = \bigoplus_{i = 1}^n K(c_i, b)$ with $m \leq n$ in $\N \cup \{\omega\}$, the $a_i$ and $c_i$ are ordered in nondecreasing order, and the canonical matching $\varphi$ is the inclusion of $\{1, \ldots, m\}$ in $\{1, \ldots, n\}$. The fact that $X$ and $Y$ have at most countably many bars with end-point $b$ is explained in \cref{C!R:ephemeral}. Then
+  \[
+    f_\varphi = \bigoplus_{i = 1}^m (K(a_i, b) \to K(c_i, b)) \oplus \bigoplus_{j = m + 1}^n (0 \to K(c_i, b)).
+  \]
+  Therefore
+  \[
+    \coker f_\varphi = \bigoplus_{i = 1}^m K(c_i, a_i) \oplus \bigoplus_{j = m + 1}^n K(c_i, b).
+  \]
+  If $t^- \geq b$, then the result holds trivially.
+  Now consider the case $t^- < b$. Since the $a_i$ and $c_i$ are in nondecreasing order, there exist integers $k_a$ and $k_c$ such that
+  \begin{align*}
+    \{i \in \{1, \ldots, m\} : a_i \leq t^-\} & = \{1, \ldots, k_a\} \\
+    \text{and} \quad \{i \in \{1, \ldots, n\} : c_i \leq s^-\} & = \{1, \ldots, k_c\}.
+  \end{align*}
+  Therefore
+  \begin{align*}
+    & \{i \in \{1, \ldots, n\} : c_i \leq s^-\} \setminus \{i \in \{1, \ldots, m\} : a_i \leq t^-\} \\
+    & = \begin{cases}
+      \{k_a + 1, \ldots, k_c\} & \text{if } k_a < k_c, \\
+      \varnothing & \text{otherwise},
+    \end{cases}
+  \end{align*}
+  and we conclude that
+  \begin{align*}
+    \rk((\coker f_\varphi)_{s \leq t}) = {} & \big|\{i \in \{1, \ldots, m\} : c_i \leq s^-, t^- < a_i\} \\
+    & \hphantom{\big|} \sqcup \{j \in \{m + 1, \ldots, n\} : c_i \leq s^-\} \big| \\
+    = {} & \big| \{i \in \{1, \ldots, n\} : c_i \leq s^-\} \setminus \{i \in \{1, \ldots, m\} : a_i \leq t^-\} \big| \\
+    = {} & (k_c - k_a)_+ \\
+    = {} & (\rk Y_{s \leq t} - \dim X_t)_+,
+  \end{align*}
+  where the second equality comes from the equality between the sets, and the fourth equality comes from the fact that $k_a = \dim X_t$ and $k_c = \rk Y_{s \leq t}$.
 \end{proof}
 
 \begin{proof}[Proof of \cref{C!P:cokernel-rank}]
@@ -1715,17 +1725,18 @@ We show the second inequality as follows. Since $\Delta f$ is bar-to-bar by \cre
 & \geq \max\{\rk Y_{s \leq t}, \rk (\Delta f)_t\} - \dim X_t \tag{true for general sums of maps} \\
 & = \max\{\rk Y_{s \leq t}, \dim X_t\} - \dim X_t \tag{since $\Delta f$ is a monomorphism}\\
 & = (\rk Y_{s \leq t} - \dim X_t)_+ \\
-& = \rk((\coker f_\varphi)_{s \leq t}). \tag{by \cref{C!L:canonical-coker}}
+& = \rk((\coker f_\varphi)_{s \leq t}). \tag*{(by \cref{C!L:canonical-coker}) \qedhere}
 \end{align*}
 \end{proof}
 
 To connect rank functions to $p$-norms of cokernels, we define the following measurable space.
 
 \begin{definition}
-Fix $p \in (1, \infty)$. We define the space $\Omega \coloneq \{(s, t) : s \leq t \in \R\} \subset \R^2$ and the density function $g_p \colon \R^2 \to [0,\infty )$ given by
-\[
-g_p(s, t) \coloneq p (p - 1) |t - s|^{p - 2}.
-\]
+  Fix $p \in (1, \infty)$. We define the space $\Omega \coloneq \{(s, t) : s \leq t \in \R\} \subset \R^2$ and the density function $g_p \colon \R^2 \to [0,\infty )$ given by
+  \[
+    g_p(s, t) \coloneq p (p - 1) |t - s|^{p - 2}.
+    \qedhere
+  \]
 \end{definition}
 
 \begin{proposition}
@@ -1756,7 +1767,7 @@ follows from the Monotone Convergence Theorem \cite[Thm.~2.14]{folland1999real}.
 \end{proof}
 
 \begin{remark}\label{C!rmk:int-norm1}
-When $p=1$, as observed for example in \cite{bubenik2022exact}, the $1$-norm $\| X \|_1$ of a persistence module coincides with the integral $\int_{\R} \dim X_{t} \textnormal{d}t$ of its Hilbert function $(\dim X)(t)\coloneqq \dim X_t$. 
+When $p=1$, as observed for example in \cite{BSS2023}, the $1$-norm $\| X \|_1$ of a persistence module coincides with the integral $\int_{\R} \dim X_{t} \textnormal{d}t$ of its Hilbert function $(\dim X)(t)\coloneqq \dim X_t$. 
 \end{remark}
 
 \begin{theorem}
@@ -1775,7 +1786,15 @@ For $p = 1$ and $p = \infty$, we conclude by continuity of $p$-norms with respec
 
 
 \begin{remark}
-When $p=1$, the inequalities of Theorem \ref{C!thm:cost-coker-btb} are equalities: $\| \coker f \|_1 = \| \coker \Delta f \|_1 = \| \coker f_\varphi \|_1$. To see this, recall Remark \ref{C!rmk:int-norm1} and observe that $\dim (\coker f)_t = \dim (\coker \Delta f)_t = \dim (\coker f_\varphi)_t$ since each of these dimensions equals $\dim Y_t - \dim X_t$. For any $p>1$, it is easy to find a monomorphism $f \colon X \hookrightarrow Y$ such that the inequalities of Theorem \ref{C!thm:cost-coker-btb} are strict.    
+  When $p=1$, the inequalities of Theorem \ref{C!thm:cost-coker-btb} are equalities:
+  \[
+    \| \coker f \|_1 = \| \coker \Delta f \|_1 = \| \coker f_\varphi \|_1.
+  \]
+  To see this, recall Remark \ref{C!rmk:int-norm1} and observe that for all $t \in \R$,
+  \[
+    \dim (\coker f)_t = \dim (\coker \Delta f)_t = \dim (\coker f_\varphi)_t = \dim Y_t - \dim X_t.
+  \]
+  For all $p>1$, it is easy to find a monomorphism $f \colon X \hookrightarrow Y$ such that the inequalities of Theorem \ref{C!thm:cost-coker-btb} are strict.
 \end{remark}
 
 Dually, we obtain the following result.
@@ -1792,7 +1811,7 @@ Let $f \colon X \twoheadrightarrow Y$ be an epimorphism in $\Pfd$ and $f_\varphi
 \subsection{Recovering isometry result for Wasserstein distances}
 \label{C!SS:isometry}
 
-We now provide alternate proofs of the construction of algebraic $p$-Wasserstein distances and of the isometry result for $p$-Wasserstein distances \cite{skraba2020wasserstein}. We define algebraic $p$-Wasserstein distances by defining a noise system \cite{scolamiero2017multidimensional}: see \cite{AGRS2025} for the details to this approach in the context of \textit{tame} persistence modules. In particular, we need to show the following result.
+We now provide alternate proofs of the construction of algebraic $p$-Wasserstein distances and of the isometry result for $p$-Wasserstein distances \cite{SkrabaTurner2023}. We define algebraic $p$-Wasserstein distances by defining a noise system \cite{SCLRÖ2017}: see \cite{AGRS2025} for the details to this approach in the context of \textit{tame} persistence modules. In particular, we need to show the following result.
 
 \begin{proposition}
 Let $0 \to X \to Y \to Z \to 0$ be a short exact sequence in $\Pfd$. Then, for all $p \in [1, \infty]$,
@@ -1804,7 +1823,8 @@ Let $0 \to X \to Y \to Z \to 0$ be a short exact sequence in $\Pfd$. Then, for a
 
 To prove the ``easy'' axiom of noise systems we can proceed as follows, showing a stronger statement.
 
-\begin{proposition}\label{C!prop:rkYge}
+\begin{proposition}
+\label{C!prop:rkYge}
 For every short exact sequence $0\to X\to Y\to Z\to 0$ it holds that $\rk (Y) \ge \rk (X) + \rk (Z)$.
 \end{proposition}
 \begin{proof}
@@ -1817,7 +1837,7 @@ where the equality follows from $\rk X_{s\le t} = \dim X_t - \dim \ker X_{s\le t
 
 By Proposition \ref{C!P:p-norm-by-integral} and monotonicity of the integral, we have the following consequence of Proposition \ref{C!prop:rkYge}.
 
-\begin{corollary}[{\cite[Remark 7.32]{skraba2020wasserstein}}]
+\begin{corollary}[{\cite[Remark 7.32]{SkrabaTurner2023}}]
 If $p\in [1,\infty)$ and $0\to X\to Y\to Z\to 0$ is a short exact sequence, then
 \[
 \left( \| X\|_p^p + \| Z\|_p^p \right)^\frac{1}{p} \le \| Y\|_p .
@@ -1856,7 +1876,7 @@ Now let $f$ be an arbitrary monomorphism, and let $f_\varphi$ be the bar-to-bar 
 \]
 \end{proof}
 
-We provide an alternate (for one direction at least) proof to \cite[Theorems 7.27-7.28]{skraba2020wasserstein}, the isometry result between algebraic and combinatorial $p$-Wasserstein distances.
+We provide an alternate (for one direction at least) proof to \cite[Theorems 7.27-7.28]{SkrabaTurner2023}, the isometry result between algebraic and combinatorial $p$-Wasserstein distances.
 
 \begin{theorem}
 \label{C!T:isometry}
@@ -1864,7 +1884,7 @@ For any $X$ and $Y$ in $\Pfd$, we have $d_p^p (X,Y) = W_p (\mathsf{Dgm}(X),\math
 \end{theorem}
 \begin{proof}
 \noindent\fbox{$\le$}
-Let $\varphi \colon \mathsf{Dgm}(X) \to \mathsf{Dgm}(Y)$ be a matching. We want to construct a span with a smaller or equal cost. Following \cite[Theorem 7.28]{skraba2020wasserstein}, define
+Let $\varphi \colon \mathsf{Dgm}(X) \to \mathsf{Dgm}(Y)$ be a matching. We want to construct a span with a smaller or equal cost. Following \cite[Theorem 7.28]{SkrabaTurner2023}, define
 \[
 Z \coloneq \bigoplus_{((a, b), (c, d)) \in \varphi} K(\max(a, c), \max(b, d))
 \]
@@ -1879,7 +1899,7 @@ Define
 \[
 Z' \coloneq \bigoplus_{\substack{(a, b) \in \Dgm(X) \\ (c, d) \in \Dgm(Y) \\ \varphi_X(a, b) = \varphi_Y(c, d)}} K(\max(a, c), \max(b, d)).
 \]
-Observe that $f_b$ and $g_b$ factor through $Z'$. This defines a new span (of strictly bar-to-bar/algebraic matching morphisms) $X \leftarrow Z' \rightarrow Y$ with a smaller cost than the previous span: essentially, for each bar $\langle e, f\rangle$ in $Z$, we consider its matched bars $\langle a, b \rangle$ and $\langle c, d\rangle$ in $X$ and $Y$, respectively, and we move the endpoints of $\langle e, f\rangle$ as far left as possible while keeping $f_b$ and $g_b$ well-defined. This makes the cokernels and kernels of these two morphisms smaller.
+Observe that $f_b$ and $g_b$ factor through $Z'$. This defines a new span (of strictly bar-to-bar/algebraic matching morphisms) $X \leftarrow Z' \rightarrow Y$ with a smaller cost than the previous span: essentially, for each bar $\langle e, f\rangle$ in $Z$, we consider its matched bars $\langle a, b \rangle$ and $\langle c, d\rangle$ in $X$ and $Y$, respectively, and we move the end-points of $\langle e, f\rangle$ as far left as possible while keeping $f_b$ and $g_b$ well-defined. This makes the cokernels and kernels of these two morphisms smaller.
 
 By the discussion for the \fbox{$\leq$} case, the cost of this span is equal to the cost of the matching $\psi = \varphi_X \circ \varphi_Y^{-1}$. Thus $\psi \colon \mathsf{Dgm}(X) \to \mathsf{Dgm}(Y)$ is a matching whose cost is smaller than the original span. This concludes the proof.
 \end{proof}

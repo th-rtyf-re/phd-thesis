@@ -15,13 +15,13 @@ In this thesis, we explored several ways in which algebraic invariants for filte
 
 On the other hand, we contributed to the emerging field of \index{metric algebraic geometry}\textbf{metric algebraic geometry} with our study of Morse theory for distance functions between algebraic varieties in Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}. In particular, we identify two indices for nondegenerate critical points, which encode the topological and algebraic properties of filtered spaces, and we show that generic distance functions between algebraic varieties are ``Morse,'' i.e., their critical points are all nondegenerate.
 
-None of the research directions taken in this thesis are closed-ended, and there is still much more to investigate. We now present some ongoing work and interesting partial results in these directions. We freely use the notations and results of the included papers.
+Both persistent algebra and metric algebraic geometry are open and actively developing fields. As we improve our understanding in these fields, we will obtain broader applications in mathematics and other sciences, as well as more effective computational methods. We now present some ongoing work and interesting partial results in the study of persistence modules and algebraic distance functions. We freely use the notations and results of the included papers.
 
 \section{Replacing kernels with cokernels}
 
 Following discussions with Andrea Guidolin and Bjørnar Gullikstad Hem.
 
-Recall from Paper \ref{PC:CGRST2024} that for the lower hook parameterization, we have $\Nat(\cc{T}(a, b), F) = \ker F(a \leq b)$. Denote by $\pi_1$ and $\pi_2$ the two projections $\Omega(I) \to I$. We get two functors $F \pi_1$ and $F \pi_2$ and a natural morphism $\alpha \colon F \pi_1 \to F \pi_2$ between them. The following long exact sequence in $\Fun(\Omega(I), \Vect)$
+Recall from Example F of Paper \ref{PC:CGRST2024} that for the lower hook parameterization, we have $\Nat(\cc{T}(a, b), F) = \ker F(a \leq b)$. Denote by $\pi_1$ and $\pi_2$ the two projections $\Omega(I) \to I$. We get two functors $F \pi_1$ and $F \pi_2$ and a natural morphism $\alpha \colon F \pi_1 \to F \pi_2$ between them. The long exact sequence in $\Fun(\Omega(I), \Vect)$
 \[
   0 \to \ker F(- \leq -) \hookrightarrow F \pi_1 \xrightarrow{\alpha} F \pi_2 \twoheadrightarrow \coker F(- \leq -) \to 0
 \]
@@ -64,64 +64,35 @@ I have implemented this cokernel approach in Python, to middling success: see \c
   \label{F:coker-results}
 \end{figure}
 
-% \section{Stabilized relative Betti numbers}  % I've kind of avoided defining stabilized ranks
-
-% at IML, with Claudia Landi, Bjørnar Gullikstad Hem, Daniel Tolosa, Berat Geven \ir{surely I don't cite these names, or maybe this result...}
-
-% In \cite{CGRST2024} the authors develop the theory of relative homological algebra for (multiparameter) persistence modules. In particular, given a collection $\mathcal{P}$ of ``simple'' persistence modules, we can define a minimal relative projective resolution of a module $M$ as
-% \[
-% \cdots \to F_1 \to F_0 \to M \to 0
-% \]
-% where each $F_i$ is of the form $\bigoplus_{A \in \mathcal{P}} A^{\oplus \beta_i^{\mathcal{P}}M(A)}$, with $\beta_i^{\mathcal{P}} M \colon \mathcal{P} \to \mathbb{N}$ giving the multiplicity of each module $A$ of $\mathcal{P}$ in $F_i$. These multiplicities are the \emph{relative Betti numbers}, and the paper gives a strategy to efficiently compute them for certain collections $\mathcal{P}$, using (local) Koszul complexes. When $\mathcal{P}$ is the collection of free modules, then the relative Betti numbers are exactly the standard Betti numbers; in the notation the $\mathcal{P}$ is omitted.
-
-% Separately, in \cite{GafvertChacholski2021}, the authors show that the hierarchical stabilization of the standard $0^{\text{th}}$ Betti number $\beta_0 M$ is NP-hard to compute, while also giving a strategy for computing them (not so efficiently). We then had two broad research directions:
-% \begin{enumerate}
-% \item understand the algorithm for computing stabilized $\beta_0$;
-% \item understand the stabilized relative $\beta_0$.
-% \end{enumerate}
-% We focused on the second direction, where we managed to prove the following.
-
-% \paragraph{Result.} If $\{\text{free}\} \subseteq \mathcal{P} \subseteq \{\text{single-source}\}$, where single-source modules are those with a single generator, then $\widehat{\beta_0^{\mathcal{P}} M} \geq \widehat{\beta_0 M}$ for all persistence modules $M$.
-
-% That is, given a fixed noise system, if the collection $\mathcal{P}$ contains all free modules and only contains single-source modules, then the stabilized relative $\beta_0$ is always greater than the stabilized standard $\beta_0$.
-
-% \ir{proof?}
-
-% \section{Dual poset elements for Koszul complexes}
-
-% with Wojciech Chachólski and Marve Grönblad Vesterinen.
-
-% This was a Master's thesis. We define a notion of \index{dual element}\textbf{dual elements} for lattices $I$ such that the Betti diagrams of the minimal projective and injective resolutions of a functor over $I$ are dual in some sense.
-
 \section{Space of rank functions}
 
 With Wojiech Chachólski, Andrea Guidolin, Christina Kapatsori, Woojin Kim, Francesca Tombari.
 
 The rank function $\rank V$ of a persistence module $V$ over a poset $I$ (\cref{!D:rank-function}) satisfies the following inequalities. For all chains $a \leq b \leq c \leq d$ in $I$,
 \begin{enumerate}
-  \item (\index{monotonicity}\textbf{monotonicity}) $\rank V(a \leq d) \leq \rank V(b \leq c)$, and
-  \item (\index{chain-supermodularity}\textbf{chain-supermodularity}) $\rank V(a \leq d) + \rank V(b \leq c) \leq \rank V(a \leq c) + \rank V(b \leq d)$.
+  \item (\textbf{monotonicity}) $\rank V(a \leq d) \leq \rank V(b \leq c)$, and
+  \item (\index{chain-(super)modularity}\textbf{chain-supermodularity}) $\rank V(a \leq d) + \rank V(b \leq c) \leq \rank V(a \leq c) + \rank V(b \leq d)$.
 \end{enumerate}
-The name \index{chain-supermodularity}\textbf{chain-supermodularity} comes from \textbf{supermodularity}, a notion studied in probability and order theory \cite{PromislowYoung2005}. Monotone, chain-supermodular functions form a positive convex cone. The broad aim of this project is to study this cone and investigate if we can express rank functions as convex combinations of extremal rays.
+The name \textbf{chain-supermodularity} comes from \textbf{supermodularity}, a notion studied in probability and order theory \cite{PromislowYoung2005}. Monotone, chain-supermodular functions form a positive convex cone. The broad aim of this project is to study this cone and investigate if we can express rank functions as convex combinations of extremal rays.
 
-As a first step, we study \index{chain-modularity}\textbf{chain-modular} functions, which satisfy the chain-supermodularity condition but with an equality instead of inequality. An interesting question is: which functors have rank functions that are chain-modular? This is ongoing work.
+As a first step, we study \index{chain-(super)modularity}\textbf{chain-modular} functions, which satisfy the chain-supermodularity condition but with an equality instead of inequality. An interesting question is: which functors have rank functions that are chain-modular? This is ongoing work.
 
 \section{Rank-based noise systems for multiparameter persistence}
 
 With Håvard Bakke Bjerkevik, Andrea Guidolin, and Martina Scolamiero.
 
-In Paper \ref{PC:GRRS2026} \ir{ref the specific result}, we show that the $p$-norm for a one-dimensional persistence module can be computed using the integral of its rank function. Here, we generalize this to multiparameter persistence. For $p \geq n + 1$ and $V \colon \R^n \to \Vect$ an $n$-dimensional persistence module, consider the following integral:
+In Paper \ref{PC:GRRS2026}, we show that the $p$-norm for a one-dimensional persistence module can be computed using the integral of its rank function (\cref{C!P:p-norm-by-integral}). Here, we generalize this to multiparameter persistence. For $p > 1$ and $V \colon \R^n \to \Vect$ an $n$-dimensional persistence module, consider the following integral:
 \[
   \| V \|_{p} \coloneq \left( \int_{\vec{x} \leq \vec{y} \in \Omega} p (p - 1)(y_1 - x_1)^{p - n - 1} \rank V(\vec{x} \leq \vec{y}) \right)^{\frac{1}{p}},
 \]
 where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{y}\}$ for the product order on $\R^n$. We have the following result:
 
 \begin{proposition}
-  Let $p \in [n + 1, \infty)$. The $p$-norm on $n$-dimensional persistence modules defines in amplitude. In other words, the $p$-norm defines a noise system.
+  Let $p \in (1, \infty)$. The $p$-norm on $n$-dimensional persistence modules defines in amplitude. In other words, the $p$-norm defines a noise system.
 \end{proposition}
 
 \begin{proof}[Sketch of proof]
-  The first, easier short exact sequence axiom (see \cref{!D:noise-system}) comes from [Paper \ref{PC:GRRS2026}, Proposition 4.9], as in the one-dimensional case.
+  The first short exact sequence axiom (see \cref{!D:noise-system}) comes from \cref{C!prop:rkYge}, as in the one-dimensional case.
 
   To prove the second, harder short exact sequence axiom, we proceed as follows. We restrict the rank function of $V$ to lines in $\R^n$ parameterized as $\ell \colon t \mapsto t \vec{a} + \vec{b}$, where $\vec{a} = (1, a_2, \ldots, a_n)$ and $\vec{b} = (0, b_2, \ldots, b_n)$. Then we parameterize our pairs of points $(\vec{x}, \vec{y})$ in $\Omega$ by scalars $s$ and $t$ in $\R$:
   \[
@@ -135,7 +106,7 @@ where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{
       & = \int_{\vec{a} \geq 0} \int_{\vec{b} \in \R^n} \int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank V(\vec{p}, \vec{q}) \text{d}t \text{d}s \text{d}\vec{b} \text{d}\vec{a},
     \end{aligned}
   \end{equation}
-  where the proof relies on the computation of the Jacobian of the change of parameters:
+  where the Jacobian of the change of parameters is
   \[
     J_\varphi = \bordermatrix{%
     & s & t & a_2 & b_2 & \cdots & a_n & b_n & \cr
@@ -150,11 +121,11 @@ where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{
   \]
   In particular, we have $|\det J_\varphi| = (t - s)^{n - 1}$.
 
-  For a given line $\ell \colon t \mapsto t \vec{a} + \vec{b}$, we apply the result that the $p$-norm gives a noise system in the one-dimensional case. In particular, given a short exact sequence $0 \to U \to V \to W \to 0$ of $n$-dimensional persistence modules, we use the characterization of $p$-norms as integrals of the rank function [Paper \ref{PC:GRRS2026}, Proposition 4.7] to obtain the following triangular inequality:
+  For a given line $\ell \colon t \mapsto t \vec{a} + \vec{b}$, we apply the result that the $p$-norm gives a noise system in the one-dimensional case. In particular, given a short exact sequence $0 \to U \to V \to W \to 0$ of $n$-dimensional persistence modules, we use the characterization of $p$-norms as integrals of the rank function \cref{C!P:p-norm-by-integral} to obtain the following triangular inequality:
   \begin{align*}
     & \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank V(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \\
     & \leq \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank U(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}} \\
-    & \hspace{2em} + \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank W(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}}.
+    & \hspace{1em} + \left(\int_{s = -\infty}^{+\infty} \int_{t = s}^{+\infty} p (p - 1) (t - s)^{p - 2} \rank W(\vec{x} \leq \vec{y}) \text{d}t \text{d}s\right)^{\frac{1}{p}}.
   \end{align*}
   Let
   \[
@@ -164,7 +135,7 @@ where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{
 
   We can apply Minkowski's inequality, which states that $(\int (f + g)^p)^{\frac 1p} \leq (\int f^p)^{\frac 1p} + (\int g^p)^{\frac 1p}$ holds for $1 \leq p < \infty$. We get
   \[
-    (\int_{\vec{a}} \int_{\vec{b}} f(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} \leq (\int_{\vec{a}} \int_{\vec{b}} g(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}} + (\int_{\vec{a}} \int_{\vec{b}} h(\vec{a}, \vec{b})^p d\vec{b} d\vec{a})^{\frac{1}{p}}.
+    \left( \int_{\vec{a}} \int_{\vec{b}} f(\vec{a}, \vec{b})^p d\vec{b} d\vec{a} \right)^{\frac{1}{p}} \leq \left( \int_{\vec{a}} \int_{\vec{b}} g(\vec{a}, \vec{b})^p d\vec{b} d\vec{a} \right)^{\frac{1}{p}} + \left( \int_{\vec{a}} \int_{\vec{b}} h(\vec{a}, \vec{b})^p d\vec{b} d\vec{a} \right)^{\frac{1}{p}}.
   \]
   By \eqref{Eq:reparam}, this exactly says that
   \[
@@ -173,7 +144,7 @@ where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{
   and this is the hard axiom of noise systems.
 \end{proof}
 
-From here, we can study the pseudometric induced by this noise system, including its computation and applications.
+From here, we can study the pseudometric induced by this noise system, including its computation and applications. We can also compare with existing notions of $\ell^p$-distances on multiparameter persistence modules \cite{BakkeBjerkevikLesnick2021}. 
 
 % \section{Matching costs}
 
@@ -220,7 +191,7 @@ When $W$ is arbitrary, Åkesson provides a recursive formula \cite[Theorem 4.1]{
 \label{Eq:recursive-extension}
   \barcode(\Ext(W, V)) = \bigcup_{B \in \barcode(\Ext(W_2, V))} \barcode(\Ext(W_1, \cc{V}(B))),
 \end{equation}
-where $\cc{V}(B)$ is a persistence module with barcode $B$. This gives an iterative strategy for computing $\barcode(\Ext(W, V))$: sort the bars of $W$ compatibly with the product order on the start- and endpoints, set $W_2$ equal to the first bar and $W_1$ to the sum of the rest: by construction, we get $\Ext(W_1, W_2) = 0$.
+where $\cc{V}(B)$ is a persistence module with barcode $B$. This gives an iterative strategy for computing $\barcode(\Ext(W, V))$: sort the bars of $W$ compatibly with the product order on the start- and end-points, set $W_2$ equal to the first bar and $W_1$ to the sum of the rest: by construction, we get $\Ext(W_1, W_2) = 0$.
 
 It is still an open problem to determine the extension with largest $p$-norm. This is useful, for example, in the study of the noise system axioms for $p$-norms.
 
@@ -228,10 +199,10 @@ It is still an open problem to determine the extension with largest $p$-norm. Th
 
 Following discussions with Emil Horobeț.
 
-In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we defined notions of algebraic critical points, and bounded their number. The number of algebraic critical points could define a new numerical invariant that generalizes the Euclidean distance degree \cite{EDD_Draisma} and the bottleneck degree \cite{DiRocco_Eklund_Weinstein}. Here we sketch its definition:
+In Papers \ref{PC:GLRS2025} and \ref{PC:Ren2026}, we defined notions of algebraic critical points, and bounded their number. The number of algebraic critical points could define a new numerical invariant that generalizes the Euclidean distance degree \cite{DHOST2016} and the bottleneck degree \cite{DREW2020}. Here we sketch its definition:
 
 \begin{definition}
-  Let $X$ and $Y$ be real complete intersections defined by polynomials $\vec{p}$ and $\vec{q}$, respectively. We define the \index{pair degree}\textbf{pair degree of $X$ and $Y$} to be the cardinality of the set $C_1(\vec{p}, \vec{q})$ of algebraic $1$-critical points of the distance function $\dist_Y\big|_X$ (see Paper \ref{PC:Ren2026}, Definition 3.3.2).
+  Let $X$ and $Y$ be real complete intersections defined by polynomials $\vec{p}$ and $\vec{q}$, respectively. We define the \index{pair degree}\textbf{pair degree of $X$ and $Y$} to be the cardinality of the set $C_1(\vec{p}, \vec{q})$ of algebraic $1$-critical points of the distance function $\distYX$ (see \cref{E!D:algebraic-critical-points}).
 \end{definition}
 
 When $X$ is the entire space $\R^n$, this is the Euclidean distance degree, and when $X$ is equal to $Y$, this is the bottleneck degree. Future works includes numerically computing the pair degree on examples, studying properties such as stability with respect to perturbations of $X$ and $Y$, and studying algebraic $k$-critical points with $k \geq 2$.

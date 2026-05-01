@@ -11,6 +11,7 @@
 \usepackage[%
   bibstyle=numeric,
   maxnames=99,
+  sorting=nyt,
   doi=false,
   isbn=false,
   url=false,
@@ -32,14 +33,12 @@
 % {\item}
 % \makeatother
 
-% ---- Formatting ----
+% ---- Formatting & layout ----
 
 \usepackage{microtype}
 \usepackage{parskip}
 
-\usepackage[
-  % demo  % omit inclusion of PDFs
-]{pdfpages}
+\usepackage{pdfpages}
 
 % longtable: ignoring this error https://github.com/latex3/latex2e/issues/1907
 % with VS Code LaTeX Workshop 
@@ -70,21 +69,18 @@
 % (https://tex.stackexchange.com/questions/450551/theorems-and-parskip#comment1853746_450551),
 % and generally should be loaded last.
 \usepackage[
-%  draft, % Uncomment to remove all links (useful for printing in black and white)
-%  hidelinks,
+  % draft, % Uncomment to remove all links (useful for printing in black and white)
   % bookmarksdepth,% w/o argument: uses tocdepth, supposedly
   pdfusetitle,
   colorlinks,
   linktoc=all,
-  allcolors={digital blue}
+  allcolors={digital blue},
 ]{hyperref}
 
 % amsmath (from unicode-math) > hyperref > cleveref
 \usepackage[noabbrev,capitalize]{cleveref}
 
 % ==== COMMANDS ====
-
-\DeclarePrintbibliographyDefaults{title=References}
 
 % ---- Font ----
 
@@ -109,15 +105,17 @@
 \addbibresource{bib/kappa.bib}
 \addbibresource{bib/btb.bib}
 \addbibresource{bib/gM.bib}
-\addbibresource{bib/CI.bib}
 
+\DeclarePrintbibliographyDefaults{title=References}
 \DeclareFieldFormat{eprint:github}{%
 GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint}}}
 }
 
-\renewcommand*{\bibfont}{\normalfont\small}
+\renewcommand{\bibfont}{\normalfont\small}
 
 % ---- Layout ----
+
+\allowdisplaybreaks
 
 % Custom header and footer with fancyhdr
 \fancypagestyle{fancy}{%
@@ -127,33 +125,57 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
   \fancyhead[LE,RO]{\sffamily\small\thepage}  % Left for even pages, right for odd pages
 }
 
-\fancypagestyle{plain}{% for special pages, e.g. first pages of chapters
+\fancypagestyle{front-fancy}{% for special pages, e.g. first pages of chapters
   \fancyhead{}  % reset
   \fancyhead[LE,RO]{\sffamily\small\thepage}  % Left for even pages, right for odd pages
+}
+
+\fancypagestyle{paper-fancy}{
+  \fancyhead{}
+  \fancyhead[LE]{%
+    \makebox[0pt][l]{\hspace{-5mm}\textcolor{white}{\rule[-2pt]{25mm}{15pt}}}%
+    \sffamily\small\thepage%
+  }
+  \fancyhead[RO]{%
+    \makebox[20mm][l]{\textcolor{white}{\rule[-2pt]{30mm}{15pt}}}%
+    \sffamily\small\thepage%
+  }
+}
+
+\fancypagestyle{plain}{
+  \fancyhead{}
+  \fancyfoot[C]{\sffamily\small\thepage}
 }
 
 \makeatletter
 % Flipbook stuff: inspired by nilsvu/latex-flipbook on GitHub
 % Current hunch is that pgfpicture sets the bounding box based on the vertices (the last path?)
 \newif\if@frontmatter
+\newcommand\abspagenumber{\inteval{\ReadonlyShipoutCounter+1}}
 \fancyfoot{}  % reset footer
 \fancyfoot[RO]{%
-  \if@mainmatter%
-    \ifnum\thepage<70\relax%
-      \AddToHookNext{shipout/background}{\put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-\fpeval{trunc((\thepage - 1) / 2, 0)}.pgf}}}%
-    \fi%
-  \else%
-    \if@frontmatter%
-      \AddToHookNext{shipout/background}{\put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-0.pgf}}}%
-    \fi%
-  \fi%
+  % \if@mainmatter%
+  \AddToHookNext{shipout/background}{
+    \ifnum\ReadonlyShipoutCounter<88\relax%
+      \put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-\fpeval{trunc(\ReadonlyShipoutCounter / 2, 0)}.pgf}}%
+    \fi
+  }
+    %   \ifnum\thepage>179\relax%
+    %     \AddToHookNext{shipout/background}{\put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-34.pgf}}}%
+    %   \fi
+  %   \fi%
+  % \else%
+  %   \if@frontmatter%
+  %     \AddToHookNext{shipout/background}{\put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-0.pgf}}}%
+  %   \fi%
+  % \fi%
 }
 
 % Remove fancy headers from front matter and add check for front matter
 \let\oldfrontmatter\frontmatter
 \let\oldmainmatter\mainmatter
 \let\oldbackmatter\backmatter
-\def\frontmatter{\oldfrontmatter\@frontmattertrue\pagestyle{plain}}
+\def\frontmatter{\oldfrontmatter\@frontmattertrue\pagestyle{front-fancy}}
 \def\mainmatter{\oldmainmatter\@frontmatterfalse\pagestyle{fancy}}
 \def\backmatter{\oldbackmatter\@frontmatterfalse}
 \makeatother
@@ -161,7 +183,7 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \setcounter{tocdepth}{1}
 
 % Try to make things more compact
-%\linespread{.9}
+% \linespread{.95}
 
 % ---- Sections & titles ----
 
@@ -179,59 +201,59 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 
 % New section-like for papers
 \makeatletter
-\newcommand\papersection[2][]{% OPTIONAL: shorttitle, misctext
-  \setkeys{kthpq@papersection}{#1}%
-  \@papersection{#2}%
-  \let\@misctext\defaultmisctext%
-  \let\@shorttitle\@nil
-}
+% \newcommand\papersection[2][]{% OPTIONAL: shorttitle, misctext
+%   \setkeys{kthpq@papersection}{#1}%
+%   \@papersection{#2}%
+%   \let\@misctext\defaultmisctext%
+%   \let\@shorttitle\@nil
+% }
 
-\let\@shorttitle\@nil
-\define@key{kthpq@papersection}{misctext}{\def\@misctext{#1}}
-\define@key{kthpq@papersection}{shorttitle}{\def\@shorttitle{#1}}
+% \let\@shorttitle\@nil
+% \define@key{kthpq@papersection}{misctext}{\def\@misctext{#1}}
+% \define@key{kthpq@papersection}{shorttitle}{\def\@shorttitle{#1}}
 
-\DeclareCiteCommand{\@papersection}
-{%
-  \pagetrackerfalse%
-  \citetrackerfalse%
-  \usebibmacro{prenote}%
-  \defcounter{maxnames}{99}%
-  \sffamily%
-  \let\theoldsection\thesection
-  \renewcommand{\thesection}{\papername\ \Alph{section}}
-}
-{%
-  \ifx\@shorttitle\@nil
-    \section{\thefield{labeltitle}}
-  \else
-    \section[\@shorttitle]{\thefield{labeltitle}}
-  \fi
-  % % automatically add label (outside labels don't detect this section)
-  % \label{PS:\strfield{entrykey}}
-  \printnames{author}.
-  \ifentrytype{article}{%
-    In \usebibmacro{tryfjournal},
-  }{}%
-  \ifentrytype{inbook}{%
-    In \printfield{booktitle},
-  }{}%
-  \ifentrytype{incollection}{%
-    In \printfield{booktitle},
-  }{}%
-  \ifentrytype{inproceedings}{%
-    In \printfield{booktitle},
-  }{}%
-  \ifentrytype{misc}{%
-    \@misctext\ifx\@misctext\empty\else, \fi%
-  }{}%
-  \printfield{year}.
-  \printfield{doi}\printfield[eprint:arxiv]{eprint}%
-}
-{}
-{%
-  \usebibmacro{postnote}%
-  \let\thesection\theoldsection
-}
+% \DeclareCiteCommand{\@papersection}
+% {%
+%   \pagetrackerfalse%
+%   \citetrackerfalse%
+%   \usebibmacro{prenote}%
+%   \defcounter{maxnames}{99}%
+%   \sffamily%
+%   \let\theoldsection\thesection%
+%   \renewcommand{\thesection}{\Alph{section}}%
+% }
+% {%
+%   \ifx\@shorttitle\@nil%
+%     \section{\thefield{labeltitle}}%
+%   \else%
+%     \section[\@shorttitle]{\thefield{labeltitle}}%
+%   \fi%
+%   % % automatically add label (outside labels don't detect this section)
+%   % \label{PS:\strfield{entrykey}}
+%   \printnames{author}.
+%   \ifentrytype{article}{%
+%     In \usebibmacro{tryfjournal},
+%   }{}%
+%   \ifentrytype{inbook}{%
+%     In \printfield{booktitle},
+%   }{}%
+%   \ifentrytype{incollection}{%
+%     In \printfield{booktitle},
+%   }{}%
+%   \ifentrytype{inproceedings}{%
+%     In \printfield{booktitle},
+%   }{}%
+%   \ifentrytype{misc}{%
+%     \@misctext\ifx\@misctext\empty\else, \fi%
+%   }{}%
+%   \printfield{year}.
+%   \printfield{doi}\printfield[eprint:arxiv]{eprint}%
+% }
+% {}
+% {%
+%   \usebibmacro{postnote}%
+%   \let\thesection\theoldsection
+% }
 
 % Adding bibliographic data to ToC
 % can't patch this command for some reason so here's the full thing
@@ -306,6 +328,7 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 ]{theorem-margin}
 
 \declaretheorem[style=theorem-margin, parent=chapter]{theorem}
+\RenewCommandCopy{\theHtheorem}{\thetheorem}  % fix issue with thmtools and hyperref
 \declaretheorem[style=theorem-margin, numbered=no, name=Theorem]{theorem*}
 \declaretheorem[style=theorem-margin, sibling=theorem]{proposition}
 \declaretheorem[style=theorem-margin, sibling=theorem]{corollary}
@@ -322,8 +345,6 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \declaretheorem[style=plain-margin, sibling=theorem]{remark}
 \declaretheorem[style=plain-margin, sibling=theorem]{example}
 \declaretheorem[style=plain-margin, sibling=theorem]{notation}
-
-% \declaretheorem[style=plain-bird, numbered=no, name=Definition]{definition**}
 
 % Add a footnote right before the period of the theorem head.
 % This version is designed to be used with cleveref. The commented out lines (1)
@@ -351,6 +372,8 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 % ---- floats ----
 
 % \captionsetup[subfigure]{justification=centering}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
 
 % ---- non-math commands ----
 
@@ -378,52 +401,7 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \newcommand{\ir}[1]{{\color{brick} #1}}
 \def\mydinkus{\par\noindent\hfill\textasciitilde~$\cdot$~\textasciitilde\hfill\null\par}
 
-% in-margin highlights
-\makeatletter
-\def\notate{\@dblarg\kthpq@highlight}
-\def\term{\@dblarg\kthpq@term}
-\newcommand{\kthpq@term}[2][]{\kthpq@highlight[#1]{\textbf{#2}}}
-
-% % Fix value (3) for same-note line spacing,
-% % Fix value (2) for vertical alignment with the text.
-% % After fixing (2) and (3), fix value (1) for multiple-note spacing.
-% \marginparpush=1.2\baselineskip  % (1)
-% \newcommand{\kthpq@highlight}[2][]{%
-%   \leavevmode% I don't remember why
-%   \checkoddpage
-%   \marginpar{%
-%     \ifoddpageoroneside
-%       \raggedright
-%     \else
-%       \raggedleft
-%     \fi
-%     \vspace{-5pt}  % (2)
-%     \begin{spacing}{.7}  % (3)
-%       \scriptsize\sffamily #1
-%     \end{spacing}
-%   }%
-%   \penalty\@M% no linebreak after hspace
-%   \hspace{0pt}% allow hyphenation by inserting a zero-width thing
-%   #2%
-% }
-% \makeatother
-
-% \newcommand{\fallbackhighlight}[1]{%
-%   \marginnote{%
-%     \ifoddpageoroneside%
-%       \raggedright%
-%     \else%
-%       \raggedleft%
-%     \fi%
-%     \scriptsize\sffamily #1%
-%   }
-% }
-
-% % Uncomment to remove margin notes
-\makeatletter
-\newcommand{\kthpq@highlight}[2][]{\index{#1}#2}
-\makeatother
-\newcommand{\fallbackhighlight}[1]{\index{#1}}
+% ---- INDEX ----
 
 \indexsetup{othercode=\small}
 \makeindex[intoc]
