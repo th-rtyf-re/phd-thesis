@@ -393,13 +393,13 @@ def plot_barcode(diag):
     # diagonal
     
     ax[0].set_title('Barcode')
-    ax[0].set_xlabel('filtration value')
+    ax[0].set_xlabel('filtration value (mm)')
     ax[0].set_yticks([])
     
     ax[1].axis("equal")
     ax[1].set_title("Persistence diagram")
-    ax[1].set_xlabel("birth")
-    ax[1].set_ylabel("death")
+    ax[1].set_xlabel("birth (mm)")
+    ax[1].set_ylabel("death (mm)")
     ax[1].legend(legend_artists, [r"$𝐻_0$", r"$𝐻_1$"], facecolor="none", edgecolor="none", handlelength=0.)
     
     fig.tight_layout()
@@ -416,7 +416,8 @@ def barcode_stuff():
     diag_array = np.zeros((len(diag), 3), dtype=float)
     for i, element in enumerate(diag):
         diag_array[i] = (element[1][0], element[1][1], element[0])
-    diag_array[:, :2] = np.sqrt(diag_array[:, :2])
+    # square root of alpha values + scaling for printed version
+    diag_array[:, :2] = np.sqrt(diag_array[:, :2]) / 72.27 * 25.4
     diag_array = diag_array[np.lexsort((diag_array[:, 1], diag_array[:, 0], diag_array[:, 2]))]
     # print(diag_array)
     plot_barcode(diag_array)
@@ -430,5 +431,13 @@ def flipbook_stuff():
 if __name__ == "__main__":
     # visualize()
     # render_frame(10, render_tetras=True, debug=True)
-    flipbook_stuff()
-    # barcode_stuff()
+    # flipbook_stuff()
+    barcode_stuff()
+
+"""
+# get conversion from pt to mm
+u = 1 / 72.27 * 25.4
+# get threshold values in printed mm
+a = np.linspace(0, 17, endpoint=True, num=44)
+u * a[0], u * a[17], u * a[34]
+"""

@@ -94,18 +94,18 @@ We now present some typical constructions for filtered simplicial complexes in T
   \hfill
   \begin{subfigure}{.3\textwidth}
     \centering
-    \input{figs/flip/leo-17.pgf}
+    \input{figs/flip/leo-18.pgf}
     \caption{}
     \label{F:Cech-mid}
   \end{subfigure}
   \hfill
   \begin{subfigure}{.3\textwidth}
     \centering
-    \input{figs/flip/leo-34.pgf}
+    \input{figs/flip/leo-36.pgf}
     \caption{}
     \label{F:Cech-high}
   \end{subfigure}
-  \caption[The Čech filtration of the flip book example at three threshold levels.]{The Čech filtration of the flip book example (in the bottom corner of right-side pages), which consists the the points (\subref{F:Cech-low}) in $\R^2$, at threshold levels $t = 0$, $17$, and $34$ (in arbitrary units), respectively.
+  \caption[The Čech filtration of the flip book example at three threshold levels.]{The Čech filtration of the flip book example (in the bottom corner of right-side pages), which consists the the points (\subref{F:Cech-low}) in $\R^2$, at threshold levels $t = 0$, $2.5$, and $5\,\textrm{mm}$, respectively.
   $0$-simplices are represented as points, $1$-simplices as edges, $2$-simplices as lightly shaded triangles, and $3$-simplices as darker quadrilaterals. Higher-dimensional simplices are not shown.
   The outline is the subset of $\R^2$ whose distance from the points is the threshold level\footnotemark.}
   \label{F:Cech}
@@ -361,7 +361,7 @@ We have strayed far enough our persistent homology pipeline. Let us return to th
 \end{definition}
 
 \begin{definition}
-  A \index{multiset (for multisets)}\textbf{multiset} is a set $X$ equipped with a \index{multiplicity}\textbf{multiplicity} function $m_X \colon X \to \N \setminus \{0\}$. A multiset is \textbf{finite} if its underlying set is finite. We often omit the multiplicity function when writing multisets.
+  A \index{multiset}\textbf{multiset} is a set $X$ equipped with a \index{multiplicity (for multisets)}\textbf{multiplicity} function $m_X \colon X \to \N \setminus \{0\}$. A multiset is \textbf{finite} if its underlying set is finite. We often omit the multiplicity function when writing multisets.
   
   We can iterate over a multiset $X$ by indexing its elements by a set. For instance, we can write $X = \{x_\alpha\}_{\alpha \in A}$ with $A$ the indexing set.
 \end{definition}
@@ -443,7 +443,7 @@ In TDA, not only are we interested in the topological features of a data set, bu
 \begin{definition}
 \label{!D:distance}
 \label{!D:Wasserstein}
-  Let $X$ and $Y$ be sets. A \index{matching, partial}(\textbf{partial}) \textbf{matching of $X$ and $Y$} is a subset $M$ of $X \times Y$ such that each element of $X$ and each element of $Y$ appears at most once. We denote by \index{.b matchxy@$\Match$}$\Match(X, Y)$ the set of all matchings between $X$ and $Y$.
+  Let $X$ and $Y$ be sets. A \index{matching, partial}(\textbf{partial}) \textbf{matching of $X$ and $Y$} is a subset $M$ of $X \times Y$ such that each element of $X$ and each element of $Y$ appears at most once. We denote by \index{.b match@$\Match$}$\Match(X, Y)$ the set of all matchings between $X$ and $Y$.
 
   A partial matching of multisets is defined similarly, as a sub-multiset $M$ of $X \times Y$ (where the multiplicity of $(x, y)$ is $m_{X \times Y}(x, y) \coloneq m_X(x) m_Y(y)$), such that each element $x$ of $X$ (resp.\ $y$ of $Y$) appears at most $m_X(x)$ (resp.\ $m_Y(y)$) times.
   
@@ -585,9 +585,9 @@ As noted in \cref{R:no-barcode}, generalized persistence modules do not have bar
 \label{!D:rank-function}
   Let $V$ be a persistence module indexed by $(I, \mathord{\leq})$. The \index{rank function}\textbf{rank function of $V$} is the function
   \[
-    \rank(V) \colon \left\{ \begin{array}{ccc}
+    \rank V \colon \left\{ \begin{array}{ccc}
       \Omega(I) & \to & \N \\
-      (s \leq t) & \mapsto & \rank(V(s \leq t)),
+      (s \leq t) & \mapsto & \rank V(s \leq t),
     \end{array} \right.
   \]
   where \index{.g ωi@$\Omega(I)$}$\Omega(I)$ is the set $\{(s, t) \in I \times I \mid s \leq t\}$.
@@ -758,11 +758,13 @@ When $T$ overlaps $S$ above, the morphisms of $\hom(\K_{S}, \K_{T})$ are all of 
   \hfill
   \begin{subfigure}[tbp]{.45\textwidth}
     \[
-      F = \bordermatrix{%
-        & (a_2, b_2) & (a_1, b_1) \cr
-        (c_1, d_1) & 1 & 1 \cr
-        (c_2, d_2) & 0 & 1
-      }
+      F = \begin{blockarray}{c cc}
+        & (a_2, b_2) & (a_1, b_1) \\
+        \begin{block}{c [cc]}
+          (c_1, d_1) & 1 & 1 \\
+          (c_2, d_2) & 0 & 1 \\
+        \end{block}
+      \end{blockarray}
     \]
   \end{subfigure}
   \caption[Representation of a morphism and its only ordered matrix representation]{Representation of a morphism $f \colon K(a_1,b_1) \oplus K(a_2,b_2) \rightarrow K(c_1,d_1) \oplus K(c_2,d_2)$ and its only ordered matrix representation $F$ (with coefficients in $\bf{F}_2$). An arrow between two bars $K(a_j,b_j)$ and $K(c_i,d_i)$ corresponds to a nonzero coefficient $F_{ij}$.}
@@ -1023,7 +1025,7 @@ As we have seen in \cref{!D:distance}, matchings of barcodes and persistence dia
   \[
     \cc{X}_{t^\tau} \coloneq \{(\langle r_i^\pm, t^\tau \rangle, \langle s_i^\pm, t^\tau \rangle) \mid 1 \leq i \leq m \}.
   \]
-  The \index{.c xmatching@$\symcal {X}$-matching}\textbf{$\cc{X}$-matching of the monomorphism $f$}, denoted by $\cc{X}(f)$, is defined as the union
+  The \index{.c xmatching@$\symcal {X}$-matching (induced matching)}\textbf{$\cc{X}$-matching of the monomorphism $f$}, denoted by $\cc{X}(f)$, is defined as the union
   \[
     \cc{X}(f) \coloneq \bigcup_{t \in \R, \tau \in \{-, +\}} \cc{X}_{t^\tau}  \in \Match(\barcode(V), \barcode(W)).
   \]

@@ -317,11 +317,14 @@ Let $f \colon \bigoplus_{j \in J} K(a_j, b_j) \to \bigoplus_{i \in I} K(c_i, d_i
 \begin{example}
 For example, the only ordered matrix representation of the morphism represented in Figure \ref{C!fig:morphism_in_Bar} is:
 \[
-    F = \bordermatrix { 
-    & \langle a_1,b_1 \rangle & \langle a_2,b_2 \rangle \cr 
-    \langle c_1,d_1 \rangle & 1 & 1 \cr
-    \langle c_2,d_2 \rangle & 1 & 0 \cr}
-    \qedhere
+  F = \begin{blockarray}{c cc}
+    & \langle a_1,b_1 \rangle & \langle a_2,b_2 \rangle \\
+    \begin{block}{c [cc]}
+      \langle c_1,d_1 \rangle & 1 & 1 \\
+      \langle c_2,d_2 \rangle & 1 & 0 \\
+    \end{block}
+  \end{blockarray},
+  \qedhere
 \]
 \end{example}
 
@@ -1571,7 +1574,7 @@ We deduce that our induced matching $\mu(f)$ is a representation of the (multise
 \subsection{Sizes and ranks of (co)kernels}
 \label{C!SS:coker}
 
-In this section we prove some results in the category $\Pfd$. In particular, we highlight a connection between rank functions and $p$-norms, which yields new proofs of results in \cite[Section 3]{AGRS2025}.
+In this section we prove some results in the category $\Pfd$. In particular, we highlight a connection between rank functions and $p$-norms, which yields new proofs of results in \cite[Section 3]{AGRS2025}. We denote by $\rk f$ the rank of a linear map $f$.
 
 \begin{proposition}
 \label{C!P:cokernel-rank}
