@@ -1,5 +1,9 @@
 # -*-coding:utf8-*-
 
+"""
+Render torus for illustrating Morse functions.
+"""
+
 import pyvista as pv
 
 pv.global_theme.transparent_background = True
@@ -55,5 +59,5 @@ def make_nested(heights=[-.7, 0, .7, 2], csradius=[.8, .7, .6, .5]):
     plotter.show()
 
 if __name__ == "__main__":
-    # render_figs()
-    make_nested()
+    render_figs()
+    # make_nested()

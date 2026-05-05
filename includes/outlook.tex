@@ -109,14 +109,14 @@ where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{
   where the Jacobian of the change of parameters is
   \[
     J_\varphi = \bordermatrix{%
-    & s & t & a_2 & b_2 & \cdots & a_n & b_n & \cr
-    p_1 & 1 & 0 \cr
-    q_1 & 0 & 1 \cr
-    p_2 & a_2 & 0 & s & 1 \cr
-    q_2 & 0 & a_2 & t & 1 \cr
-    \vdots & \vdots & \vdots &&& \ddots \cr
-    p_n & a_n & 0 &&&& s & 1 \cr
-    q_n & 0 & a_n &&&& t & 1
+      & s & t & a_2 & b_2 & \cdots & a_n & b_n & \cr
+      p_1 & 1 & 0 \cr
+      q_1 & 0 & 1 \cr
+      p_2 & a_2 & 0 & s & 1 \cr
+      q_2 & 0 & a_2 & t & 1 \cr
+      \vdots & \vdots & \vdots &&& \ddots \cr
+      p_n & a_n & 0 &&&& s & 1 \cr
+      q_n & 0 & a_n &&&& t & 1
     }
   \]
   In particular, we have $|\det J_\varphi| = (t - s)^{n - 1}$.
@@ -145,10 +145,6 @@ where $\Omega \coloneq \{(\vec{x}, \vec{y}) \in (\R^n)^2 \mid \vec{x} \leq \vec{
 \end{proof}
 
 From here, we can study the pseudometric induced by this noise system, including its computation and applications. We can also compare with existing notions of $\ell^p$-distances on multiparameter persistence modules \cite{BakkeBjerkevikLesnick2021}. 
-
-% \section{Matching costs}
-
-% $\| \mu_1 \bullet \mu_2 \|_p \leq \| \mu_1 \|_p \| \mu_2 \|_p$ ?
 
 \section{\texorpdfstring{$p$}{p}-norms of extensions}
 

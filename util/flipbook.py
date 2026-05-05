@@ -1,5 +1,10 @@
 # -*-coding:utf8-*-
 
+"""
+Rough code for visualizing a filtered simplicial complex and producing a flip
+book.
+"""
+
 import gudhi as gd
 import itertools as it
 import miniball
@@ -23,7 +28,6 @@ font_manager.fontManager.addfont(font_path)
 prop = font_manager.FontProperties(fname=font_path)
 
 font_path = "/Users/rtyf/Library/Fonts/XCharter-Math.otf" # Your font path goes here
-# font_path = "/usr/local/texlive/2025/texmf-dist/fonts/opentype/public/xcharter-math/XCharter-Math.otf"
 font_manager.fontManager.addfont(font_path)
 prop = font_manager.FontProperties(fname=font_path)
 
@@ -257,7 +261,7 @@ def render_frame(threshold, file_prefix=None, frame_id=None, render_tetras=False
 
 def render_to_pgf(
         f,                      # output file
-        sls_xys,                # ripple coords
+        sls_xys,                # ripple (sublevel set) coords
         tri_patch_xys,          # triangle coords (unioned)
         tetra_patch_xys,        # tetrahedra coords (unioned)
         lines,                  # edge coords
@@ -387,10 +391,6 @@ def plot_barcode(diag):
             c = ("#000061", "#E86A58")[dim]
             ax[0].plot([b, d], [i, i], color=c, lw=3)
             legend_artists[dim], = ax[1].plot(b, d, color=c, marker='o', markersize=5)
-    # random infinite bar?
-    # ax[0].plot([0, inf_end], [-1, -1], color="#000061", lw=3)
-    # ax[1].plot(0, inf_end, color="#000061", marker='o', markersize=5)
-    # diagonal
     
     ax[0].set_title('Barcode')
     ax[0].set_xlabel('filtration value (mm)')
@@ -410,7 +410,7 @@ def plot_barcode(diag):
 
 
 def barcode_stuff():
-    cpx = gd.AlphaComplex(points=coords).create_simplex_tree()  # output_squared_values=False is an option
+    cpx = gd.AlphaComplex(points=coords).create_simplex_tree()
     cpx.compute_persistence()
     diag = cpx.persistence(persistence_dim_max=2)
     diag_array = np.zeros((len(diag), 3), dtype=float)
@@ -419,7 +419,6 @@ def barcode_stuff():
     # square root of alpha values + scaling for printed version
     diag_array[:, :2] = np.sqrt(diag_array[:, :2]) / 72.27 * 25.4
     diag_array = diag_array[np.lexsort((diag_array[:, 1], diag_array[:, 0], diag_array[:, 2]))]
-    # print(diag_array)
     plot_barcode(diag_array)
 
 def flipbook_stuff():
@@ -435,9 +434,10 @@ if __name__ == "__main__":
     barcode_stuff()
 
 """
-# get conversion from pt to mm
+# Explanation for getting print-accurate units
+# (1) get conversion from pt to mm
 u = 1 / 72.27 * 25.4
-# get threshold values in printed mm
+# (2) get threshold values in printed mm
 a = np.linspace(0, 17, endpoint=True, num=44)
 u * a[0], u * a[17], u * a[34]
 """

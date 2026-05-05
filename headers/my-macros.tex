@@ -6,7 +6,6 @@
 \newcommand{\bb}{\mathbb}
 \renewcommand{\bf}{\mathbf}
 \newcommand{\cat}{\mathbf}
-% \setmathfontface\cat{Figtree Semibold}[Scale=\fontscale]
 \newcommand{\cc}{\mathcal}
 
 % single letter
@@ -58,48 +57,28 @@
 
 % ---- btb ----
 
-\usepackage[ruled]{algorithm2e}
-\usepackage{blkarray}
-
-% \newcommand{\th}{\text{th}}
-\newcommand{\TT}{\top}%transpose symbol
-
 \newcommand{\E}{\mathbb{E}}
-
 \newcommand{\B}{\mathcal{B}}
-\newcommand{\Int}{\mathsf{Int}}
 
-% \DeclareMathOperator{\BarDec}{\mathsf{BarDec}}
-\DeclareMathOperator{\Dgm}{\mathsf{Dgm}}
-
-\DeclareMathOperator{\vect}{\mathsf{vect}}
-\DeclareMathOperator{\Mch}{\mathbf{Mch}}
-\DeclareMathOperator{\MchR}{\mathbf{Mch}^{\mathbf{R}}}
 \DeclareMathOperator{\Barc}{\mathbf{Barc}}
+\DeclareMathOperator{\Dgm}{\mathsf{Dgm}}
 \DeclareMathOperator{\rk}{rk}
-\DeclareMathOperator{\mult}{mult}
-\DeclareMathOperator{\PVect}{PVect}
 
 % ---- gM ----
 
-% \newcommand{\Po}{P}
-
 \newcommand{\Z}{\bf{Z}}
-% \newcommand{\RP}{\mathbb{R}\mathrm{P}}
-% \newcommand{\CP}{\mathbb{C}\mathrm{P}}
-% \newcommand{\dist}{{\mathrm{dist}_Y|_X}}
-
 \newcommand{\Poly}{\cc{P}}
-
-\DeclareMathOperator{\Id}{Id}
 \newcommand{\lini}{k}
 \newcommand{\quadi}{\iota}
+
+\DeclareMathOperator{\Id}{Id}
 
 \newcommand{\myemph}{\textbf}
 
 % ---- CI ----
 
 \newcommand{\CI}{\mathcal{C}}
+\newcommand{\TT}{\top}  % transpose symbol
 
 \newcommand{\distYX}{\mathord{\dist}_Y\big|_X}
 \newcommand{\ev}{\operatorname{ev}}
@@ -107,7 +86,7 @@
 
 % ==== INDEXING ====
 
-% ---- kappa ----
+% ---- indices without specific page numbers ----
 
 \makeatletter
 \newcommand{\gobblecomma}[1]{\@gobble{#1}\ignorespaces}
@@ -122,7 +101,7 @@
 \index{.g δ@$\Delta$!ZZfat diagonal@\gobblecomma|see{fat diagonal}}
 \index{variety, real algebraic!ZZcomplete@\gobblecomma|seealso{complete intersection}}
 
-% ---- papers ----
+% ---- indices for included PDFs ----
 
 % Switch case for numbers: https://tex.stackexchange.com/a/629224/216213
 \makeatletter

@@ -1,59 +1,5 @@
 % !TEX root = ../thesis-main.tex
 
-% \documentclass{amsart}
-
-% \usepackage{amsmath}
-% \usepackage{amssymb}
-% \usepackage{mathtools}
-% \usepackage{mathrsfs}
-% \usepackage{comment}
-
-% \usepackage[english]{babel}
-% \usepackage[utf8]{inputenc}
-% \usepackage[T1]{fontenc}
-
-% \parskip4pt plus2pt minus2pt
-
-% \usepackage[top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}%[top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
-
-
-% \usepackage{graphicx}
-% \usepackage[colorinlistoftodos]{todonotes}
-% \usepackage[colorlinks=true, allcolors=blue]{hyperref}
-% \usepackage[noadjust]{cite}
-% \usepackage{enumitem}
-% \setlist[1]{itemsep=3pt}
-% \usepackage{tikz}
-% \usetikzlibrary{calc,arrows.meta,cd}
-% \usepackage[capitalise]{cleveref}
-% \usepackage{setspace}
-% \usepackage{subcaption}
-
-% \expandafter\def\csname ver@etex.sty\endcsname{3000/12/31}
-% \let\globcount\newcount
-% \usepackage{autonum}
-% \usepackage{thm-restate}
-
-% \newtheorem{theorem}[subsubsection]{Theorem}
-% \newtheorem{proposition}[subsubsection]{Proposition}
-% \newtheorem{corollary}[subsubsection]{Corollary}
-% \newtheorem{lemma}[subsubsection]{Lemma}
-% \newtheorem*{problem}{Problem}
-
-% \theoremstyle{definition}
-% \newtheorem{definition}[subsubsection]{Definition}
-
-% \theoremstyle{remark} 
-% \newtheorem{remark}[subsubsection]{Remark}
-% \newtheorem{example}[subsubsection]{Example}
-% \newtheorem{exercise}[subsubsection]{Exercise}
-
-% \newcommand{\be}{\begin{equation}}
-% \newcommand{\ee}{\end{equation}}
-
-% \newcommand\comm[1]{\textbf{\textcolor{orange}{[#1]}}}
-% \newcommand\ir[1]{{\color{magenta} #1}}
-
 % \title[Morse Theory of Euclidean Distance Functions from Algebraic Hypersurfaces]{Morse Theory of Euclidean Distance Functions from Algebraic Hypersurfaces}
 % \author{Andrea Guidolin, Antonio Lerario, Isaac Ren, and Martina Scolamiero}
 % \address{University of Southampton, School of Mathematical Sciences, SO17 1BJ Southampton, UK}
@@ -726,7 +672,7 @@ Since $\partial_x(\dist_Y)$ is convex and $\mathrm{proj}_{T_xX}$ is linear, this
 The latter equality is equivalent to $v \in N_xX$, and the second statement follows.
 \end{proof}
 
-\begin{remark}%\label{D!remark:restriction}
+\begin{remark}
 In \cref{D!P:squared-distance-subgradient,D!propo:subgradient1,D!propo:subgradient2,D!coro:projection}, the only assumptions are that $Y$ is closed and that $X$ is smooth. In particular, definability and transversality are not used here.
 \end{remark}
 
@@ -1462,9 +1408,9 @@ Let $\Poly_d$ be the space of real polynomials of degree $d$ in $\R^n$. There ex
 Fix $d$ a polynomial degree, $p \in \Poly_d$ a polynomial, and $\vec{x} \coloneq (x_1, \ldots, x_k) \in (\R^{nk} \setminus \Delta)$ points in $\R^n$. The differential of $F$ at $(p, x)$ is a linear map
 \[
   DF_{p, \vec{x}} \colon \left\{ \begin{array}{ccc}
-    T_{p, \vec{x}} \Poly_d \times \R^{nk}% = \Poly_d \times \R^{nk}
+    T_{p, \vec{x}} \Poly_d \times \R^{nk}
     & \to
-    & T_{F(p, \vec{x})} {}_k J^r(\R^n, \R)% = \R^{nk} \oplus \bigoplus_{\ell = 0}^r (\Poly_{\ell, n})^k
+    & T_{F(p, \vec{x})} {}_k J^r(\R^n, \R)
   \\
     (\dot{p}, \vec{\dot{x}})
     & \mapsto
@@ -1497,23 +1443,6 @@ If $k \leq n + 1$ and $r = 2$, then we can take $d(n, k, r) = 4$. Indeed, we com
 \end{align}
 We determine the sign of \eqref{D!E:simplified} by looking at the derivative of the last factor: $3n^2 - 6n + 14$ has discriminant $36 - 4 \cdot 3 \cdot 14 < 0$ and value $14 > 0$ at $n = 0$, so the derivative is always positive. At $n = 1$, we have $n^3 - 3n^2 + 14n = 12$, so for all $n \geq 1$, \eqref{D!E:simplified} is positive.
 \end{example}
-%\subsection{Generic transversality}Here we prove that for the generic choice of the pair $(p, q)$, the zero set of $p$ is transverse to both $Z(q)$ and the closure of its medial axis.
-%\begin{proposition}
-%\label{D!P:transverse-Y-MY}
-%For $d_1, d_2 \geq 0$ and generic $p\in \Poly_{d_1}$ and $q\in\Poly_{d_2}$, $X$ is transverse to $Y$ and $\overline{M_Y}$.
-%\end{proposition}
-%
-%\begin{proof}
-%We prove the statement by showing that the set $S \coloneq \{(p, q) \in \Poly_{d_1} \times \Poly_{d_2} \mid X \not \pitchfork Y \text{ or } X \not \pitchfork \overline{M_Y}\}$ is semialgebraic of measure $0$ in $\Poly_{d_1} \times \Poly_{d_2}$. Indeed, this would imply that the set $S$ has codimension at least $1$, making it nowhere dense, and thus its complement is a residual set.
-%
-%The fact that $S$ is semialgebraic follows from the fact that $\overline{M_Y}$ is semialgebraic: taking a stratification of $\overline{M_Y}$, being transverse to it is a semialgebraic property; the same is true for $Y$.
-%
-%Next, let $T$ be a stratum of $Y$ or $\overline{M_Y}$, and consider the evaluation map $F^{\operatorname{ev}} \colon \Poly_{d_1} \times T \to \R$ sending $(p, x)$ to $p(x)$. It is clear that $F^{\operatorname{ev}}$ is a submersion. We observe that $Z(p)$ is transverse to $T$ if, and only if, $0$ is a regular value of $p_{|T}$, which is equivalent to $F^{\operatorname{ev}}(p, -)$ being transverse to $\{0\}$. We therefore use parametric transversality with $W = \{0\}$: the set
-%\[
-%\{p \in \Poly_{d_1} \mid 0 \text{ regular value of } p_{|T}\}
-%\]
-%is residual in $\Poly_{d_1}$. Since $Y$ and $\overline{M_Y}$ can be stratified into finitely many disjoint strata, we conclude that the set $\{p \in \Poly_{d_1} \mid X \pitchfork Y \text{ and } X \pitchfork \overline{M_Y}\}$ is residual in $\Poly_{d_1}$. Thus, for all $q$ in $\Poly_{d_2}$, the set $S(q) \coloneq \{p \in \Poly_d \mid X \not \pitchfork Y \text{ or } X \not \pitchfork \overline{M_Y}\}$ is semialgebraic of measure $0$. By Fubini's theorem, we conclude that $S$ also has measure $0$.
-%\end{proof}
 
 
 \subsection{Finite number of closest points}In this section we prove an analogue of \cite[Proposition 3]{Yomdin1981}, showing that generically the function $m_Y$ is bounded by $n+1$. 

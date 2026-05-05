@@ -1,89 +1,5 @@
 % !TEX root = ../thesis-main.tex
 
-% \documentclass[numberwithinsect, cleveref, autoref]{lipics-v2021}
-% \nolinenumbers
-% % \usepackage[scale=.75]{geometry} % scale is the portion of the paper that is used. Default is 0.7
-% \usepackage{graphicx}
-% \usepackage{caption}
-% \usepackage{subcaption}
-
-% %%%% FONT STUFF
-% % \usepackage[utf8]{inputenc}
-% % \usepackage[T1]{fontenc}
-
-% \usepackage{xspace}
-% \usepackage[autostyle=false]{csquotes}
-% % \usepackage{libertine}
-% % \usepackage[scaled=.85]{beramono}
-
-% %%%% MATH STUFF
-% \usepackage{hyperref}
-
-% \usepackage{mathtools,amssymb,stmaryrd}\allowdisplaybreaks
-% % \usepackage[libertine]{newtxmath}
-% % \newcommand\hmmax{0} % reduce number of fonts imported by bm
-% % \usepackage{bm}
-% \usepackage{booktabs}
-
-%%%% LISTS
-% \usepackage{enumitem}
-% \setlist[itemize]{label=\textbullet, topsep=1ex, itemsep=0ex, leftmargin=5ex}
-% \setlist[enumerate]{topsep=1ex, itemsep=0ex}
-
-%%%% THEOREMS
-
-% \usepackage[capitalise]{cleveref}
-
-% \theoremstyle{definition}
-% \newtheorem{definition2}[theorem]{Definition}
-% \newtheorem{Task}{task}
-
-% \swapnumbers
-
-%\theoremseparator{.}
-% \newtheorem{theorem}[subsection]{Theorem}
-% \newtheorem{proposition}[subsection]{Proposition}
-% \newtheorem{corollary}[subsection]{Corollary}
-% \newtheorem{lemma}[subsection]{Lemma}
-% \newtheorem{conjecture}[subsection]{Conjecture}
-
-% \theoremstyle{definition}
-% \newtheorem{definition}[subsection]{Definition}
-% \newtheorem{example}[subsection]{Example}
-% \newtheorem{fact}[subsection]{Fact}
-% \newtheorem{remark}[subsection]{Remark}
-% \newtheorem{todo}[subsection]{To do}
-
-%%%% TIKZ
-
-% \usepackage{tikz}
-% \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-%             \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
-% \usetikzlibrary{cd}
-% \usepackage{adjustbox}
-
-%%%% OTHER
-
-% \newcommand{\bigboxplus}{\mathop{\scalebox{1.5}{$\boxplus$}}\displaylimits}
-% \usepackage{scalerel}
-% \makeatletter
-% \DeclareMathOperator*{\bigboxplus}{\scalerel*{\ooalign{$\m@th\boxempty$\cr\hidewidth$\m@th+$\hidewidth\cr}}{\bigoplus}}
-% \makeatother
-
-
-
-% \newcommand{\ir}[1]{{\color{magenta} #1}}
-% \newcommand{\ag}[1]{{\color{teal} #1}}
-
-% ==== Metadata ====
-
-% \title{Barcode matchings and \texorpdfstring{$p$}{p}-norms of persistence modules}
-% % REFERENCE: \author{name}{affil}{email}{orcid}{funding}
-% \author{Andrea Guidolin}{University of Southampton}{}{}{}
-% \author{Arthur Reidenbach}{ENS Paris--Saclay}{}{}{}
-% \author{Isaac Ren}{KTH Royal Institute of Technology}{}{}{}
-% \author{Martina Scolamiero}{KTH Royal Institute of Technology}{}{}{}
-
 \paperchapter[Barcode matchings and $p$-norms]{GRRS2026}
 \newrefsection
 
@@ -217,9 +133,7 @@ Let $X$ be a persistence module in $\Pfd$. A \index{barcode decomposition}\textb
 \end{definition}
 
 \begin{remark}
-The decomposition theorem \cite{CrawleyBoevey2015,BotnanCrawleyBoevey2020} states that every persistence module  $X$ in $\Pfd$ admits a barcode decomposition  $\varphi_X \colon X \cong \bigoplus_i K(a_i, b_i)$. While the isomorphism $\varphi_X$ is not unique
-% \ir{(give an example)}
-, the direct sum of bars $\bigoplus_i K(a_i, b_i)$ is, up to reordering of the bars. In particular, we can speak of the \textbf{barcode} of an object in $\Pfd$ as well.  
+The decomposition theorem \cite{CrawleyBoevey2015,BotnanCrawleyBoevey2020} states that every persistence module  $X$ in $\Pfd$ admits a barcode decomposition  $\varphi_X \colon X \cong \bigoplus_i K(a_i, b_i)$. While the isomorphism $\varphi_X$ is not unique, the direct sum of bars $\bigoplus_i K(a_i, b_i)$ is, up to reordering of the bars. In particular, we can speak of the \textbf{barcode} of an object in $\Pfd$ as well.  
 \end{remark}
 
 \begin{remark}
@@ -543,7 +457,7 @@ Clearly the left map is bar-to-bar. The right map is bar-to-bar by doing a base 
 
 \begin{figure}[tbp]
 \centering
-\begin{tikzpicture}[scale = 0.4]%, baseline = {([yshift = .5ex](0, 2))}]
+\begin{tikzpicture}[scale = 0.4]
 \draw[line width=1pt]
   (2, 7) node[left]{$1$} -- (8, 7) node[right]{$4$}
   (4, 6) node[left]{$2$} -- (6, 6) node[right]{$3$}
@@ -752,7 +666,6 @@ The converse of the first statement is also true, but it follows from \cref{C!T:
 
 \begin{figure}[tbp]
 \centering
-% \includegraphics[width=0.95\textwidth]{Figures/bar-to-bar-example.pdf}
 \begin{subfigure}{.45\textwidth}
 \centering
 \begin{tikzpicture}[scale = 0.4]
@@ -1341,7 +1254,6 @@ R_{ij} & \text{if } i = \low(j) \text{ in } R, \\
 0 & \text{otherwise}.
 \end{cases}
 \]
-% \ag{($R$ is defined below by $M E = R \coloneq U^{-1} A$)}
 
 \begin{proposition}
 We use the notations introduced immediately above. Let $Z$ be the persistence module in $\Bar$ that is isomorphic to $\im(f)$.
@@ -1404,169 +1316,6 @@ We conclude that \cref{C!A:labeled-red} and \cite[Algorithm 1]{GST2025} return m
 \end{proof}
 
 We deduce that our induced matching $\mu(f)$ is a representation of the (multiset) $\cc{P}$-matching defined in \cite{GST2025}.
-% {\color{violet}(Not so sure about this but this might be useful to show that we recover the Spanish algorithm) If we have the following configuration (with columns  ordered by birth then death and row by death then birth):
-% \[
-% F = \bordermatrix { 
-%     & K(a_i,b_i) & K(a_s,b_s) & K(a_j,b_j)\cr 
-%     K(c_i,d_i) & . & 1 & . \cr
-%     K(c_s,d_s) & 1 & x & . \cr
-%     K(c_j,d_j) & . & 1 & . \cr}
-% \]
-% we can show that $K(a_s,b_s)$ and $K(c_s,d_s)$ overlap and we have the same result if there exist a valid entry at each side of $x$ in the same row and one below in the same column. Moreover, if an unvalid nonzero $x$ entry is created it implies that there is a valid entry at the left of $x$ and below it. Therefore all the entries above and at the right of $x$ can not be valid. To conclude that the two algorithms give the same pivots we can apply the pairing uniqueness lemma to say that $FV_1$ and $FV_2$ have the same pivots (with possibly unvalid entries) then say that removing the unvalid entries does not change the pivots since all the entries above are also unvalid.}
-
-
-% Now let $f$ be a morphism in $\Pfd$. Given a choice of representative $g$ in $\Bar$, we can define the induced matching $\mu(g)$. Recall that we consider matchings as multiset representations. The induced matching $\mu(g)$ induces a multiset matching $M(g)$, and we now show that this multiset matching does not depend on the choice of $g$.
-
-% {\color{magenta}
-% \begin{proposition}
-% Let $f$ be a morphism in $\Pfd$ and $g$ a representative in $\Bar$. The induced multiset matching $M(g)$ does not depend on the choice of $g$.
-% \end{proposition}
-
-% \begin{proof}
-% Let $g$ and $h \colon X \to Y$ be representatives of $f$ in $\Bar$, with $X$ and $Y$ the barcode decompositions of the domain and codomain of $f$, respectively. We have the following diagram:
-% \[
-% \begin{tikzcd}
-% \tilde{X}
-%   \arrow[r, two heads]
-%   \arrow[d, "\tilde{\varphi}" swap]
-% & X
-%   \arrow[r, "g"]
-%   \arrow[d, "\varphi" swap]
-% & Y
-%   \arrow[r, hook]
-%   \arrow[d, "\psi"]
-% & \tilde{Y}
-%   \arrow[d, "\tilde{\psi}"]
-% \\
-% \tilde{X}
-%   \arrow[r, two heads]
-% & X
-%   \arrow[r, "h" swap]
-% & Y
-%   \arrow[r, hook]
-% & \tilde{Y}
-% \end{tikzcd}
-% \]
-% where $\varphi \colon X \to X$ and $\psi \colon Y \to Y$ are the isomorphisms that relate $g$ and $h$ (all representatives of $f$ are isomorphic), $\tilde{X}$ and $\tilde{Y}$ are the persistence modules defined in \cref{C!P:image-barcode}, and $\tilde{\varphi}$ and $\tilde{\psi}$ are the induced maps on $\tilde{X}$ and $\tilde{Y}$.
-
-% First, we show that $\tilde{\varphi}$ is an isomorphism. Denoting by $\Phi$ the ordered matrix representation of $\varphi$ whose rows and columns are ordered lexicographically by birth than death, and similarly writing $\tilde{\Phi}$, we have the following equivalences:
-% \begin{itemize}
-% \item $\varphi$ is an isomorphism.
-% \item For all $t \in \R$, $\varphi_t \colon X_t \to X_t$ is an isomorphism.
-% \item For all $t \in \R$, every same-start-point block of $\Phi_t$ (the matrix $\Phi$ restricted to rows and columns whose label contains $t$) is invertible.
-% \item For all $t \in \R$, every same-start-point block of $\tilde{\Phi}_t$ is invertible.
-% \item For all $t \in \R$, $\tilde{\varphi}_t$ is an isomorphism.
-% \item $\tilde{\varphi}$ is an isomorphism.
-% \end{itemize}
-% Thus $\tilde{\varphi}$ is an isomorphism. We reason similarly for $\tilde{\psi}$, ordering the matrix labels by death than birth, and using same-endpoint blocks instead of same-start-point blocks. We deduce that $\tilde{g}$ and $\tilde{h}$ are isomorphic.
-
-% Similarly to \cref{C!P:unique-induced-matching}, we can view the morphisms $\tilde{g}$ and $\tilde{h}$ as objects in the category $\Fun(\R \times \{0 < 1 \}, \Vect_K)$. Applying \cref{C!A:labeled-red}, we deduce that these objects decompose into simple indecomposables (compare also with \cite[Theorem 5.3]{JNT2023}). As this decomposition is unique, we conclude that the pivots of $\tilde{G}$ and $\tilde{H}$ are the same up to permutation of identically labeled bars.
-
-% \textcolor{red}{(Isaac) continue from here, but I'm not sure if this is going to lead to something correct. The issue is that I don't know how to guarantee that these permutations are only between bars that were originally identical in $X$ and $Y$.}
-% \end{proof}
-% }
-
-% {\color{lightgray}
-% \begin{lemma}
-% \label{C!L:bar-permutation}
-% Let $F$ be a possibly countably infinite, column-finite matrix, and let $\Phi$ be a matrix that permutes two adjacent columns when multiplied on the right. Given the output $A = U F V$ of \cref{C!A:labeled-red} applied to the matrix $F$, there exist $U'$, $V'$ upper triangular invertible such that $A' \coloneq U' F \Phi V'$ is equal to $A$ up to permutation of identically labeled bars.
-% \end{lemma}
-
-% \begin{proof}
-% Consider the execution of \cref{C!A:labeled-red} on $F$. In particular, we can write
-% \[
-% V = \prod_{j' < j} (I - \lambda_{j', j} E_{j', j}),
-% \]
-% where the order in which we multiply matrices is given by the algorithm and $\lambda_{j', j} = 0$ if we do not add $A_{*, j'}$ to $A_{*, j}$. This notation is well defined because each pair of columns $(j', j)$ is only considered once in the algorithm.
-
-% Denote by $j_0$ and $j_0 + 1$ the indices of the two permuted columns. If we never add column $j_0$ to column $j_0 + 1$, then we set
-% \begin{equation}
-% \label{C!Eq:v-prime}
-% V' \coloneq \prod_{j' < j} (I - \lambda_{j', j} E_{\sigma(j'), \sigma(j)}),
-% \end{equation}
-% where $\sigma$ is the permutation $(j_0 \; j_0 + 1)$ on $J$. Every factor of this product is upper triangular and invertible, so $V'$ is so as well. We also show (by induction on the product defining $V'$) that $U F \Phi V'$ is equal to $A$ with columns $j_0$ and $j_0 + 1$ switched.
-
-% Now suppose that, at some point in the execution of the algorithm, we do add column $j_0$ to column $j_0 + 1$. Then we know that this happens only once, when the for loop is at index $j_0 + 1$. We define $V'$ as in \eqref{C!Eq:v-prime} except that
-% \begin{itemize}
-% \item every factor of the form $(I - \lambda_{j_0, j} E_{\sigma(j_0), \sigma(j)})$ with $j > j_0 + 1$ is replaced by $(I - \lambda_{j_0, j} E_{j_0 + 1, j} + \lambda_{j_0, j} E_{j_0, j})$ (note that $\sigma(j) = j$);
-% \item every factor of the form $(I - \lambda_{j_0 + 1, j} E_{\sigma(j_0 + 1), \sigma(j)})$ with $j > j_0 + 1$ is replaced by $(I - \lambda_{j_0 + 1, j} E_{j_0 + 1, j})$.
-% \end{itemize}
-% By this construction, we can show by induction on the product defining $V'$ that $A'' \coloneq U F \Phi V'$ has the same pivots as $A$. Moreover, the only part of the matrix $A''$ that does not have at most one nonzero coefficient on each row and column is column $j_0$. We can therefore multiply $U$ with some more row reduction operations to reduce $A''$ to $A'$, equal to $A$. This concludes the proof.
-% \end{proof}
-
-% \begin{lemma}
-% \label{C!L:extract-permutation}
-% Let $\varphi \colon X \to X$ be an isomorphism in $\Bar$ and $\Phi$ an ordered matrix representation whose columns and rows are either both ordered lexicographically by birth than death, or both ordered lexicographically by death than birth. Then $\Phi$ is equal to $U \Sigma V$, where $\Sigma$ is a permutation matrix (exactly one nonzero coefficient in each row and column) and $U$ and $V$ are invertible upper triangular.
-% \end{lemma}
-
-% \begin{proof}
-% We assume that the rows and columns of $\Phi$ are ordered lexicographically by birth than death; the other case is handled analogously. Consider the application of \cref{C!A:invertible-reduction} to $\Phi$. The algorithm is properly defined; we check some aspects here.
-% \begin{itemize}
-% \item In the first while loop, column operations only happen between columns with the same start-point. Indeed, the block in $\Phi$ whose rows and columns are labeled with a given start-point is a diagonal block of $\Phi$. Since $\Phi$ is invertible, this block must be of full rank, and so the lowest nonzero element of a column in this block must belong to a row in the block. Moreover, no column to the left of this block may have a lowest nonzero coefficient on a row of this block, as that column's label would not overlap above this block's rows' labels. In this block, the end-points are in increasing order, so all operations are valid: in particular, nonzero coefficients are always between overlapping bars.
-% \item In the second while loop, by design, the row operations only happen between rows with the same end-point. Once again, since the start-points in this block are in increasing order, all operations are valid.
-% \item In the third while loop, the column index $j'$ always exists because $\varphi$ is an isomorphism. Moreover, this $j'$ column only has one nonzero coefficient, so the column operation is valid.
-% \end{itemize}
-% The convergence of this algorithm can be verified as in the proof of \cref{C!L:good-alg}.
-
-% From the output of \cref{C!A:invertible-reduction}, we set $\Sigma \coloneq A$ and invert $U$ and $V$ to obtain $\Phi = U \Sigma V$, and this concludes the proof.
-% \end{proof}
-
-% \begin{algorithm}[tbp]
-% \caption{Reduction of invertible matrix representations}
-% \label{C!A:invertible-reduction}
-% \KwIn{an invertible matrix representation $M$ whose rows and columns are ordered by birth than death.}
-% \KwOut{a factorization $A = U M V$, where $A$ is a permutation matrix and $U$ and $V$ are invertible upper triangular.}
-
-% $V \leftarrow I$\;
-% $A \leftarrow M$\;
-% \For{$j = 1, 2, \ldots$}{%
-%   \While(\tcp*[f]{reduce by columns with same low}){$\exists j' < j, \; \low(j') = \low(j)$}{%
-%     $\lambda \leftarrow A_{\low(j), j} / A_{\low(j'), j'}$\;
-%     $A \leftarrow A (I - \lambda E_{j', j})$\;
-%     $V \leftarrow V (I - \lambda E_{j', j})$\;
-%   }
-%   $i \leftarrow \low(j)$\;
-%   $i_0 \leftarrow \min\{i' \in I \mid a_{i'} = a_i\}$ \tcp*{highest row with same start-point}
-%   \While(\tcp*[f]{reduce nonzero entries above low in same-start block}){$\exists i' \in \{i_0, \ldots, i - 1\}, \; A_{i', j} \neq 0$}{%
-%     $\lambda \leftarrow A_{i', j} / A_{i, j}$\;
-%     $A \leftarrow (I - \lambda E_{i', i}) A$\; 
-%     $U \leftarrow (I - \lambda E_{i', i}) U$\;
-%   }
-%   \While(\tcp*[f]{reduce nonzero entries above same-end block}){$\exists i' < i_0, \; A_{i', j} \neq 0$}{%
-%     Find $j'$ such that $\low(j') = i'$\;
-%     $\lambda \leftarrow A_{i', j} / A_{i, j}$\;
-%     $A \leftarrow A (I - \lambda E_{j', j})$ \ir{Why is this valid?}\;
-%     $V \leftarrow V (I - \lambda E_{j', j})$\;
-%   }
-% }
-% \Return{$A$, $U$, $V$}
-% \end{algorithm}
-
-% \begin{remark}
-% At first, one might think that we can apply \cref{C!A:labeled-red} to $\Phi$ to get the reduced matrix $A$. However, this is not possible in general, as the rows and columns of $\Phi$ are labeled by arbitrary intervals that may not be totally orderable. This is why we introduce \cref{C!A:invertible-reduction}.
-% \end{remark}
-
-% \begin{proposition}
-% Let $f \colon X \to Y$ be a morphism in $\Pfd$ and $g$ a representative in $\Bar$. The induced multiset matching $M(g)$ does not depend on the choice of $g$.
-% \end{proposition}
-
-% \begin{proof}
-% \ir{(Incredibly confusingly written; I will go over this again if I have time)}
-
-% Let $g$ and $h$ be representatives of $f$ in $\Bar$ and let $G$ and $H$ be ordered matrix representatives of $g$ and $h$, respectively. Then there exist invertible (labeled) matrices $\Psi$ and $\Phi$ such that $H = \Psi G \Phi$. By \cref{C!R:knowing-epi-suffices}, it suffices to show that \cref{C!A:labeled-red} applied to $\tilde{G}$ and $\tilde{H}$ (see \cref{C!P:image-barcode}) return matrices that are equal up to permutation of rows and columns whose original labels (i.e.\ in $G$ and $H$) are identically labeled, since this will lead to identical induced multiset matchings.
-
-% Let us show that $\tilde{G}$ and $\tilde{H}$ have the same pivots up to permutation of rows and columns with identical original labels (in $G$ and $H$), which implies that their reductions by \cref{C!A:labeled-red} are equal, up to said permutation. By \cref{C!L:extract-permutation}, there exist permutation matrices $\Sigma$ and $\Pi$ and upper triangular invertible matrices $U$, $V$, $U'$ and $V'$ such that $\Phi = U \Sigma V$ and $\Psi = U' \Pi V'$. Denote by $\tilde{U}$, $\tilde{\Sigma}$, and $\tilde{V}$ the relabelings of the matrices $U$, $\Sigma$, and $V$ where we replace each label $\langle a, b \rangle$ with $\langle a, \infty \rangle$. Denote by $\tilde{U}'$, $\tilde{\Pi}$, and $\tilde{V}'$ the relabelings of the matrices $U'$, $\Pi$, and $V'$ where we replace each label $\langle c, d \rangle$ with $\langle -\infty, d \rangle$. We check that the following equality of relabeled matrices holds:
-% \[
-% \tilde{H} = \tilde{U}' \tilde{\Pi} \tilde{V}' \tilde{G} \tilde{U} \tilde{\Sigma} \tilde{V}.
-% \]
-% Indeed, on the righthand side, a coefficient with column label $\langle a, \infty \rangle$ and row label $\langle -\infty, d \rangle$ is nonzero if, and only if, the coefficient in the original overlap multiplication, whose column label is $\langle a, b \rangle$ and row label is $\langle c, d \rangle$, is nonzero. \ir{In more details: in the original product $H = U' \Pi V' G U \Sigma V$, each coefficient can be expressed as the sum of a product of coefficients where the labels associated to each coefficient are properly overlapping. The only way for a label to not be properly overlapping is if they are disjoint, with $d < a$, and in this case the extended intervals are not overlapping either. Thus we check that the tilde-fied product has the exact same coefficients as the original product.}
-% Note also that $\tilde{\Pi}$ and $\tilde{\Sigma}$ are permutation matrices that only permute rows and columns whose original labels (in $\Pi$ and $\Sigma$) are identical.
-
-% Multiplying a matrix by an upper triangular matrix does not change the matrix's pivots \ir{(Prove this for elementary column and row operations and then conclude by induction)}, so we can ignore $\tilde{U}'$ and $\tilde{V}$. By \cref{C!L:bar-permutation} and induction on the decompositions of $\Pi$ and $\Sigma$ into permutations of adjacent rows and columns, we know that $\tilde{V}' \tilde{G} \tilde{U}$ has the same pivots as $\tilde{\Pi} \tilde{V}' \tilde{G} \tilde{U} \tilde{\Sigma}$ up to permutation of rows and columns whose original labels are identical. Therefore we can ignore $\tilde{\Pi}$ and $\tilde{\Sigma}$. Finally, as for $\tilde{U}'$ and $\tilde{V}$, we can ignore $\tilde{V}'$ and $\tilde{U}$ to conclude that $\tilde{G}$ and $\tilde{H}$ have the same pivots up to permutation of rows and columns with identical original labels. This concludes the proof.
-% \end{proof}
-% }
-
-% We can therefore define the \textbf{induced multiset matching} $M(f)$ for all morphisms $f$ in $\Pfd$, and this is a \ir{(alternate?)} proof that the $\cc{P}$-matching defined in \cite{GST2025} is unique \ir{i.e., does not depend on the choice of bases}.
 
 \section{Application to Wasserstein distances}
 \label{C!S:Wasserstein}

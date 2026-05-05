@@ -19,20 +19,6 @@
   defernumbers=true
 ]{biblatex-kthpq}
 
-% \makeatletter  % bibliography numbers in margin...
-% \defbibenvironment{bibliography}
-% {\list{\printtext[labelnumberwidth]{%
-%     \printfield{prefixnumber}%
-%     \printfield{labelnumber}}}
-% {\setlength{\bibhang}{0pt}%
-% \setlength{\leftmargin}{\bibhang}%
-% \setlength{\itemindent}{-\leftmargin}%
-% \setlength{\itemsep}{\bibitemsep}%
-% \setlength{\parsep}{\bibparsep}}}
-% {\endlist}
-% {\item}
-% \makeatother
-
 % ---- Formatting & layout ----
 
 \usepackage{microtype}
@@ -48,18 +34,18 @@
 
 % mathtools loaded at the top!
 \usepackage{amsthm,thmtools}  % thmtools for QED in any theorem
+\usepackage{blkarray}
 
 % ---- Floats ----
 
-% \usepackage{flafter} % force figures to appear after they are first referenced
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage[ruled,algochapter]{algorithm2e}
 
 % ---- Other ----
 
 \usepackage{tikz}
 \usetikzlibrary{babel,calc,cd}
-\usepackage[ruled,algochapter]{algorithm2e}
 
 \usepackage{imakeidx}
 
@@ -84,6 +70,7 @@
 
 % ---- Font ----
 
+% Improved font with ligatures (needs to be installed separately)
 \setmainfont{Georgia Pro}[
   Uprightfont = *-Regular,
   BoldFont = *-Bold,
@@ -150,34 +137,23 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \makeatletter
 % Flipbook stuff: inspired by nilsvu/latex-flipbook on GitHub
 % Current hunch is that pgfpicture sets the bounding box based on the vertices (the last path?)
-\newif\if@frontmatter
 \newcommand\abspagenumber{\inteval{\ReadonlyShipoutCounter+1}}
 \fancyfoot{}  % reset footer
 \fancyfoot[RO]{%
-  % \if@mainmatter%
   \AddToHookNext{shipout/background}{
     \ifnum\ReadonlyShipoutCounter<88\relax%
       \put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-\fpeval{trunc(\ReadonlyShipoutCounter / 2, 0)}.pgf}}%
     \fi
   }
-    %   \ifnum\thepage>179\relax%
-    %     \AddToHookNext{shipout/background}{\put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-34.pgf}}}%
-    %   \fi
-  %   \fi%
-  % \else%
-  %   \if@frontmatter%
-  %     \AddToHookNext{shipout/background}{\put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-0.pgf}}}%
-  %   \fi%
-  % \fi%
 }
 
 % Remove fancy headers from front matter and add check for front matter
 \let\oldfrontmatter\frontmatter
 \let\oldmainmatter\mainmatter
 \let\oldbackmatter\backmatter
-\def\frontmatter{\oldfrontmatter\@frontmattertrue\pagestyle{front-fancy}}
-\def\mainmatter{\oldmainmatter\@frontmatterfalse\pagestyle{fancy}}
-\def\backmatter{\oldbackmatter\@frontmatterfalse}
+\def\frontmatter{\oldfrontmatter\pagestyle{front-fancy}}
+\def\mainmatter{\oldmainmatter\pagestyle{fancy}}
+\def\backmatter{\oldbackmatter}
 \makeatother
 
 \setcounter{tocdepth}{1}
@@ -199,64 +175,9 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
   {\sffamily\fontsize{12pt}{12pt}\selectfont\bfseries}
   {\inleftmargin{\thesubsection}}{0em}{}
 
-% New section-like for papers
-\makeatletter
-% \newcommand\papersection[2][]{% OPTIONAL: shorttitle, misctext
-%   \setkeys{kthpq@papersection}{#1}%
-%   \@papersection{#2}%
-%   \let\@misctext\defaultmisctext%
-%   \let\@shorttitle\@nil
-% }
-
-% \let\@shorttitle\@nil
-% \define@key{kthpq@papersection}{misctext}{\def\@misctext{#1}}
-% \define@key{kthpq@papersection}{shorttitle}{\def\@shorttitle{#1}}
-
-% \DeclareCiteCommand{\@papersection}
-% {%
-%   \pagetrackerfalse%
-%   \citetrackerfalse%
-%   \usebibmacro{prenote}%
-%   \defcounter{maxnames}{99}%
-%   \sffamily%
-%   \let\theoldsection\thesection%
-%   \renewcommand{\thesection}{\Alph{section}}%
-% }
-% {%
-%   \ifx\@shorttitle\@nil%
-%     \section{\thefield{labeltitle}}%
-%   \else%
-%     \section[\@shorttitle]{\thefield{labeltitle}}%
-%   \fi%
-%   % % automatically add label (outside labels don't detect this section)
-%   % \label{PS:\strfield{entrykey}}
-%   \printnames{author}.
-%   \ifentrytype{article}{%
-%     In \usebibmacro{tryfjournal},
-%   }{}%
-%   \ifentrytype{inbook}{%
-%     In \printfield{booktitle},
-%   }{}%
-%   \ifentrytype{incollection}{%
-%     In \printfield{booktitle},
-%   }{}%
-%   \ifentrytype{inproceedings}{%
-%     In \printfield{booktitle},
-%   }{}%
-%   \ifentrytype{misc}{%
-%     \@misctext\ifx\@misctext\empty\else, \fi%
-%   }{}%
-%   \printfield{year}.
-%   \printfield{doi}\printfield[eprint:arxiv]{eprint}%
-% }
-% {}
-% {%
-%   \usebibmacro{postnote}%
-%   \let\thesection\theoldsection
-% }
-
 % Adding bibliographic data to ToC
 % can't patch this command for some reason so here's the full thing
+\makeatletter
 \renewcommand{\papertitlepage}[2][]{%
   \cleardoublepage%
   \newgeometry{top=30mm,bottom=30mm,left=43mm,right=\@tabmargin}%
@@ -371,7 +292,6 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 
 % ---- floats ----
 
-% \captionsetup[subfigure]{justification=centering}
 \SetAlFnt{\small}
 \SetAlCapFnt{\small}
 

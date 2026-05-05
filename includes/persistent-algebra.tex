@@ -14,8 +14,6 @@
 \label{S:ways-of-looking}
 
 If you are familiar with TDA, then you may be aware of the perhaps excessive number of resources introducing the field and its central tool, persistent homology \cite[][and the ``Preliminaries'' section of many papers]{CdSGO2016,DeyWang2022,EdelsbrunnerMorozov2013,OPTGH2017,Oudot2015}. This section is yet another presentation of TDA, through ten perspectives. The aim here is not to be exhaustive, but instead to showcase the multifaceted nature of persistence modules.
-% Not everything introduced here will be used in the thesis (see the following sections for thesis-specific results), but all preliminary definitions will be provided here.
-% Mathematical detours that are not directly used in the thesis are marked by a \blackbird{} symbol.
 You may skip to \cref{S:persistent-linear-algebra} and return as needed for exact definitions and notational conventions.
 
 If you are not familiar with TDA, then read on. In this section, we will explore some of the field's definitions, characterizations, generalizations, and invariants. Along the way, we will cover key concepts in the so-called persistent homology pipeline, including the barcode decomposition (\cref{T:barcode-decomposition}), bottleneck stability (\cref{T:isometry-infty}), and the rank invariant (\cref{!D:rank-function}).
@@ -476,13 +474,6 @@ In TDA, not only are we interested in the topological features of a data set, bu
     d_p(D, D') \coloneq \inf_{M \in \Match(D, D')} c_p(M).
   \]
   When $p = +\infty$, we get the $\infty$-Wasserstein distance, which is more commonly referred to as the \index{distance!bottleneck}\textbf{bottleneck distance}.
-  % \[
-  %   d_\infty(D, D') \coloneq \inf_{M \in \Match(D, D')} \max\left(
-  %     \sup_{(a, b) \in M} d_\infty(a, b),
-  %     \sup_{\substack{a \in D \\ \mathclap{\text{unmatched}}}} d_\infty(a, \Delta),
-  %     \sup_{\substack{b \in D' \\ \mathclap{\text{unmatched}}}} d_\infty(b, \Delta)
-  %   \right).
-  % \]
   
   These distances between persistence diagrams lift to distances between barcodes: given persistence modules $V$ and $W$ and $p \in [1, +\infty]$, we define
   \[
