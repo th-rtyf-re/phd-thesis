@@ -31,8 +31,22 @@ Various programs and scripts were used to make this thesis; they are located in
 * [`morse.py`](util/morse.py) generates the example of critical points of a
   height function on a torus (page 41).
 * [`split.sh`](util/split.sh) splits the output PDF into parts that KTH's
-  printing service, US-AB, likes. Before running this, be sure to create the
-  directory `util/split/`.
+  printing service, US-AB, likes. This script requires [Coherent PDF Tools](https://www.coherentpdf.com/).
+  Before running this, be sure to create the directory `util/split/`.
+
+### `blacktext`
+
+As a micro-optimization of the printed thesis, I edited the two published
+papers' PDFs to make all of the text black (links were blue). I did this using
+the command
+
+```
+cpdf -blacktext in.pdf -o out.pdf
+```
+
+from Coherent PDF Tools. If you want to produce a digital full-color version of
+this thesis, then you can download the published papers freely, as they are
+open access.
 
 Errata
 ------
