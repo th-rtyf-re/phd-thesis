@@ -1,8 +1,8 @@
 My PhD thesis
 =============
 
-This repository contains my PhD thesis, ["Algebraic invariants for filtered
-spaces and their computation"](https://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-380673).
+This repository contains my PhD thesis, [Algebraic invariants for filtered
+spaces and their computation](https://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-380673).
 
 My thesis uses my LuaLaTeX thesis class [`kthpq-thesis`](https://github.com/th-rtyf-re/kthpq-thesis),
 with some modifications.
@@ -38,7 +38,8 @@ Errata
 ------
 
 The published version of this thesis is version 1.1 (May 3, 2026, commit
-1d293f7). Since then, the following mistakes have been found:
+[1d293f7](https://github.com/th-rtyf-re/phd-thesis/commit/1d293f777b425198f08d835f976b068cbe7511fc)).
+Since then, the following mistakes have been found:
 
 * On page 233 (Paper D, Section D.1.4), the
   
@@ -46,14 +47,14 @@ The published version of this thesis is version 1.1 (May 3, 2026, commit
   
   should refer to the equation in Section D.1.2; this equation should have been
   numbered, and indeed is in the arXiv version of the paper (corrected in
-  commit c467e6a).
+  commit [c467e6a](https://github.com/th-rtyf-re/phd-thesis/commit/c467e6af439d58a8d34ea277d891e0cec00def3f)).
 * On page 245 (Paper D, proof of Proposition D.21), the
   
   > Equations (D.2.2) and (D.2.2)
   
   are referring to the two previous equations, which should have been numbered,
   and indeed are in the arXiv version of the paper (corrected in commit
-  c467e6a).
+  [c467e6a](https://github.com/th-rtyf-re/phd-thesis/commit/c467e6af439d58a8d34ea277d891e0cec00def3f)).
 
 Note that there is a small mistake on page 91, Section 4.4 of Paper A. This is
 acknowledged and corrected on pages 48-49, in Chapter 4.
