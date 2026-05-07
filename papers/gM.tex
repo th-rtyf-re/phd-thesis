@@ -119,10 +119,12 @@ A \myemph{critical point} of $f$ is a point $x\in X$ such that the subdifferenti
 
 The set of critical points of $f$ is denoted by $C(f)$. A regular point is a point that is not critical.  
 The definitions of critical value and regular value are the usual ones. Minima and maxima are critical points; moreover, at a point of differentiability, one recovers the classical definitions. Going back to our functions of interest, if $Y \subseteq \R^n$ is a closed set and $x \in \R^n \setminus Y$, then the subdifferential of $\dist_Y$ at $x$ can be easily described, see \cref{D!propo:subgradient1}:
-\[\label{D!eq:subintro}
-\partial_x(\dist_Y) = \mathrm{co}\left\{
-\frac{x - y}{\|x - y\|} \,\middle|\, y \in B(x, \dist_Y(x)) \cap Y \right\},
-\]
+\begin{equation}
+\label{D!eq:subintro}
+  \partial_x(\dist_Y) = \mathrm{co}\left\{
+    \frac{x - y}{\|x - y\|} \,\middle|\, y \in B(x, \dist_Y(x)) \cap Y
+  \right\},
+\end{equation}
 where $B(x, \dist_Y(x))$ is the closed ball of radius $\dist_Y(x)$ centered in $x$.
 If $X$ and $Y$ are in general position (see \cref{D!propo:subgradient2}) The subdifferential of $\distYX$ at $x\in X$ is just the projection of $\partial_x(\dist_Y) $ on the tangent space $T_xX$, see Figure \ref{D!F:distance-subdifferentialintro}.
 
@@ -584,21 +586,21 @@ The function $\Phi$ is continuous, for every $y \in Z$ the function $\Phi(-,y)$ 
 \nabla_u\Phi(u,y)=D\psi(u)^{\top}(y-\psi(u))
 \]
 depends continuously on $y$. Therefore \cref{D!P:danskin} applies and gives
-\[
-\label{D!Eq:F-subdif-first}
-\partial_0F
-=
-\mathrm{co}\left\{
-D\psi(0)^{\top}(y-x_0)
-\;\middle|\;
-y \in B(x_0,\dist_Y(x_0)) \cap Y
-\right\}.
-\]
-Moreover, by the chain rule, we have
-\[
-\label{D!Eq:F-subdif-second}
-\partial_0 F = D \psi(0)^\top \partial_{x_0} \left( -\frac{1}{2} \distYX^2 \right).
-\]
+  \begin{equation}
+  \label{D!Eq:F-subdif-first}
+    \partial_0F
+    =
+    \mathrm{co}\left\{
+    D\psi(0)^{\top}(y-x_0)
+    \;\middle|\;
+    y \in B(x_0,\dist_Y(x_0)) \cap Y
+    \right\}.
+  \end{equation}
+  Moreover, by the chain rule, we have
+  \begin{equation}
+  \label{D!Eq:F-subdif-second}
+    \partial_0 F = D \psi(0)^\top \partial_{x_0} \left( -\frac{1}{2} \distYX^2 \right).
+  \end{equation}
 Identifying $T_{x_0} X$ with the image of $D \psi(0)$, Equations \eqref{D!Eq:F-subdif-first} and \eqref{D!Eq:F-subdif-second} give the following equality between projections onto $T_{x_0} X$:
 \[
 \operatorname{proj}_{T_{x_0}} \partial_{x_0} \left( -\frac{1}{2} \distYX^2 \right) = \mathrm{co} \left\{
