@@ -42,13 +42,17 @@
 \defbibheading{bibliography}[\bibname]{\section*{#1}}
 \part*{Papers}
 \label{Part:papers}
-\newrefsection% Reset the bibliography
-\captionsetup[figure]{list=no}% Hide figures from List of figures
+% Reset the bibliography
+\newrefsection
+% Hide figures from List of figures from here onwards
+\captionsetup[figure]{list=no}
 
 \papertitlepage[color=\dividercolor]{CGRST2024}
 \label{PC:CGRST2024}
 
+% Manual positioning of page numbers for the included PDFs
 \newgeometry{top=15.8mm,right=12.5mm,headsep=0mm,bottom=22.7mm}
+% force update fancyhdr header width
 \fancyhfoffset{0pt}
 \includepdf[
   pages=1,

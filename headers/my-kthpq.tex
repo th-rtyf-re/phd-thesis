@@ -21,7 +21,9 @@
 
 % ---- Formatting & layout ----
 
+% Subtle optimizations in layout
 \usepackage{microtype}
+% Paragraphs start with vertical space, not indent
 \usepackage{parskip}
 
 \usepackage{pdfpages}
@@ -33,7 +35,9 @@
 % ---- Math ----
 
 % mathtools loaded at the top!
-\usepackage{amsthm,thmtools}  % thmtools for QED in any theorem
+% thmtools for QED in any theorem
+\usepackage{amsthm,thmtools}
+% Labeled matrices with square brackets
 \usepackage{blkarray}
 
 % ---- Floats ----
@@ -70,7 +74,7 @@
 
 % ---- Font ----
 
-% Improved font with ligatures (needs to be installed separately)
+% Improved font with ligatures (font needs to be installed separately)
 \setmainfont{Georgia Pro}[
   Uprightfont = *-Regular,
   BoldFont = *-Bold,
@@ -93,6 +97,7 @@
 \addbibresource{bib/btb.bib}
 \addbibresource{bib/gM.bib}
 
+% Format GitHub references
 \DeclarePrintbibliographyDefaults{title=References}
 \DeclareFieldFormat{eprint:github}{%
 GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint}}}
@@ -102,19 +107,19 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 
 % ---- Layout ----
 
-\allowdisplaybreaks
+\allowdisplaybreaks  % equations can go over multiple pages
 
 % Custom header and footer with fancyhdr
 \fancypagestyle{fancy}{%
   \fancyhead{}  % reset
   \fancyhead[LO]{\sffamily\small\rightmark}
   \fancyhead[RE]{\sffamily\small\leftmark}
-  \fancyhead[LE,RO]{\sffamily\small\thepage}  % Left for even pages, right for odd pages
+  \fancyhead[LE,RO]{\sffamily\small\thepage}
 }
 
 \fancypagestyle{front-fancy}{% for special pages, e.g. first pages of chapters
   \fancyhead{}  % reset
-  \fancyhead[LE,RO]{\sffamily\small\thepage}  % Left for even pages, right for odd pages
+  \fancyhead[LE,RO]{\sffamily\small\thepage}
 }
 
 \fancypagestyle{paper-fancy}{
@@ -141,13 +146,14 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 \fancyfoot{}  % reset footer
 \fancyfoot[RO]{%
   \AddToHookNext{shipout/background}{
-    \ifnum\ReadonlyShipoutCounter<88\relax%
+    \ifnum\ReadonlyShipoutCounter<88\relax% Manually adjusted max page number
+      % Manually adjusted positioning
       \put(\paperwidth-30mm,3mm-\paperheight){\input{figs/flip/leo-\fpeval{trunc(\ReadonlyShipoutCounter / 2, 0)}.pgf}}%
     \fi
   }
 }
 
-% Remove fancy headers from front matter and add check for front matter
+% Remove fancy headers from front matter
 \let\oldfrontmatter\frontmatter
 \let\oldmainmatter\mainmatter
 \let\oldbackmatter\backmatter
@@ -293,7 +299,7 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 % ---- floats ----
 
 \SetAlFnt{\small}
-\SetAlCapFnt{\small}
+\SetAlCapFnt{\small}  % This didn't work... it's in the official version of the thesis, so I'm keeping this here.
 
 % ---- non-math commands ----
 
@@ -318,7 +324,9 @@ GitHub: \href{https://www.github.com/\strfield{eprint}}{\texttt{\strfield{eprint
 }
 \makeatother
 
+% Proofreading
 \newcommand{\ir}[1]{{\color{brick} #1}}
+% Dinkus
 \def\mydinkus{\par\noindent\hfill\textasciitilde~$\cdot$~\textasciitilde\hfill\null\par}
 
 % ---- INDEX ----
