@@ -29,7 +29,8 @@ Various programs and scripts were used to make this thesis; they are located in
   some extra functions to interact with the filtered simplicial complex. Before
   running this, be sure to create the directory `figs/flip/`.
 * [`morse.py`](util/morse.py) generates the example of critical points of a
-  height function on a torus (page 41).
+  height function on a torus (page 41). Before running this, be sure to create
+  the directory `figs/morse/`.
 * [`split.sh`](util/split.sh) splits the output PDF into parts that KTH's
   printing service, US-AB, likes. This script requires [Coherent PDF Tools](https://www.coherentpdf.com/).
   Before running this, be sure to create the directory `util/split/`.
