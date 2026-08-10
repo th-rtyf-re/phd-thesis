@@ -7,6 +7,8 @@ spaces and their computation](https://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-
 My thesis uses my LuaLaTeX thesis class [`kthpq-thesis`](https://github.com/th-rtyf-re/kthpq-thesis),
 with some modifications.
 
+<p align="center"><img src="docs/thesis-cover.jpg" alt="cover of my thesis" width="400" /></p>
+
 How it works
 ------------
 
