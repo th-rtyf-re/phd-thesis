@@ -56,20 +56,43 @@ The published version of this thesis is version 1.1 (May 3, 2026, commit
 [1d293f7](https://github.com/th-rtyf-re/phd-thesis/commit/1d293f777b425198f08d835f976b068cbe7511fc)).
 Since then, the following mistakes have been found:
 
+* On page viii (Popular science summary), the phrase
+  
+  > ..., where the filtrations values...
+  
+  is missing an apostrophe: "_filtration's_ values".
+* On page 25 (Remark 2.45), page 190 (Paper C, Equation C.2), and page 197
+  (Paper C, Definition C.25), the direct sum or product of hom-spaces should be
+  a product on $i$ and a direct sum on $j$: this is the correct way of
+  decomposing the hom-space between p.f.d. modules. Note in particular that the
+  column-finiteness property follows immediately.
+* On page 193 (Paper C, Definition C.19), the definition of p-costs for
+  multiset matchings is wrong. Specifically, it is missing the contribution of
+  unmatched bars. The definition is not used in the paper, though.
+* In Paper C, several figures have old-style numerals instead of lining ones.
+  Specifically, the affected numerals are on page 194 (Figure C.2), page 196
+  (Figure C.3), and page 207 (Example C.43).
+* In Paper C, the term "canonical matching" appears several times, first on
+  page 214, in Proposition C.53. This term is never defined. It should refer
+  to the canonical injections of Bauer and Lesnick (2015), viewed as barcode
+  matchings.
+* On page 222 (Paper C, proof of Theorem C.68), the words "algebraic matching"
+  should be removed from the passage
+  
+  > (of strictly bar-to-bar/algebraic matching morphisms)
+  
 * On page 233 (Paper D, Section D.1.4), the
   
   > description (D.1.2)
   
   should refer to the equation in Section D.1.2; this equation should have been
-  numbered, and indeed is in the arXiv version of the paper (corrected in
-  commit [c467e6a](https://github.com/th-rtyf-re/phd-thesis/commit/c467e6af439d58a8d34ea277d891e0cec00def3f)).
+  numbered, and indeed is in the arXiv version of the paper.
 * On page 245 (Paper D, proof of Proposition D.21), the
   
   > Equations (D.2.2) and (D.2.2)
   
   are referring to the two previous equations, which should have been numbered,
-  and indeed are in the arXiv version of the paper (corrected in commit
-  [c467e6a](https://github.com/th-rtyf-re/phd-thesis/commit/c467e6af439d58a8d34ea277d891e0cec00def3f)).
+  and indeed are in the arXiv version of the paper.
 
 Note that there is a small mistake on page 91, Section 4.4 of Paper A. This is
 acknowledged and corrected on pages 48-49, in Chapter 4.

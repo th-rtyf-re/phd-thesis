@@ -176,7 +176,7 @@ By Remark \ref{C!R:ephemeral}, the $p$-norm of a persistence module in $\Pfd$ in
 One advantage of $\Bar$ over $\Pfd$ is that we can conveniently, and not just up to isomorphism, represent morphisms as (possibly infinite) matrices. Let $X = \bigoplus_{i \in I} K(a_i, b_i)$ and $Y = \bigoplus_{j \in J} K(c_j, d_j)$ be objects of $\Bar$. Note that $\hom(X, Y)$ is a vector space, possibly infinite-dimensional. Moreover, given the canonical isomorphisms
 \begin{equation}
 \label{C!E:iso1}
-  \hom (\bigoplus_{i \in I} K(a_i, b_i), \bigoplus_{j \in J} K(c_j, d_j)) \cong \prod_{i \in I} \prod_{j \in J}  \hom (K(a_i, b_i), K(c_j, d_j))
+  \hom (\bigoplus_{i \in I} K(a_i, b_i), \bigoplus_{j \in J} K(c_j, d_j)) \cong \prod_{i \in I} \bigoplus_{j \in J}  \hom (K(a_i, b_i), K(c_j, d_j))
 \end{equation}
 and
 \begin{equation}
@@ -359,9 +359,9 @@ Not every morphism is bar-to-bar: see \cref{C!fig:non_bar_bar_morphism} for an e
     \centering
     \begin{tikzpicture}[scale = 0.4]
       \draw[line width=1pt]
-        (2, 4) node[left]{2} -- (8, 4) node[right]{4}
-        (0, 1) node[left]{0} -- (8, 1) node[right]{4}
-        (1, 0) node[left]{1} -- (7, 0) node[right]{3}
+        (2, 4) node[left]{$2$} -- (8, 4) node[right]{$4$}
+        (0, 1) node[left]{$0$} -- (8, 1) node[right]{$4$}
+        (1, 0) node[left]{$1$} -- (7, 0) node[right]{$3$}
       ;
       
       \draw[->] (3, 3.8) -- (3, 1.2);
@@ -379,8 +379,8 @@ Not every morphism is bar-to-bar: see \cref{C!fig:non_bar_bar_morphism} for an e
     \centering
     \begin{tikzpicture}[scale = 0.4]
       \draw[line width=1pt]
-        (2, 4) node[left]{2} -- (8, 4) node[right]{4}
-        (2, 0) node[left]{2} -- (8, 0) node[right]{4}
+        (2, 4) node[left]{$2$} -- (8, 4) node[right]{$4$}
+        (2, 0) node[left]{$2$} -- (8, 0) node[right]{$4$}
       ;
       
       \draw[->] (5, 3.8) -- (5, 0.2);
@@ -396,10 +396,10 @@ Not every morphism is bar-to-bar: see \cref{C!fig:non_bar_bar_morphism} for an e
     \begin{tikzpicture}[scale = 0.4]
       \draw[line width=1pt]
       
-        (0, 4) node[left]{0} -- (8, 4) node[right]{4}
-        (1, 3) node[left]{1} -- (7, 3) node[right]{3}
-        (0, 1) node[left]{0} -- (8, 1) node[right]{4}
-        (1, 0) node[left]{1} -- (7, 0) node[right]{3}
+        (0, 4) node[left]{$0$} -- (8, 4) node[right]{$4$}
+        (1, 3) node[left]{$1$} -- (7, 3) node[right]{$3$}
+        (0, 1) node[left]{$0$} -- (8, 1) node[right]{$4$}
+        (1, 0) node[left]{$1$} -- (7, 0) node[right]{$3$}
       ;
       
       \draw[->] (3, 3.8) -- (3, 1.2);
@@ -511,8 +511,8 @@ We define the same-endpoint operator on direct sums of bars, and then show that 
 \label{C!D:Delta}
   We define $\Delta$ as the operator $\Bar \to \Bar$ that is the identity on objects and the projection
   \begin{align*}
-    \hom(X, Y) & \cong \bigoplus_{i, j} \hom(K(a_i, b_i), K(c_j, d_j)) \\
-    & \longrightarrow \bigoplus_{\substack{i, j \\ b_i \: = \: d_j}} \hom(K(a_i, b_i), K(c_j, d_j)) \\
+    \hom(X, Y) & \cong \prod_{i \in I} \bigoplus_{j \in J} \hom(K(a_i, b_i), K(c_j, d_j)) \\
+    & \longrightarrow \prod_{i \in I} \bigoplus_{\substack{j \in J \\ b_i \: = \: d_j}} \hom(K(a_i, b_i), K(c_j, d_j)) \\
     & \hookrightarrow \hom(X, Y)
   \end{align*}
   on morphisms, where $X = \bigoplus_i K(a_i, b_i)$ and $Y = \bigoplus_j K(c_j, d_j)$. We call $\Delta$ the \index{same-endpoint operator}\textbf{same-endpoint operator}.
@@ -962,10 +962,10 @@ The issue with this construction is that the epi-mono factorization is only uniq
   \[
     \begin{tikzpicture}[scale = 0.4, baseline={([yshift=-.5ex]current bounding box.center)}]
       \draw[line width=1pt]
-        (3, 7) node[left]{1} -- (9, 7) node[right]{3}
-        (3, 6) node[left]{1} -- (6, 6) node[right]{2}
-        (3, 1) node[left]{1} -- (6, 1) node[right]{2}
-        (0, 0) node[left]{0} -- (6, 0) node[right]{2}
+        (3, 7) node[left]{$1$} -- (9, 7) node[right]{$3$}
+        (3, 6) node[left]{$1$} -- (6, 6) node[right]{$2$}
+        (3, 1) node[left]{$1$} -- (6, 1) node[right]{$2$}
+        (0, 0) node[left]{$0$} -- (6, 0) node[right]{$2$}
       ;
       
       \draw[->] (3.4, 6.8) -- (3.4, 1.2);
@@ -1641,7 +1641,7 @@ We provide an alternate (for one direction at least) proof to \cite[Theorems 7.2
   \[
     Z' \coloneq \bigoplus_{\substack{(a, b) \in \Dgm(X) \\ (c, d) \in \Dgm(Y) \\ \varphi_X(a, b) = \varphi_Y(c, d)}} K(\max(a, c), \max(b, d)).
   \]
-  Observe that $f_b$ and $g_b$ factor through $Z'$. This defines a new span (of strictly bar-to-bar/algebraic matching morphisms) $X \leftarrow Z' \rightarrow Y$ with a smaller cost than the previous span: essentially, for each bar $\langle e, f\rangle$ in $Z$, we consider its matched bars $\langle a, b \rangle$ and $\langle c, d\rangle$ in $X$ and $Y$, respectively, and we move the end-points of $\langle e, f\rangle$ as far left as possible while keeping $f_b$ and $g_b$ well-defined. This makes the cokernels and kernels of these two morphisms smaller.
+  Observe that $f_b$ and $g_b$ factor through $Z'$. This defines a new span (of strictly bar-to-bar morphisms) $X \leftarrow Z' \rightarrow Y$ with a smaller cost than the previous span: essentially, for each bar $\langle e, f\rangle$ in $Z$, we consider its matched bars $\langle a, b \rangle$ and $\langle c, d\rangle$ in $X$ and $Y$, respectively, and we move the end-points of $\langle e, f\rangle$ as far left as possible while keeping $f_b$ and $g_b$ well-defined. This makes the cokernels and kernels of these two morphisms smaller.
 
   By the discussion for the \fbox{$\leq$} case, the cost of this span is equal to the cost of the matching $\psi = \varphi_X \circ \varphi_Y^{-1}$. Thus $\psi \colon \mathsf{Dgm}(X) \to \mathsf{Dgm}(Y)$ is a matching whose cost is smaller than the original span. This concludes the proof.
 \end{proof}
